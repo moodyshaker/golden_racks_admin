@@ -1,0 +1,96 @@
+name: golden_racks_admin
+description: A new Flutter project.
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=2.19.3 <3.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  flutter_localizations:
+    sdk: flutter
+
+
+  cupertino_icons: ^1.0.2
+  flutter_screenutil:
+  shared_preferences:
+  http:
+  flutter_image_compress:
+  focus_detector:
+  fancy_shimmer_image:
+  image_picker:
+  percent_indicator:
+  intl:
+  flutter_ringtone_player:
+  flutter_local_notifications:
+  firebase_messaging:
+  lottie:
+  firebase_core:
+  pin_code_fields: ^7.3.0
+  url_launcher: ^6.0.12
+  path_provider:
+  path:
+  provider:
+  firebase_auth:
+  flutter_datetime_picker:
+  carousel_slider:
+  flutter_spinkit:
+  flutter_rating_bar:
+  photo_view:
+  qr_code_scanner:
+  file_picker:
+  google_sign_in:
+  sign_in_with_apple:
+  flutter_launcher_icons:
+  shimmer:
+  google_fonts:
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+flutter_icons:
+  android: true
+  ios: true
+  remove_alpha_ios: true
+  image_path: "assets/images/logo.png"
+
+  flutter_lints: ^2.0.0
+
+flutter:
+
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+    - assets/lang/
+
+  fonts:
+    - family: Lato
+      fonts:
+        - asset: assets/fonts/lato_black.ttf
+        - asset: assets/fonts/lato_light.ttf
+        - asset: assets/fonts/lato_regular.ttf
+        - asset: assets/fonts/lato_bold.ttf
+
+    - family: Lato_smiBold
+      fonts:
+        - asset: assets/fonts/lato_black.ttf
+
+    - family: Lato_medium
+      fonts:
+        - asset: assets/fonts/lato_light.ttf
+
+    - family: Lato_regular
+      fonts:
+        - asset: assets/fonts/lato_regular.ttf
+
+    - family: Lato_bold
+      fonts:
+        - asset: assets/fonts/lato_bold.ttf
+
+
