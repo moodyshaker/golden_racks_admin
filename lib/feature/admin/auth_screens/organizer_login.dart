@@ -10,6 +10,7 @@ import '../../widgets/customButton.dart';
 import '../../widgets/customScaffold.dart';
 import '../../widgets/customTextFeild.dart';
 import '../../widgets/main_text.dart';
+import '../main_screens/home.dart';
 
 class OrganizerLogin extends StatefulWidget {
   const OrganizerLogin({Key? key}) : super(key: key);
@@ -45,109 +46,113 @@ class _OrganizerLoginState extends State<OrganizerLogin> {
                   child: SingleChildScrollView(
                     child: Form(
                       key: _form,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SizedBox(height: 16.h,),
-                          Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.all(Radius.circular(15.0))
+                      child: Container(
+                        margin: EdgeInsets.symmetric(horizontal: 26.w),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SizedBox(height: 16.h,),
+                            Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.all(Radius.circular(15.0))
+                              ),
+                              child: Image.asset(getAsset('logo'),
+                              width: double.infinity,
+                              height: 141.h,
+                              fit: BoxFit.cover,),
                             ),
-                            child: Image.asset(getAsset('logo'),
-                            width: double.infinity,
-                            height: 141.h,
-                            fit: BoxFit.cover,),
-                          ),
-                          SizedBox(height: 4.h,),
-                          DropMenu(
-                            hint: 'مدير التطبيق',
-                            items: type,
-                            onChanged: (v){
+                            SizedBox(height: 281.h,),
+                            DropMenu(
+                              hint: 'مدير التطبيق',
+                              items: type,
+                              hintSize: 15.sp,
+                              onChanged: (v){
 
-                            },
-                          ),
-                          CustomTextField(
-                            controller: organizer.loginEmailController,
-                            hasHeader: true,
-                            header: 'user name',
-                            hasHint: false,
-                            headerFont: 12.sp,
-                            headerTextColor: Colors.black,
-                            headerWeight: FontWeight.w400,
-                            headerFamily: 'Lato_regular',
-                            type: TextInputType.text,
-                            valid: (String? v) {
-
-                            },
-                          ),
-                          SizedBox(
-                            height: 10.h,
-                          ),
-                          CustomTextField(
-                            controller: organizer.loginPasswordController,
-                            hasHint: false,
-                            hasHeader: true,
-                            header: 'password',
-                            headerFont: 12.sp,
-                            headerTextColor: Colors.black,
-                            headerWeight: FontWeight.w400,
-                            headerFamily: 'Lato_regular',
-                            type: TextInputType.visiblePassword,
-                            isPassword: true,
-                            valid: (String? v) => v!.isEmpty
-                                ? demo.getTranslatedValue('password_validation')
-                                : v.length < 8
-                                    ? demo.getTranslatedValue(
-                                        'password_8ch_validation')
-                                    : Validations.passwordVerified(v)
-                                        ? null
-                                        : demo.getTranslatedValue(
-                                            'strong_password'),
-                          ),
-                          SizedBox(
-                            height: 16.h,
-                          ),
-                          CustomButton(
-                            title: 'login',
-                            color: kSecondaryColor,
-                            height: 50.h,
-                            font: 16.sp,
-                            family: 'Lato_bold',
-                            textColor: Colors.white,
-                            withBorder: false,
-                            onPressed: () async {
-
-                            },
-                          ),
-                          SizedBox(height: 25.h,),
-                          GestureDetector(
-                            onTap: (){
-
-                            },
-                            child: MainText(
-                              text: 'rest pass',
-                              font: 14.sp,
-                              color: gray_80,
-                              weight: FontWeight.w600,
+                              },
                             ),
-                          ),
-                          SizedBox(
-                            height: 105.h,
-                          ),
-                          CustomButton(
-                            title: 'register',
-                            color: Colors.transparent,
-                            height: 60.h,
-                            font: 20.sp,
-                            family: 'Lato_smiBold',
-                            textColor: Colors.black,
-                            borderColor: Colors.black,
-                            onPressed: () async {
+                            CustomTextField(
+                              controller: organizer.loginEmailController,
+                              hasHeader: true,
+                              header: 'user name',
+                              hasHint: false,
+                              headerFont: 12.sp,
+                              headerTextColor: Colors.black,
+                              headerWeight: FontWeight.w400,
+                              headerFamily: 'Lato_regular',
+                              type: TextInputType.text,
+                              valid: (String? v) {
 
-                            },
-                          ),
-                          SizedBox(height: 10.h,),
-                        ],
+                              },
+                            ),
+                            SizedBox(
+                              height: 10.h,
+                            ),
+                            CustomTextField(
+                              controller: organizer.loginPasswordController,
+                              hasHint: false,
+                              hasHeader: true,
+                              header: 'password',
+                              headerFont: 12.sp,
+                              headerTextColor: Colors.black,
+                              headerWeight: FontWeight.w400,
+                              headerFamily: 'Lato_regular',
+                              type: TextInputType.visiblePassword,
+                              isPassword: true,
+                              valid: (String? v) => v!.isEmpty
+                                  ? demo.getTranslatedValue('password_validation')
+                                  : v.length < 8
+                                      ? demo.getTranslatedValue(
+                                          'password_8ch_validation')
+                                      : Validations.passwordVerified(v)
+                                          ? null
+                                          : demo.getTranslatedValue(
+                                              'strong_password'),
+                            ),
+                            SizedBox(
+                              height: 16.h,
+                            ),
+                            CustomButton(
+                              title: 'login',
+                              color: kSecondaryColor,
+                              height: 50.h,
+                              font: 16.sp,
+                              family: 'Lato_bold',
+                              textColor: Colors.white,
+                              withBorder: false,
+                              onPressed: () async {
+                                  MagicRouter.navigateTo(AdminHome());
+                              },
+                            ),
+                            SizedBox(height: 25.h,),
+                            GestureDetector(
+                              onTap: (){
+
+                              },
+                              child: MainText(
+                                text: 'rest pass',
+                                font: 14.sp,
+                                color: gray_80,
+                                weight: FontWeight.w600,
+                              ),
+                            ),
+                            SizedBox(
+                              height: 105.h,
+                            ),
+                            CustomButton(
+                              title: 'register',
+                              color: Colors.transparent,
+                              height: 60.h,
+                              font: 20.sp,
+                              family: 'Lato_smiBold',
+                              textColor: Colors.black,
+                              borderColor: Colors.black,
+                              onPressed: () async {
+
+                              },
+                            ),
+                            SizedBox(height: 10.h,),
+                          ],
+                        ),
                       ),
                     ),
                   ),

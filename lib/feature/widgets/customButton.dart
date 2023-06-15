@@ -7,6 +7,7 @@ class CustomButton extends StatelessWidget {
   final String title;
   final String? family;
   final Color? color;
+  final double? radius;
   final double? verticalPadding;
   final double? horizontalPadding;
   final double? verticalMargin;
@@ -27,6 +28,7 @@ class CustomButton extends StatelessWidget {
   CustomButton(
       {this.onPressed,
       required this.title,
+      this.radius,
       this.color,
       this.width,
       this.withBorder = true,
@@ -61,7 +63,7 @@ class CustomButton extends StatelessWidget {
         width: width,
         decoration: BoxDecoration(
           color: isTransparent ? Colors.transparent : color ?? kSecondaryColor,
-          borderRadius: BorderRadius.circular(24.r),
+          borderRadius: BorderRadius.circular(radius ?? 24.r),
           border: withBorder
               ? Border.all(
                   width: borderWidth ?? 1.0, color: borderColor ?? Colors.white)

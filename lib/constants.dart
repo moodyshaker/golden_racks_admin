@@ -3,6 +3,7 @@ import 'dart:ui';
 
 import 'package:flutter/Widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:golden_racks_admin/feature/admin/auth_screens/organizer_login.dart';
 
 import 'core/localization/demo_localization.dart';
 import 'core/models/more_model.dart';
@@ -100,20 +101,42 @@ class CategoryTest {
   CategoryTest({required this.image, required this.name});
 }
 
+// List<MoreModel> organizerMoreList(DemoLocalization demo) =>
+//     [
+//       MoreModel(
+//           name: 'Profile',
+//           route: OrganizerLogin()),
+//       MoreModel(
+//           name: name,
+//           route: OrganizerLogin()),
+//       MoreModel(
+//           name: name,
+//           route: OrganizerLogin()),
+//       MoreModel(
+//           name: name,
+//           route: OrganizerLogin()),
+//       MoreModel(
+//           name: name,
+//           route: OrganizerLogin()),
+//       MoreModel(
+//           name: name,
+//           route: OrganizerLogin()),
+//     ];
+
 List<NavItem> navItems = [
+  NavItem(icon: 'home_icon', title: 'القائمة'),
+  NavItem(icon: 'icon', title: ''),
+  NavItem(icon: 'add_new_icon', title: ''),
+  NavItem(icon: 'ticket_icon', title: 'التذاكر'),
   NavItem(icon: 'control_icon', title: 'اللوحة'),
-  NavItem(icon: 'white_ticket_icon', title: 'التذاكر'),
-  NavItem(icon: 'add_new_icon', title: 'طلب الطوارئ'),
-  NavItem(icon: 'mail_icon', title: 'الرسائل'),
-  NavItem(icon: 'menu_icon', title: ''),
 ];
 
 List<NavItem> organizerNavItems = [
+  NavItem(icon: 'home_icon', title: 'القائمة'),
+  NavItem(icon: 'icon', title: ''),
+  NavItem(icon: 'add_new_icon', title: ''),
+  NavItem(icon: 'ticket_icon', title: 'التذاكر'),
   NavItem(icon: 'control_icon', title: 'اللوحة'),
-  NavItem(icon: 'white_ticket_icon', title: 'التذاكر'),
-  NavItem(icon: 'add_new_icon', title: 'طلب الطوارئ'),
-  NavItem(icon: 'mail_icon', title: 'الرسائل'),
-  NavItem(icon: 'menu_icon', title: ''),
 ];
 
 List<MoreModel> moreList(DemoLocalization demo) =>

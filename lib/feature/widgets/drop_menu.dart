@@ -9,6 +9,7 @@ class DropMenu extends StatelessWidget {
   final Function(String?)? onChanged;
   final String? Function(String?)? valid;
   final String hint;
+  final double? hintSize;
   final bool shouldBeEmpty;
   final Color? headerTextColor;
   final Function()? onTap;
@@ -20,6 +21,7 @@ class DropMenu extends StatelessWidget {
   DropMenu(
       {this.value,
       required this.hint,
+        this.hintSize,
       this.shouldBeEmpty = false,
       this.valid,
       this.dropDownColor,
@@ -38,7 +40,7 @@ class DropMenu extends StatelessWidget {
           height: 50.h,
           child: DropdownButtonFormField<String>(
             decoration: InputDecoration(
-              contentPadding: EdgeInsets.symmetric(horizontal: 21 , vertical: 17),
+              contentPadding: EdgeInsets.symmetric(horizontal: 21 , vertical: 15),
               enabledBorder: OutlineInputBorder(
                 borderSide: BorderSide(color: kInactiveColor),
                 borderRadius: BorderRadius.circular(50.r),
@@ -91,7 +93,7 @@ class DropMenu extends StatelessWidget {
                       : isModel
                           ? value.name
                           : value,
-                  style: TextStyle(fontSize: 12.sp, color: Colors.black , fontWeight: FontWeight.w400)),
+                  style: TextStyle(fontSize:hintSize ?? 12.sp, color: Colors.black , fontWeight: FontWeight.w700)),
             ),
             iconEnabledColor: kAccentColor,
             isExpanded: true,
