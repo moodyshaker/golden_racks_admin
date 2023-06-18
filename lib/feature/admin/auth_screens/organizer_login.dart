@@ -70,13 +70,16 @@ class _OrganizerLoginState extends State<OrganizerLogin> {
 
                               },
                             ),
+                            SizedBox(
+                              height: 10.h,
+                            ),
                             CustomTextField(
                               controller: organizer.loginEmailController,
                               hasHeader: true,
-                              header: 'user name',
+                              header: 'اسم المستخدم',
                               hasHint: false,
                               headerFont: 12.sp,
-                              headerTextColor: Colors.black,
+                              headerTextColor: Colors.white,
                               headerWeight: FontWeight.w400,
                               headerFamily: 'Lato_regular',
                               type: TextInputType.text,
@@ -91,9 +94,9 @@ class _OrganizerLoginState extends State<OrganizerLogin> {
                               controller: organizer.loginPasswordController,
                               hasHint: false,
                               hasHeader: true,
-                              header: 'password',
+                              header: 'كلمة المرور',
                               headerFont: 12.sp,
-                              headerTextColor: Colors.black,
+                              headerTextColor: Colors.white,
                               headerWeight: FontWeight.w400,
                               headerFamily: 'Lato_regular',
                               type: TextInputType.visiblePassword,
@@ -112,7 +115,7 @@ class _OrganizerLoginState extends State<OrganizerLogin> {
                               height: 16.h,
                             ),
                             CustomButton(
-                              title: 'login',
+                              title: 'تسجيل الدخول',
                               color: kSecondaryColor,
                               height: 50.h,
                               font: 16.sp,
@@ -123,34 +126,6 @@ class _OrganizerLoginState extends State<OrganizerLogin> {
                                   MagicRouter.navigateTo(AdminHome());
                               },
                             ),
-                            SizedBox(height: 25.h,),
-                            GestureDetector(
-                              onTap: (){
-
-                              },
-                              child: MainText(
-                                text: 'rest pass',
-                                font: 14.sp,
-                                color: gray_80,
-                                weight: FontWeight.w600,
-                              ),
-                            ),
-                            SizedBox(
-                              height: 105.h,
-                            ),
-                            CustomButton(
-                              title: 'register',
-                              color: Colors.transparent,
-                              height: 60.h,
-                              font: 20.sp,
-                              family: 'Lato_smiBold',
-                              textColor: Colors.black,
-                              borderColor: Colors.black,
-                              onPressed: () async {
-
-                              },
-                            ),
-                            SizedBox(height: 10.h,),
                           ],
                         ),
                       ),

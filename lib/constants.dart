@@ -48,9 +48,13 @@ const Color gray_80 = Color(0xFF3A3A3A);
 const Color gray_60 = Color(0xFFA6A6AA);
 const Color gray_40 = Color(0xFFCBCBD4);
 const Color gray_20 = Color(0xFFF8F7FA);
+const Color gray_10 = Color(0xFFE8ECF4);
+const Color gray_0 = Color(0xFFF7F8F9);
 const Color blueColor = Color(0xFF0082A2);
+const Color lightBlueColor = Color(0xFF35C2C1);
 const Color redColor = Color(0xFFFE8668);
 const Color titleColor = Color(0xFF2D2D2D);
+const Color backColor = Color(0xFFE2E2E2);
 
 void closeKeyboard() => FocusScope.of(MagicRouter.currentContext!).unfocus();
 

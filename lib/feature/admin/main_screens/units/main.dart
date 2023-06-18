@@ -19,7 +19,7 @@ class _OrganizerMainState extends State<OrganizerMain> {
   @override
   void initState() {
     super.initState();
-    OrganizerAppCubit.listenFalse(context).getOrganizerEventList(OrganizerAppCubit().status);
+    // OrganizerAppCubit.listenFalse(context).getOrganizerEventList(OrganizerAppCubit().status);
   }
 
   @override

@@ -230,19 +230,19 @@ class _CustomTextFieldState extends State<CustomTextField> {
                   ),
             enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide(
-                        color: gray_40,
+                        color: widget.borderColor ?? gray_40,
                         width: 1),
                     borderRadius: BorderRadius.circular(24.r),
                   ),
             focusedBorder: OutlineInputBorder(
                     borderSide: BorderSide(
-                        color: gray_40,
+                        color: widget.borderColor ?? gray_40,
                         width: 1),
                     borderRadius: BorderRadius.circular(24.r),
                   ),
             border: OutlineInputBorder(
               borderSide: BorderSide(
-                  color: gray_40, width: 1),
+                  color: widget.borderColor ?? gray_40, width: 1),
               borderRadius: BorderRadius.circular(24.r),
             ),
           ),

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:golden_racks_admin/core/router/router.dart';
+import 'package:golden_racks_admin/feature/admin/main_screens/requests_screen/unsubscribers_emergency_requests_screen.dart';
 import '../../../../constants.dart';
 import '../../../../core/bloc/language_cubit.dart';
 import '../../../../core/localization/demo_localization.dart';
@@ -23,6 +25,7 @@ class HomeItem extends StatelessWidget {
             color: kInactiveColor),
       ),
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           Expanded(
             child: Column(
@@ -49,22 +52,19 @@ class HomeItem extends StatelessWidget {
               ],
             ),
           ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: CustomButton(
-              title: 'عرض',
-              color: kSecondaryColor,
-              radius: 10.r,
-              height: 42.h,
-              width: 95.w,
-              font: 16.sp,
-              family: 'Lato_bold',
-              textColor: Colors.white,
-              withBorder: false,
-              onPressed: () async {
-
-              },
-            ),
+          CustomButton(
+            title: 'عرض',
+            color: kSecondaryColor,
+            radius: 8.r,
+            height: 42.h,
+            width: 95.w,
+            font: 16.sp,
+            family: 'Lato_bold',
+            textColor: Colors.white,
+            withBorder: false,
+            onPressed: () async {
+              MagicRouter.navigateTo(UnSubscribersEmergencyRequestsScreen());
+            },
           ),
         ],
       ),

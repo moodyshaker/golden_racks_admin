@@ -28,8 +28,7 @@ class OrganizerCustomScaffold extends StatefulWidget {
   final Function()? onBackPressed;
 
   const OrganizerCustomScaffold(
-      {
-      this.title1,
+      {this.title1,
       this.title2,
       this.title3,
       this.backgroundColor,
@@ -135,11 +134,11 @@ class _OrganizerCustomScaffoldState extends State<OrganizerCustomScaffold> {
                                   ),
                                   MainText(
                                     text:
-                                    // Preferences
-                                    //         .instance.getUserName.isNotEmpty
-                                    //     ? Preferences.instance.getUserName
-                                    //     :
-                                    'مصطفي رضا',
+                                        // Preferences
+                                        //         .instance.getUserName.isNotEmpty
+                                        //     ? Preferences.instance.getUserName
+                                        //     :
+                                        'مصطفي رضا',
                                     weight: FontWeight.bold,
                                   ),
                                 ],
@@ -225,83 +224,141 @@ class _OrganizerCustomScaffoldState extends State<OrganizerCustomScaffold> {
               )
             : null,
         body: SafeArea(
-            child: Column(
-          children: [
-            widget.hasAppbar
-                ? Column(children: [
-                    Container(
-                      margin: EdgeInsets.only(top: 10.h, left: 20, right: 20),
-                      decoration: BoxDecoration(color: Colors.transparent),
-                      child: Row(
-                        children: [
-                          Center(
-                            child: GestureDetector(
-                              onTap: () {},
-                              child: Container(
-                                height: 24.h,
-                                width: 24.w,
-                                child: Image.asset(
-                                  getAsset('notification_icon'),
+          child: Column(
+            children: [
+              widget.hasAppbar
+                  ? Column(children: [
+                      Container(
+                        margin: EdgeInsets.only(top: 10.h, left: 20, right: 20),
+                        decoration: BoxDecoration(color: Colors.transparent),
+                        child: Row(
+                          children: [
+                            Center(
+                              child: GestureDetector(
+                                onTap: () {},
+                                child: Container(
+                                  height: 24.h,
+                                  width: 24.w,
+                                  child: Image.asset(
+                                    getAsset('notification_icon'),
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                          Expanded(
-                            child: Container(
-                              margin: EdgeInsets.only(right: 20.0),
-                              child: Column(
-                                children: [
-                                  Center(
-                                    child: MainText(
-                                      text: widget.title1,
-                                      color: Colors.black,
-                                      font: 12.sp,
-                                      weight: FontWeight.w800,
-                                    ),
-                                  ),
-                                  Center(
-                                    child: MainText(
-                                      text: widget.title2,
-                                      color: Colors.black,
-                                      font: 12.sp,
-                                      weight: FontWeight.w800,
-                                    ),
-                                  ),
-                                  Center(
-                                    child: MainText(
-                                      text: widget.title3,
-                                      color: Colors.brown,
-                                      font: 8.sp,
-                                      weight: FontWeight.w300,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                          Center(
-                            child: GestureDetector(
-                              onTap: () {},
+                            Expanded(
                               child: Container(
-                                height: 33.h,
-                                width: 68.w,
-                                child: Image.asset(
-                                  getAsset(widget.pic!),
+                                margin: EdgeInsets.only(right: 20.0),
+                                child: Column(
+                                  children: [
+                                    Center(
+                                      child: MainText(
+                                        text: widget.title1,
+                                        color: Colors.black,
+                                        font: 12.sp,
+                                        weight: FontWeight.w800,
+                                      ),
+                                    ),
+                                    Center(
+                                      child: MainText(
+                                        text: widget.title2,
+                                        color: Colors.black,
+                                        font: 12.sp,
+                                        weight: FontWeight.w800,
+                                      ),
+                                    ),
+                                    Center(
+                                      child: MainText(
+                                        text: widget.title3,
+                                        color: Colors.brown,
+                                        font: 8.sp,
+                                        weight: FontWeight.w300,
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
                             ),
-                          ),
-                        ],
+                            Center(
+                              child: GestureDetector(
+                                onTap: () {},
+                                child: Container(
+                                  height: 33.h,
+                                  width: 68.w,
+                                  child: Image.asset(
+                                    getAsset(widget.pic!),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
+                      SizedBox(
+                        height: 20.h,
+                      ),
+                    ])
+                  : Container(
+                    margin: EdgeInsets.symmetric(horizontal: 22.w),
+                    height: 80.h,
+                    decoration: BoxDecoration(
+                      color: Colors.transparent,
                     ),
-                    SizedBox(
-                      height: 20.h,
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: MainText(
+                            text: widget.title1,
+                            color: Colors.black,
+                            font: 16.sp,
+                            weight: FontWeight.w800,
+                            family: 'Lato_smiBold',
+                          ),
+                        ),
+                        Container(
+                          decoration: BoxDecoration(
+                            color: Colors.transparent,
+                          ),
+                          height: 41.h,
+                          width: 41.w,
+                          child: GestureDetector(
+                            child: Image.asset(getAsset('back')),
+                            onTap: () {
+                              if (!MagicRouter.canPop) {
+                                showDialog(
+                                    context: navigatorKey.currentContext!,
+                                    builder: (c) => ActionDialog(
+                                          content:
+                                              demo.getTranslatedValue(
+                                                  'do_you_want_exit'),
+                                          onCancelClick: () {
+                                            MagicRouter.pop();
+                                          },
+                                          approveAction:
+                                              demo.getTranslatedValue(
+                                                  'dialog_approve'),
+                                          cancelAction:
+                                              demo.getTranslatedValue(
+                                                  'dialog_decline'),
+                                          onApproveClick: () {
+                                            MagicRouter.pop();
+                                            SystemNavigator.pop();
+                                          },
+                                        ));
+                              } else {
+                                widget.onBackPressed != null
+                                    ? widget.onBackPressed!()
+                                    : MagicRouter.pop();
+                              }
+                            },
+                          ),
+                        ),
+                      ],
                     ),
-                  ])
-                : Container(),
-            Expanded(child: widget.body),
-          ],
-        )),
+                  ),
+              Expanded(child: widget.body),
+            ],
+          ),
+        ),
         bottomNavigationBar: widget.isHome && widget.hasNavBar
             ? SafeArea(
                 child: Container(
@@ -343,7 +400,9 @@ class _OrganizerCustomScaffoldState extends State<OrganizerCustomScaffold> {
                                               height: 24.h,
                                               width: 24.w,
                                               color: kBlackColor),
-                                          SizedBox(height: 4.h,),
+                                          SizedBox(
+                                            height: 4.h,
+                                          ),
                                           MainText(
                                               text: navBar[i].title,
                                               font: 10.sp,
