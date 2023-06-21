@@ -49,8 +49,8 @@ class _TicketViewScreenState extends State<TicketViewScreen> {
                 width: 1.0,
                 color: kInactiveColor),
           ),
-          margin: EdgeInsets.symmetric(horizontal: 22.w),
-          padding: EdgeInsets.symmetric(horizontal: 12.w , vertical: 19.h),
+          margin: EdgeInsets.symmetric(horizontal: 16.w),
+          padding: EdgeInsets.symmetric(horizontal: 8.w , vertical: 19.h),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -74,7 +74,7 @@ class _TicketViewScreenState extends State<TicketViewScreen> {
               ),
               SizedBox(height: 27.h,),
               Container(
-                margin: EdgeInsets.symmetric(horizontal: 20.w),
+                margin: EdgeInsets.symmetric(horizontal: 16.w),
                 child: MainText(
                   text: 'عطل فني ادي الي توقف العمل بالكامل',
                   font: 12.sp,
@@ -83,7 +83,7 @@ class _TicketViewScreenState extends State<TicketViewScreen> {
                 ),
               ),
               Container(
-                margin: EdgeInsets.symmetric(horizontal: 20.w),
+                margin: EdgeInsets.symmetric(horizontal: 16.w),
                 child: Row(
                   children: [
                     MainText(
@@ -103,7 +103,7 @@ class _TicketViewScreenState extends State<TicketViewScreen> {
                 ),
               ),
               Container(
-                margin: EdgeInsets.symmetric(horizontal: 20.w),
+                margin: EdgeInsets.symmetric(horizontal: 16.w),
                 child: Row(
                   children: [
                     MainText(
@@ -124,7 +124,7 @@ class _TicketViewScreenState extends State<TicketViewScreen> {
               ),
               SizedBox(height: 32.h,),
               Container(
-                margin: EdgeInsets.symmetric(horizontal: 20.w),
+                margin: EdgeInsets.symmetric(horizontal: 16.w),
                 child: MainText(
                   text: 'تفاصيل المشكلة تسجيل صوتي',
                   font: 12.sp,
@@ -134,7 +134,7 @@ class _TicketViewScreenState extends State<TicketViewScreen> {
               ),
               SizedBox(height: 16.h,),
               Container(
-                margin: EdgeInsets.symmetric(horizontal: 17.w),
+                margin: EdgeInsets.symmetric(horizontal: 16.w),
                 child: GestureDetector(
                   onTap: (){
                     // MagicRouter.navigateTo(AddTechnicianScreen());
@@ -178,7 +178,7 @@ class _TicketViewScreenState extends State<TicketViewScreen> {
               ),
               SizedBox(height: 19.h,),
               Container(
-                margin: EdgeInsets.symmetric(horizontal: 20.w),
+                margin: EdgeInsets.symmetric(horizontal: 16.w),
                 child: MainText(
                   text: 'الصور والفيديو الخاصين بالمشكلة',
                   font: 12.sp,
