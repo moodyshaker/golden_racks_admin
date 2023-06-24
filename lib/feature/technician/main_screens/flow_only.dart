@@ -9,6 +9,7 @@ import 'package:golden_racks_admin/feature/admin/other_screens/add_spare_part_sc
 import 'package:golden_racks_admin/feature/admin/other_screens/create_plan_screen.dart';
 import 'package:golden_racks_admin/feature/admin/other_screens/share_company_data_screen.dart';
 import 'package:golden_racks_admin/feature/admin/other_screens/show_plans_screen.dart';
+import 'package:golden_racks_admin/feature/technician/main_screens/tickets_screen.dart';
 import '../../../../constants.dart';
 import '../../../../core/bloc/home_cubit.dart';
 import '../../widgets/customButton.dart';
@@ -51,7 +52,7 @@ class _FlowOnlyState extends State<FlowOnly> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               CustomButton(
-                title: 'الطلبات الدورية لغير المشتركين',
+                title: 'الي التذاكر',
                 color: kSecondaryColor,
                 height: 50.h,
                 font: 16.sp,
@@ -59,7 +60,7 @@ class _FlowOnlyState extends State<FlowOnly> {
                 textColor: Colors.white,
                 withBorder: false,
                 onPressed: () async {
-                  MagicRouter.navigateTo(UnSubscribersPeriodicRequestsScreen());
+                  MagicRouter.navigateTo(TicketsScreen());
                 },
               ),
               CustomButton(

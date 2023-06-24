@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:golden_racks_admin/feature/technician/main_screens/technician_home.dart';
+import 'package:golden_racks_admin/feature/technician/main_screens/units/technician_main.dart';
 import 'package:golden_racks_admin/feature/widgets/drop_menu.dart';
 import '../../../constants.dart';
 import '../../../core/bloc/organizer_app_cubit.dart';
@@ -123,7 +125,7 @@ class _OrganizerLoginState extends State<OrganizerLogin> {
                               textColor: Colors.white,
                               withBorder: false,
                               onPressed: () async {
-                                  MagicRouter.navigateTo(AdminHome());
+                                  MagicRouter.navigateTo(TechnicianHome());
                               },
                             ),
                           ],

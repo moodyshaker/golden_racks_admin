@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:golden_racks_admin/core/bloc/technician_app_cubit.dart';
 import 'package:provider/provider.dart';
 
 import 'core/bloc/app_cubit.dart';
@@ -36,6 +37,7 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider(create: (_) => AuthCubit()),
           ChangeNotifierProvider(create: (_) => HomeCubit()),
           ChangeNotifierProvider(create: (_) => OrganizerAppCubit()),
+          ChangeNotifierProvider(create: (_) => TechnicianAppCubit()),
         ],
         child: Builder(
           builder: (BuildContext c) => MaterialApp(

@@ -143,6 +143,12 @@ List<NavItem> organizerNavItems = [
   NavItem(icon: 'control_icon', title: 'اللوحة'),
 ];
 
+List<NavItem> technicianNavItems = [
+  NavItem(icon: 'home_icon', title: 'القائمة'),
+  NavItem(icon: 'ticket_icon', title: 'التذاكر'),
+  NavItem(icon: 'control_icon', title: 'اللوحة'),
+];
+
 List<MoreModel> moreList(DemoLocalization demo) =>
     [
       MoreModel(
