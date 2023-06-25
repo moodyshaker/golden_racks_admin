@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:golden_racks_admin/feature/technician/main_screens/technician_home.dart';
@@ -24,7 +26,7 @@ class OrganizerLogin extends StatefulWidget {
 class _OrganizerLoginState extends State<OrganizerLogin> {
   final GlobalKey<FormState> _form = GlobalKey<FormState>();
   bool isPhone = false;
-
+  bool isAdmin = true ;
   @override
   Widget build(BuildContext context) {
     final demo = DemoLocalization.of(context);
@@ -69,7 +71,13 @@ class _OrganizerLoginState extends State<OrganizerLogin> {
                               items: type,
                               hintSize: 15.sp,
                               onChanged: (v){
-
+                                if(v == 'مدير التطبيق'){
+                                  isAdmin = true ;
+                                  log(v!);
+                                }else{
+                                  isAdmin = false ;
+                                  log(v!);
+                                }
                               },
                             ),
                             SizedBox(
@@ -125,7 +133,11 @@ class _OrganizerLoginState extends State<OrganizerLogin> {
                               textColor: Colors.white,
                               withBorder: false,
                               onPressed: () async {
+                                if(isAdmin){
+                                  MagicRouter.navigateTo(AdminHome());
+                                }else {
                                   MagicRouter.navigateTo(TechnicianHome());
+                                }
                               },
                             ),
                           ],

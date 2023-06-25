@@ -9,6 +9,9 @@ import 'package:golden_racks_admin/feature/admin/other_screens/add_spare_part_sc
 import 'package:golden_racks_admin/feature/admin/other_screens/create_plan_screen.dart';
 import 'package:golden_racks_admin/feature/admin/other_screens/share_company_data_screen.dart';
 import 'package:golden_racks_admin/feature/admin/other_screens/show_plans_screen.dart';
+import 'package:golden_racks_admin/feature/admin/other_screens/ticket_view_screen.dart';
+import 'package:golden_racks_admin/feature/technician/main_screens/notification_screen.dart';
+import 'package:golden_racks_admin/feature/technician/main_screens/show_spar_parts_screen.dart';
 import 'package:golden_racks_admin/feature/technician/main_screens/tickets_screen.dart';
 import '../../../../constants.dart';
 import '../../../../core/bloc/home_cubit.dart';
@@ -26,7 +29,6 @@ class _FlowOnlyState extends State<FlowOnly> {
   @override
   void initState() {
     super.initState();
-    HomeCubit.listenFalse(context).getEventCategory();
   }
 
   @override
@@ -64,7 +66,7 @@ class _FlowOnlyState extends State<FlowOnly> {
                 },
               ),
               CustomButton(
-                title: 'طلبات الطوارئ للمشتركين',
+                title: 'عرض قطع الغيار',
                 color: kSecondaryColor,
                 height: 50.h,
                 font: 16.sp,
@@ -72,11 +74,11 @@ class _FlowOnlyState extends State<FlowOnly> {
                 textColor: Colors.white,
                 withBorder: false,
                 onPressed: () async {
-                  MagicRouter.navigateTo(SubscribersEmergencyRequestsScreen());
+                  MagicRouter.navigateTo(ShowSparPartsScreen());
                 },
               ),
               CustomButton(
-                title: 'الطلبات الدورية للمشتركين',
+                title: 'الاشعارات',
                 color: kSecondaryColor,
                 height: 50.h,
                 font: 16.sp,
@@ -84,11 +86,11 @@ class _FlowOnlyState extends State<FlowOnly> {
                 textColor: Colors.white,
                 withBorder: false,
                 onPressed: () async {
-                  MagicRouter.navigateTo(SubscribersPeriodicRequestsScreen());
+                  MagicRouter.navigateTo(NotificationScreen());
                 },
               ),
               CustomButton(
-                title: 'في انتظار التفعيل',
+                title: 'عرض التذكرة',
                 color: kSecondaryColor,
                 height: 50.h,
                 font: 16.sp,
@@ -96,55 +98,7 @@ class _FlowOnlyState extends State<FlowOnly> {
                 textColor: Colors.white,
                 withBorder: false,
                 onPressed: () async {
-                  MagicRouter.navigateTo(ActivatePlanScreen());
-                },
-              ),
-              CustomButton(
-                title: 'بيانات الشركات',
-                color: kSecondaryColor,
-                height: 50.h,
-                font: 16.sp,
-                family: 'Lato_bold',
-                textColor: Colors.white,
-                withBorder: false,
-                onPressed: () async {
-                  MagicRouter.navigateTo(SharedCompanyDataScreen());
-                },
-              ),
-              CustomButton(
-                title: 'اضافة قطعة غيار',
-                color: kSecondaryColor,
-                height: 50.h,
-                font: 16.sp,
-                family: 'Lato_bold',
-                textColor: Colors.white,
-                withBorder: false,
-                onPressed: () async {
-                  MagicRouter.navigateTo(AddASparePartScreen());
-                },
-              ),
-              CustomButton(
-                title: 'انشاء خطة صيانة',
-                color: kSecondaryColor,
-                height: 50.h,
-                font: 16.sp,
-                family: 'Lato_bold',
-                textColor: Colors.white,
-                withBorder: false,
-                onPressed: () async {
-                  MagicRouter.navigateTo(CreatePlanScreen());
-                },
-              ),
-              CustomButton(
-                title: 'عرض خطط الصيانة',
-                color: kSecondaryColor,
-                height: 50.h,
-                font: 16.sp,
-                family: 'Lato_bold',
-                textColor: Colors.white,
-                withBorder: false,
-                onPressed: () async {
-                  MagicRouter.navigateTo(ShowPlansScreen());
+                  MagicRouter.navigateTo(TicketViewScreen());
                 },
               ),
             ],
