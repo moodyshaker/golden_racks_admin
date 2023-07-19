@@ -127,7 +127,8 @@ class AuthCubit extends ChangeNotifier {
         MagicRouter.pop();
         AppCubit.listenFalse(navigatorKey.currentContext!).changeCurrent(0);
         // MagicRouter.navigateAndPopAll(Home());
-      } else {
+      }
+      else {
         MagicRouter.pop();
         showDialog(
             context: navigatorKey.currentContext!,

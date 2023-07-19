@@ -5,7 +5,7 @@ import '../../../../constants.dart';
 import '../../../../core/bloc/home_cubit.dart';
 import '../../../widgets/organizerCustomScaffold.dart';
 import '../widgets/requests_item.dart';
-import '../widgets/subdcribers_requests_item.dart';
+import '../widgets/subscribers_request_item.dart';
 
 class SubscribersEmergencyRequestsScreen extends StatefulWidget {
   const SubscribersEmergencyRequestsScreen({Key? key}) : super(key: key);
@@ -15,11 +15,7 @@ class SubscribersEmergencyRequestsScreen extends StatefulWidget {
 }
 
 class _SubscribersEmergencyRequestsScreenState extends State<SubscribersEmergencyRequestsScreen> {
-  @override
-  void initState() {
-    super.initState();
-    HomeCubit.listenFalse(context).getEventCategory();
-  }
+
   @override
   Widget build(BuildContext context) {
     return Container(

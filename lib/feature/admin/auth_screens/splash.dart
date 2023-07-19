@@ -39,7 +39,7 @@ class _SplashState extends State<Splash> {
       decoration: BoxDecoration(
         image: DecorationImage(
           image: AssetImage(
-              getAsset('onboarding'),),
+              getAsset('background'),),
           fit: BoxFit.fill,
         ),
       ),
@@ -48,13 +48,11 @@ class _SplashState extends State<Splash> {
         isHome: false,
         hasAppbar: false,
         hasNavBar: false,
-        body: Stack(
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Center(
-                child: Image.asset(getAsset('logo'))
-            ),
-          ],
-        ),
+          Image.asset(getAsset('logo')),
+        ],)
       ),
     );
   }

@@ -21,11 +21,6 @@ class SharedCompanyDataScreen extends StatefulWidget {
 }
 
 class _SharedCompanyDataScreenState extends State<SharedCompanyDataScreen> {
-  @override
-  void initState() {
-    super.initState();
-    HomeCubit.listenFalse(context).getEventCategory();
-  }
 
   @override
   Widget build(BuildContext context) {

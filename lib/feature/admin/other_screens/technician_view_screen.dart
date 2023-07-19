@@ -20,11 +20,6 @@ class TechnicianViewScreen extends StatefulWidget {
 }
 
 class _TechnicianViewScreenState extends State<TechnicianViewScreen> {
-  @override
-  void initState() {
-    super.initState();
-    HomeCubit.listenFalse(context).getEventCategory();
-  }
 
   @override
   Widget build(BuildContext context) {

@@ -6,7 +6,7 @@ import '../../../../constants.dart';
 import '../../../../core/bloc/home_cubit.dart';
 import '../../../widgets/organizerCustomScaffold.dart';
 import '../widgets/requests_item.dart';
-import '../widgets/subdcribers_requests_item.dart';
+import '../widgets/subscribers_request_item.dart';
 
 class ActivatePlanScreen extends StatefulWidget {
   const ActivatePlanScreen({Key? key}) : super(key: key);
@@ -16,11 +16,7 @@ class ActivatePlanScreen extends StatefulWidget {
 }
 
 class _ActivatePlanScreenState extends State<ActivatePlanScreen> {
-  @override
-  void initState() {
-    super.initState();
-    HomeCubit.listenFalse(context).getEventCategory();
-  }
+
   @override
   Widget build(BuildContext context) {
     return Container(

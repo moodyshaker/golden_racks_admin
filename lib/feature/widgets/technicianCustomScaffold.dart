@@ -4,12 +4,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:golden_racks_admin/core/bloc/technician_app_cubit.dart';
 import '../../constants.dart';
-import '../../core/appStorage/shared_preference.dart';
 import '../../core/bloc/auth_cubit.dart';
 import '../../core/bloc/language_cubit.dart';
-import '../../core/bloc/organizer_app_cubit.dart';
 import '../../core/localization/demo_localization.dart';
-import '../../core/models/more_model.dart';
 import '../../core/models/nav_item.dart';
 import '../../core/router/router.dart';
 import 'action_dialog.dart';
@@ -25,7 +22,6 @@ class TechnicianCustomScaffold extends StatefulWidget {
   final bool isHome;
   final Widget body;
   final Color? backgroundColor;
-
   final Function()? onBackPressed;
 
   const TechnicianCustomScaffold(

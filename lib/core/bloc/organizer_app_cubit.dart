@@ -3,8 +3,6 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:golden_racks_admin/feature/admin/main_screens/flow_only.dart';
-import 'package:golden_racks_admin/feature/admin/other_screens/share_company_data_screen.dart';
 import 'package:http/http.dart';
 import 'package:provider/provider.dart';
 import '../../feature/admin/auth_screens/organizer_login.dart';
@@ -136,11 +134,9 @@ class OrganizerAppCubit extends ChangeNotifier {
   void _getCurrentScreen() {
     switch (_i) {
       case 0:
-        _w = OrganizerMain();
-        _title = 'main';
         break;
       case 1:
-        _w = FlowOnly();
+        _w = OrganizerMain();
         break;
       case 2:
         break;

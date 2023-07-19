@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:golden_racks_admin/feature/admin/main_screens/widgets/subdcribers_requests_item.dart';
+import 'package:golden_racks_admin/feature/admin/main_screens/widgets/subscribers_request_item.dart';
 
 import '../../../../constants.dart';
 import '../../../../core/bloc/home_cubit.dart';

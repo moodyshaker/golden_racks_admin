@@ -4,11 +4,23 @@ import 'dart:ui';
 import 'package:flutter/Widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:golden_racks_admin/feature/admin/auth_screens/organizer_login.dart';
+import 'package:golden_racks_admin/feature/technician/main_screens/requests_screen/maintainance_for_subscribers.dart';
 
 import 'core/localization/demo_localization.dart';
 import 'core/models/more_model.dart';
 import 'core/models/nav_item.dart';
 import 'core/router/router.dart';
+import 'feature/admin/main_screens/requests_screen/activate_plane_screen.dart';
+import 'feature/admin/main_screens/requests_screen/subscribers_emergency_requests_screen.dart';
+import 'feature/admin/main_screens/requests_screen/subscribers_periodic_requests_screen.dart';
+import 'feature/admin/main_screens/requests_screen/unsubscribers_periodic_requests_screen.dart';
+import 'feature/admin/other_screens/add_company_with_plan_screen.dart';
+import 'feature/admin/other_screens/add_spare_part_screen.dart';
+import 'feature/admin/other_screens/create_plan_screen.dart';
+import 'feature/admin/other_screens/share_company_data_screen.dart';
+import 'feature/admin/other_screens/show_plans_screen.dart';
+import 'feature/admin/other_screens/technician_view_screen.dart';
+import 'feature/technician/main_screens/requests_screen/unsubscribers_emergency_requests_screen.dart';
 
 String getAsset(String imageName) => 'assets/images/$imageName.png';
 
@@ -41,7 +53,6 @@ const Color kButtonColor = Color(0xFFD9D9D9);
 
 const Color kWithOpacity = Color(0x80FFFFFF);
 
-
 const Color mainColor = Color(0xFF846046);
 const Color orangeColor = Color(0xFFFDBC1F);
 const Color gray_80 = Color(0xFF3A3A3A);
@@ -60,10 +71,7 @@ void closeKeyboard() => FocusScope.of(MagicRouter.currentContext!).unfocus();
 
 void removeFocus(BuildContext ctx) => FocusScope.of(ctx).unfocus();
 
-TextTheme get getTextTheme =>
-    Theme
-        .of(MagicRouter.currentContext!)
-        .textTheme;
+TextTheme get getTextTheme => Theme.of(MagicRouter.currentContext!).textTheme;
 
 List<String> imagePickerList(BuildContext ctx) => ['Camera', 'Gallery'];
 
@@ -105,27 +113,6 @@ class CategoryTest {
   CategoryTest({required this.image, required this.name});
 }
 
-// List<MoreModel> organizerMoreList(DemoLocalization demo) =>
-//     [
-//       MoreModel(
-//           name: 'Profile',
-//           route: OrganizerLogin()),
-//       MoreModel(
-//           name: name,
-//           route: OrganizerLogin()),
-//       MoreModel(
-//           name: name,
-//           route: OrganizerLogin()),
-//       MoreModel(
-//           name: name,
-//           route: OrganizerLogin()),
-//       MoreModel(
-//           name: name,
-//           route: OrganizerLogin()),
-//       MoreModel(
-//           name: name,
-//           route: OrganizerLogin()),
-//     ];
 
 List<NavItem> navItems = [
   NavItem(icon: 'home_icon', title: 'القائمة'),
@@ -137,7 +124,7 @@ List<NavItem> navItems = [
 
 List<NavItem> organizerNavItems = [
   NavItem(icon: 'home_icon', title: 'القائمة'),
-  NavItem(icon: 'icon', title: ''),
+  NavItem(icon: 'icon', title: 'الإحصائيات'),
   NavItem(icon: 'add_new_icon', title: ''),
   NavItem(icon: 'ticket_icon', title: 'التذاكر'),
   NavItem(icon: 'control_icon', title: 'اللوحة'),
@@ -149,11 +136,50 @@ List<NavItem> technicianNavItems = [
   NavItem(icon: 'control_icon', title: 'اللوحة'),
 ];
 
-List<MoreModel> moreList(DemoLocalization demo) =>
-    [
+class DrawerItemModel {
+  String title;
+  String? count;
+  Widget? route;
+
+  DrawerItemModel({required this.title, this.count, this.route});
+}
+
+List<DrawerItemModel> list = [
+  DrawerItemModel(
+      title: 'تحديد فني لطلبات الطوارئ لغير المشتركين',
+      count: '2',
+      route: UnSubscribersEmergencyRequestsScreen()),
+  DrawerItemModel(
+      title: 'تحديد فني لطلبات الدورية لغير المشتركين',
+      count: '5',
+      route: UnSubscribersPeriodicRequestsScreen()),
+  DrawerItemModel(
+      title: 'تحديد فني لطلبات الطوارئ للمشتركين',
+      count: '7',
+      route: SubscribersEmergencyRequestsScreen()),
+  DrawerItemModel(
+      title: 'تحديد فني للصيانة الدورية للمشتركين',
+      count: '8',
+      route: MaintenanceForSubscribers()),
+  DrawerItemModel(
+      count: '3',
+      title: 'حسابات في انتظار تفعيل الخطط لها', route: ActivatePlanScreen()),
+  DrawerItemModel(
+      title: 'انشاء حسابات الدخول للفنين', route: TechnicianViewScreen()),
+  DrawerItemModel(
+      title: 'انشاء حسابات للشركات وربطها بخطة',
+      route: AddCompanyWithPlanScreen()),
+  DrawerItemModel(
+      title: 'بيانات الشركات المشتركة في خطط',
+      route: SharedCompanyDataScreen()),
+  DrawerItemModel(title: 'اضافة قطع الغيار', route: AddASparePartScreen()),
+  DrawerItemModel(title: 'انشاء خطط الصيانة', route: CreatePlanScreen()),
+  DrawerItemModel(title: 'التقارير'),
+];
+
+List<MoreModel> moreList(DemoLocalization demo) => [
       MoreModel(
-          name: demo.getTranslatedValue('more_privacy_policy'),
-          route: null),
+          name: demo.getTranslatedValue('more_privacy_policy'), route: null),
       // PrivacyPolicy()
       MoreModel(
           name: demo.getTranslatedValue('more_previous_event'), route: null),

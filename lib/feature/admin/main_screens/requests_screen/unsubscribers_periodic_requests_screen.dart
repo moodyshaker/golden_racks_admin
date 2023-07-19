@@ -14,11 +14,7 @@ class UnSubscribersPeriodicRequestsScreen extends StatefulWidget {
 }
 
 class _UnSubscribersPeriodicRequestsScreenState extends State<UnSubscribersPeriodicRequestsScreen> {
-  @override
-  void initState() {
-    super.initState();
-    HomeCubit.listenFalse(context).getEventCategory();
-  }
+
   @override
   Widget build(BuildContext context) {
     return Container(

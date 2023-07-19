@@ -14,11 +14,7 @@ class ActivatePlanScreen extends StatefulWidget {
 }
 
 class _ActivatePlanScreenState extends State<ActivatePlanScreen> {
-  @override
-  void initState() {
-    super.initState();
-    HomeCubit.listenFalse(context).getEventCategory();
-  }
+
   @override
   Widget build(BuildContext context) {
     return Container(

@@ -34,6 +34,21 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSCameraUsageDescription</key>
+        	<string>Golden Racks Admin needs to access your camera to change your profile picture</string>
+        	<key>NSPhotoLibraryUsageDescription</key>
+        	<string>Golden Racks Admin needs to access your photos to change your profile picture</string>
+        	<key>NSLocationAlwaysUsageDescription</key>
+            	<string>Golden Racks Admin needs  to provider location to share your location to users in chat</string>
+            	<key>NSLocationWhenInUseUsageDescription</key>
+            	<string>Golden Racks Admin needs  to provider location to share your location to users in chat</string>
+            	<key>NSMicrophoneUsageDescription</key>
+            	<string>Golden Racks Admin needs to access to the microphone to record audio file and send it in chat</string>
+        	<key>UIBackgroundModes</key>
+            	<array>
+            		<string>fetch</string>
+            		<string>remote-notification</string>
+            	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

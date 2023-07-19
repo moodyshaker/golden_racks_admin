@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -11,6 +14,7 @@ import '../../core/localization/demo_localization.dart';
 import '../../core/models/more_model.dart';
 import '../../core/models/nav_item.dart';
 import '../../core/router/router.dart';
+import '../technician/main_screens/notification_screen.dart';
 import 'action_dialog.dart';
 import 'main_text.dart';
 
@@ -49,6 +53,7 @@ class OrganizerCustomScaffold extends StatefulWidget {
 class _OrganizerCustomScaffoldState extends State<OrganizerCustomScaffold> {
   // late List<MoreModel> list;
   late List<NavItem> navBar;
+  final GlobalKey<ScaffoldState> _key = GlobalKey();
 
   @override
   void didChangeDependencies() {
@@ -89,11 +94,12 @@ class _OrganizerCustomScaffoldState extends State<OrganizerCustomScaffold> {
         return false;
       },
       child: Scaffold(
+        key: _key,
         backgroundColor: widget.backgroundColor ?? kAccentColor,
-        // backgroundColor: kAccentColor,
         drawer: widget.isHome
             ? SafeArea(
                 child: Drawer(
+                  width: 330.w,
                   shape: RoundedRectangleBorder(
                       borderRadius: lang.locale.languageCode == 'ar'
                           ? BorderRadius.only(
@@ -103,120 +109,91 @@ class _OrganizerCustomScaffoldState extends State<OrganizerCustomScaffold> {
                               topRight: Radius.circular(50.r),
                               bottomRight: Radius.circular(50.r))),
                   child: Padding(
-                    padding:
-                        EdgeInsets.only(top: 50.h, right: 20.w, left: 20.w),
+                    padding: EdgeInsets.only(top: 50.h, right: 8.w, left: 8.w),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
                         Padding(
                           padding: EdgeInsets.symmetric(horizontal: 16.w),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Column(
-                                children: [
-                                  Container(
-                                    decoration: BoxDecoration(
-                                        border: Border.all(
-                                            color: kMainColor, width: 5.0),
-                                        shape: BoxShape.circle),
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(50.r),
-                                      child: Image.asset(
-                                        getAsset('user_profile_icon'),
-                                        height: 100.h,
-                                        width: 100.w,
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 8.h,
-                                  ),
-                                  MainText(
-                                    text:
-                                        // Preferences
-                                        //         .instance.getUserName.isNotEmpty
-                                        //     ? Preferences.instance.getUserName
-                                        //     :
-                                        'مصطفي رضا',
-                                    weight: FontWeight.bold,
-                                  ),
-                                ],
-                              ),
-                            ],
+                          child: MainText(
+                            text: 'القائمة الرئيسية',
+                            font: 24.sp,
+                            weight: FontWeight.bold,
                           ),
                         ),
                         SizedBox(
                           height: 40.h,
                         ),
-                        // Expanded(
-                        //   child: SingleChildScrollView(
-                        //     child: Column(
-                        //       crossAxisAlignment: CrossAxisAlignment.start,
-                        //       children: List.generate(
-                        //           list.length,
-                        //           (i) => ListTile(
-                        //                 contentPadding: EdgeInsets.symmetric(
-                        //                     horizontal: 16.w, vertical: 8.h),
-                        //                 onTap: () {
-                        //                   MagicRouter.pop();
-                        //                   if (list[i].hasRoute) {
-                        //                     if (list[i].route != null) {
-                        //                       MagicRouter.navigateTo(
-                        //                           list[i].route);
-                        //                     }
-                        //                   } else {
-                        //                     switch (list[i].desc!) {
-                        //                       case 'lang':
-                        //                         lang.locale.languageCode == 'en'
-                        //                             ? lang.setLocale(
-                        //                                 Locale('ar', 'EG'))
-                        //                             : lang.setLocale(
-                        //                                 Locale('en', 'US'));
-                        //                         break;
-                        //                       case 'logout':
-                        //                         showDialog(
-                        //                           context: navigatorKey
-                        //                               .currentContext!,
-                        //                           barrierDismissible: false,
-                        //                           builder: (ctx) =>
-                        //                               ActionDialog(
-                        //                             content:
-                        //                                 demo.getTranslatedValue(
-                        //                                     'logout_dialog_content'),
-                        //                             onApproveClick: () async {
-                        //                               MagicRouter.pop();
-                        //                               await auth.clearData();
-                        //                             },
-                        //                             approveAction:
-                        //                                 demo.getTranslatedValue(
-                        //                                     'dialog_approve'),
-                        //                             cancelAction:
-                        //                                 demo.getTranslatedValue(
-                        //                                     'dialog_decline'),
-                        //                             onCancelClick: () {
-                        //                               MagicRouter.pop();
-                        //                             },
-                        //                           ),
-                        //                         );
-                        //                         break;
-                        //                     }
-                        //                   }
-                        //                 },
-                        //                 title: MainText(
-                        //                   text: '${list[i].name}',
-                        //                   font: 16.sp,
-                        //                   weight: FontWeight.bold,
-                        //                 ),
-                        //                 trailing: Image.asset(
-                        //                   getAsset('double_arrow'),
-                        //                   height: 24.h,
-                        //                   width: 24.w,
-                        //                 ),
-                        //               )),
-                        //     ),
-                        //   ),
-                        // ),
+                        Expanded(
+                          child: SingleChildScrollView(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: List.generate(
+                                  list.length,
+                                  (i) => ListTile(
+                                        onTap: () {
+                                          if (list[i].route != null) {
+                                            MagicRouter.pop();
+                                            MagicRouter.navigateTo(
+                                                list[i].route!);
+                                          } else {
+                                            MagicRouter.pop();
+                                          }
+                                        },
+                                        contentPadding: EdgeInsets.symmetric(
+                                            horizontal: 16.w, vertical: 0.h),
+                                        subtitle: Row(
+                                            children: List.generate(
+                                                15,
+                                                (index) => Container(
+                                                      color: kBorderColor,
+                                                      width: 4.w,
+                                                      height: 1.h,
+                                                      margin:
+                                                          EdgeInsets.symmetric(
+                                                              horizontal: 2.w),
+                                                    ))),
+                                        title: Row(
+                                          children: [
+                                            Expanded(
+                                              child: MainText(
+                                                text: list[i].title,
+                                                font: 14.sp,
+                                                weight: FontWeight.bold,
+                                              ),
+                                            ),
+                                            list[i].count != null
+                                                ? DottedBorder(
+                                              color: kSecondaryColor,
+                                              borderType: BorderType.Circle,
+                                              padding:EdgeInsets.symmetric(
+                                                  horizontal: 8.w,
+                                                  vertical: 8.h) ,
+                                              strokeWidth: 1,
+                                                  child: Center(
+                                                    child: MainText(
+                                                      text: list[i].count,
+                                                      font: 14.sp,
+                                                      color: kBlackColor,
+                                                    ),
+                                                  ),
+                                                )
+                                                : Container(),
+                                            SizedBox(
+                                              width: 4.w,
+                                            ),
+                                            Image.asset(
+                                              getAsset('double_arrow'),
+                                              color: Colors.black54,
+                                              height: 18.h,
+                                              width: 18.w,
+                                            ),
+                                          ],
+                                        ),
+                                      )),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -235,7 +212,9 @@ class _OrganizerCustomScaffoldState extends State<OrganizerCustomScaffold> {
                           children: [
                             Center(
                               child: GestureDetector(
-                                onTap: () {},
+                                onTap: () {
+                                  MagicRouter.navigateTo(NotificationScreen());
+                                },
                                 child: Container(
                                   height: 24.h,
                                   width: 24.w,
@@ -298,63 +277,62 @@ class _OrganizerCustomScaffoldState extends State<OrganizerCustomScaffold> {
                       ),
                     ])
                   : Container(
-                    margin: EdgeInsets.symmetric(horizontal: 22.w),
-                    height: 80.h,
-                    decoration: BoxDecoration(
-                      color: Colors.transparent,
+                      margin: EdgeInsets.symmetric(horizontal: 22.w),
+                      height: 80.h,
+                      decoration: BoxDecoration(
+                        color: Colors.transparent,
+                      ),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: MainText(
+                              text: widget.title1,
+                              color: Colors.black,
+                              font: 16.sp,
+                              weight: FontWeight.w800,
+                              family: 'Lato_smiBold',
+                            ),
+                          ),
+                          Container(
+                            decoration: BoxDecoration(
+                              color: Colors.transparent,
+                            ),
+                            height: 41.h,
+                            width: 41.w,
+                            child: GestureDetector(
+                              child: Image.asset(getAsset('back')),
+                              onTap: () {
+                                if (!MagicRouter.canPop) {
+                                  showDialog(
+                                      context: navigatorKey.currentContext!,
+                                      builder: (c) => ActionDialog(
+                                            content: demo.getTranslatedValue(
+                                                'do_you_want_exit'),
+                                            onCancelClick: () {
+                                              MagicRouter.pop();
+                                            },
+                                            approveAction:
+                                                demo.getTranslatedValue(
+                                                    'dialog_approve'),
+                                            cancelAction:
+                                                demo.getTranslatedValue(
+                                                    'dialog_decline'),
+                                            onApproveClick: () {
+                                              MagicRouter.pop();
+                                              SystemNavigator.pop();
+                                            },
+                                          ));
+                                } else {
+                                  widget.onBackPressed != null
+                                      ? widget.onBackPressed!()
+                                      : MagicRouter.pop();
+                                }
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: MainText(
-                            text: widget.title1,
-                            color: Colors.black,
-                            font: 16.sp,
-                            weight: FontWeight.w800,
-                            family: 'Lato_smiBold',
-                          ),
-                        ),
-                        Container(
-                          decoration: BoxDecoration(
-                            color: Colors.transparent,
-                          ),
-                          height: 41.h,
-                          width: 41.w,
-                          child: GestureDetector(
-                            child: Image.asset(getAsset('back')),
-                            onTap: () {
-                              if (!MagicRouter.canPop) {
-                                showDialog(
-                                    context: navigatorKey.currentContext!,
-                                    builder: (c) => ActionDialog(
-                                          content:
-                                              demo.getTranslatedValue(
-                                                  'do_you_want_exit'),
-                                          onCancelClick: () {
-                                            MagicRouter.pop();
-                                          },
-                                          approveAction:
-                                              demo.getTranslatedValue(
-                                                  'dialog_approve'),
-                                          cancelAction:
-                                              demo.getTranslatedValue(
-                                                  'dialog_decline'),
-                                          onApproveClick: () {
-                                            MagicRouter.pop();
-                                            SystemNavigator.pop();
-                                          },
-                                        ));
-                              } else {
-                                widget.onBackPressed != null
-                                    ? widget.onBackPressed!()
-                                    : MagicRouter.pop();
-                              }
-                            },
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
               Expanded(child: widget.body),
             ],
           ),
@@ -374,14 +352,16 @@ class _OrganizerCustomScaffoldState extends State<OrganizerCustomScaffold> {
                         (i) => GestureDetector(
                               onTap: () {
                                 if (i == 2) {
+                                } else if (i == 0) {
+                                  _key.currentState!.openDrawer();
                                 } else {
                                   cubit.changeCurrent(i);
                                 }
                               },
                               child: i == 2
                                   ? Container(
-                                      height: 80.h,
-                                      width: 80.h,
+                                      height: 60.h,
+                                      width: 60.h,
                                       padding: EdgeInsets.symmetric(
                                           vertical: 6.h, horizontal: 6.w),
                                       margin: EdgeInsets.symmetric(
@@ -389,60 +369,41 @@ class _OrganizerCustomScaffoldState extends State<OrganizerCustomScaffold> {
                                       decoration: BoxDecoration(
                                           color: kAccentColor,
                                           shape: BoxShape.circle),
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: [
-                                          Image.asset(
+                                      child: Center(
+                                        child: Padding(
+                                          padding: EdgeInsets.only(bottom: 4.h),
+                                          child: Image.asset(
                                               getAsset('${navBar[i].icon}'),
                                               height: 24.h,
                                               width: 24.w,
                                               color: kBlackColor),
-                                          SizedBox(
-                                            height: 4.h,
-                                          ),
-                                          MainText(
-                                              text: navBar[i].title,
-                                              font: 10.sp,
-                                              color: kBlackColor,
-                                              weight: FontWeight.bold),
-                                        ],
+                                        ),
                                       ),
                                     )
-                                  : Container(
-                                      decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(16.r),
-                                      ),
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: [
-                                          Image.asset(
-                                              getAsset('${navBar[i].icon}'),
-                                              height:
-                                                  cubit.i == i ? 30.h : 24.h,
-                                              width: cubit.i == i ? 30.w : 24.w,
-                                              color: cubit.i == i
-                                                  ? kAccentColor
-                                                  : kInactiveColor),
-                                          SizedBox(
-                                            height: 5.h,
-                                          ),
-                                          MainText(
-                                              text: navBar[i].title,
-                                              font:
-                                                  cubit.i == i ? 14.sp : 12.sp,
-                                              color: kAccentColor,
-                                              weight: cubit.i == i
-                                                  ? FontWeight.bold
-                                                  : FontWeight.w500),
-                                        ],
-                                      ),
+                                  : Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        Image.asset(
+                                            getAsset('${navBar[i].icon}'),
+                                            height: cubit.i == i ? 30.h : 24.h,
+                                            width: cubit.i == i ? 30.w : 24.w,
+                                            color: cubit.i == i
+                                                ? kAccentColor
+                                                : kInactiveColor),
+                                        SizedBox(
+                                          height: 5.h,
+                                        ),
+                                        MainText(
+                                            text: navBar[i].title,
+                                            font: cubit.i == i ? 14.sp : 12.sp,
+                                            color: kAccentColor,
+                                            weight: cubit.i == i
+                                                ? FontWeight.bold
+                                                : FontWeight.w500),
+                                      ],
                                     ),
                             )),
                   ),

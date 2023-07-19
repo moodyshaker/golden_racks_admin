@@ -27,7 +27,7 @@ class RequestsItem extends StatelessWidget {
       ),
       child: Column(
         children: [
-          SizedBox(width: 9.w,),
+          SizedBox(height: 9.h,),
           Row(
             children: [
               Container(
@@ -79,7 +79,7 @@ class RequestsItem extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(width: 9.w,),
+          SizedBox(height: 9.h,),
           Row(
             children: [
               SizedBox(width: 8.w,),
@@ -98,7 +98,7 @@ class RequestsItem extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(width: 7.w,),
+          SizedBox(height: 7.h,),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -144,7 +144,7 @@ class RequestsItem extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(width: 6.w,),
+          SizedBox(height: 6.h,),
           Row(
             children: [
               SizedBox(width: 8.w,),
@@ -163,10 +163,9 @@ class RequestsItem extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(width: 14.w,),
+          SizedBox(height: 14.h,),
           Row(
             children: [
-              SizedBox(width: 16.w,),
               CustomButton(
                 horizontalPadding: 8.w,
                 title: 'عرض التذكرة',
@@ -213,7 +212,6 @@ class RequestsItem extends StatelessWidget {
                 onPressed: () async {
                 },
               ),
-              SizedBox(width: 16.w,),
             ],
           ),
         ],

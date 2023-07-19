@@ -13,8 +13,6 @@ class SubscribersRequestsItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final demo = DemoLocalization.of(context);
-    final lang = LanguageCubit.get(context);
     return Container(
       padding: EdgeInsets.symmetric(vertical: 10.h , horizontal: 16.w),
       margin: EdgeInsets.only(bottom: 5.0),
@@ -30,13 +28,13 @@ class SubscribersRequestsItem extends StatelessWidget {
           SizedBox(width: 9.w,),
           Row(
             children: [
-              Container(
-                height: 38.h,
-                width: 38.w,
-                child: Image.asset(
-                  getAsset('defualt_pic'),
-                ),
-              ),
+              // Container(
+              //   height: 38.h,
+              //   width: 38.w,
+              //   child: Image.asset(
+              //     getAsset('defualt_pic'),
+              //   ),
+              // ),
               SizedBox(width: 9.w,),
               Expanded(
                 child: Row(
@@ -155,12 +153,12 @@ class SubscribersRequestsItem extends StatelessWidget {
                 weight: FontWeight.w700,
               ),
               SizedBox(width: 27.w,),
-              MainText(
-                text: 'جدة-الحي الخامس-قطعة 200',
-                font: 15.sp,
-                color: Colors.black,
-                weight: FontWeight.w500,
-              ),
+              // MainText(
+              //   text: 'جدة-الحي الخامس-قطعة 200',
+              //   font: 15.sp,
+              //   color: Colors.black,
+              //   weight: FontWeight.w500,
+              // ),
             ],
           ),
           SizedBox(width: 14.w,),

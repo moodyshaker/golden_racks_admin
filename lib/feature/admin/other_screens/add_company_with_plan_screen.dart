@@ -20,11 +20,6 @@ class AddCompanyWithPlanScreen extends StatefulWidget {
 }
 
 class _AddCompanyWithPlanScreenState extends State<AddCompanyWithPlanScreen> {
-  @override
-  void initState() {
-    super.initState();
-    HomeCubit.listenFalse(context).getEventCategory();
-  }
 
   final GlobalKey<FormState> _form = GlobalKey<FormState>();
 
