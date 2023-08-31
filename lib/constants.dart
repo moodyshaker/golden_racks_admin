@@ -113,7 +113,6 @@ class CategoryTest {
   CategoryTest({required this.image, required this.name});
 }
 
-
 List<NavItem> navItems = [
   NavItem(icon: 'home_icon', title: 'القائمة'),
   NavItem(icon: 'icon', title: ''),
@@ -163,7 +162,8 @@ List<DrawerItemModel> list = [
       route: MaintenanceForSubscribers()),
   DrawerItemModel(
       count: '3',
-      title: 'حسابات في انتظار تفعيل الخطط لها', route: ActivatePlanScreen()),
+      title: 'حسابات في انتظار تفعيل الخطط لها',
+      route: ActivatePlanScreen()),
   DrawerItemModel(
       title: 'انشاء حسابات الدخول للفنين', route: TechnicianViewScreen()),
   DrawerItemModel(

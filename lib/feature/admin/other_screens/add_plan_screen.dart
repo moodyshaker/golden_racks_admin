@@ -1,16 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:golden_racks_admin/core/router/router.dart';
-import 'package:golden_racks_admin/feature/admin/main_screens/widgets/need_activate_item.dart';
+import 'package:golden_racks_admin/core/provider/provider_ready_plan.dart';
 import 'package:golden_racks_admin/feature/admin/main_screens/widgets/plan_item.dart';
-import 'package:golden_racks_admin/feature/admin/other_screens/add_technician_screen.dart';
-import 'package:golden_racks_admin/feature/admin/other_screens/widgets/technician_item.dart';
 import 'package:golden_racks_admin/feature/widgets/main_text.dart';
 
 import '../../../../constants.dart';
 import '../../../../core/bloc/home_cubit.dart';
-import '../../widgets/customButton.dart';
-import '../../widgets/customTextFeild.dart';
+import '../../widgets/drop_menu.dart';
 import '../../widgets/organizerCustomScaffold.dart';
 
 class AddPlanScreen extends StatefulWidget {
@@ -29,6 +25,7 @@ class _AddPlanScreenState extends State<AddPlanScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final readyPlanProvider = ReadyPlanProvider.get(context);
     return Container(
       height: double.infinity,
       width: double.infinity,
@@ -49,7 +46,9 @@ class _AddPlanScreenState extends State<AddPlanScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: 6.h,),
+              SizedBox(
+                height: 6.h,
+              ),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -59,7 +58,9 @@ class _AddPlanScreenState extends State<AddPlanScreen> {
                     color: Colors.black,
                     weight: FontWeight.w400,
                   ),
-                  SizedBox(width: 50.w,),
+                  SizedBox(
+                    width: 50.w,
+                  ),
                   MainText(
                     text: 'GR6545-23',
                     font: 16.sp,
@@ -68,28 +69,48 @@ class _AddPlanScreenState extends State<AddPlanScreen> {
                   ),
                 ],
               ),
-              SizedBox(height: 8.h,),
-              CustomTextField(
-                horizontalPadding: 20.w,
-                // controller: organizer.loginEmailController,
-                hasHeader: false,
-                hint: 'سنوي خطط بعد الشراء',
-                hasHint: true,
-                hintFont: 15.sp,
-                hintColor: Colors.black,
-                hintWeight: FontWeight.w400,
-                type: TextInputType.text,
-                valid: (String? v) {
-
+              SizedBox(
+                height: 8.h,
+              ),
+              DropMenu(
+                hint: ('اختر مدة الخطة'),
+                items: readyPlanProvider.arabicPlanTypes,
+                onChanged: (v) async {
+                  readyPlanProvider.chosenPlanDuration =
+                      readyPlanProvider.arabicPlanTypes.indexOf(v!);
+                  await readyPlanProvider.getReadyPlan(
+                    planDuration: readyPlanProvider.chosenPlanDuration,
+                  );
+                },
+                valid: (v) {
+                  if (v == null) {
+                    return 'من فضلك اختر مدة الخطة';
+                  } else {
+                    return '';
+                  }
                 },
               ),
-              SizedBox(height: 16.h,),
+              SizedBox(
+                height: 16.h,
+              ),
               Expanded(
-                child: ListView.builder(
-                  padding: EdgeInsets.symmetric(vertical: 10.h),
-                  itemBuilder: (BuildContext context, int i) => PlanItem(),
-                  itemCount: 2,
-                ),
+                child: readyPlanProvider.allReadyPlans.isEmpty
+                    ? Center(
+                        child: MainText(
+                          text:
+                              'لا يوجد ${readyPlanProvider.arabicPlanTypes[readyPlanProvider.chosenPlanDuration]}',
+                        ),
+                      )
+                    : ListView.builder(
+                        padding: EdgeInsets.symmetric(vertical: 10.h),
+                        itemCount: readyPlanProvider.allReadyPlans.length,
+                        itemBuilder: (BuildContext context, int i) {
+                          readyPlanProvider.chosenReadyPlan =
+                              readyPlanProvider.allReadyPlans[i];
+
+                          return PlanItem();
+                        },
+                      ),
               ),
             ],
           ),

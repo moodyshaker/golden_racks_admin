@@ -55,12 +55,7 @@ class AuthCubit extends ChangeNotifier {
   }
 
   format(Duration d) =>
-      d
-          .toString()
-          .split('.')
-          .first
-          .padLeft(8, "0")
-          .substring(3, 8);
+      d.toString().split('.').first.padLeft(8, "0").substring(3, 8);
 
   Future<void> clearData() async {
     await _preferences.logout();
@@ -127,14 +122,12 @@ class AuthCubit extends ChangeNotifier {
         MagicRouter.pop();
         AppCubit.listenFalse(navigatorKey.currentContext!).changeCurrent(0);
         // MagicRouter.navigateAndPopAll(Home());
-      }
-      else {
+      } else {
         MagicRouter.pop();
         showDialog(
             context: navigatorKey.currentContext!,
             barrierDismissible: false,
-            builder: (ctx) =>
-                ErrorDialog(
+            builder: (ctx) => ErrorDialog(
                   text: json.decode(r.body),
                 ));
       }
@@ -191,10 +184,10 @@ class AuthCubit extends ChangeNotifier {
         showDialog(
             context: navigatorKey.currentContext!,
             barrierDismissible: false,
-            builder: (ctx) =>
-                ErrorDialog(
-                  text: r.body.contains('type') ? jsonDecode(
-                      r.body)['errors']['Password'][0] : jsonDecode(r.body),
+            builder: (ctx) => ErrorDialog(
+                  text: r.body.contains('type')
+                      ? jsonDecode(r.body)['errors']['Password'][0]
+                      : jsonDecode(r.body),
                 ));
       }
     } catch (e) {
@@ -228,8 +221,7 @@ class AuthCubit extends ChangeNotifier {
         showDialog(
             context: navigatorKey.currentContext!,
             barrierDismissible: false,
-            builder: (ctx) =>
-                ErrorDialog(
+            builder: (ctx) => ErrorDialog(
                   text: json.decode(r.body),
                 ));
       }

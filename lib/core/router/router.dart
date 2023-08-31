@@ -23,7 +23,9 @@ class MagicRouter {
           _materialPageRoute(page), (route) => route.isFirst);
 
   static Future<dynamic> navigateAndPop(Widget page) =>
-      navigatorKey.currentState!.pushReplacement(_materialPageRoute(page));
+      navigatorKey.currentState!.pushReplacement(
+        _materialPageRoute(page),
+      );
 
   static bool get canPop => navigatorKey.currentState!.canPop();
 

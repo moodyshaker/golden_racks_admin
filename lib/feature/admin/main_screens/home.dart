@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:golden_racks_admin/constants.dart';
 import 'package:golden_racks_admin/core/bloc/organizer_app_cubit.dart';
-import 'package:golden_racks_admin/core/localization/demo_localization.dart';
 import 'package:golden_racks_admin/feature/widgets/organizerCustomScaffold.dart';
 
 class AdminHome extends StatefulWidget {
@@ -14,7 +12,6 @@ class AdminHome extends StatefulWidget {
 class _AdminHomeState extends State<AdminHome> {
   @override
   Widget build(BuildContext context) {
-    final demo = DemoLocalization.of(context);
     final OrganizerAppCubit organizer = OrganizerAppCubit.get(context);
     return OrganizerCustomScaffold(
       backgroundColor: Colors.white,

@@ -1,17 +1,11 @@
-import 'dart:developer';
-
 import 'package:dotted_border/dotted_border.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../constants.dart';
-import '../../core/appStorage/shared_preference.dart';
-import '../../core/bloc/auth_cubit.dart';
 import '../../core/bloc/language_cubit.dart';
 import '../../core/bloc/organizer_app_cubit.dart';
 import '../../core/localization/demo_localization.dart';
-import '../../core/models/more_model.dart';
 import '../../core/models/nav_item.dart';
 import '../../core/router/router.dart';
 import '../technician/main_screens/notification_screen.dart';
@@ -58,7 +52,6 @@ class _OrganizerCustomScaffoldState extends State<OrganizerCustomScaffold> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    final demo = DemoLocalization.of(context);
     // list = organizerMoreList(demo);
     navBar = organizerNavItems;
   }
@@ -68,24 +61,24 @@ class _OrganizerCustomScaffoldState extends State<OrganizerCustomScaffold> {
     final cubit = OrganizerAppCubit.get(context);
     final demo = DemoLocalization.of(context);
     final lang = LanguageCubit.get(context);
-    final auth = AuthCubit.get(context);
     return WillPopScope(
       onWillPop: () async {
         if (!MagicRouter.canPop) {
           showDialog(
-              context: navigatorKey.currentContext!,
-              builder: (c) => ActionDialog(
-                    content: demo.getTranslatedValue('do_you_want_exit'),
-                    onCancelClick: () {
-                      MagicRouter.pop();
-                    },
-                    approveAction: demo.getTranslatedValue('dialog_approve'),
-                    cancelAction: demo.getTranslatedValue('dialog_decline'),
-                    onApproveClick: () {
-                      MagicRouter.pop();
-                      SystemNavigator.pop();
-                    },
-                  ));
+            context: navigatorKey.currentContext!,
+            builder: (c) => ActionDialog(
+              content: demo.getTranslatedValue('do_you_want_exit'),
+              onCancelClick: () {
+                MagicRouter.pop();
+              },
+              approveAction: demo.getTranslatedValue('dialog_approve'),
+              cancelAction: demo.getTranslatedValue('dialog_decline'),
+              onApproveClick: () {
+                MagicRouter.pop();
+                SystemNavigator.pop();
+              },
+            ),
+          );
         } else {
           widget.onBackPressed != null
               ? widget.onBackPressed!()
@@ -101,13 +94,16 @@ class _OrganizerCustomScaffoldState extends State<OrganizerCustomScaffold> {
                 child: Drawer(
                   width: 330.w,
                   shape: RoundedRectangleBorder(
-                      borderRadius: lang.locale.languageCode == 'ar'
-                          ? BorderRadius.only(
-                              topLeft: Radius.circular(50.r),
-                              bottomLeft: Radius.circular(50.r))
-                          : BorderRadius.only(
-                              topRight: Radius.circular(50.r),
-                              bottomRight: Radius.circular(50.r))),
+                    borderRadius: lang.locale.languageCode == 'ar'
+                        ? BorderRadius.only(
+                            topLeft: Radius.circular(50.r),
+                            bottomLeft: Radius.circular(50.r),
+                          )
+                        : BorderRadius.only(
+                            topRight: Radius.circular(50.r),
+                            bottomRight: Radius.circular(50.r),
+                          ),
+                  ),
                   child: Padding(
                     padding: EdgeInsets.only(top: 50.h, right: 8.w, left: 8.w),
                     child: Column(
@@ -129,68 +125,73 @@ class _OrganizerCustomScaffoldState extends State<OrganizerCustomScaffold> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: List.generate(
-                                  list.length,
-                                  (i) => ListTile(
-                                        onTap: () {
-                                          if (list[i].route != null) {
-                                            MagicRouter.pop();
-                                            MagicRouter.navigateTo(
-                                                list[i].route!);
-                                          } else {
-                                            MagicRouter.pop();
-                                          }
-                                        },
-                                        contentPadding: EdgeInsets.symmetric(
-                                            horizontal: 16.w, vertical: 0.h),
-                                        subtitle: Row(
-                                            children: List.generate(
-                                                15,
-                                                (index) => Container(
-                                                      color: kBorderColor,
-                                                      width: 4.w,
-                                                      height: 1.h,
-                                                      margin:
-                                                          EdgeInsets.symmetric(
-                                                              horizontal: 2.w),
-                                                    ))),
-                                        title: Row(
-                                          children: [
-                                            Expanded(
-                                              child: MainText(
-                                                text: list[i].title,
-                                                font: 14.sp,
-                                                weight: FontWeight.bold,
-                                              ),
-                                            ),
-                                            list[i].count != null
-                                                ? DottedBorder(
+                                list.length,
+                                (i) => ListTile(
+                                  onTap: () {
+                                    if (list[i].route != null) {
+                                      MagicRouter.pop();
+                                      MagicRouter.navigateTo(list[i].route!);
+                                    } else {
+                                      MagicRouter.pop();
+                                    }
+                                  },
+                                  contentPadding: EdgeInsets.symmetric(
+                                    horizontal: 16.w,
+                                    vertical: 0.h,
+                                  ),
+                                  subtitle: Row(
+                                    children: List.generate(
+                                      15,
+                                      (index) => Container(
+                                        color: kBorderColor,
+                                        width: 4.w,
+                                        height: 1.h,
+                                        margin: EdgeInsets.symmetric(
+                                          horizontal: 2.w,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  title: Row(
+                                    children: [
+                                      Expanded(
+                                        child: MainText(
+                                          text: list[i].title,
+                                          font: 14.sp,
+                                          weight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      list[i].count != null
+                                          ? DottedBorder(
                                               color: kSecondaryColor,
                                               borderType: BorderType.Circle,
-                                              padding:EdgeInsets.symmetric(
-                                                  horizontal: 8.w,
-                                                  vertical: 8.h) ,
+                                              padding: EdgeInsets.symmetric(
+                                                horizontal: 8.w,
+                                                vertical: 8.h,
+                                              ),
                                               strokeWidth: 1,
-                                                  child: Center(
-                                                    child: MainText(
-                                                      text: list[i].count,
-                                                      font: 14.sp,
-                                                      color: kBlackColor,
-                                                    ),
-                                                  ),
-                                                )
-                                                : Container(),
-                                            SizedBox(
-                                              width: 4.w,
-                                            ),
-                                            Image.asset(
-                                              getAsset('double_arrow'),
-                                              color: Colors.black54,
-                                              height: 18.h,
-                                              width: 18.w,
-                                            ),
-                                          ],
-                                        ),
-                                      )),
+                                              child: Center(
+                                                child: MainText(
+                                                  text: list[i].count,
+                                                  font: 14.sp,
+                                                  color: kBlackColor,
+                                                ),
+                                              ),
+                                            )
+                                          : Container(),
+                                      SizedBox(
+                                        width: 4.w,
+                                      ),
+                                      Image.asset(
+                                        getAsset('double_arrow'),
+                                        color: Colors.black54,
+                                        height: 18.h,
+                                        width: 18.w,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
                             ),
                           ),
                         ),

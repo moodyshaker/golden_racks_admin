@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:golden_racks_admin/core/router/router.dart';
@@ -50,114 +52,118 @@ class _AddTechnicianScreenState extends State<AddTechnicianScreen> {
           child: Column(
             children: [
               Expanded(
-                  child: SingleChildScrollView(
-                    child: Form(
-                      key: _form,
-                      child: Column(
-                        children: [
-                          SizedBox(height: 24.h,),
-                          GestureDetector(
-                            onTap: () {
+                child: SingleChildScrollView(
+                  child: Form(
+                    key: _form,
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          height: 24.h,
+                        ),
+                        GestureDetector(
+                          onTap: () {},
+                          child: Container(
+                            height: 97.h,
+                            width: 97.w,
+                            child: Image.asset(getAsset('defualt_pic')),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 22.h,
+                        ),
+                        CustomTextField(
+                          horizontalPadding: 20.w,
+                          // controller: organizer.loginEmailController,
+                          hasHeader: false,
+                          hint: 'اسم المستخدم',
+                          hasHint: true,
+                          hintFont: 15.sp,
+                          hintColor: gray_40,
+                          hintWeight: FontWeight.w400,
+                          type: TextInputType.text,
+                          valid: (String? v) {},
+                        ),
+                        SizedBox(
+                          height: 6.h,
+                        ),
+                        CustomTextField(
+                          horizontalPadding: 20.w,
+                          // controller: organizer.loginEmailController,
+                          hasHeader: false,
+                          hint: 'اسم الفني كاملا',
+                          hasHint: true,
+                          hintFont: 15.sp,
+                          hintColor: gray_40,
+                          hintWeight: FontWeight.w400,
+                          type: TextInputType.text,
+                          valid: (String? v) {},
+                        ),
+                        SizedBox(
+                          height: 6.h,
+                        ),
+                        CustomTextField(
+                          horizontalPadding: 20.w,
+                          // controller: organizer.loginEmailController,
+                          hasHeader: false,
+                          hint: 'البريد الاليكتروني',
+                          hasHint: true,
+                          hintFont: 15.sp,
+                          hintColor: gray_40,
+                          hintWeight: FontWeight.w400,
+                          type: TextInputType.text,
+                          valid: (String? v) {},
+                        ),
+                        SizedBox(
+                          height: 6.h,
+                        ),
+                        CustomTextField(
+                          horizontalPadding: 20.w,
+                          // controller: organizer.loginEmailController,
+                          hasHeader: false,
+                          hint: 'رقم الجوال',
+                          hasHint: true,
+                          hintFont: 15.sp,
+                          hintColor: gray_40,
+                          hintWeight: FontWeight.w400,
+                          type: TextInputType.text,
+                          valid: (String? v) {},
+                        ),
+                        SizedBox(
+                          height: 6.h,
+                        ),
+                        CustomTextField(
+                          horizontalPadding: 20.w,
+                          // controller: organizer.loginEmailController,
+                          hasHeader: false,
+                          hint: 'كلمة المرور',
+                          hasHint: true,
+                          hintFont: 15.sp,
+                          hintColor: gray_40,
+                          hintWeight: FontWeight.w400,
+                          type: TextInputType.text,
+                          valid: (String? v) {},
+                        ),
+                        SizedBox(
+                          height: 22.h,
+                        ),
+                        CustomButton(
+                          title: 'تسجيل الحساب',
+                          color: kSecondaryColor,
+                          height: 50.h,
+                          font: 16.sp,
+                          family: 'Lato_bold',
+                          textColor: Colors.white,
+                          withBorder: false,
+                          onPressed: () async {
+                            log('from addTechnicalScreen');
 
-                            },
-                            child: Container(
-                              height: 97.h,
-                              width: 97.w,
-                              child: Image.asset(getAsset('defualt_pic')),
-                            ),
-                          ),
-                          SizedBox(height: 22.h,),
-                          CustomTextField(
-                            horizontalPadding: 20.w,
-                            // controller: organizer.loginEmailController,
-                            hasHeader: false,
-                            hint: 'اسم المستخدم',
-                            hasHint: true,
-                            hintFont: 15.sp,
-                            hintColor: gray_40,
-                            hintWeight: FontWeight.w400,
-                            type: TextInputType.text,
-                            valid: (String? v) {
-
-                            },
-                          ),
-                          SizedBox(height: 6.h,),
-                          CustomTextField(
-                            horizontalPadding: 20.w,
-                            // controller: organizer.loginEmailController,
-                            hasHeader: false,
-                            hint: 'اسم الفني كاملا',
-                            hasHint: true,
-                            hintFont: 15.sp,
-                            hintColor: gray_40,
-                            hintWeight: FontWeight.w400,
-                            type: TextInputType.text,
-                            valid: (String? v) {
-
-                            },
-                          ),
-                          SizedBox(height: 6.h,),
-                          CustomTextField(
-                            horizontalPadding: 20.w,
-                            // controller: organizer.loginEmailController,
-                            hasHeader: false,
-                            hint: 'البريد الاليكتروني',
-                            hasHint: true,
-                            hintFont: 15.sp,
-                            hintColor: gray_40,
-                            hintWeight: FontWeight.w400,
-                            type: TextInputType.text,
-                            valid: (String? v) {
-
-                            },
-                          ),
-                          SizedBox(height: 6.h,),
-                          CustomTextField(
-                            horizontalPadding: 20.w,
-                            // controller: organizer.loginEmailController,
-                            hasHeader: false,
-                            hint: 'رقم الجوال',
-                            hasHint: true,
-                            hintFont: 15.sp,
-                            hintColor: gray_40,
-                            hintWeight: FontWeight.w400,
-                            type: TextInputType.text,
-                            valid: (String? v) {
-
-                            },
-                          ),
-                          SizedBox(height: 6.h,),
-                          CustomTextField(
-                            horizontalPadding: 20.w,
-                            // controller: organizer.loginEmailController,
-                            hasHeader: false,
-                            hint: 'كلمة المرور',
-                            hasHint: true,
-                            hintFont: 15.sp,
-                            hintColor: gray_40,
-                            hintWeight: FontWeight.w400,
-                            type: TextInputType.text,
-                            valid: (String? v) {
-
-                            },
-                          ),
-                          SizedBox(height: 22.h,),
-                          CustomButton(
-                            title: 'تسجيل الحساب',
-                            color: kSecondaryColor,
-                            height: 50.h,
-                            font: 16.sp,
-                            family: 'Lato_bold',
-                            textColor: Colors.white,
-                            withBorder: false,
-                            onPressed: () async {
-                              MagicRouter.navigateTo(AddCompanyWithPlanScreen());
-                            },
-                          ),
-                        ],
-                      ),
+                            MagicRouter.navigateTo(AddCompanyWithPlanScreen());
+                          },
+                        ),
+                      ],
                     ),
                   ),
+                ),
               ),
             ],
           ),

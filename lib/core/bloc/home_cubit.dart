@@ -138,9 +138,7 @@ class HomeCubit extends ChangeNotifier {
       _eventCategoryStatus = NetworkStatus.loading;
       Response r = await HttpHelper.instance.httpGet(
           'EventeCatgories/GetEventCategory?pageSize=20&pageNumber=1', false);
-      log('getEventCategory -> ${r.body}');
-      log('getEventCategory -> ${r.request!.url}');
-      log('getEventCategory -> ${r.statusCode}');
+      log('getEventCategory');
       if (r.statusCode == 200) {
         _eventsCategory = (jsonDecode(r.body) as List)
             .map((e) => EventCategoryModel.fromJson(e))

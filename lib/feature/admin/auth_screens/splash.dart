@@ -22,9 +22,11 @@ class _SplashState extends State<Splash> {
 
   void init() async {
     Future.delayed(
-        const Duration(milliseconds: 1000),
-        () =>
-        MagicRouter.navigateAndPopAll(OrganizerLogin()));
+      const Duration(milliseconds: 1000),
+      () => MagicRouter.navigateAndPopAll(
+        OrganizerLogin(),
+      ),
+    );
   }
 
   @override
@@ -39,21 +41,22 @@ class _SplashState extends State<Splash> {
       decoration: BoxDecoration(
         image: DecorationImage(
           image: AssetImage(
-              getAsset('background'),),
+            getAsset('background'),
+          ),
           fit: BoxFit.fill,
         ),
       ),
       child: CustomScaffold(
-        backgroundColor: Colors.transparent,
-        isHome: false,
-        hasAppbar: false,
-        hasNavBar: false,
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-          Image.asset(getAsset('logo')),
-        ],)
-      ),
+          backgroundColor: Colors.transparent,
+          isHome: false,
+          hasAppbar: false,
+          hasNavBar: false,
+          body: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset(getAsset('logo')),
+            ],
+          )),
     );
   }
 }

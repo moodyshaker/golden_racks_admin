@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../constants.dart';
 import '../../feature/widgets/main_text.dart';
+import '../router/router.dart';
 
 class InfoDialog extends StatelessWidget {
   final String content;
@@ -17,33 +18,42 @@ class InfoDialog extends StatelessWidget {
       onWillPop: () async {
         return false;
       },
-      child: Dialog(
+      child: AlertDialog(
         backgroundColor: kAccentColor,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20.0),
         ),
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 40.h),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Image.asset(
-                imagePath != null
-                    ? getAsset(imagePath!)
-                    : getAsset('done_icon'),
-                height: 80.h,
-                width: 80.w,
+        content: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Image.asset(
+              imagePath != null ? getAsset(imagePath!) : getAsset('done_icon'),
+              height: 80.h,
+              width: 80.w,
+            ),
+            MainText(
+              text: content,
+              font: 16.sp,
+              color: kBlackColor,
+              weight: FontWeight.bold,
+              textAlign: TextAlign.center,
+            ),
+            TextButton(
+              style: ButtonStyle(
+                fixedSize: MaterialStateProperty.all<Size>(
+                  Size(100.w, 40.h),
+                ),
+                backgroundColor:
+                    MaterialStateProperty.all<Color>(Colors.green.shade400),
+                foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
               ),
-              MainText(
-                text: content,
-                font: 16.sp,
-                color: kBlackColor,
-                weight: FontWeight.bold,
-                textAlign: TextAlign.center,
-              ),
-            ],
-          ),
+              onPressed: () {
+                MagicRouter.pop();
+              },
+              child: Text('OK'),
+            ),
+          ],
         ),
       ),
     );

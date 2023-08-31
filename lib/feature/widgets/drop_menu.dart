@@ -2,14 +2,11 @@ import 'package:flutter/material.dart';
 import '../../constants.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import 'main_text.dart';
-
 class DropMenu extends StatelessWidget {
   final List<String>? items;
   final Function(String?)? onChanged;
   final String? Function(String?)? valid;
   final String hint;
-  final double? hintSize;
   final bool shouldBeEmpty;
   final Color? headerTextColor;
   final Function()? onTap;
@@ -17,30 +14,33 @@ class DropMenu extends StatelessWidget {
   final bool isModel;
   final Widget? prefixIcon;
   final Color? dropDownColor;
+  final Color? hintColor;
 
-  DropMenu(
-      {this.value,
-      required this.hint,
-        this.hintSize,
-      this.shouldBeEmpty = false,
-      this.valid,
-      this.dropDownColor,
-      this.items,
-      this.prefixIcon,
-      this.onChanged,
-      this.headerTextColor,
-      this.onTap,
-      this.isModel = false});
+  DropMenu({
+    this.value,
+    required this.hint,
+    this.shouldBeEmpty = false,
+    this.valid,
+    this.dropDownColor,
+    this.items,
+    this.prefixIcon,
+    this.onChanged,
+    this.headerTextColor,
+    this.onTap,
+    this.isModel = false,
+    this.hintColor,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         Container(
-          height: 50.h,
+          // height: 100.h,
           child: DropdownButtonFormField<String>(
             decoration: InputDecoration(
-              contentPadding: EdgeInsets.symmetric(horizontal: 21 , vertical: 15),
+              contentPadding:
+                  EdgeInsets.symmetric(horizontal: 21, vertical: 10),
               enabledBorder: OutlineInputBorder(
                 borderSide: BorderSide(color: kInactiveColor),
                 borderRadius: BorderRadius.circular(50.r),
@@ -88,12 +88,17 @@ class DropMenu extends StatelessWidget {
             ),
             hint: Container(
               child: Text(
-                  value == null
-                      ? hint
-                      : isModel
-                          ? value.name
-                          : value,
-                  style: TextStyle(fontSize:hintSize ?? 12.sp, color: Colors.black , fontWeight: FontWeight.w700)),
+                value == null
+                    ? hint
+                    : isModel
+                        ? value.name
+                        : value,
+                style: TextStyle(
+                  fontSize: 12.sp,
+                  color: hintColor == null ? Colors.black : hintColor,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
             ),
             iconEnabledColor: kAccentColor,
             isExpanded: true,

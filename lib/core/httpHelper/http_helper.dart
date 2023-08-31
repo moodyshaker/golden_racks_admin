@@ -5,24 +5,29 @@ import 'package:intl/intl.dart';
 import 'package:path/path.dart';
 import '../appStorage/shared_preference.dart';
 import 'header_config.dart';
+
 // final String base_url = 'https://malqaapi.webxy.net/api/';
-final String base_url = 'http://109.123.244.24:8090/api/';
+final String base_url = 'http://75.119.156.82/api/';
 final String base_url_image = 'http://109.123.244.24:8081/';
 
 class HttpHelper {
-
   static final HttpHelper instance = HttpHelper._instance();
 
   HttpHelper._instance();
 
-  Future<Response> httpPost(String path, bool withAuth,
-      {Map<String, dynamic>? body, bool withoutPath = false}) async {
+  Future<Response> httpPost(
+    String path,
+    bool withAuth, {
+    Map<String, dynamic>? body,
+    bool withoutPath = false,
+  }) async {
     final Response r = await post(
-        Uri.parse(withoutPath ? path : '$base_url$path'),
-        body: json.encode(body),
-        headers: withAuth
-            ? await HeaderConfig.getHeaderWithToken()
-            : await HeaderConfig.getHeader());
+      Uri.parse(withoutPath ? path : '$base_url$path'),
+      body: json.encode(body),
+      headers: withAuth
+          ? await HeaderConfig.getHeaderWithToken()
+          : await HeaderConfig.getHeader(),
+    );
     return r;
   }
 

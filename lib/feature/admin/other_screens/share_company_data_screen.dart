@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:golden_racks_admin/core/router/router.dart';
@@ -17,11 +19,11 @@ class SharedCompanyDataScreen extends StatefulWidget {
   const SharedCompanyDataScreen({Key? key}) : super(key: key);
 
   @override
-  State<SharedCompanyDataScreen> createState() => _SharedCompanyDataScreenState();
+  State<SharedCompanyDataScreen> createState() =>
+      _SharedCompanyDataScreenState();
 }
 
 class _SharedCompanyDataScreenState extends State<SharedCompanyDataScreen> {
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -45,20 +47,21 @@ class _SharedCompanyDataScreenState extends State<SharedCompanyDataScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               GestureDetector(
-                onTap: (){
+                onTap: () {
+                  log('from shareCompanyDataScreen');
+
                   MagicRouter.navigateTo(AddCompanyWithPlanScreen());
-                  },
+                },
                 child: Container(
                   height: 56.h,
                   width: 200.h,
-                  padding: EdgeInsets.symmetric(vertical: 10.w, horizontal: 30.h),
+                  padding:
+                      EdgeInsets.symmetric(vertical: 10.w, horizontal: 30.h),
                   margin: EdgeInsets.only(bottom: 8.h),
                   decoration: BoxDecoration(
                     color: mainColor,
                     borderRadius: BorderRadius.circular(30.r),
-                    border: Border.all(
-                        width: 1.0,
-                        color: mainColor),
+                    border: Border.all(width: 1.0, color: mainColor),
                   ),
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -83,7 +86,9 @@ class _SharedCompanyDataScreenState extends State<SharedCompanyDataScreen> {
                   ),
                 ),
               ),
-              SizedBox(height: 20.h,),
+              SizedBox(
+                height: 20.h,
+              ),
               Container(
                 child: CustomTextField(
                   borderColor: mainColor,
@@ -93,20 +98,18 @@ class _SharedCompanyDataScreenState extends State<SharedCompanyDataScreen> {
                     width: 60.w,
                     child: Center(
                         child: Container(
-                          height: 32.h,
-                          width: 32.w,
-                          child: Image.asset(
-                            getAsset('search_icon')
-                          ),
-                        )),
+                      height: 32.h,
+                      width: 32.w,
+                      child: Image.asset(getAsset('search_icon')),
+                    )),
                   ),
                   hasHint: true,
-                  suffixCallback: () {
-
-                  },
+                  suffixCallback: () {},
                 ),
               ),
-              SizedBox(height: 20.h,),
+              SizedBox(
+                height: 20.h,
+              ),
               CustomButton(
                 title: 'اسم الشركة',
                 color: backColor,
@@ -119,12 +122,15 @@ class _SharedCompanyDataScreenState extends State<SharedCompanyDataScreen> {
                 withBorder: false,
                 onPressed: () async {},
               ),
-              SizedBox(height: 6.h,),
+              SizedBox(
+                height: 6.h,
+              ),
               Container(
                 height: 235.h,
                 child: ListView.builder(
                   padding: EdgeInsets.symmetric(vertical: 10.h),
-                  itemBuilder: (BuildContext context, int i) => TechnicianItem(),
+                  itemBuilder: (BuildContext context, int i) =>
+                      TechnicianItem(),
                   itemCount: 4,
                 ),
               ),

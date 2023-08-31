@@ -20,6 +20,8 @@ class Preferences {
   static const String lang = 'malqa_lang';
   static const String isRemember = 'malqa_remember';
   static const String type = 'malqa_type';
+  static const String fullName = 'goldenRakcs_fullName';
+  static const String registerdUserId = 'goldenRakcs_registerdUserId';
 
   Preferences._instance();
 
@@ -113,6 +115,16 @@ class Preferences {
     return isSet;
   }
 
+  Future<bool> setUserFullName(String value) async {
+    bool isSet = await _preferences!.setString(fullName, value);
+    return isSet;
+  }
+
+  Future<bool> setRegisterdUserId(String value) async {
+    bool isSet = await _preferences!.setString(registerdUserId, value);
+    return isSet;
+  }
+
   Future<bool> logout() async {
     bool isSet = await _preferences!.clear();
     return isSet;
@@ -151,4 +163,9 @@ class Preferences {
   String get getOrgUserPhone => _preferences!.getString(orgPhone) ?? '';
 
   String get getLanguage => _preferences!.getString(lang) ?? 'en';
+
+  String get getUserFullName => _preferences!.getString(fullName) ?? '';
+
+  String get getRegisterdUserId =>
+      _preferences!.getString(registerdUserId) ?? '';
 }
