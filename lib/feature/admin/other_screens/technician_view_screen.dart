@@ -151,7 +151,6 @@ class _TechnicianViewScreenState extends State<TechnicianViewScreen> {
                           );
                         },
                         itemCount: addTechProvider.allTechnicals.length,
-                        //test
                       ),
               ),
               SizedBox(
