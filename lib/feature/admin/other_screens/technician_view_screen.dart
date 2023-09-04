@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:golden_racks_admin/core/provider/provider_add_technation.dart';
 import 'package:golden_racks_admin/core/router/router.dart';
-import 'package:golden_racks_admin/feature/admin/main_screens/widgets/need_activate_item.dart';
 import 'package:golden_racks_admin/feature/admin/other_screens/add_technician_screen.dart';
 import 'package:golden_racks_admin/feature/admin/other_screens/widgets/technician_item.dart';
 import 'package:golden_racks_admin/feature/widgets/main_text.dart';
-
 import '../../../../constants.dart';
-import '../../../../core/bloc/home_cubit.dart';
 import '../../widgets/customButton.dart';
 import '../../widgets/customTextFeild.dart';
 import '../../widgets/organizerCustomScaffold.dart';
@@ -20,9 +18,14 @@ class TechnicianViewScreen extends StatefulWidget {
 }
 
 class _TechnicianViewScreenState extends State<TechnicianViewScreen> {
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
+    final addTechProvider = AddTechnationProvider.get(context);
     return Container(
       height: double.infinity,
       width: double.infinity,
@@ -44,18 +47,19 @@ class _TechnicianViewScreenState extends State<TechnicianViewScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               GestureDetector(
-                onTap: (){ MagicRouter.navigateTo(AddTechnicianScreen()); },
+                onTap: () {
+                  MagicRouter.navigateTo(AddTechnicianScreen());
+                },
                 child: Container(
                   height: 56.h,
                   width: 200.h,
-                  padding: EdgeInsets.symmetric(vertical: 10.w, horizontal: 30.h),
+                  padding:
+                      EdgeInsets.symmetric(vertical: 10.w, horizontal: 30.h),
                   margin: EdgeInsets.only(bottom: 8.h),
                   decoration: BoxDecoration(
                     color: mainColor,
                     borderRadius: BorderRadius.circular(30.r),
-                    border: Border.all(
-                        width: 1.0,
-                        color: mainColor),
+                    border: Border.all(width: 1.0, color: mainColor),
                   ),
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -80,30 +84,42 @@ class _TechnicianViewScreenState extends State<TechnicianViewScreen> {
                   ),
                 ),
               ),
-              SizedBox(height: 20.h,),
+              SizedBox(
+                height: 20.h,
+              ),
               Container(
                 child: CustomTextField(
+                  controller: addTechProvider.searchTechController,
                   borderColor: mainColor,
                   hint: 'ابحث عن فني',
                   horizontalPadding: 16.w,
-                  suffixIcon: Container(
-                    width: 60.w,
-                    child: Center(
+                  suffixIcon: InkWell(
+                    child: Container(
+                      width: 60.w,
+                      child: Center(
                         child: Container(
                           height: 32.h,
                           width: 32.w,
                           child: Image.asset(
-                            getAsset('search_icon')
+                            getAsset('search_icon'),
                           ),
-                        )),
+                        ),
+                      ),
+                    ),
+                    onTap: () async {
+                      await addTechProvider.getallTechnation(
+                        userFullName:
+                            '${addTechProvider.searchTechController.text}',
+                      );
+                    },
                   ),
                   hasHint: true,
-                  suffixCallback: () {
-
-                  },
+                  suffixCallback: () {},
                 ),
               ),
-              SizedBox(height: 20.h,),
+              SizedBox(
+                height: 20.h,
+              ),
               CustomButton(
                 title: 'اسم الفني',
                 color: backColor,
@@ -116,14 +132,26 @@ class _TechnicianViewScreenState extends State<TechnicianViewScreen> {
                 withBorder: false,
                 onPressed: () async {},
               ),
-              SizedBox(height: 6.h,),
+              SizedBox(
+                height: 6.h,
+              ),
               Container(
                 height: 235.h,
-                child: ListView.builder(
-                  padding: EdgeInsets.symmetric(vertical: 10.h),
-                  itemBuilder: (BuildContext context, int i) => TechnicianItem(),
-                  itemCount: 4,
-                ),
+                child: addTechProvider.allTechnicals.isEmpty
+                    ? MainText(
+                        text: 'لا يوجد فني بهذا الاسم',
+                      )
+                    : ListView.builder(
+                        padding: EdgeInsets.symmetric(vertical: 10.h),
+                        itemBuilder: (BuildContext context, int i) {
+                          addTechProvider.chosenTech =
+                              addTechProvider.allTechnicals[i];
+                          return TechnicianItem(
+                            tech: addTechProvider.allTechnicals[i],
+                          );
+                        },
+                        itemCount: addTechProvider.allTechnicals.length,
+                      ),
               ),
               SizedBox(
                 height: 27.h,

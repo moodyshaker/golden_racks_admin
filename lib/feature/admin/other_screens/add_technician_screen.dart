@@ -1,18 +1,14 @@
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:golden_racks_admin/core/router/router.dart';
-import 'package:golden_racks_admin/feature/admin/main_screens/widgets/need_activate_item.dart';
-import 'package:golden_racks_admin/feature/admin/other_screens/widgets/technician_item.dart';
-import 'package:golden_racks_admin/feature/widgets/main_text.dart';
-
+import 'package:golden_racks_admin/core/localization/demo_localization.dart';
+import 'package:golden_racks_admin/core/provider/provider_add_technation.dart';
+import 'package:golden_racks_admin/core/validate/validation.dart';
 import '../../../../constants.dart';
 import '../../../../core/bloc/home_cubit.dart';
 import '../../widgets/customButton.dart';
 import '../../widgets/customTextFeild.dart';
 import '../../widgets/organizerCustomScaffold.dart';
-import 'add_company_with_plan_screen.dart';
 
 class AddTechnicianScreen extends StatefulWidget {
   const AddTechnicianScreen({Key? key}) : super(key: key);
@@ -32,6 +28,9 @@ class _AddTechnicianScreenState extends State<AddTechnicianScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final demo = DemoLocalization.of(context);
+    final addTechnationProvider = AddTechnationProvider.get(context);
+
     return Container(
       height: double.infinity,
       width: double.infinity,
@@ -61,11 +60,24 @@ class _AddTechnicianScreenState extends State<AddTechnicianScreen> {
                           height: 24.h,
                         ),
                         GestureDetector(
-                          onTap: () {},
+                          onTap: () async {
+                            await addTechnationProvider.pickImageFromGallary();
+
+                            if (addTechnationProvider.selectedTechnicalImage !=
+                                null) {
+                              log(addTechnationProvider
+                                  .selectedTechnicalImage!.path);
+                            }
+                          },
                           child: Container(
                             height: 97.h,
                             width: 97.w,
-                            child: Image.asset(getAsset('defualt_pic')),
+                            child:
+                                addTechnationProvider.selectedTechnicalImage ==
+                                        null
+                                    ? Image.asset(getAsset('defualt_pic'))
+                                    : Image.file(addTechnationProvider
+                                        .selectedTechnicalImage!),
                           ),
                         ),
                         SizedBox(
@@ -73,7 +85,8 @@ class _AddTechnicianScreenState extends State<AddTechnicianScreen> {
                         ),
                         CustomTextField(
                           horizontalPadding: 20.w,
-                          // controller: organizer.loginEmailController,
+                          controller:
+                              addTechnationProvider.addTechUserNameController,
                           hasHeader: false,
                           hint: 'اسم المستخدم',
                           hasHint: true,
@@ -81,14 +94,21 @@ class _AddTechnicianScreenState extends State<AddTechnicianScreen> {
                           hintColor: gray_40,
                           hintWeight: FontWeight.w400,
                           type: TextInputType.text,
-                          valid: (String? v) {},
+                          valid: (String? v) {
+                            if (v!.isEmpty) {
+                              return 'من فضلك ادخل اسم المستخدم';
+                            } else {
+                              return null;
+                            }
+                          },
                         ),
                         SizedBox(
                           height: 6.h,
                         ),
                         CustomTextField(
                           horizontalPadding: 20.w,
-                          // controller: organizer.loginEmailController,
+                          controller:
+                              addTechnationProvider.addTechfullNameController,
                           hasHeader: false,
                           hint: 'اسم الفني كاملا',
                           hasHint: true,
@@ -96,14 +116,21 @@ class _AddTechnicianScreenState extends State<AddTechnicianScreen> {
                           hintColor: gray_40,
                           hintWeight: FontWeight.w400,
                           type: TextInputType.text,
-                          valid: (String? v) {},
+                          valid: (String? v) {
+                            if (v!.isEmpty) {
+                              return 'من فضلك ادخل اسم الفني كاملا';
+                            } else {
+                              return null;
+                            }
+                          },
                         ),
                         SizedBox(
                           height: 6.h,
                         ),
                         CustomTextField(
                           horizontalPadding: 20.w,
-                          // controller: organizer.loginEmailController,
+                          controller:
+                              addTechnationProvider.addTechEmailController,
                           hasHeader: false,
                           hint: 'البريد الاليكتروني',
                           hasHint: true,
@@ -111,14 +138,21 @@ class _AddTechnicianScreenState extends State<AddTechnicianScreen> {
                           hintColor: gray_40,
                           hintWeight: FontWeight.w400,
                           type: TextInputType.text,
-                          valid: (String? v) {},
+                          valid: (String? v) {
+                            if (v!.isEmpty) {
+                              return 'من فضلك ادخل البريد الالكتروني';
+                            } else {
+                              return null;
+                            }
+                          },
                         ),
                         SizedBox(
                           height: 6.h,
                         ),
                         CustomTextField(
                           horizontalPadding: 20.w,
-                          // controller: organizer.loginEmailController,
+                          controller: addTechnationProvider
+                              .addTechmobileNumberController,
                           hasHeader: false,
                           hint: 'رقم الجوال',
                           hasHint: true,
@@ -126,22 +160,40 @@ class _AddTechnicianScreenState extends State<AddTechnicianScreen> {
                           hintColor: gray_40,
                           hintWeight: FontWeight.w400,
                           type: TextInputType.text,
-                          valid: (String? v) {},
+                          valid: (String? v) {
+                            if (v!.isEmpty) {
+                              return 'من فضلك ادخل رقم الجوال';
+                            } else {
+                              return null;
+                            }
+                          },
                         ),
                         SizedBox(
                           height: 6.h,
                         ),
                         CustomTextField(
                           horizontalPadding: 20.w,
-                          // controller: organizer.loginEmailController,
+                          controller:
+                              addTechnationProvider.addTechPasswordController,
                           hasHeader: false,
                           hint: 'كلمة المرور',
+                          isPassword: true,
                           hasHint: true,
                           hintFont: 15.sp,
                           hintColor: gray_40,
                           hintWeight: FontWeight.w400,
                           type: TextInputType.text,
-                          valid: (String? v) {},
+                          valid: (String? v) => v!.isEmpty
+                              ? 'من فضلك ادخل كلمة المرور'
+                              : v.length < 8
+                                  ? demo.getTranslatedValue(
+                                      'password_8ch_validation',
+                                    )
+                                  : Validations.passwordVerified(v)
+                                      ? null
+                                      : demo.getTranslatedValue(
+                                          'strong_password',
+                                        ),
                         ),
                         SizedBox(
                           height: 22.h,
@@ -155,9 +207,22 @@ class _AddTechnicianScreenState extends State<AddTechnicianScreen> {
                           textColor: Colors.white,
                           withBorder: false,
                           onPressed: () async {
-                            log('from addTechnicalScreen');
-
-                            MagicRouter.navigateTo(AddCompanyWithPlanScreen());
+                            if (_form.currentState!.validate()) {
+                              await addTechnationProvider.addNewTechnical(
+                                fullName: addTechnationProvider
+                                    .addTechfullNameController.text,
+                                Password: addTechnationProvider
+                                    .addTechPasswordController.text,
+                                UploadImage: addTechnationProvider
+                                    .selectedTechnicalImage!,
+                                mobileNumber: addTechnationProvider
+                                    .addTechmobileNumberController.text,
+                                Email: addTechnationProvider
+                                    .addTechEmailController.text,
+                                UserName: addTechnationProvider
+                                    .addTechUserNameController.text,
+                              );
+                            }
                           },
                         ),
                       ],

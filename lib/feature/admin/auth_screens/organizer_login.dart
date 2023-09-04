@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:golden_racks_admin/core/provider/provider_add_technation.dart';
 import 'package:golden_racks_admin/core/provider/provider_auth.dart';
 import 'package:golden_racks_admin/feature/widgets/drop_menu.dart';
 import '../../../constants.dart';
@@ -25,6 +26,7 @@ class _OrganizerLoginState extends State<OrganizerLogin> {
   Widget build(BuildContext context) {
     final demo = DemoLocalization.of(context);
     final auth = AuthProvider.get(context);
+    final addTechnical = AddTechnationProvider.get(context);
     List<String> type = ['مدير التطبيق', 'فني'];
 
     return Container(
@@ -133,6 +135,9 @@ class _OrganizerLoginState extends State<OrganizerLogin> {
                           onPressed: () async {
                             if (_form.currentState!.validate()) {
                               await auth.authGetCountries();
+                              await addTechnical.getallTechnation(
+                                userFullName: '',
+                              );
                               if (isAdmin) {
                                 log('Admin');
                                 await auth.authLogin(
