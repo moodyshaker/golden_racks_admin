@@ -2,30 +2,27 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:golden_racks_admin/feature/admin/other_screens/technician_view_screen.dart';
 import '../../../../constants.dart';
-import '../../../../core/bloc/language_cubit.dart';
-import '../../../../core/localization/demo_localization.dart';
 import '../../../../core/router/router.dart';
 import '../../../widgets/customButton.dart';
 import '../../../widgets/main_text.dart';
 import '../../other_screens/ticket_view_screen.dart';
 
 class SubscribersRequestsItem extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 10.h , horizontal: 16.w),
+      padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 14.w),
       margin: EdgeInsets.only(bottom: 5.0),
       decoration: BoxDecoration(
         color: Colors.transparent,
         borderRadius: BorderRadius.circular(15.r),
-        border: Border.all(
-            width: 1.0,
-            color: kInactiveColor),
+        border: Border.all(width: 1.0, color: kInactiveColor),
       ),
       child: Column(
         children: [
-          SizedBox(width: 9.w,),
+          SizedBox(
+            width: 9.w,
+          ),
           Row(
             children: [
               // Container(
@@ -35,7 +32,9 @@ class SubscribersRequestsItem extends StatelessWidget {
               //     getAsset('defualt_pic'),
               //   ),
               // ),
-              SizedBox(width: 9.w,),
+              SizedBox(
+                width: 9.w,
+              ),
               Expanded(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -77,17 +76,23 @@ class SubscribersRequestsItem extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(width: 9.w,),
+          SizedBox(
+            width: 9.w,
+          ),
           Row(
             children: [
-              SizedBox(width: 8.w,),
+              SizedBox(
+                width: 8.w,
+              ),
               MainText(
                 text: 'العطل',
                 font: 15.sp,
                 color: Colors.black,
                 weight: FontWeight.w700,
               ),
-              SizedBox(width: 27.w,),
+              SizedBox(
+                width: 27.w,
+              ),
               MainText(
                 text: 'توقف الماكينة وصوت يخرج منها',
                 font: 15.sp,
@@ -96,11 +101,15 @@ class SubscribersRequestsItem extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(width: 7.w,),
+          SizedBox(
+            width: 7.w,
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              SizedBox(width: 8.w,),
+              SizedBox(
+                width: 8.w,
+              ),
               Expanded(
                 child: Row(
                   children: [
@@ -110,7 +119,9 @@ class SubscribersRequestsItem extends StatelessWidget {
                       color: Colors.black,
                       weight: FontWeight.w700,
                     ),
-                    SizedBox(width: 27.w,),
+                    SizedBox(
+                      width: 27.w,
+                    ),
                     MainText(
                       text: '21-1-2023',
                       font: 15.sp,
@@ -120,7 +131,9 @@ class SubscribersRequestsItem extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(width: 18.w,),
+              SizedBox(
+                width: 18.w,
+              ),
               Expanded(
                 child: Row(
                   children: [
@@ -130,7 +143,9 @@ class SubscribersRequestsItem extends StatelessWidget {
                       color: Colors.black,
                       weight: FontWeight.w700,
                     ),
-                    SizedBox(width: 8.w,),
+                    SizedBox(
+                      width: 8.w,
+                    ),
                     MainText(
                       text: '12.30 am',
                       font: 15.sp,
@@ -142,17 +157,23 @@ class SubscribersRequestsItem extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(width: 6.w,),
+          SizedBox(
+            width: 6.w,
+          ),
           Row(
             children: [
-              SizedBox(width: 8.w,),
+              SizedBox(
+                width: 8.w,
+              ),
               MainText(
                 text: 'عنوان',
                 font: 15.sp,
                 color: Colors.black,
                 weight: FontWeight.w700,
               ),
-              SizedBox(width: 27.w,),
+              SizedBox(
+                width: 27.w,
+              ),
               // MainText(
               //   text: 'جدة-الحي الخامس-قطعة 200',
               //   font: 15.sp,
@@ -161,7 +182,9 @@ class SubscribersRequestsItem extends StatelessWidget {
               // ),
             ],
           ),
-          SizedBox(width: 14.w,),
+          SizedBox(
+            width: 14.w,
+          ),
           Row(
             children: [
               Expanded(
@@ -182,7 +205,9 @@ class SubscribersRequestsItem extends StatelessWidget {
                         MagicRouter.navigateTo(TicketViewScreen());
                       },
                     ),
-                    SizedBox(width: 5.w,),
+                    SizedBox(
+                      width: 5.w,
+                    ),
                     CustomButton(
                       horizontalPadding: 19.w,
                       title: 'تخصيص فني',

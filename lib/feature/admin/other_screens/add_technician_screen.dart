@@ -76,8 +76,10 @@ class _AddTechnicianScreenState extends State<AddTechnicianScreen> {
                                 addTechnationProvider.selectedTechnicalImage ==
                                         null
                                     ? Image.asset(getAsset('defualt_pic'))
-                                    : Image.file(addTechnationProvider
-                                        .selectedTechnicalImage!),
+                                    : Image.file(
+                                        addTechnationProvider
+                                            .selectedTechnicalImage!,
+                                      ),
                           ),
                         ),
                         SizedBox(

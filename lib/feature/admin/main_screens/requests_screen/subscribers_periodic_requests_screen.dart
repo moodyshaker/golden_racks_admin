@@ -3,19 +3,18 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:golden_racks_admin/feature/admin/main_screens/widgets/subscribers_request_item.dart';
 
 import '../../../../constants.dart';
-import '../../../../core/bloc/home_cubit.dart';
 import '../../../widgets/organizerCustomScaffold.dart';
-import '../widgets/requests_item.dart';
 
-class SubscribersPeriodicRequestsScreen extends StatefulWidget {
-  const SubscribersPeriodicRequestsScreen({Key? key}) : super(key: key);
+class SubscribersPeriodicRequestsAdminScreen extends StatefulWidget {
+  const SubscribersPeriodicRequestsAdminScreen({Key? key}) : super(key: key);
 
   @override
-  State<SubscribersPeriodicRequestsScreen> createState() => _SubscribersPeriodicRequestsScreenState();
+  State<SubscribersPeriodicRequestsAdminScreen> createState() =>
+      _SubscribersPeriodicRequestsAdminScreenState();
 }
 
-class _SubscribersPeriodicRequestsScreenState extends State<SubscribersPeriodicRequestsScreen> {
-
+class _SubscribersPeriodicRequestsAdminScreenState
+    extends State<SubscribersPeriodicRequestsAdminScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -29,15 +28,15 @@ class _SubscribersPeriodicRequestsScreenState extends State<SubscribersPeriodicR
       ),
       child: OrganizerCustomScaffold(
         backgroundColor: Colors.transparent,
-        hasAppbar:false,
+        hasAppbar: false,
         isHome: true,
         hasNavBar: false,
         title1: 'تحديد فني لطلبات الدورية لغير المشتركين',
         body: Expanded(
           child: ListView.builder(
-            padding:
-            EdgeInsets.symmetric(horizontal: 22.w, vertical: 10.h),
-            itemBuilder: (BuildContext context, int i) => SubscribersRequestsItem(),
+            padding: EdgeInsets.symmetric(horizontal: 22.w, vertical: 10.h),
+            itemBuilder: (BuildContext context, int i) =>
+                SubscribersRequestsItem(),
             itemCount: 2,
           ),
         ),

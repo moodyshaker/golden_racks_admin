@@ -1,33 +1,34 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:golden_racks_admin/core/provider/provider_assign_to_unsub_emergency_plan.dart';
 import 'package:golden_racks_admin/core/router/router.dart';
 import 'package:golden_racks_admin/feature/admin/other_screens/technician_view_screen.dart';
 import 'package:golden_racks_admin/feature/admin/other_screens/ticket_view_screen.dart';
 import '../../../../constants.dart';
-import '../../../../core/bloc/language_cubit.dart';
-import '../../../../core/localization/demo_localization.dart';
 import '../../../widgets/customButton.dart';
 import '../../../widgets/main_text.dart';
 
 class RequestsItem extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
-    final demo = DemoLocalization.of(context);
-    final lang = LanguageCubit.get(context);
+    final emergencyUnsubProvider = AssignToUnsubEmergencyProvider.get(context);
+    var choosedPlan = emergencyUnsubProvider.choosedEmergencyUnsubPlan;
+
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 10.h , horizontal: 16.w),
+      padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 12.w),
       margin: EdgeInsets.only(bottom: 5.0),
       decoration: BoxDecoration(
         color: Colors.transparent,
         borderRadius: BorderRadius.circular(15.r),
-        border: Border.all(
-            width: 1.0,
-            color: kInactiveColor),
+        border: Border.all(width: 1.0, color: kInactiveColor),
       ),
       child: Column(
         children: [
-          SizedBox(height: 9.h,),
+          SizedBox(
+            height: 9.h,
+          ),
           Row(
             children: [
               Container(
@@ -37,7 +38,9 @@ class RequestsItem extends StatelessWidget {
                   getAsset('defualt_pic'),
                 ),
               ),
-              SizedBox(width: 9.w,),
+              SizedBox(
+                width: 9.w,
+              ),
               Expanded(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -45,7 +48,7 @@ class RequestsItem extends StatelessWidget {
                     Column(
                       children: [
                         MainText(
-                          text: 'شركة امازون',
+                          text: '${choosedPlan.id}',
                           font: 15.sp,
                           weight: FontWeight.w700,
                           color: Colors.black,
@@ -79,30 +82,40 @@ class RequestsItem extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: 9.h,),
+          SizedBox(
+            height: 9.h,
+          ),
           Row(
             children: [
-              SizedBox(width: 8.w,),
+              SizedBox(
+                width: 8.w,
+              ),
               MainText(
                 text: 'العطل',
                 font: 15.sp,
                 color: Colors.black,
                 weight: FontWeight.w700,
               ),
-              SizedBox(width: 27.w,),
+              SizedBox(
+                width: 27.w,
+              ),
               MainText(
-                text: 'توقف الماكينة وصوت يخرج منها',
+                text: '${choosedPlan.problemName}',
                 font: 15.sp,
                 color: Colors.black,
                 weight: FontWeight.w500,
               ),
             ],
           ),
-          SizedBox(height: 7.h,),
+          SizedBox(
+            height: 7.h,
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              SizedBox(width: 8.w,),
+              SizedBox(
+                width: 8.w,
+              ),
               Expanded(
                 child: Row(
                   children: [
@@ -112,7 +125,9 @@ class RequestsItem extends StatelessWidget {
                       color: Colors.black,
                       weight: FontWeight.w700,
                     ),
-                    SizedBox(width: 27.w,),
+                    SizedBox(
+                      width: 27.w,
+                    ),
                     MainText(
                       text: '21-1-2023',
                       font: 15.sp,
@@ -122,7 +137,9 @@ class RequestsItem extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(width: 18.w,),
+              SizedBox(
+                width: 18.w,
+              ),
               Expanded(
                 child: Row(
                   children: [
@@ -132,7 +149,9 @@ class RequestsItem extends StatelessWidget {
                       color: Colors.black,
                       weight: FontWeight.w700,
                     ),
-                    SizedBox(width: 8.w,),
+                    SizedBox(
+                      width: 8.w,
+                    ),
                     MainText(
                       text: '12.30 am',
                       font: 15.sp,
@@ -144,17 +163,23 @@ class RequestsItem extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: 6.h,),
+          SizedBox(
+            height: 6.h,
+          ),
           Row(
             children: [
-              SizedBox(width: 8.w,),
+              SizedBox(
+                width: 8.w,
+              ),
               MainText(
                 text: 'عنوان',
                 font: 15.sp,
                 color: Colors.black,
                 weight: FontWeight.w700,
               ),
-              SizedBox(width: 27.w,),
+              SizedBox(
+                width: 27.w,
+              ),
               MainText(
                 text: 'جدة-الحي الخامس-قطعة 200',
                 font: 15.sp,
@@ -163,7 +188,9 @@ class RequestsItem extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: 14.h,),
+          SizedBox(
+            height: 14.h,
+          ),
           Row(
             children: [
               CustomButton(
@@ -180,7 +207,9 @@ class RequestsItem extends StatelessWidget {
                   MagicRouter.navigateTo(TicketViewScreen());
                 },
               ),
-              SizedBox(width: 5.w,),
+              SizedBox(
+                width: 5.w,
+              ),
               Expanded(
                 child: CustomButton(
                   title: 'تخصيص فني',
@@ -198,7 +227,9 @@ class RequestsItem extends StatelessWidget {
                   },
                 ),
               ),
-              SizedBox(width: 5.w,),
+              SizedBox(
+                width: 5.w,
+              ),
               CustomButton(
                 horizontalPadding: 15.w,
                 title: 'رفض',
@@ -210,6 +241,7 @@ class RequestsItem extends StatelessWidget {
                 textColor: Colors.white,
                 withBorder: false,
                 onPressed: () async {
+                  log(choosedPlan.id.toString());
                 },
               ),
             ],

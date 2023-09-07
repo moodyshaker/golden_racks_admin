@@ -1,9 +1,5 @@
-import 'dart:io';
-import 'dart:ui';
-
-import 'package:flutter/Widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:golden_racks_admin/feature/admin/auth_screens/organizer_login.dart';
+import 'package:golden_racks_admin/feature/admin/main_screens/requests_screen/unsubscribers_emergency_requests_screen.dart';
 import 'package:golden_racks_admin/feature/technician/main_screens/requests_screen/maintainance_for_subscribers.dart';
 
 import 'core/localization/demo_localization.dart';
@@ -12,15 +8,12 @@ import 'core/models/nav_item.dart';
 import 'core/router/router.dart';
 import 'feature/admin/main_screens/requests_screen/activate_plane_screen.dart';
 import 'feature/admin/main_screens/requests_screen/subscribers_emergency_requests_screen.dart';
-import 'feature/admin/main_screens/requests_screen/subscribers_periodic_requests_screen.dart';
 import 'feature/admin/main_screens/requests_screen/unsubscribers_periodic_requests_screen.dart';
 import 'feature/admin/other_screens/add_company_with_plan_screen.dart';
 import 'feature/admin/other_screens/add_spare_part_screen.dart';
 import 'feature/admin/other_screens/create_plan_screen.dart';
 import 'feature/admin/other_screens/share_company_data_screen.dart';
-import 'feature/admin/other_screens/show_plans_screen.dart';
 import 'feature/admin/other_screens/technician_view_screen.dart';
-import 'feature/technician/main_screens/requests_screen/unsubscribers_emergency_requests_screen.dart';
 
 String getAsset(String imageName) => 'assets/images/$imageName.png';
 
@@ -147,15 +140,15 @@ List<DrawerItemModel> list = [
   DrawerItemModel(
       title: 'تحديد فني لطلبات الطوارئ لغير المشتركين',
       count: '2',
-      route: UnSubscribersEmergencyRequestsScreen()),
+      route: UnSubscribersEmergencyRequestsAdminScreen()),
   DrawerItemModel(
       title: 'تحديد فني لطلبات الدورية لغير المشتركين',
       count: '5',
-      route: UnSubscribersPeriodicRequestsScreen()),
+      route: UnSubscribersPeriodicRequestsAdminScreen()),
   DrawerItemModel(
       title: 'تحديد فني لطلبات الطوارئ للمشتركين',
       count: '7',
-      route: SubscribersEmergencyRequestsScreen()),
+      route: SubscribersEmergencyRequestsAdminScreen()),
   DrawerItemModel(
       title: 'تحديد فني للصيانة الدورية للمشتركين',
       count: '8',
@@ -163,7 +156,7 @@ List<DrawerItemModel> list = [
   DrawerItemModel(
       count: '3',
       title: 'حسابات في انتظار تفعيل الخطط لها',
-      route: ActivatePlanScreen()),
+      route: ActivatePlanAdminScreen()),
   DrawerItemModel(
       title: 'انشاء حسابات الدخول للفنين', route: TechnicianViewScreen()),
   DrawerItemModel(

@@ -3,26 +3,19 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:golden_racks_admin/core/router/router.dart';
 import 'package:golden_racks_admin/feature/admin/main_screens/requests_screen/unsubscribers_emergency_requests_screen.dart';
 import '../../../../constants.dart';
-import '../../../../core/bloc/language_cubit.dart';
-import '../../../../core/localization/demo_localization.dart';
 import '../../../widgets/customButton.dart';
 import '../../../widgets/main_text.dart';
 
 class HomeItem extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
-    final demo = DemoLocalization.of(context);
-    final lang = LanguageCubit.get(context);
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 10.w , horizontal: 10.h),
+      padding: EdgeInsets.symmetric(vertical: 10.w, horizontal: 10.h),
       margin: EdgeInsets.only(bottom: 5.0),
       decoration: BoxDecoration(
         color: Colors.transparent,
         borderRadius: BorderRadius.circular(15.r),
-        border: Border.all(
-            width: 1.0,
-            color: kInactiveColor),
+        border: Border.all(width: 1.0, color: kInactiveColor),
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.end,
@@ -63,7 +56,9 @@ class HomeItem extends StatelessWidget {
             textColor: Colors.white,
             withBorder: false,
             onPressed: () async {
-              MagicRouter.navigateTo(UnSubscribersEmergencyRequestsScreen());
+              MagicRouter.navigateTo(
+                UnSubscribersEmergencyRequestsAdminScreen(),
+              );
             },
           ),
         ],

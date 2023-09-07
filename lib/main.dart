@@ -4,6 +4,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:golden_racks_admin/core/bloc/technician_app_cubit.dart';
 import 'package:golden_racks_admin/core/provider/provider_add_technation.dart';
+import 'package:golden_racks_admin/core/provider/provider_assign_to_unsub_emergency_plan.dart';
 import 'package:golden_racks_admin/core/provider/provider_ready_plan.dart';
 import 'package:provider/provider.dart';
 import 'core/appStorage/shared_preference.dart';
@@ -46,6 +47,8 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider(create: (_) => AuthProvider()),
           ChangeNotifierProvider(create: (_) => ReadyPlanProvider()),
           ChangeNotifierProvider(create: (_) => AddTechnationProvider()),
+          ChangeNotifierProvider(
+              create: (_) => AssignToUnsubEmergencyProvider()),
         ],
         child: Builder(
           builder: (BuildContext c) => MaterialApp(

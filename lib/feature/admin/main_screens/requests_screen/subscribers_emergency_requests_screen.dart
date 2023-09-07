@@ -2,20 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../constants.dart';
-import '../../../../core/bloc/home_cubit.dart';
 import '../../../widgets/organizerCustomScaffold.dart';
-import '../widgets/requests_item.dart';
 import '../widgets/subscribers_request_item.dart';
 
-class SubscribersEmergencyRequestsScreen extends StatefulWidget {
-  const SubscribersEmergencyRequestsScreen({Key? key}) : super(key: key);
+class SubscribersEmergencyRequestsAdminScreen extends StatefulWidget {
+  const SubscribersEmergencyRequestsAdminScreen({Key? key}) : super(key: key);
 
   @override
-  State<SubscribersEmergencyRequestsScreen> createState() => _SubscribersEmergencyRequestsScreenState();
+  State<SubscribersEmergencyRequestsAdminScreen> createState() =>
+      _SubscribersEmergencyRequestsAdminScreenState();
 }
 
-class _SubscribersEmergencyRequestsScreenState extends State<SubscribersEmergencyRequestsScreen> {
-
+class _SubscribersEmergencyRequestsAdminScreenState
+    extends State<SubscribersEmergencyRequestsAdminScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -29,15 +28,15 @@ class _SubscribersEmergencyRequestsScreenState extends State<SubscribersEmergenc
       ),
       child: OrganizerCustomScaffold(
         backgroundColor: Colors.transparent,
-        hasAppbar:false,
+        hasAppbar: false,
         isHome: true,
         hasNavBar: false,
         title1: 'تحديد فني لطلبات الطوارئ للمشتركين',
         body: Expanded(
           child: ListView.builder(
-            padding:
-            EdgeInsets.symmetric(horizontal: 22.w, vertical: 10.h),
-            itemBuilder: (BuildContext context, int i) => SubscribersRequestsItem(),
+            padding: EdgeInsets.symmetric(horizontal: 22.w, vertical: 10.h),
+            itemBuilder: (BuildContext context, int i) =>
+                SubscribersRequestsItem(),
             itemCount: 2,
           ),
         ),

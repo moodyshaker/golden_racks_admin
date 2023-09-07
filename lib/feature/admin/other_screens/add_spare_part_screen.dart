@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:golden_racks_admin/core/provider/provider_ready_plan.dart';
@@ -14,6 +15,7 @@ class AddASparePartScreen extends StatefulWidget {
 }
 
 class _AddASparePartScreenState extends State<AddASparePartScreen> {
+  List<String?> images = List.generate(3, (i) => null);
   @override
   void initState() {
     super.initState();
@@ -46,62 +48,42 @@ class _AddASparePartScreenState extends State<AddASparePartScreen> {
                       ),
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                            decoration: BoxDecoration(
-                              image: DecorationImage(
-                                image: AssetImage(getAsset('add_bg')),
-                                fit: BoxFit.fill,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: List.generate(
+                          3,
+                          (i) => InkWell(
+                            onTap: () async {
+                              File? file = await readyPlanProvider
+                                  .pickImageFromGallary();
+                              if (file != null) {
+                                images[i] = file.path;
+                                setState(() {});
+                              }
+                            },
+                            child: Container(
+                              decoration: BoxDecoration(
+                                image: images[i] == null
+                                    ? DecorationImage(
+                                        image: AssetImage(getAsset('add_bg')),
+                                        fit: BoxFit.fill,
+                                      )
+                                    : DecorationImage(
+                                        image: FileImage(
+                                          File(images[i]!),
+                                        ),
+                                      ),
                               ),
-                            ),
-                            padding: EdgeInsets.all(24.0),
-                            height: 74.h,
-                            width: 74.w,
-                            child: Center(
-                              child: Image.asset(
-                                getAsset('brown_add_icon'),
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            width: 21.w,
-                          ),
-                          Container(
-                            decoration: BoxDecoration(
-                              image: DecorationImage(
-                                image: AssetImage(getAsset('add_bg')),
-                                fit: BoxFit.fill,
-                              ),
-                            ),
-                            padding: EdgeInsets.all(24.0),
-                            height: 74.h,
-                            width: 74.w,
-                            child: Center(
-                              child: Image.asset(
-                                getAsset('brown_add_icon'),
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            width: 21.w,
-                          ),
-                          Container(
-                            decoration: BoxDecoration(
-                              image: DecorationImage(
-                                image: AssetImage(getAsset('add_bg')),
-                                fit: BoxFit.fill,
-                              ),
-                            ),
-                            padding: EdgeInsets.all(24.0),
-                            height: 74.h,
-                            width: 74.w,
-                            child: Center(
-                              child: Image.asset(
-                                getAsset('brown_add_icon'),
+                              padding: EdgeInsets.all(24.0),
+                              height: 74.h,
+                              width: 74.w,
+                              child: Center(
+                                child: Image.asset(
+                                  getAsset('brown_add_icon'),
+                                ),
                               ),
                             ),
                           ),
-                        ],
+                        ),
                       ),
                       SizedBox(
                         height: 11.h,
@@ -299,6 +281,13 @@ class _AddASparePartScreenState extends State<AddASparePartScreen> {
               withBorder: false,
               onPressed: () async {
                 if (_form.currentState!.validate()) {
+                  List<File> files = [];
+                  images.forEach((String? e) {
+                    if (e != null) {
+                      files.add(File(e));
+                    }
+                  });
+
                   await readyPlanProvider.addReadyPlan(
                     PlanDuration: readyPlanProvider.PlanDurationController!,
                     NumberOfFixedVisits: int.parse(
@@ -329,6 +318,7 @@ class _AddASparePartScreenState extends State<AddASparePartScreen> {
                     RacksUnitPrice: double.parse(
                       readyPlanProvider.RacksUnitPriceController.text,
                     ),
+                    SparePartImages: files,
                   );
                 }
               },

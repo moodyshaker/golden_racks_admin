@@ -1,49 +1,54 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:golden_racks_admin/feature/admin/main_screens/widgets/subscribers_request_item.dart';
-
+import 'package:golden_racks_admin/core/provider/provider_assign_to_unsub_emergency_plan.dart';
 import '../../../../constants.dart';
-import '../../../../core/bloc/home_cubit.dart';
 import '../../../widgets/organizerCustomScaffold.dart';
-import '../widgets/need_activate_item.dart';
 import '../widgets/requests_item.dart';
 
-class UnSubscribersEmergencyRequestsScreen extends StatefulWidget {
-  const UnSubscribersEmergencyRequestsScreen({Key? key}) : super(key: key);
+class UnSubscribersEmergencyRequestsAdminScreen extends StatefulWidget {
+  const UnSubscribersEmergencyRequestsAdminScreen({Key? key}) : super(key: key);
 
   @override
-  State<UnSubscribersEmergencyRequestsScreen> createState() => _UnSubscribersEmergencyRequestsScreenState();
+  State<UnSubscribersEmergencyRequestsAdminScreen> createState() =>
+      _UnSubscribersEmergencyRequestsAdminScreenState();
 }
 
-class _UnSubscribersEmergencyRequestsScreenState extends State<UnSubscribersEmergencyRequestsScreen> {
+class _UnSubscribersEmergencyRequestsAdminScreenState
+    extends State<UnSubscribersEmergencyRequestsAdminScreen> {
   @override
   void initState() {
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
+    final emergencyUnsubProvider = AssignToUnsubEmergencyProvider.get(context);
+
     return Container(
       height: double.infinity,
       width: double.infinity,
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: AssetImage(getAsset('background2')),
+          image: AssetImage(
+            getAsset('background2'),
+          ),
           fit: BoxFit.fill,
         ),
       ),
       child: OrganizerCustomScaffold(
         backgroundColor: Colors.transparent,
-        hasAppbar:false,
+        hasAppbar: false,
         isHome: true,
         hasNavBar: false,
         title1: 'تحديد فني لطلبات الطوارئ لغير المشتركين',
-        body: Expanded(
-          child: ListView.builder(
-            padding:
-            EdgeInsets.symmetric(horizontal: 22.w, vertical: 10.h),
-            itemBuilder: (BuildContext context, int i) => RequestsItem(),
-            itemCount: 2,
-          ),
+        body: ListView.builder(
+          padding: EdgeInsets.symmetric(horizontal: 22.w, vertical: 10.h),
+          itemBuilder: (BuildContext context, int i) {
+            emergencyUnsubProvider.choosedEmergencyUnsubPlan =
+                emergencyUnsubProvider.emergencyUnsubPlans[i];
+            return RequestsItem();
+          },
+          itemCount: emergencyUnsubProvider.emergencyUnsubPlans.length,
         ),
       ),
     );

@@ -1,8 +1,10 @@
 import 'dart:convert';
 import 'dart:developer';
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:http/http.dart' as http;
+import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import '../../feature/widgets/loading_dialog.dart';
 import '../dialogs/error_dialog.dart';
@@ -105,6 +107,7 @@ class ReadyPlanProvider extends ChangeNotifier {
     required bool IsActive,
     required int NumberOfRacks,
     required double RacksUnitPrice,
+    required List<File> SparePartImages,
   }) async {
     try {
       showDialog(
@@ -137,6 +140,18 @@ class ReadyPlanProvider extends ChangeNotifier {
       request.fields['IsActive'] = IsActive.toString();
       request.fields['NumberOfRacks'] = NumberOfRacks.toString();
       request.fields['RacksUnitPrice'] = RacksUnitPrice.toString();
+
+      for (var image in SparePartImages) {
+        request.files.add(
+          await http.MultipartFile(
+            'SparePartImages',
+            await image.readAsBytes().asStream(),
+            await image.length(),
+            filename: image.path.split('/').last,
+          ),
+        );
+      }
+
       request.headers.addAll(headers);
 
       var res = await request.send();
@@ -291,5 +306,12 @@ class ReadyPlanProvider extends ChangeNotifier {
       log('catch subscribe to ready plan ${e.toString()}');
       MagicRouter.pop();
     }
+  }
+
+  Future<File?> pickImageFromGallary() async {
+    final returnedImage = await ImagePicker().pickImage(
+      source: ImageSource.gallery,
+    );
+    return returnedImage != null ? File(returnedImage.path) : null;
   }
 }

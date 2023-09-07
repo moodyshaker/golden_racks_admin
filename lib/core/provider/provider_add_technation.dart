@@ -7,6 +7,7 @@ import 'package:golden_racks_admin/core/dialogs/error_dialog.dart';
 import 'package:golden_racks_admin/core/dialogs/info_dialog.dart';
 import 'package:golden_racks_admin/core/httpHelper/http_helper.dart';
 import 'package:golden_racks_admin/core/models/technical_model.dart';
+import 'package:golden_racks_admin/core/networkStatus/network_status.dart';
 import 'package:golden_racks_admin/core/router/router.dart';
 import 'package:golden_racks_admin/feature/widgets/loading_dialog.dart';
 import 'package:http/http.dart' as http;
@@ -36,13 +37,19 @@ class AddTechnationProvider extends ChangeNotifier {
   //view technicals controllers
   TextEditingController searchTechController = TextEditingController();
 
-  Future<void> getallTechnation({required String userFullName}) async {
+  NetworkStatus? techStatus;
+
+  Future<void> getallTechnation({
+    required String userFullName,
+    bool retry = false,
+  }) async {
     allTechnicals = [];
-    showDialog(
-      context: navigatorKey.currentContext!,
-      barrierDismissible: false,
-      builder: (ctx) => LoadingDialog(),
-    );
+
+    techStatus = NetworkStatus.loading;
+    if (retry) {
+      notifyListeners();
+    }
+
     try {
       Map<String, dynamic> params = {};
 
@@ -73,15 +80,14 @@ class AddTechnationProvider extends ChangeNotifier {
 
         log('all Technicals length ${allTechnicals.length}');
 
-        MagicRouter.pop();
+        techStatus = NetworkStatus.success;
       } else {
         log('Error get ready plans > ${response.body}');
 
-        MagicRouter.pop();
+        techStatus = NetworkStatus.error;
       }
     } catch (e) {
       log('catch get all Technicals> ${e.toString()}');
-      MagicRouter.pop();
     }
     notifyListeners();
   }

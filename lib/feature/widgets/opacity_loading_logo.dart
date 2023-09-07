@@ -1,7 +1,6 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:golden_racks_admin/constants.dart';
 
 class OpacityLoadingLogo extends StatefulWidget {
   const OpacityLoadingLogo({Key? key}) : super(key: key);
@@ -18,7 +17,9 @@ class _OpacityLoadingLogoState extends State<OpacityLoadingLogo> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SpinKitDoubleBounce(),
+            SpinKitDoubleBounce(
+              color: kSecondaryColor,
+            ),
           ],
         ),
         // ),

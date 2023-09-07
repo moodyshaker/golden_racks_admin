@@ -303,9 +303,12 @@ class _PlanItemState extends State<PlanItem> {
                   height: 8.h,
                 ),
                 Container(
-                    height: 33.h,
-                    width: 42.w,
-                    child: Image.asset(getAsset('calendar_icon'))),
+                  height: 33.h,
+                  width: 42.w,
+                  // child: Image.asset(
+                  //   getAsset('calendar_icon'),
+                  // ),
+                ),
               ],
             ),
             Column(
@@ -322,9 +325,9 @@ class _PlanItemState extends State<PlanItem> {
                 Container(
                   height: 33.h,
                   width: 42.w,
-                  child: Image.asset(
-                    getAsset('calendar_icon'),
-                  ),
+                  // child: Image.asset(
+                  //   getAsset('calendar_icon'),
+                  // ),
                 ),
               ],
             ),

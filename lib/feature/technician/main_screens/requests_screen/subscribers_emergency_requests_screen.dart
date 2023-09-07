@@ -6,19 +6,22 @@ import '../../../../constants.dart';
 import '../../../../core/bloc/home_cubit.dart';
 import '../../../widgets/organizerCustomScaffold.dart';
 
-class SubscribersEmergencyRequestsScreen extends StatefulWidget {
-  const SubscribersEmergencyRequestsScreen({Key? key}) : super(key: key);
+class SubscribersEmergencyRequestsTechScreen extends StatefulWidget {
+  const SubscribersEmergencyRequestsTechScreen({Key? key}) : super(key: key);
 
   @override
-  State<SubscribersEmergencyRequestsScreen> createState() => _SubscribersEmergencyRequestsScreenState();
+  State<SubscribersEmergencyRequestsTechScreen> createState() =>
+      _SubscribersEmergencyRequestsTechScreenState();
 }
 
-class _SubscribersEmergencyRequestsScreenState extends State<SubscribersEmergencyRequestsScreen> {
+class _SubscribersEmergencyRequestsTechScreenState
+    extends State<SubscribersEmergencyRequestsTechScreen> {
   @override
   void initState() {
     super.initState();
     HomeCubit.listenFalse(context).getEventCategory();
   }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -32,15 +35,15 @@ class _SubscribersEmergencyRequestsScreenState extends State<SubscribersEmergenc
       ),
       child: OrganizerCustomScaffold(
         backgroundColor: Colors.transparent,
-        hasAppbar:false,
+        hasAppbar: false,
         isHome: true,
         hasNavBar: false,
         title1: 'تحديد فني لطلبات الطوارئ للمشتركين',
         body: Expanded(
           child: ListView.builder(
-            padding:
-            EdgeInsets.symmetric(horizontal: 22.w, vertical: 10.h),
-            itemBuilder: (BuildContext context, int i) => SubscribersRequestsItem(),
+            padding: EdgeInsets.symmetric(horizontal: 22.w, vertical: 10.h),
+            itemBuilder: (BuildContext context, int i) =>
+                SubscribersRequestsItem(),
             itemCount: 2,
           ),
         ),

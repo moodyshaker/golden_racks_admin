@@ -6,19 +6,22 @@ import '../../../../constants.dart';
 import '../../../../core/bloc/home_cubit.dart';
 import '../../../widgets/organizerCustomScaffold.dart';
 
-class UnSubscribersPeriodicRequestsScreen extends StatefulWidget {
-  const UnSubscribersPeriodicRequestsScreen({Key? key}) : super(key: key);
+class UnSubscribersPeriodicRequestsTechScreen extends StatefulWidget {
+  const UnSubscribersPeriodicRequestsTechScreen({Key? key}) : super(key: key);
 
   @override
-  State<UnSubscribersPeriodicRequestsScreen> createState() => _UnSubscribersPeriodicRequestsScreenState();
+  State<UnSubscribersPeriodicRequestsTechScreen> createState() =>
+      _UnSubscribersPeriodicRequestsTechScreenState();
 }
 
-class _UnSubscribersPeriodicRequestsScreenState extends State<UnSubscribersPeriodicRequestsScreen> {
+class _UnSubscribersPeriodicRequestsTechScreenState
+    extends State<UnSubscribersPeriodicRequestsTechScreen> {
   @override
   void initState() {
     super.initState();
     HomeCubit.listenFalse(context).getEventCategory();
   }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -32,14 +35,13 @@ class _UnSubscribersPeriodicRequestsScreenState extends State<UnSubscribersPerio
       ),
       child: OrganizerCustomScaffold(
         backgroundColor: Colors.transparent,
-        hasAppbar:false,
+        hasAppbar: false,
         isHome: true,
         hasNavBar: false,
         title1: 'تحديد فني لطلبات الدورية لغير المشتركين',
         body: Expanded(
           child: ListView.builder(
-            padding:
-            EdgeInsets.symmetric(horizontal: 22.w, vertical: 10.h),
+            padding: EdgeInsets.symmetric(horizontal: 22.w, vertical: 10.h),
             itemBuilder: (BuildContext context, int i) => RequestsItem(),
             itemCount: 2,
           ),
