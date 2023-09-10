@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:golden_racks_admin/feature/admin/main_screens/widgets/requests_item.dart';
+import 'package:golden_racks_admin/feature/admin/main_screens/widgets/requests_item_unsub_emergency.dart';
+import 'package:golden_racks_admin/feature/technician/main_screens/widgets/requests_item_unsub_emergency_tech.dart';
 
 import '../../../../constants.dart';
 import '../../../../core/bloc/home_cubit.dart';
@@ -42,7 +43,8 @@ class _UnSubscribersPeriodicRequestsTechScreenState
         body: Expanded(
           child: ListView.builder(
             padding: EdgeInsets.symmetric(horizontal: 22.w, vertical: 10.h),
-            itemBuilder: (BuildContext context, int i) => RequestsItem(),
+            itemBuilder: (BuildContext context, int i) =>
+                RequestsItemUnsubEmergencyTech(),
             itemCount: 2,
           ),
         ),

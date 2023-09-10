@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:golden_racks_admin/feature/admin/main_screens/requests_screen/unsubscribers_emergency_requests_screen.dart';
 import 'package:golden_racks_admin/feature/technician/main_screens/requests_screen/maintainance_for_subscribers.dart';
+import 'package:intl/intl.dart';
 
 import 'core/localization/demo_localization.dart';
 import 'core/models/more_model.dart';
@@ -18,6 +19,20 @@ import 'feature/admin/other_screens/technician_view_screen.dart';
 String getAsset(String imageName) => 'assets/images/$imageName.png';
 
 String getLottie(String name) => 'assets/images/$name.json';
+
+String formateDateTimeToDate(String dateTimeString) {
+  DateTime dateTime = DateTime.parse(dateTimeString);
+  final DateFormat formatter = DateFormat('dd/MM/yyyy');
+  final String formatted = formatter.format(dateTime);
+  return formatted;
+}
+
+String formateDateTimeToTime(String dateTimeString) {
+  DateTime dateTime = DateTime.parse(dateTimeString);
+  final DateFormat formatter = DateFormat('h.mm a');
+  final String formatted = formatter.format(dateTime);
+  return formatted;
+}
 
 const Color kMainColor = Color(0xFF098E4D);
 const Color kSecondaryColor = Color(0xFF846046);

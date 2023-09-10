@@ -1,18 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:golden_racks_admin/core/models/emergency_plan_unsub_model.dart';
-import 'package:golden_racks_admin/feature/admin/main_screens/widgets/emergency_unsub_ticket_view_screen.dart';
+import 'package:golden_racks_admin/core/router/router.dart';
+import 'package:golden_racks_admin/feature/admin/main_screens/widgets/normal_unsub_ticket_view_screen.dart';
 import 'package:golden_racks_admin/feature/admin/other_screens/technician_view_screen.dart';
 import '../../../../constants.dart';
-import '../../../../core/router/router.dart';
 import '../../../widgets/customButton.dart';
 import '../../../widgets/main_text.dart';
 
-class SubscribersRequestsItem extends StatelessWidget {
+class RequestsItemUnsubNormal extends StatefulWidget {
+  // final EmergencyPlanUnSubModel emergencyUnsub;
+
+  // const RequestsItemUnsubNormal({required this.emergencyUnsub});
+  @override
+  State<RequestsItemUnsubNormal> createState() =>
+      _RequestsItemUnsubNormalState();
+}
+
+class _RequestsItemUnsubNormalState extends State<RequestsItemUnsubNormal> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 14.w),
+      padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 12.w),
       margin: EdgeInsets.only(bottom: 5.0),
       decoration: BoxDecoration(
         color: Colors.transparent,
@@ -22,17 +30,17 @@ class SubscribersRequestsItem extends StatelessWidget {
       child: Column(
         children: [
           SizedBox(
-            width: 9.w,
+            height: 9.h,
           ),
           Row(
             children: [
-              // Container(
-              //   height: 38.h,
-              //   width: 38.w,
-              //   child: Image.asset(
-              //     getAsset('defualt_pic'),
-              //   ),
-              // ),
+              Container(
+                height: 38.h,
+                width: 38.w,
+                child: Image.asset(
+                  getAsset('defualt_pic'),
+                ),
+              ),
               SizedBox(
                 width: 9.w,
               ),
@@ -43,7 +51,7 @@ class SubscribersRequestsItem extends StatelessWidget {
                     Column(
                       children: [
                         MainText(
-                          text: 'شركة امازون',
+                          // text: '${widget.emergencyUnsub.id}',
                           font: 15.sp,
                           weight: FontWeight.w700,
                           color: Colors.black,
@@ -78,7 +86,7 @@ class SubscribersRequestsItem extends StatelessWidget {
             ],
           ),
           SizedBox(
-            width: 9.w,
+            height: 9.h,
           ),
           Row(
             children: [
@@ -95,7 +103,7 @@ class SubscribersRequestsItem extends StatelessWidget {
                 width: 27.w,
               ),
               MainText(
-                text: 'توقف الماكينة وصوت يخرج منها',
+                // text: '${widget.emergencyUnsub.problemName}',
                 font: 15.sp,
                 color: Colors.black,
                 weight: FontWeight.w500,
@@ -103,7 +111,7 @@ class SubscribersRequestsItem extends StatelessWidget {
             ],
           ),
           SizedBox(
-            width: 7.w,
+            height: 7.h,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -159,7 +167,7 @@ class SubscribersRequestsItem extends StatelessWidget {
             ],
           ),
           SizedBox(
-            width: 6.w,
+            height: 6.h,
           ),
           Row(
             children: [
@@ -175,60 +183,69 @@ class SubscribersRequestsItem extends StatelessWidget {
               SizedBox(
                 width: 27.w,
               ),
-              // MainText(
-              //   text: 'جدة-الحي الخامس-قطعة 200',
-              //   font: 15.sp,
-              //   color: Colors.black,
-              //   weight: FontWeight.w500,
-              // ),
+              MainText(
+                text: 'جدة-الحي الخامس-قطعة 200',
+                font: 15.sp,
+                color: Colors.black,
+                weight: FontWeight.w500,
+              ),
             ],
           ),
           SizedBox(
-            width: 14.w,
+            height: 14.h,
           ),
           Row(
             children: [
+              CustomButton(
+                horizontalPadding: 8.w,
+                title: 'عرض التذكرة',
+                color: kSecondaryColor,
+                height: 50.h,
+                font: 12.sp,
+                family: 'Lato_bold',
+                textColor: Colors.white,
+                weight: FontWeight.w800,
+                withBorder: false,
+                onPressed: () async {
+                  MagicRouter.navigateTo(NormalUnsubTicketViewScreen());
+                },
+              ),
+              SizedBox(
+                width: 5.w,
+              ),
               Expanded(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    CustomButton(
-                      horizontalPadding: 8.w,
-                      title: 'عرض التذكرة',
-                      color: kSecondaryColor,
-                      height: 50.h,
-                      font: 12.sp,
-                      family: 'Lato_bold',
-                      textColor: Colors.white,
-                      weight: FontWeight.w800,
-                      withBorder: false,
-                      onPressed: () async {
-                        MagicRouter.navigateTo(EmergencyUnsubTicketViewScreen(
-                          emergencyUnsub: EmergencyPlanUnSubModel(),
-                        ));
-                      },
-                    ),
-                    SizedBox(
-                      width: 5.w,
-                    ),
-                    CustomButton(
-                      horizontalPadding: 19.w,
-                      title: 'تخصيص فني',
-                      color: Colors.transparent,
-                      height: 50.h,
-                      font: 16.sp,
-                      family: 'Lato_bold',
-                      weight: FontWeight.w800,
-                      textColor: Colors.black,
-                      withBorder: true,
-                      borderWidth: 1.0,
-                      borderColor: gray_40,
-                      onPressed: () async {
-                        MagicRouter.navigateTo(TechnicianViewScreen());
-                      },
-                    ),
-                  ],
+                child: CustomButton(
+                  title: 'تخصيص فني',
+                  color: Colors.transparent,
+                  height: 50.h,
+                  font: 16.sp,
+                  family: 'Lato_bold',
+                  weight: FontWeight.w800,
+                  textColor: Colors.black,
+                  withBorder: true,
+                  borderWidth: 1.0,
+                  borderColor: gray_40,
+                  onPressed: () async {
+                    MagicRouter.navigateTo(TechnicianViewScreen());
+                  },
                 ),
+              ),
+              SizedBox(
+                width: 5.w,
+              ),
+              CustomButton(
+                horizontalPadding: 15.w,
+                title: 'رفض',
+                color: Colors.red,
+                height: 50.h,
+                font: 16.sp,
+                weight: FontWeight.w800,
+                family: 'Lato_bold',
+                textColor: Colors.white,
+                withBorder: false,
+                onPressed: () async {
+                  // log(widget.emergencyUnsub.id.toString());
+                },
               ),
             ],
           ),

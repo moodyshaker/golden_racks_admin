@@ -49,6 +49,7 @@ dependencies:
   flutter_launcher_icons:
   shimmer:
   google_fonts:
+  audioplayers:
 
 
 dev_dependencies:

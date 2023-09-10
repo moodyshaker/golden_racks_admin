@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:golden_racks_admin/feature/admin/main_screens/widgets/requests_item_unsub_normal.dart';
 
 import '../../../../constants.dart';
 import '../../../widgets/organizerCustomScaffold.dart';
-import '../widgets/requests_item.dart';
 
 class UnSubscribersPeriodicRequestsAdminScreen extends StatefulWidget {
   const UnSubscribersPeriodicRequestsAdminScreen({Key? key}) : super(key: key);
@@ -35,7 +35,8 @@ class _UnSubscribersPeriodicRequestsAdminScreenState
         body: Expanded(
           child: ListView.builder(
             padding: EdgeInsets.symmetric(horizontal: 22.w, vertical: 10.h),
-            itemBuilder: (BuildContext context, int i) => RequestsItem(),
+            itemBuilder: (BuildContext context, int i) =>
+                RequestsItemUnsubNormal(),
             itemCount: 2,
           ),
         ),

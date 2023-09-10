@@ -22,8 +22,6 @@ class AddTechnationProvider extends ChangeNotifier {
   static AddTechnationProvider listenFalse(context) =>
       Provider.of<AddTechnationProvider>(context, listen: false);
 
-  Technical chosenTech = Technical();
-
   List<Technical> allTechnicals = [];
   File? selectedTechnicalImage;
 
@@ -43,9 +41,8 @@ class AddTechnationProvider extends ChangeNotifier {
     required String userFullName,
     bool retry = false,
   }) async {
-    allTechnicals = [];
-
     techStatus = NetworkStatus.loading;
+
     if (retry) {
       notifyListeners();
     }

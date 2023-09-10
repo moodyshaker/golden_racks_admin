@@ -5,7 +5,6 @@ import 'package:golden_racks_admin/core/localization/demo_localization.dart';
 import 'package:golden_racks_admin/core/provider/provider_add_technation.dart';
 import 'package:golden_racks_admin/core/validate/validation.dart';
 import '../../../../constants.dart';
-import '../../../../core/bloc/home_cubit.dart';
 import '../../widgets/customButton.dart';
 import '../../widgets/customTextFeild.dart';
 import '../../widgets/organizerCustomScaffold.dart';
@@ -21,7 +20,6 @@ class _AddTechnicianScreenState extends State<AddTechnicianScreen> {
   @override
   void initState() {
     super.initState();
-    HomeCubit.listenFalse(context).getEventCategory();
   }
 
   final GlobalKey<FormState> _form = GlobalKey<FormState>();

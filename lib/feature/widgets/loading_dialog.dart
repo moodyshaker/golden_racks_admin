@@ -23,7 +23,9 @@ class LoadingDialog extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SpinKitDoubleBounce(color: kMainColor,),
+              SpinKitDoubleBounce(
+                color: kSecondaryColor,
+              ),
             ],
           ),
         ),

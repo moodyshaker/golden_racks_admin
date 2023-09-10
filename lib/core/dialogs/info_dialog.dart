@@ -31,6 +31,7 @@ class InfoDialog extends StatelessWidget {
               imagePath != null ? getAsset(imagePath!) : getAsset('done_icon'),
               height: 80.h,
               width: 80.w,
+              color: kSecondaryColor,
             ),
             MainText(
               text: content,
@@ -45,7 +46,7 @@ class InfoDialog extends StatelessWidget {
                   Size(100.w, 40.h),
                 ),
                 backgroundColor:
-                    MaterialStateProperty.all<Color>(Colors.green.shade400),
+                    MaterialStateProperty.all<Color>(kSecondaryColor),
                 foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
               ),
               onPressed: () {

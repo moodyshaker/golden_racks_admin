@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:golden_racks_admin/core/models/emergency_plan_unsub_model.dart';
+import 'package:golden_racks_admin/feature/admin/main_screens/widgets/emergency_unsub_ticket_view_screen.dart';
 import 'package:golden_racks_admin/feature/admin/other_screens/technician_view_screen.dart';
 import '../../../../constants.dart';
-import '../../../../core/bloc/language_cubit.dart';
-import '../../../../core/localization/demo_localization.dart';
 import '../../../../core/router/router.dart';
 import '../../../widgets/customButton.dart';
 import '../../../widgets/main_text.dart';
-import '../../other_screens/ticket_view_screen.dart';
 
 class MaintenanceForSubscribersItem extends StatelessWidget {
   @override
@@ -151,9 +150,12 @@ class MaintenanceForSubscribersItem extends StatelessWidget {
           ),
           Row(
             children: [
-              SizedBox(width: 10.w,),
+              SizedBox(
+                width: 10.w,
+              ),
               MainText(
-                text: 'تذكرة تلقائية من النظام لتحديد يوم للصيانة الدورية\nلهذا الشهر للشركة',
+                text:
+                    'تذكرة تلقائية من النظام لتحديد يوم للصيانة الدورية\nلهذا الشهر للشركة',
                 font: 15.sp,
                 color: Colors.redAccent,
                 weight: FontWeight.w500,
@@ -177,7 +179,9 @@ class MaintenanceForSubscribersItem extends StatelessWidget {
                       weight: FontWeight.w800,
                       withBorder: false,
                       onPressed: () async {
-                        MagicRouter.navigateTo(TicketViewScreen());
+                        MagicRouter.navigateTo(EmergencyUnsubTicketViewScreen(
+                          emergencyUnsub: EmergencyPlanUnSubModel(),
+                        ));
                       },
                     ),
                     SizedBox(

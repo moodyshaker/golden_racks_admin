@@ -1,21 +1,28 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:golden_racks_admin/core/models/emergency_plan_unsub_model.dart';
 import 'package:golden_racks_admin/core/provider/provider_assign_to_unsub_emergency_plan.dart';
 import 'package:golden_racks_admin/core/router/router.dart';
+import 'package:golden_racks_admin/feature/admin/main_screens/widgets/emergency_unsub_ticket_view_screen.dart';
 import 'package:golden_racks_admin/feature/admin/other_screens/technician_view_screen.dart';
-import 'package:golden_racks_admin/feature/admin/other_screens/ticket_view_screen.dart';
 import '../../../../constants.dart';
 import '../../../widgets/customButton.dart';
 import '../../../widgets/main_text.dart';
 
-class RequestsItem extends StatelessWidget {
+class RequestsItemUnsubEmergency extends StatefulWidget {
+  final EmergencyPlanUnSubModel emergencyUnsub;
+
+  const RequestsItemUnsubEmergency({required this.emergencyUnsub});
+  @override
+  State<RequestsItemUnsubEmergency> createState() =>
+      _RequestsItemUnsubEmergencyState();
+}
+
+class _RequestsItemUnsubEmergencyState
+    extends State<RequestsItemUnsubEmergency> {
   @override
   Widget build(BuildContext context) {
     final emergencyUnsubProvider = AssignToUnsubEmergencyProvider.get(context);
-    var choosedPlan = emergencyUnsubProvider.choosedEmergencyUnsubPlan;
-
     return Container(
       padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 12.w),
       margin: EdgeInsets.only(bottom: 5.0),
@@ -48,7 +55,7 @@ class RequestsItem extends StatelessWidget {
                     Column(
                       children: [
                         MainText(
-                          text: '${choosedPlan.id}',
+                          text: '${widget.emergencyUnsub.id}',
                           font: 15.sp,
                           weight: FontWeight.w700,
                           color: Colors.black,
@@ -100,7 +107,7 @@ class RequestsItem extends StatelessWidget {
                 width: 27.w,
               ),
               MainText(
-                text: '${choosedPlan.problemName}',
+                text: '${widget.emergencyUnsub.problemName}',
                 font: 15.sp,
                 color: Colors.black,
                 weight: FontWeight.w500,
@@ -111,7 +118,7 @@ class RequestsItem extends StatelessWidget {
             height: 7.h,
           ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               SizedBox(
                 width: 8.w,
@@ -124,22 +131,25 @@ class RequestsItem extends StatelessWidget {
                       font: 15.sp,
                       color: Colors.black,
                       weight: FontWeight.w700,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 2,
                     ),
                     SizedBox(
-                      width: 27.w,
+                      width: 10.w,
                     ),
-                    MainText(
-                      text: '21-1-2023',
-                      font: 15.sp,
-                      color: Colors.black,
-                      weight: FontWeight.w100,
+                    Flexible(
+                      child: MainText(
+                        text: formateDateTimeToDate(
+                            '${widget.emergencyUnsub.addedDate}'),
+                        font: 15.sp,
+                        color: Colors.black,
+                        weight: FontWeight.w100,
+                      ),
                     ),
                   ],
                 ),
               ),
-              SizedBox(
-                width: 18.w,
-              ),
+              SizedBox(width: 16.w),
               Expanded(
                 child: Row(
                   children: [
@@ -152,11 +162,14 @@ class RequestsItem extends StatelessWidget {
                     SizedBox(
                       width: 8.w,
                     ),
-                    MainText(
-                      text: '12.30 am',
-                      font: 15.sp,
-                      color: Colors.black,
-                      weight: FontWeight.w100,
+                    Flexible(
+                      child: MainText(
+                        text: formateDateTimeToTime(
+                            '${widget.emergencyUnsub.addedDate}'),
+                        font: 15.sp,
+                        color: Colors.black,
+                        weight: FontWeight.w100,
+                      ),
                     ),
                   ],
                 ),
@@ -180,11 +193,13 @@ class RequestsItem extends StatelessWidget {
               SizedBox(
                 width: 27.w,
               ),
-              MainText(
-                text: 'جدة-الحي الخامس-قطعة 200',
-                font: 15.sp,
-                color: Colors.black,
-                weight: FontWeight.w500,
+              Flexible(
+                child: MainText(
+                  text: '${widget.emergencyUnsub.address}',
+                  font: 15.sp,
+                  color: Colors.black,
+                  weight: FontWeight.w500,
+                ),
               ),
             ],
           ),
@@ -204,7 +219,9 @@ class RequestsItem extends StatelessWidget {
                 weight: FontWeight.w800,
                 withBorder: false,
                 onPressed: () async {
-                  MagicRouter.navigateTo(TicketViewScreen());
+                  MagicRouter.navigateTo(EmergencyUnsubTicketViewScreen(
+                    emergencyUnsub: widget.emergencyUnsub,
+                  ));
                 },
               ),
               SizedBox(
@@ -241,7 +258,9 @@ class RequestsItem extends StatelessWidget {
                 textColor: Colors.white,
                 withBorder: false,
                 onPressed: () async {
-                  log(choosedPlan.id.toString());
+                  await emergencyUnsubProvider.refuseEmergencyUnsubPlan(
+                    id: widget.emergencyUnsub.id!,
+                  );
                 },
               ),
             ],
