@@ -8,7 +8,7 @@ import 'package:golden_racks_admin/core/httpHelper/http_helper.dart';
 import 'package:golden_racks_admin/core/models/normal_plan_unsub_model.dart';
 import 'package:golden_racks_admin/core/networkStatus/network_status.dart';
 import 'package:golden_racks_admin/core/router/router.dart';
-import 'package:golden_racks_admin/feature/admin/main_screens/requests_screen/unsubscribers_normal_requests_screen.dart';
+import 'package:golden_racks_admin/feature/admin/main_screens/unsubscribe_normal_admin_screens/unsubscribers_normal_requests_screen.dart';
 import 'package:golden_racks_admin/feature/widgets/loading_dialog.dart';
 import 'package:http/http.dart';
 import 'package:provider/provider.dart';

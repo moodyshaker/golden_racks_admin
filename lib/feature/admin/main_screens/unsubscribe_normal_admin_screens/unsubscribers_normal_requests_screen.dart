@@ -1,32 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:golden_racks_admin/core/networkStatus/network_status.dart';
-import 'package:golden_racks_admin/core/provider/provider_assign_to_unsub_emergency_plan.dart';
+import 'package:golden_racks_admin/core/provider/provider_assign_to_unsub_normal_plan.dart';
+import 'package:golden_racks_admin/feature/admin/main_screens/unsubscribe_normal_admin_screens/requests_item_unsub_normal.dart';
 import 'package:golden_racks_admin/feature/widgets/main_text.dart';
 import 'package:golden_racks_admin/feature/widgets/opacity_loading_logo.dart';
 import 'package:golden_racks_admin/feature/widgets/retry_widget.dart';
+
 import '../../../../constants.dart';
 import '../../../widgets/organizerCustomScaffold.dart';
-import '../widgets/requests_item_unsub_emergency.dart';
 
-class UnSubscribersEmergencyRequestsAdminScreen extends StatefulWidget {
+class UnSubscribersNormalRequestsAdminScreen extends StatefulWidget {
   @override
-  State<UnSubscribersEmergencyRequestsAdminScreen> createState() =>
-      _UnSubscribersEmergencyRequestsAdminScreenState();
+  State<UnSubscribersNormalRequestsAdminScreen> createState() =>
+      _UnSubscribersNormalRequestsAdminScreenState();
 }
 
-class _UnSubscribersEmergencyRequestsAdminScreenState
-    extends State<UnSubscribersEmergencyRequestsAdminScreen> {
+class _UnSubscribersNormalRequestsAdminScreenState
+    extends State<UnSubscribersNormalRequestsAdminScreen> {
   @override
   void initState() {
     super.initState();
-    AssignToUnsubEmergencyProvider.listenFalse(context)
-        .getEmergencyUnsubPlans();
+    AssignToUnsubNormalProvider.listenFalse(context).getNormalUnsubPlans();
   }
 
   @override
   Widget build(BuildContext context) {
-    final emergencyUnsubProvider = AssignToUnsubEmergencyProvider.get(context);
+    final NormalUnsubProvider = AssignToUnsubNormalProvider.get(context);
 
     return Container(
       height: double.infinity,
@@ -44,33 +44,30 @@ class _UnSubscribersEmergencyRequestsAdminScreenState
         hasAppbar: false,
         isHome: true,
         hasNavBar: false,
-        title1: 'تحديد فني لطلبات الطوارئ لغير المشتركين',
-        body: emergencyUnsubProvider.emergencyUnsubStatus ==
-                NetworkStatus.loading
+        title1: 'تحديد فني لطلبات الدورية لغير المشتركين',
+        body: NormalUnsubProvider.normalUnsubStatus == NetworkStatus.loading
             ? OpacityLoadingLogo()
-            : emergencyUnsubProvider.emergencyUnsubStatus ==
-                    NetworkStatus.success
-                ? emergencyUnsubProvider.emergencyUnsubPlans.isEmpty
+            : NormalUnsubProvider.normalUnsubStatus == NetworkStatus.success
+                ? NormalUnsubProvider.normalUnsubPlans.isEmpty
                     ? Container(
                         child: MainText(
-                          text: 'لا يوجد خطط طوارئ',
+                          text: 'لا يوجد خطط دورية',
                         ),
                       )
                     : ListView.builder(
                         padding: EdgeInsets.symmetric(
                             horizontal: 22.w, vertical: 10.h),
                         itemBuilder: (BuildContext context, int i) {
-                          return RequestsItemUnsubEmergency(
-                            emergencyUnsub:
-                                emergencyUnsubProvider.emergencyUnsubPlans[i],
+                          return RequestsItemUnsubNormal(
+                            normalUnsub:
+                                NormalUnsubProvider.normalUnsubPlans[i],
                           );
                         },
-                        itemCount:
-                            emergencyUnsubProvider.emergencyUnsubPlans.length,
+                        itemCount: NormalUnsubProvider.normalUnsubPlans.length,
                       )
                 : RetryWidget(
                     retryCallback: () {
-                      emergencyUnsubProvider.getEmergencyUnsubPlans(
+                      NormalUnsubProvider.getNormalUnsubPlans(
                         retry: true,
                       );
                     },

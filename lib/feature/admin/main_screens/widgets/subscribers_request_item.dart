@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:golden_racks_admin/core/models/emergency_plan_unsub_model.dart';
-import 'package:golden_racks_admin/feature/admin/main_screens/widgets/emergency_unsub_ticket_view_screen.dart';
+import 'package:golden_racks_admin/feature/admin/main_screens/unsubscribe_emergency_admin_screens/emergency_unsub_ticket_view_screen.dart';
 import 'package:golden_racks_admin/feature/admin/other_screens/technician_view_screen.dart';
 import '../../../../constants.dart';
 import '../../../../core/router/router.dart';

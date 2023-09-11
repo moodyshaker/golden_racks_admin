@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/bloc/home_cubit.dart';
 import '../../../../core/localization/demo_localization.dart';
 import '../../../widgets/main_text.dart';
-import '../widgets/ticket_item.dart';
+import '../../main_screens/widgets/ticket_item.dart';
 
 class TicketsScreen extends StatefulWidget {
   const TicketsScreen({Key? key}) : super(key: key);

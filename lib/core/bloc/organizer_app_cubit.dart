@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:provider/provider.dart';
 import '../../feature/admin/auth_screens/organizer_login.dart';
-import '../../feature/admin/main_screens/units/main.dart';
+import '../../feature/admin/other_screens/units/main.dart';
 import '../../feature/widgets/loading_dialog.dart';
 import '../appStorage/shared_preference.dart';
 import '../dialogs/error_dialog.dart';

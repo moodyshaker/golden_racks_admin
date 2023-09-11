@@ -3,9 +3,9 @@ import 'dart:developer';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:golden_racks_admin/core/models/normal_plan_unsub_model.dart';
+import 'package:golden_racks_admin/core/models/emergency_plan_unsub_model.dart';
 import 'package:golden_racks_admin/core/router/router.dart';
-import 'package:golden_racks_admin/feature/admin/main_screens/widgets/admin_assign_technical_screen_for_normal_unsub.dart';
+import 'package:golden_racks_admin/feature/admin/main_screens/unsubscribe_emergency_admin_screens/admin_assign_technical_screen_for_emergency_unsub.dart';
 import 'package:golden_racks_admin/feature/widgets/main_text.dart';
 import 'package:golden_racks_admin/feature/widgets/organizerCustomScaffold.dart';
 import 'package:path/path.dart' as pathFile;
@@ -13,18 +13,20 @@ import 'package:video_player/video_player.dart';
 
 import '../../../../constants.dart';
 
-class NormalUnsubTicketViewScreen extends StatefulWidget {
-  final NormalPlanUnSubModel normalUnsub;
+class EmergencyUnsubTicketViewScreen extends StatefulWidget {
+  final EmergencyPlanUnSubModel emergencyUnsub;
 
-  const NormalUnsubTicketViewScreen({required this.normalUnsub});
+  const EmergencyUnsubTicketViewScreen({
+    required this.emergencyUnsub,
+  });
 
   @override
-  State<NormalUnsubTicketViewScreen> createState() =>
-      _NormalUnsubTicketViewScreenState();
+  State<EmergencyUnsubTicketViewScreen> createState() =>
+      _EmergencyUnsubTicketViewScreenState();
 }
 
-class _NormalUnsubTicketViewScreenState
-    extends State<NormalUnsubTicketViewScreen> {
+class _EmergencyUnsubTicketViewScreenState
+    extends State<EmergencyUnsubTicketViewScreen> {
   @override
   void initState() {
     super.initState();
@@ -44,7 +46,7 @@ class _NormalUnsubTicketViewScreenState
         hasAppbar: false,
         isHome: true,
         hasNavBar: false,
-        title1: 'عرض تذكرة رقم  ${widget.normalUnsub.ticketNumber}',
+        title1: 'عرض تذكرة رقم ${widget.emergencyUnsub.ticketNumber}',
         body: Container(
           decoration: BoxDecoration(
             color: Colors.transparent,
@@ -62,17 +64,18 @@ class _NormalUnsubTicketViewScreenState
                 children: [
                   Flexible(
                     child: MainText(
-                      text: 'شركة امازون',
-                      font: 16.sp,
-                      weight: FontWeight.w800,
+                      text: '${widget.emergencyUnsub.companyName_Ar}',
+                      font: 15.sp,
+                      weight: FontWeight.w700,
                       color: Colors.black,
                     ),
                   ),
                   Flexible(
                     child: MainText(
-                      text: 'رقم التذكرة   ${widget.normalUnsub.ticketNumber}',
-                      font: 14.sp,
-                      weight: FontWeight.w400,
+                      text:
+                          '${widget.emergencyUnsub.ticketNumber} رقم التذكرة ',
+                      font: 15.sp,
+                      weight: FontWeight.w700,
                       color: Colors.black,
                     ),
                   ),
@@ -84,13 +87,12 @@ class _NormalUnsubTicketViewScreenState
               Container(
                 margin: EdgeInsets.symmetric(horizontal: 16.w),
                 child: MainText(
-                  text: '${widget.normalUnsub.problemName}',
+                  text: '${widget.emergencyUnsub.problemName}',
                   font: 16.sp,
                   weight: FontWeight.w500,
                   color: Colors.black,
                 ),
               ),
-              SizedBox(height: 12.h),
               Container(
                 margin: EdgeInsets.symmetric(horizontal: 16.w),
                 child: Row(
@@ -107,8 +109,8 @@ class _NormalUnsubTicketViewScreenState
                     InkWell(
                       onTap: () {
                         MagicRouter.navigateTo(
-                          AdminAssignTechnicalForNormalUnsubScreen(
-                            normalUnsub: widget.normalUnsub,
+                          AdminAssignTechnicalForEmergencyUnsubScreen(
+                            emergencyUnsub: widget.emergencyUnsub,
                           ),
                         );
                       },
@@ -137,7 +139,7 @@ class _NormalUnsubTicketViewScreenState
                     ),
                     MainText(
                       text: formateDateTimeToDate(
-                        widget.normalUnsub.addedDate!,
+                        widget.emergencyUnsub.addedDate!,
                       ),
                       font: 15.sp,
                       weight: FontWeight.w400,
@@ -167,7 +169,7 @@ class _NormalUnsubTicketViewScreenState
                   onTap: () async {
                     final player = AudioPlayer();
                     var path =
-                        'http://75.119.156.82/${widget.normalUnsub.sound}';
+                        'http://75.119.156.82/${widget.emergencyUnsub.sound}';
                     log(path);
                     await player.play(
                       UrlSource(path),
@@ -232,41 +234,41 @@ class _NormalUnsubTicketViewScreenState
                   Container(
                     height: 74.h,
                     width: 74.w,
-                    child: widget.normalUnsub.problemDetails!.length < 1
+                    child: widget.emergencyUnsub.problemDetails!.length < 1
                         ? Image.asset(getAsset('no_pic'))
                         : CustomNetworkFileImage(
                             path:
-                                'http://75.119.156.82/${widget.normalUnsub.problemDetails![0].fileName}',
+                                'http://75.119.156.82/${widget.emergencyUnsub.problemDetails![0].fileName}',
                           ),
                   ),
                   Container(
                     height: 74.h,
                     width: 74.w,
-                    child: widget.normalUnsub.problemDetails!.length < 2
+                    child: widget.emergencyUnsub.problemDetails!.length < 2
                         ? Image.asset(getAsset('no_pic'))
                         : CustomNetworkFileImage(
                             path:
-                                'http://75.119.156.82/${widget.normalUnsub.problemDetails![1].fileName}',
+                                'http://75.119.156.82/${widget.emergencyUnsub.problemDetails![1].fileName}',
                           ),
                   ),
                   Container(
                     height: 74.h,
                     width: 74.w,
-                    child: widget.normalUnsub.problemDetails!.length < 3
+                    child: widget.emergencyUnsub.problemDetails!.length < 3
                         ? Image.asset(getAsset('no_pic'))
                         : CustomNetworkFileImage(
                             path:
-                                'http://75.119.156.82/${widget.normalUnsub.problemDetails![2].fileName}',
+                                'http://75.119.156.82/${widget.emergencyUnsub.problemDetails![2].fileName}',
                           ),
                   ),
                   Container(
                     height: 74.h,
                     width: 74.w,
-                    child: widget.normalUnsub.problemDetails!.length < 4
+                    child: widget.emergencyUnsub.problemDetails!.length < 4
                         ? Image.asset(getAsset('no_pic'))
                         : CustomNetworkFileImage(
                             path:
-                                'http://75.119.156.82/${widget.normalUnsub.problemDetails![3].fileName}',
+                                'http://75.119.156.82/${widget.emergencyUnsub.problemDetails![3].fileName}',
                           ),
                   ),
                 ],
