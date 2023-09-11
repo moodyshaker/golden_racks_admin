@@ -3,9 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../constants.dart';
-import '../../../../core/bloc/app_cubit.dart';
 import '../../../../core/bloc/home_cubit.dart';
-import '../../../../core/localization/demo_localization.dart';
 import '../../../widgets/main_text.dart';
 
 class CalenderScreen extends StatefulWidget {
@@ -24,9 +22,6 @@ class _CalenderScreenState extends State<CalenderScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final demo = DemoLocalization.of(context);
-    final cubit = AppCubit.get(context);
-    final home = HomeCubit.get(context);
     return Container(
       decoration: BoxDecoration(
           image: DecorationImage(

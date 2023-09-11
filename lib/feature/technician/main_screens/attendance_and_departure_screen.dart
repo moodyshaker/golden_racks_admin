@@ -1,22 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:golden_racks_admin/constants.dart';
-import 'package:golden_racks_admin/core/bloc/app_cubit.dart';
-import 'package:golden_racks_admin/core/bloc/home_cubit.dart';
-import 'package:golden_racks_admin/core/localization/demo_localization.dart';
-import 'package:golden_racks_admin/feature/admin/other_screens/widgets/ticket_item.dart';
 import 'package:golden_racks_admin/feature/widgets/main_text.dart';
-import 'package:golden_racks_admin/feature/widgets/organizerCustomScaffold.dart';
 import 'package:golden_racks_admin/feature/widgets/technicianCustomScaffold.dart';
 
 class AttendanceAndDepartureScreen extends StatefulWidget {
   const AttendanceAndDepartureScreen({Key? key}) : super(key: key);
 
   @override
-  State<AttendanceAndDepartureScreen> createState() => _AttendanceAndDepartureScreenState();
+  State<AttendanceAndDepartureScreen> createState() =>
+      _AttendanceAndDepartureScreenState();
 }
 
-class _AttendanceAndDepartureScreenState extends State<AttendanceAndDepartureScreen> {
+class _AttendanceAndDepartureScreenState
+    extends State<AttendanceAndDepartureScreen> {
   @override
   void initState() {
     super.initState();
@@ -24,9 +21,6 @@ class _AttendanceAndDepartureScreenState extends State<AttendanceAndDepartureScr
 
   @override
   Widget build(BuildContext context) {
-    final demo = DemoLocalization.of(context);
-    final cubit = AppCubit.get(context);
-    final home = HomeCubit.get(context);
     return Container(
       decoration: BoxDecoration(
         image: DecorationImage(
@@ -56,13 +50,13 @@ class _AttendanceAndDepartureScreenState extends State<AttendanceAndDepartureScr
                     children: [
                       Expanded(
                         child: GestureDetector(
-                          onTap: (){
-
-                          },
+                          onTap: () {},
                           child: Container(
-                            padding: EdgeInsets.symmetric(horizontal: 10.w , vertical: 10.h),
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 10.w, vertical: 10.h),
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.all(Radius.circular(100.0)),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(100.0)),
                               color: lightBlueColor,
                             ),
                             child: Center(
@@ -76,16 +70,18 @@ class _AttendanceAndDepartureScreenState extends State<AttendanceAndDepartureScr
                           ),
                         ),
                       ),
-                      SizedBox(width: 16.w,),
+                      SizedBox(
+                        width: 16.w,
+                      ),
                       Expanded(
                         child: GestureDetector(
-                          onTap: (){
-
-                          },
+                          onTap: () {},
                           child: Container(
-                            padding: EdgeInsets.symmetric(horizontal: 10.w , vertical: 10.h),
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 10.w, vertical: 10.h),
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.all(Radius.circular(100.0)),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(100.0)),
                               color: Colors.red,
                             ),
                             child: Center(
@@ -104,8 +100,7 @@ class _AttendanceAndDepartureScreenState extends State<AttendanceAndDepartureScr
                 ),
               ],
             ),
-          )
-      ),
+          )),
     );
   }
 }

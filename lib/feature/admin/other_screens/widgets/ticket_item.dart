@@ -1,23 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:golden_racks_admin/constants.dart';
-import 'package:golden_racks_admin/core/bloc/language_cubit.dart';
-import 'package:golden_racks_admin/core/localization/demo_localization.dart';
 import 'package:golden_racks_admin/core/router/router.dart';
 import 'package:golden_racks_admin/feature/technician/main_screens/show_ticket_screen.dart';
 import '../../../widgets/main_text.dart';
 
 class TicketItem extends StatelessWidget {
-
-  // const TicketItem(Key? key)
-  //     : super(key: key);
-
   @override
   Widget build(BuildContext context) {
-    final demo = DemoLocalization.of(context);
-    final lang = LanguageCubit.get(context);
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 10.w , horizontal: 10.h),
+      padding: EdgeInsets.symmetric(vertical: 10.w, horizontal: 10.h),
       margin: EdgeInsets.only(bottom: 8.0),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20.r),
@@ -49,7 +41,9 @@ class TicketItem extends StatelessWidget {
           //   weight: FontWeight.w700,
           //   color: Colors.black,
           // ),
-          SizedBox(height: 13.h,),
+          SizedBox(
+            height: 13.h,
+          ),
           Row(
             children: [
               Expanded(
@@ -63,7 +57,9 @@ class TicketItem extends StatelessWidget {
                           weight: FontWeight.w700,
                           color: Colors.black,
                         ),
-                        SizedBox(width: 8.w,),
+                        SizedBox(
+                          width: 8.w,
+                        ),
                         MainText(
                           text: 'سامر احمد سيد',
                           font: 15.sp,
@@ -80,7 +76,9 @@ class TicketItem extends StatelessWidget {
                           weight: FontWeight.w700,
                           color: Colors.black,
                         ),
-                        SizedBox(width: 8.w,),
+                        SizedBox(
+                          width: 8.w,
+                        ),
                         MainText(
                           text: '21-1-2023',
                           font: 15.sp,
@@ -92,14 +90,17 @@ class TicketItem extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(width: 10.w,),
+              SizedBox(
+                width: 10.w,
+              ),
               Expanded(
                 child: GestureDetector(
-                  onTap: (){
+                  onTap: () {
                     MagicRouter.navigateTo(ShowTicketScreen());
                   },
                   child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 10.w , vertical: 5.h),
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 10.w, vertical: 5.h),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.all(Radius.circular(8.0)),
                       color: Colors.yellow,

@@ -6,9 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:provider/provider.dart';
 import '../../feature/admin/auth_screens/organizer_login.dart';
-import '../../feature/admin/main_screens/units/calender_screen.dart';
 import '../../feature/admin/main_screens/units/main.dart';
-import '../../feature/admin/main_screens/units/tickets_screen.dart';
 import '../../feature/widgets/loading_dialog.dart';
 import '../appStorage/shared_preference.dart';
 import '../dialogs/error_dialog.dart';
@@ -17,7 +15,6 @@ import '../models/event_category_model.dart';
 import '../models/event_model.dart';
 import '../networkStatus/network_status.dart';
 import '../router/router.dart';
-import 'app_cubit.dart';
 
 class OrganizerAppCubit extends ChangeNotifier {
   static OrganizerAppCubit get(context) =>
@@ -58,9 +55,7 @@ class OrganizerAppCubit extends ChangeNotifier {
   int _start = 30;
   bool _wait = false;
   String? _userId;
-  String? _confirmOtp;
   bool _isPhone = false;
-  bool _rememberMe = false;
   List<int> _interestsList = [];
 
   void changeCheckbox(int i) {
@@ -92,9 +87,7 @@ class OrganizerAppCubit extends ChangeNotifier {
 
   int get index => _index;
 
-  void setRememberMe(bool v) {
-    _rememberMe = v;
-  }
+  void setRememberMe(bool v) {}
 
   format(Duration d) =>
       d.toString().split('.').first.padLeft(8, "0").substring(3, 8);
@@ -105,7 +98,7 @@ class OrganizerAppCubit extends ChangeNotifier {
 
   int get status => _status;
 
-  void setStatus(int status){
+  void setStatus(int status) {
     _status = status;
   }
 

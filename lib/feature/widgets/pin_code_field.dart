@@ -4,7 +4,6 @@ import 'package:pin_code_fields/pin_code_fields.dart';
 import '../../constants.dart';
 import '../../core/bloc/language_cubit.dart';
 import '../../core/localization/demo_localization.dart';
-import '../../core/validate/validation.dart';
 
 class PinCodeField extends StatelessWidget {
   final void Function(String?)? onSave;
@@ -18,7 +17,7 @@ class PinCodeField extends StatelessWidget {
     final demo = DemoLocalization.of(context);
     final lang = LanguageCubit.get(context);
     return Directionality(
-      textDirection:  TextDirection.ltr,
+      textDirection: TextDirection.ltr,
       child: PinCodeTextField(
         validator: (String? v) => v!.isEmpty
             ? demo.getTranslatedValue('code_validation')

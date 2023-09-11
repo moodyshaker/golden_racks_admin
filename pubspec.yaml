@@ -50,6 +50,7 @@ dependencies:
   shimmer:
   google_fonts:
   audioplayers:
+  video_player:
 
 
 dev_dependencies:

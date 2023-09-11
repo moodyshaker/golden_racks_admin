@@ -1,16 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:golden_racks_admin/core/bloc/language_cubit.dart';
-import 'package:golden_racks_admin/core/localization/demo_localization.dart';
 import 'package:golden_racks_admin/feature/widgets/main_text.dart';
 
 class DayTicketItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final demo = DemoLocalization.of(context);
-    final lang = LanguageCubit.get(context);
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 16.w , vertical: 8.h),
+      margin: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

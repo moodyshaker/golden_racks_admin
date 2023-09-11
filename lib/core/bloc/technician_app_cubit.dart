@@ -20,10 +20,7 @@ class TechnicianAppCubit extends ChangeNotifier {
 
   int _start = 30;
   bool _wait = false;
-  String? _userId;
-  String? _confirmOtp;
   bool _isPhone = false;
-  bool _rememberMe = false;
   List<int> _interestsList = [];
 
   void changeCheckbox(int i) {
@@ -55,9 +52,7 @@ class TechnicianAppCubit extends ChangeNotifier {
 
   int get index => _index;
 
-  void setRememberMe(bool v) {
-    _rememberMe = v;
-  }
+  void setRememberMe(bool v) {}
 
   format(Duration d) =>
       d.toString().split('.').first.padLeft(8, "0").substring(3, 8);
@@ -66,13 +61,12 @@ class TechnicianAppCubit extends ChangeNotifier {
     await _preferences.logout();
   }
 
-  int _v = 0;
   int _value = 0;
   int _status = 0;
 
   int get status => _status;
 
-  void setStatus(int status){
+  void setStatus(int status) {
     _status = status;
   }
 

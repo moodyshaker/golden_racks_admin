@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:golden_racks_admin/core/bloc/technician_app_cubit.dart';
 import 'package:golden_racks_admin/core/provider/provider_add_technation.dart';
 import 'package:golden_racks_admin/core/provider/provider_assign_to_unsub_emergency_plan.dart';
+import 'package:golden_racks_admin/core/provider/provider_assign_to_unsub_normal_plan.dart';
 import 'package:golden_racks_admin/core/provider/provider_ready_plan.dart';
 import 'package:provider/provider.dart';
 import 'core/appStorage/shared_preference.dart';
@@ -49,6 +50,7 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider(create: (_) => AddTechnationProvider()),
           ChangeNotifierProvider(
               create: (_) => AssignToUnsubEmergencyProvider()),
+          ChangeNotifierProvider(create: (_) => AssignToUnsubNormalProvider()),
         ],
         child: Builder(
           builder: (BuildContext c) => MaterialApp(

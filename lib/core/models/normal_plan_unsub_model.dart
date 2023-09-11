@@ -1,4 +1,4 @@
-class EmergencyPlanUnSubModel {
+class NormalPlanUnSubModel {
   int? id;
   String? ticketNumber;
   String? userId;
@@ -7,16 +7,16 @@ class EmergencyPlanUnSubModel {
   String? sound;
   String? message;
   String? notes;
-  int? numberOfHours;
+  int? numberOfDays;
   List<ProblemDetails>? problemDetails;
   String? address;
   bool? isRejected;
   String? addedDate;
-  String? companyName_Ar;
-  String? companyName_En;
-  String? accountNumber;
+  // String? companyName_Ar;
+  // String? companyName_En;
+  // String? accountNumber;
 
-  EmergencyPlanUnSubModel({
+  NormalPlanUnSubModel({
     this.id,
     this.ticketNumber,
     this.userId,
@@ -25,14 +25,14 @@ class EmergencyPlanUnSubModel {
     this.sound,
     this.message,
     this.notes,
-    this.numberOfHours,
+    this.numberOfDays,
     this.problemDetails,
     this.address,
     this.isRejected,
     this.addedDate,
-    this.companyName_Ar,
-    this.companyName_En,
-    this.accountNumber,
+    // this.companyName_Ar,
+    // this.companyName_En,
+    // this.accountNumber,
   });
 
   Map<String, dynamic> toJson() {
@@ -45,19 +45,19 @@ class EmergencyPlanUnSubModel {
       'sound': sound,
       'message': message,
       'notes': notes,
-      'numberOfHours': numberOfHours,
+      'numberOfDays': numberOfDays,
       'problemDetails': problemDetails?.map((x) => x.toJson()).toList(),
       'address': address,
       'isRejected': isRejected,
       'addedDate': addedDate,
-      'companyName_Ar': companyName_Ar,
-      'companyName_En': companyName_En,
-      'accountNumber': accountNumber,
+      // 'companyName_Ar': companyName_Ar,
+      // 'companyName_En': companyName_En,
+      // 'accountNumber': accountNumber,
     };
   }
 
-  factory EmergencyPlanUnSubModel.fromJson(Map<String, dynamic> json) {
-    return EmergencyPlanUnSubModel(
+  factory NormalPlanUnSubModel.fromJson(Map<String, dynamic> json) {
+    return NormalPlanUnSubModel(
       id: json['id'] != null ? json['id'] as int : null,
       ticketNumber:
           json['ticketNumber'] != null ? json['ticketNumber'] as String : null,
@@ -68,8 +68,8 @@ class EmergencyPlanUnSubModel {
       sound: json['sound'] != null ? json['sound'] as String : null,
       message: json['message'] != null ? json['message'] as String : null,
       notes: json['notes'] != null ? json['notes'] as String : null,
-      numberOfHours:
-          json['numberOfHours'] != null ? json['numberOfHours'] as int : null,
+      numberOfDays:
+          json['numberOfDays'] != null ? json['numberOfDays'] as int : null,
       problemDetails: json['problemDetails'] != null
           ? List<ProblemDetails>.from(
               (json['problemDetails'] as List<dynamic>).map<ProblemDetails?>(
@@ -81,15 +81,15 @@ class EmergencyPlanUnSubModel {
       isRejected:
           json['isRejected'] != null ? json['isRejected'] as bool : null,
       addedDate: json['addedDate'] != null ? json['addedDate'] as String : null,
-      companyName_Ar: json['companyName_Ar'] != null
-          ? json['companyName_Ar'] as String
-          : null,
-      companyName_En: json['companyName_En'] != null
-          ? json['companyName_En'] as String
-          : null,
-      accountNumber: json['accountNumber'] != null
-          ? json['accountNumber'] as String
-          : null,
+      // companyName_Ar: json['companyName_Ar'] != null
+      //     ? json['companyName_Ar'] as String
+      //     : null,
+      // companyName_En: json['companyName_En'] != null
+      //     ? json['companyName_En'] as String
+      //     : null,
+      // accountNumber: json['accountNumber'] != null
+      //     ? json['accountNumber'] as String
+      //     : null,
     );
   }
 }

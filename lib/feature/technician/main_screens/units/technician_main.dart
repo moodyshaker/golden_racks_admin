@@ -2,13 +2,9 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:golden_racks_admin/constants.dart';
 import 'package:golden_racks_admin/core/router/router.dart';
-import 'package:golden_racks_admin/feature/admin/main_screens/widgets/home_item.dart';
 import 'package:golden_racks_admin/feature/admin/other_screens/widgets/day_ticket_item.dart';
 import 'package:golden_racks_admin/feature/technician/main_screens/tickets_screen.dart';
-import '../../../../core/bloc/organizer_app_cubit.dart';
-import '../../../../core/localization/demo_localization.dart';
 import '../../../widgets/main_text.dart';
 
 class TechnicianMain extends StatefulWidget {
@@ -84,7 +80,7 @@ class _TechnicianMainState extends State<TechnicianMain> {
                     height: 8.h,
                   ),
                   GestureDetector(
-                    onTap: (){
+                    onTap: () {
                       MagicRouter.navigateTo(TicketsScreen());
                     },
                     child: Container(

@@ -39,38 +39,37 @@ class ReadyPlanProvider extends ChangeNotifier {
   ];
 
   List<ReadyPlanModel> allReadyPlans = [];
-  ReadyPlanModel chosenReadyPlan = ReadyPlanModel();
   int chosenPlanDuration = 0;
 
-  void increaseRack() {
-    log('id > ' + chosenReadyPlan.id.toString());
-    log('num of racks > ' + chosenReadyPlan.numberOfRacks.toString());
-    log('plan price > ' + chosenReadyPlan.planPrice.toString());
-    chosenReadyPlan.numberOfRacks = chosenReadyPlan.numberOfRacks! + 1;
+  void increaseRack({required ReadyPlanModel readyPlan}) {
+    log('id > ' + readyPlan.id.toString());
+    log('num of racks > ' + readyPlan.numberOfRacks.toString());
+    log('plan price > ' + readyPlan.planPrice.toString());
+    readyPlan.numberOfRacks = readyPlan.numberOfRacks! + 1;
 
-    chosenReadyPlan.planPrice =
-        (chosenReadyPlan.racksUnitPrice! * chosenReadyPlan.numberOfRacks!) +
-            chosenReadyPlan.totalCost!;
+    readyPlan.planPrice =
+        (readyPlan.racksUnitPrice! * readyPlan.numberOfRacks!) +
+            readyPlan.totalCost!;
 
-    log('id > ' + chosenReadyPlan.id.toString());
-    log('num of racks > ' + chosenReadyPlan.numberOfRacks.toString());
-    log('plan price > ' + chosenReadyPlan.planPrice.toString());
+    log('id > ' + readyPlan.id.toString());
+    log('num of racks > ' + readyPlan.numberOfRacks.toString());
+    log('plan price > ' + readyPlan.planPrice.toString());
 
     notifyListeners();
   }
 
-  void decreaseRack() {
-    log('id > ' + chosenReadyPlan.id.toString());
-    log('num of racks > ' + chosenReadyPlan.numberOfRacks.toString());
-    log('plan price > ' + chosenReadyPlan.planPrice.toString());
-    chosenReadyPlan.numberOfRacks = chosenReadyPlan.numberOfRacks! - 1;
+  void decreaseRack({required ReadyPlanModel readyPlan}) {
+    log('id > ' + readyPlan.id.toString());
+    log('num of racks > ' + readyPlan.numberOfRacks.toString());
+    log('plan price > ' + readyPlan.planPrice.toString());
+    readyPlan.numberOfRacks = readyPlan.numberOfRacks! - 1;
 
-    chosenReadyPlan.planPrice =
-        (chosenReadyPlan.racksUnitPrice! * chosenReadyPlan.numberOfRacks!) +
-            chosenReadyPlan.totalCost!;
-    log('id > ' + chosenReadyPlan.id.toString());
-    log('num of racks > ' + chosenReadyPlan.numberOfRacks.toString());
-    log('plan price > ' + chosenReadyPlan.planPrice.toString());
+    readyPlan.planPrice =
+        (readyPlan.racksUnitPrice! * readyPlan.numberOfRacks!) +
+            readyPlan.totalCost!;
+    log('id > ' + readyPlan.id.toString());
+    log('num of racks > ' + readyPlan.numberOfRacks.toString());
+    log('plan price > ' + readyPlan.planPrice.toString());
 
     notifyListeners();
   }

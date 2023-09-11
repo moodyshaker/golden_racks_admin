@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../../../constants.dart';
-import '../../../core/localization/demo_localization.dart';
 import '../../../core/router/router.dart';
 import '../../widgets/customScaffold.dart';
 import 'organizer_login.dart';
@@ -34,7 +33,6 @@ class _SplashState extends State<Splash> {
     SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,
         statusBarIconBrightness: Brightness.light));
-    final demo = DemoLocalization.of(context);
     return Container(
       height: double.infinity,
       width: double.infinity,

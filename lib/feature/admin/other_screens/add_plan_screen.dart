@@ -105,10 +105,9 @@ class _AddPlanScreenState extends State<AddPlanScreen> {
                         padding: EdgeInsets.symmetric(vertical: 10.h),
                         itemCount: readyPlanProvider.allReadyPlans.length,
                         itemBuilder: (BuildContext context, int i) {
-                          readyPlanProvider.chosenReadyPlan =
-                              readyPlanProvider.allReadyPlans[i];
-
-                          return PlanItem();
+                          return PlanItem(
+                            readyPlan: readyPlanProvider.allReadyPlans[i],
+                          );
                         },
                       ),
               ),

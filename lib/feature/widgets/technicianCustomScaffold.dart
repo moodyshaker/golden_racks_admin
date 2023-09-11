@@ -1,10 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:golden_racks_admin/core/bloc/technician_app_cubit.dart';
 import '../../constants.dart';
-import '../../core/bloc/auth_cubit.dart';
 import '../../core/bloc/language_cubit.dart';
 import '../../core/localization/demo_localization.dart';
 import '../../core/models/nav_item.dart';
@@ -49,7 +47,6 @@ class _TechnicianCustomScaffoldState extends State<TechnicianCustomScaffold> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    final demo = DemoLocalization.of(context);
     navBar = technicianNavItems;
   }
 
@@ -58,7 +55,6 @@ class _TechnicianCustomScaffoldState extends State<TechnicianCustomScaffold> {
     final cubit = TechnicianAppCubit.get(context);
     final demo = DemoLocalization.of(context);
     final lang = LanguageCubit.get(context);
-    final auth = AuthCubit.get(context);
     return WillPopScope(
       onWillPop: () async {
         if (!MagicRouter.canPop) {
@@ -224,63 +220,62 @@ class _TechnicianCustomScaffoldState extends State<TechnicianCustomScaffold> {
                       ),
                     ])
                   : Container(
-                    margin: EdgeInsets.symmetric(horizontal: 22.w),
-                    height: 80.h,
-                    decoration: BoxDecoration(
-                      color: Colors.transparent,
+                      margin: EdgeInsets.symmetric(horizontal: 22.w),
+                      height: 80.h,
+                      decoration: BoxDecoration(
+                        color: Colors.transparent,
+                      ),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: MainText(
+                              text: widget.title1,
+                              color: Colors.black,
+                              font: 16.sp,
+                              weight: FontWeight.w800,
+                              family: 'Lato_smiBold',
+                            ),
+                          ),
+                          Container(
+                            decoration: BoxDecoration(
+                              color: Colors.transparent,
+                            ),
+                            height: 41.h,
+                            width: 41.w,
+                            child: GestureDetector(
+                              child: Image.asset(getAsset('back')),
+                              onTap: () {
+                                if (!MagicRouter.canPop) {
+                                  showDialog(
+                                      context: navigatorKey.currentContext!,
+                                      builder: (c) => ActionDialog(
+                                            content: demo.getTranslatedValue(
+                                                'do_you_want_exit'),
+                                            onCancelClick: () {
+                                              MagicRouter.pop();
+                                            },
+                                            approveAction:
+                                                demo.getTranslatedValue(
+                                                    'dialog_approve'),
+                                            cancelAction:
+                                                demo.getTranslatedValue(
+                                                    'dialog_decline'),
+                                            onApproveClick: () {
+                                              MagicRouter.pop();
+                                              SystemNavigator.pop();
+                                            },
+                                          ));
+                                } else {
+                                  widget.onBackPressed != null
+                                      ? widget.onBackPressed!()
+                                      : MagicRouter.pop();
+                                }
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: MainText(
-                            text: widget.title1,
-                            color: Colors.black,
-                            font: 16.sp,
-                            weight: FontWeight.w800,
-                            family: 'Lato_smiBold',
-                          ),
-                        ),
-                        Container(
-                          decoration: BoxDecoration(
-                            color: Colors.transparent,
-                          ),
-                          height: 41.h,
-                          width: 41.w,
-                          child: GestureDetector(
-                            child: Image.asset(getAsset('back')),
-                            onTap: () {
-                              if (!MagicRouter.canPop) {
-                                showDialog(
-                                    context: navigatorKey.currentContext!,
-                                    builder: (c) => ActionDialog(
-                                          content:
-                                              demo.getTranslatedValue(
-                                                  'do_you_want_exit'),
-                                          onCancelClick: () {
-                                            MagicRouter.pop();
-                                          },
-                                          approveAction:
-                                              demo.getTranslatedValue(
-                                                  'dialog_approve'),
-                                          cancelAction:
-                                              demo.getTranslatedValue(
-                                                  'dialog_decline'),
-                                          onApproveClick: () {
-                                            MagicRouter.pop();
-                                            SystemNavigator.pop();
-                                          },
-                                        ));
-                              } else {
-                                widget.onBackPressed != null
-                                    ? widget.onBackPressed!()
-                                    : MagicRouter.pop();
-                              }
-                            },
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
               Expanded(child: widget.body),
             ],
           ),
@@ -305,75 +300,69 @@ class _TechnicianCustomScaffoldState extends State<TechnicianCustomScaffold> {
                                 }
                               },
                               child:
-                              // i == 2
-                              //     ? Container(
-                              //         height: 80.h,
-                              //         width: 80.h,
-                              //         padding: EdgeInsets.symmetric(
-                              //             vertical: 6.h, horizontal: 6.w),
-                              //         margin: EdgeInsets.symmetric(
-                              //             vertical: 6.h, horizontal: 6.w),
-                              //         decoration: BoxDecoration(
-                              //             color: kAccentColor,
-                              //             shape: BoxShape.circle),
-                              //         child: Column(
-                              //           mainAxisAlignment:
-                              //               MainAxisAlignment.center,
-                              //           crossAxisAlignment:
-                              //               CrossAxisAlignment.center,
-                              //           children: [
-                              //             Image.asset(
-                              //                 getAsset('${navBar[i].icon}'),
-                              //                 height: 24.h,
-                              //                 width: 24.w,
-                              //                 color: kBlackColor),
-                              //             SizedBox(
-                              //               height: 4.h,
-                              //             ),
-                              //             MainText(
-                              //                 text: navBar[i].title,
-                              //                 font: 10.sp,
-                              //                 color: kBlackColor,
-                              //                 weight: FontWeight.bold),
-                              //           ],
-                              //         ),
-                              //       )
-                              //     :
-                              Container(
-                                      margin: EdgeInsets.symmetric(
-                                      vertical: 6.h, horizontal: 6.w),
-                                      decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(16.r),
-                                      ),
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: [
-                                          Image.asset(
-                                              getAsset('${navBar[i].icon}'),
-                                              height:
-                                                  cubit.i == i ? 30.h : 24.h,
-                                              width: cubit.i == i ? 30.w : 24.w,
-                                              color: cubit.i == i
-                                                  ? kAccentColor
-                                                  : kInactiveColor),
-                                          SizedBox(
-                                            height: 5.h,
-                                          ),
-                                          MainText(
-                                              text: navBar[i].title,
-                                              font:
-                                                  cubit.i == i ? 14.sp : 12.sp,
-                                              color: kAccentColor,
-                                              weight: cubit.i == i
-                                                  ? FontWeight.bold
-                                                  : FontWeight.w500),
-                                        ],
-                                      ),
+                                  // i == 2
+                                  //     ? Container(
+                                  //         height: 80.h,
+                                  //         width: 80.h,
+                                  //         padding: EdgeInsets.symmetric(
+                                  //             vertical: 6.h, horizontal: 6.w),
+                                  //         margin: EdgeInsets.symmetric(
+                                  //             vertical: 6.h, horizontal: 6.w),
+                                  //         decoration: BoxDecoration(
+                                  //             color: kAccentColor,
+                                  //             shape: BoxShape.circle),
+                                  //         child: Column(
+                                  //           mainAxisAlignment:
+                                  //               MainAxisAlignment.center,
+                                  //           crossAxisAlignment:
+                                  //               CrossAxisAlignment.center,
+                                  //           children: [
+                                  //             Image.asset(
+                                  //                 getAsset('${navBar[i].icon}'),
+                                  //                 height: 24.h,
+                                  //                 width: 24.w,
+                                  //                 color: kBlackColor),
+                                  //             SizedBox(
+                                  //               height: 4.h,
+                                  //             ),
+                                  //             MainText(
+                                  //                 text: navBar[i].title,
+                                  //                 font: 10.sp,
+                                  //                 color: kBlackColor,
+                                  //                 weight: FontWeight.bold),
+                                  //           ],
+                                  //         ),
+                                  //       )
+                                  //     :
+                                  Container(
+                                margin: EdgeInsets.symmetric(
+                                    vertical: 6.h, horizontal: 6.w),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(16.r),
+                                ),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Image.asset(getAsset('${navBar[i].icon}'),
+                                        height: cubit.i == i ? 30.h : 24.h,
+                                        width: cubit.i == i ? 30.w : 24.w,
+                                        color: cubit.i == i
+                                            ? kAccentColor
+                                            : kInactiveColor),
+                                    SizedBox(
+                                      height: 5.h,
                                     ),
+                                    MainText(
+                                        text: navBar[i].title,
+                                        font: cubit.i == i ? 14.sp : 12.sp,
+                                        color: kAccentColor,
+                                        weight: cubit.i == i
+                                            ? FontWeight.bold
+                                            : FontWeight.w500),
+                                  ],
+                                ),
+                              ),
                             )),
                   ),
                 ),

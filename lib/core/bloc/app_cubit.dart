@@ -1,10 +1,7 @@
-import 'dart:developer';
-import 'dart:io';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:provider/provider.dart';
-import '../appStorage/shared_preference.dart';
 
 class AppCubit extends ChangeNotifier {
   static AppCubit get(context) => Provider.of<AppCubit>(context);
@@ -17,7 +14,6 @@ class AppCubit extends ChangeNotifier {
   // final FirebaseMessaging _fcm = FirebaseMessaging.instance;
   final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
-  Preferences _preferences = Preferences.instance;
 
   void changeCurrent(int i) {
     _i = i;

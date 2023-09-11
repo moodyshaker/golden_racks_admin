@@ -9,7 +9,7 @@ import 'core/models/nav_item.dart';
 import 'core/router/router.dart';
 import 'feature/admin/main_screens/requests_screen/activate_plane_screen.dart';
 import 'feature/admin/main_screens/requests_screen/subscribers_emergency_requests_screen.dart';
-import 'feature/admin/main_screens/requests_screen/unsubscribers_periodic_requests_screen.dart';
+import 'feature/admin/main_screens/requests_screen/unsubscribers_normal_requests_screen.dart';
 import 'feature/admin/other_screens/add_company_with_plan_screen.dart';
 import 'feature/admin/other_screens/add_spare_part_screen.dart';
 import 'feature/admin/other_screens/create_plan_screen.dart';
@@ -159,7 +159,7 @@ List<DrawerItemModel> list = [
   DrawerItemModel(
       title: 'تحديد فني لطلبات الدورية لغير المشتركين',
       count: '5',
-      route: UnSubscribersPeriodicRequestsAdminScreen()),
+      route: UnSubscribersNormalRequestsAdminScreen()),
   DrawerItemModel(
       title: 'تحديد فني لطلبات الطوارئ للمشتركين',
       count: '7',

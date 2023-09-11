@@ -1,16 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:golden_racks_admin/core/router/router.dart';
-import 'package:golden_racks_admin/feature/admin/main_screens/widgets/need_activate_item.dart';
-import 'package:golden_racks_admin/feature/admin/other_screens/add_company_with_plan_screen.dart';
-import 'package:golden_racks_admin/feature/admin/other_screens/add_technician_screen.dart';
 import 'package:golden_racks_admin/feature/admin/other_screens/widgets/spar_part_item.dart';
-import 'package:golden_racks_admin/feature/admin/other_screens/widgets/technician_item.dart';
-import 'package:golden_racks_admin/feature/widgets/main_text.dart';
 
 import '../../../../constants.dart';
-import '../../../../core/bloc/home_cubit.dart';
-import '../../widgets/customButton.dart';
 import '../../widgets/customTextFeild.dart';
 import '../../widgets/organizerCustomScaffold.dart';
 
@@ -49,7 +41,9 @@ class _ShowSparPartsScreenState extends State<ShowSparPartsScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: 20.h,),
+              SizedBox(
+                height: 20.h,
+              ),
               Container(
                 child: CustomTextField(
                   borderColor: mainColor,
@@ -59,20 +53,18 @@ class _ShowSparPartsScreenState extends State<ShowSparPartsScreen> {
                     width: 60.w,
                     child: Center(
                         child: Container(
-                          height: 32.h,
-                          width: 32.w,
-                          child: Image.asset(
-                            getAsset('search_icon')
-                          ),
-                        )),
+                      height: 32.h,
+                      width: 32.w,
+                      child: Image.asset(getAsset('search_icon')),
+                    )),
                   ),
                   hasHint: true,
-                  suffixCallback: () {
-
-                  },
+                  suffixCallback: () {},
                 ),
               ),
-              SizedBox(height: 20.h,),
+              SizedBox(
+                height: 20.h,
+              ),
               Container(
                 height: 235.h,
                 child: ListView.builder(

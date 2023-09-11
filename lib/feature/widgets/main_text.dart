@@ -1,6 +1,5 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import '../../constants.dart';
 
 class MainText extends StatelessWidget {
@@ -41,16 +40,14 @@ class MainText extends StatelessWidget {
           textAlign: textAlign,
           maxLines: maxLines,
           overflow: overflow,
-          style:
-          TextStyle(
+          style: TextStyle(
             color: color ?? kBlackColor,
             fontSize: font ?? 20.sp,
             height: lineHeight,
             decoration: decoration ?? TextDecoration.none,
             fontWeight: weight ?? FontWeight.w500,
             fontFamily: family ?? 'Lato',
-          )
-      ),
+          )),
     );
   }
 }

@@ -1,21 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:golden_racks_admin/constants.dart';
-import 'package:golden_racks_admin/core/bloc/app_cubit.dart';
-import 'package:golden_racks_admin/core/bloc/home_cubit.dart';
-import 'package:golden_racks_admin/core/localization/demo_localization.dart';
-import 'package:golden_racks_admin/feature/admin/other_screens/widgets/ticket_item.dart';
 import 'package:golden_racks_admin/feature/widgets/customButton.dart';
 import 'package:golden_racks_admin/feature/widgets/customTextFeild.dart';
 import 'package:golden_racks_admin/feature/widgets/main_text.dart';
-import 'package:golden_racks_admin/feature/widgets/organizerCustomScaffold.dart';
 import 'package:golden_racks_admin/feature/widgets/technicianCustomScaffold.dart';
 
 class SendAlertToCompanyScreen extends StatefulWidget {
   const SendAlertToCompanyScreen({Key? key}) : super(key: key);
 
   @override
-  State<SendAlertToCompanyScreen> createState() => _SendAlertToCompanyScreenState();
+  State<SendAlertToCompanyScreen> createState() =>
+      _SendAlertToCompanyScreenState();
 }
 
 class _SendAlertToCompanyScreenState extends State<SendAlertToCompanyScreen> {
@@ -26,9 +22,6 @@ class _SendAlertToCompanyScreenState extends State<SendAlertToCompanyScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final demo = DemoLocalization.of(context);
-    final cubit = AppCubit.get(context);
-    final home = HomeCubit.get(context);
     return Container(
       decoration: BoxDecoration(
         image: DecorationImage(
@@ -67,11 +60,10 @@ class _SendAlertToCompanyScreenState extends State<SendAlertToCompanyScreen> {
                   hintColor: gray_40,
                   hintFont: 16.sp,
                   type: TextInputType.text,
-                  valid: (String? v) {
-
-                  },
                 ),
-                SizedBox(height: 16.h,),
+                SizedBox(
+                  height: 16.h,
+                ),
                 CustomButton(
                   title: 'ارسال التنبيه للشركة',
                   color: kSecondaryColor,
@@ -82,12 +74,12 @@ class _SendAlertToCompanyScreenState extends State<SendAlertToCompanyScreen> {
                   withBorder: false,
                   onPressed: () async {},
                 ),
-                SizedBox(height: 16.h,),
-
+                SizedBox(
+                  height: 16.h,
+                ),
               ],
             ),
-          )
-      ),
+          )),
     );
   }
 }

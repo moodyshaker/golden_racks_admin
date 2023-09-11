@@ -3,8 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:golden_racks_admin/core/models/emergency_plan_unsub_model.dart';
 import 'package:golden_racks_admin/core/provider/provider_assign_to_unsub_emergency_plan.dart';
 import 'package:golden_racks_admin/core/router/router.dart';
+import 'package:golden_racks_admin/feature/admin/main_screens/widgets/admin_assign_technical_screen_for_emergency_unsub.dart';
 import 'package:golden_racks_admin/feature/admin/main_screens/widgets/emergency_unsub_ticket_view_screen.dart';
-import 'package:golden_racks_admin/feature/admin/other_screens/technician_view_screen.dart';
 import '../../../../constants.dart';
 import '../../../widgets/customButton.dart';
 import '../../../widgets/main_text.dart';
@@ -55,13 +55,13 @@ class _RequestsItemUnsubEmergencyState
                     Column(
                       children: [
                         MainText(
-                          text: '${widget.emergencyUnsub.id}',
+                          text: '${widget.emergencyUnsub.companyName_Ar}',
                           font: 15.sp,
                           weight: FontWeight.w700,
                           color: Colors.black,
                         ),
                         MainText(
-                          text: 'GR566-23',
+                          text: '${widget.emergencyUnsub.accountNumber}',
                           font: 14.sp,
                           weight: FontWeight.w300,
                           color: Colors.black,
@@ -240,7 +240,11 @@ class _RequestsItemUnsubEmergencyState
                   borderWidth: 1.0,
                   borderColor: gray_40,
                   onPressed: () async {
-                    MagicRouter.navigateTo(TechnicianViewScreen());
+                    MagicRouter.navigateTo(
+                      AdminAssignTechnicalForEmergencyUnsubScreen(
+                        emergencyUnsub: widget.emergencyUnsub,
+                      ),
+                    );
                   },
                 ),
               ),

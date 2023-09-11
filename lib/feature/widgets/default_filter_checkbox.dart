@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../constants.dart';
-import '../../core/bloc/home_cubit.dart';
-import '../../core/bloc/language_cubit.dart';
 
 class DefaultCheckbox extends StatefulWidget {
   final Function onCheck;
@@ -36,9 +34,6 @@ class _DefaultCheckboxState extends State<DefaultCheckbox> {
 
   @override
   Widget build(BuildContext context) {
-    final home = HomeCubit.get(context);
-    final lang = LanguageCubit.get(context);
-    final size = MediaQuery.of(context).size;
     return GestureDetector(
       onTap: () {
         setState(() {

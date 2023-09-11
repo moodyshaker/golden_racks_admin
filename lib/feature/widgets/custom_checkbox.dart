@@ -40,7 +40,6 @@ class _State extends State<SubFilterCheckbox> {
   Widget build(BuildContext context) {
     final home = HomeCubit.get(context);
     final lang = LanguageCubit.get(context);
-    final size = MediaQuery.of(context).size;
     return GestureDetector(
       onTap: () {
         if (!widget.mainValue) {

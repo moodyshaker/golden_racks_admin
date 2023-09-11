@@ -37,7 +37,6 @@ class AuthCubit extends ChangeNotifier {
   int _start = 30;
   bool _wait = false;
   String? _userId;
-  String? _confirmOtp;
   bool _isPhone = false;
   bool _rememberMe = false;
   List<int> _interestsList = [];

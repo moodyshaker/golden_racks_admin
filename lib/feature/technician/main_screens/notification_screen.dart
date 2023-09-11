@@ -1,18 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:golden_racks_admin/core/router/router.dart';
-import 'package:golden_racks_admin/feature/admin/main_screens/widgets/need_activate_item.dart';
-import 'package:golden_racks_admin/feature/admin/other_screens/add_company_with_plan_screen.dart';
-import 'package:golden_racks_admin/feature/admin/other_screens/add_technician_screen.dart';
 import 'package:golden_racks_admin/feature/admin/other_screens/widgets/notification_item.dart';
-import 'package:golden_racks_admin/feature/admin/other_screens/widgets/spar_part_item.dart';
-import 'package:golden_racks_admin/feature/admin/other_screens/widgets/technician_item.dart';
-import 'package:golden_racks_admin/feature/widgets/main_text.dart';
-
 import '../../../../constants.dart';
-import '../../../../core/bloc/home_cubit.dart';
-import '../../widgets/customButton.dart';
-import '../../widgets/customTextFeild.dart';
 import '../../widgets/organizerCustomScaffold.dart';
 
 class NotificationScreen extends StatefulWidget {

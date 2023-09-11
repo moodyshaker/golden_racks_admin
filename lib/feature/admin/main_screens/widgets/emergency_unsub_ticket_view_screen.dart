@@ -1,9 +1,15 @@
+import 'dart:developer';
+
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:golden_racks_admin/core/models/emergency_plan_unsub_model.dart';
-import 'package:golden_racks_admin/core/provider/provider_assign_to_unsub_emergency_plan.dart';
+import 'package:golden_racks_admin/core/router/router.dart';
+import 'package:golden_racks_admin/feature/admin/main_screens/widgets/admin_assign_technical_screen_for_emergency_unsub.dart';
 import 'package:golden_racks_admin/feature/widgets/main_text.dart';
 import 'package:golden_racks_admin/feature/widgets/organizerCustomScaffold.dart';
+import 'package:path/path.dart' as pathFile;
+import 'package:video_player/video_player.dart';
 
 import '../../../../constants.dart';
 
@@ -28,7 +34,6 @@ class _EmergencyUnsubTicketViewScreenState
 
   @override
   Widget build(BuildContext context) {
-    final emergencyUnsub = AssignToUnsubEmergencyProvider.get(context);
     return Container(
       decoration: BoxDecoration(
         image: DecorationImage(
@@ -57,17 +62,22 @@ class _EmergencyUnsubTicketViewScreenState
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  MainText(
-                    text: 'شركة امازون',
-                    font: 15.sp,
-                    weight: FontWeight.w700,
-                    color: Colors.black,
+                  Flexible(
+                    child: MainText(
+                      text: '${widget.emergencyUnsub.companyName_Ar}',
+                      font: 15.sp,
+                      weight: FontWeight.w700,
+                      color: Colors.black,
+                    ),
                   ),
-                  MainText(
-                    text: '${widget.emergencyUnsub.ticketNumber} رقم التذكرة ',
-                    font: 15.sp,
-                    weight: FontWeight.w700,
-                    color: Colors.black,
+                  Flexible(
+                    child: MainText(
+                      text:
+                          '${widget.emergencyUnsub.ticketNumber} رقم التذكرة ',
+                      font: 15.sp,
+                      weight: FontWeight.w700,
+                      color: Colors.black,
+                    ),
                   ),
                 ],
               ),
@@ -78,8 +88,8 @@ class _EmergencyUnsubTicketViewScreenState
                 margin: EdgeInsets.symmetric(horizontal: 16.w),
                 child: MainText(
                   text: '${widget.emergencyUnsub.problemName}',
-                  font: 12.sp,
-                  weight: FontWeight.w700,
+                  font: 16.sp,
+                  weight: FontWeight.w500,
                   color: Colors.black,
                 ),
               ),
@@ -98,13 +108,16 @@ class _EmergencyUnsubTicketViewScreenState
                     ),
                     InkWell(
                       onTap: () {
-                        //technicals list to assign one
-                        // MagicRouter.navigateTo(AddTechnicianScreen());
+                        MagicRouter.navigateTo(
+                          AdminAssignTechnicalForEmergencyUnsubScreen(
+                            emergencyUnsub: widget.emergencyUnsub,
+                          ),
+                        );
                       },
                       child: MainText(
                         text: 'تخصيص فني الان',
                         font: 15.sp,
-                        weight: FontWeight.w500,
+                        weight: FontWeight.w600,
                         color: kSecondaryColor,
                       ),
                     ),
@@ -129,7 +142,7 @@ class _EmergencyUnsubTicketViewScreenState
                         widget.emergencyUnsub.addedDate!,
                       ),
                       font: 15.sp,
-                      weight: FontWeight.w300,
+                      weight: FontWeight.w400,
                       color: Colors.black,
                     ),
                   ],
@@ -154,9 +167,12 @@ class _EmergencyUnsubTicketViewScreenState
                 margin: EdgeInsets.symmetric(horizontal: 16.w),
                 child: InkWell(
                   onTap: () async {
-                    // play audio
-                    await emergencyUnsub.playRecord(
-                      audioPath: '${widget.emergencyUnsub.sound}',
+                    final player = AudioPlayer();
+                    var path =
+                        'http://75.119.156.82/${widget.emergencyUnsub.sound}';
+                    log(path);
+                    await player.play(
+                      UrlSource(path),
                     );
                   },
                   child: Container(
@@ -218,23 +234,42 @@ class _EmergencyUnsubTicketViewScreenState
                   Container(
                     height: 74.h,
                     width: 74.w,
-                    child: Image.asset(
-                      getAsset('no_pic'),
-                    ),
+                    child: widget.emergencyUnsub.problemDetails!.length < 1
+                        ? Image.asset(getAsset('no_pic'))
+                        : CustomNetworkFileImage(
+                            path:
+                                'http://75.119.156.82/${widget.emergencyUnsub.problemDetails![0].fileName}',
+                          ),
                   ),
                   Container(
                     height: 74.h,
                     width: 74.w,
-                    child: Image.asset(
-                      getAsset('no_pic'),
-                    ),
+                    child: widget.emergencyUnsub.problemDetails!.length < 2
+                        ? Image.asset(getAsset('no_pic'))
+                        : CustomNetworkFileImage(
+                            path:
+                                'http://75.119.156.82/${widget.emergencyUnsub.problemDetails![1].fileName}',
+                          ),
                   ),
                   Container(
                     height: 74.h,
                     width: 74.w,
-                    child: Image.asset(
-                      getAsset('no_pic'),
-                    ),
+                    child: widget.emergencyUnsub.problemDetails!.length < 3
+                        ? Image.asset(getAsset('no_pic'))
+                        : CustomNetworkFileImage(
+                            path:
+                                'http://75.119.156.82/${widget.emergencyUnsub.problemDetails![2].fileName}',
+                          ),
+                  ),
+                  Container(
+                    height: 74.h,
+                    width: 74.w,
+                    child: widget.emergencyUnsub.problemDetails!.length < 4
+                        ? Image.asset(getAsset('no_pic'))
+                        : CustomNetworkFileImage(
+                            path:
+                                'http://75.119.156.82/${widget.emergencyUnsub.problemDetails![3].fileName}',
+                          ),
                   ),
                 ],
               ),
@@ -242,6 +277,123 @@ class _EmergencyUnsubTicketViewScreenState
           ),
         ),
       ),
+    );
+  }
+}
+
+class CustomNetworkFileImage extends StatefulWidget {
+  final String path;
+  const CustomNetworkFileImage({
+    required this.path,
+  });
+
+  @override
+  State<CustomNetworkFileImage> createState() => _CustomNetworkFileImageState();
+}
+
+class _CustomNetworkFileImageState extends State<CustomNetworkFileImage> {
+  @override
+  Widget build(BuildContext context) {
+    bool isVideo = false;
+    String extension = pathFile.extension(widget.path).toLowerCase();
+    if (extension == '.mp4' ||
+        extension == '.avi' ||
+        extension == '.mov' ||
+        extension == '.mkv' ||
+        extension == '.wmv' ||
+        extension == '.flv' ||
+        extension == '.ts' ||
+        extension == '.ogv' ||
+        extension == '.webm' ||
+        extension == '.m4v' ||
+        extension == '.3gp') {
+      isVideo = true;
+    } else {
+      isVideo = false;
+    }
+
+    if (!isVideo) {
+      return InkWell(
+        child: Image.network(
+          '${widget.path}',
+        ),
+        onTap: () {
+          showDialog(
+            context: context,
+            builder: (context) {
+              return AlertDialog(
+                contentPadding: EdgeInsets.zero,
+                content: Image.network(
+                  '${widget.path}',
+                ),
+              );
+            },
+          );
+        },
+      );
+    } else {
+      log(widget.path);
+      return CustomVideoPlayer(
+        path: widget.path,
+      );
+    }
+  }
+}
+
+class CustomVideoPlayer extends StatefulWidget {
+  final String path;
+
+  CustomVideoPlayer({required this.path});
+  @override
+  State<CustomVideoPlayer> createState() => _CustomVideoPlayerState();
+}
+
+class _CustomVideoPlayerState extends State<CustomVideoPlayer> {
+  late VideoPlayerController? videoController;
+  bool load = false;
+
+  void initalizeVideoPlayer() async {
+    setState(() {
+      load = true;
+    });
+    videoController = await VideoPlayerController.networkUrl(
+      Uri.parse(widget.path),
+    )
+      ..initialize().then((_) {
+        setState(() {});
+      });
+    setState(() {
+      load = false;
+    });
+  }
+
+  Widget videoPreview() {
+    if (videoController != null) {
+      return videoController!.value.isInitialized
+          ? AspectRatio(
+              aspectRatio: videoController!.value.aspectRatio,
+              child: VideoPlayer(videoController!),
+            )
+          : Container();
+    } else {
+      return CircularProgressIndicator();
+    }
+  }
+
+  void initState() {
+    super.initState();
+    initalizeVideoPlayer();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Center(
+          child: videoPreview(),
+        ),
+        Text('sss'),
+      ],
     );
   }
 }

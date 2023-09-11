@@ -1,30 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../constants.dart';
-import '../../../../core/bloc/language_cubit.dart';
-import '../../../../core/localization/demo_localization.dart';
 import '../../../widgets/customButton.dart';
 import '../../../widgets/main_text.dart';
 
 class NeedActivateItem extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
-    final demo = DemoLocalization.of(context);
-    final lang = LanguageCubit.get(context);
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 10.h , horizontal: 16.w),
+      padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 16.w),
       margin: EdgeInsets.only(bottom: 5.0),
       decoration: BoxDecoration(
         color: Colors.transparent,
         borderRadius: BorderRadius.circular(15.r),
-        border: Border.all(
-            width: 1.0,
-            color: kInactiveColor),
+        border: Border.all(width: 1.0, color: kInactiveColor),
       ),
       child: Column(
         children: [
-          SizedBox(width: 9.w,),
+          SizedBox(
+            width: 9.w,
+          ),
           Row(
             children: [
               Container(
@@ -34,7 +29,9 @@ class NeedActivateItem extends StatelessWidget {
                   getAsset('defualt_pic'),
                 ),
               ),
-              SizedBox(width: 9.w,),
+              SizedBox(
+                width: 9.w,
+              ),
               Expanded(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -61,17 +58,23 @@ class NeedActivateItem extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(width: 9.w,),
+          SizedBox(
+            width: 9.w,
+          ),
           Row(
             children: [
-              SizedBox(width: 8.w,),
+              SizedBox(
+                width: 8.w,
+              ),
               MainText(
                 text: 'الخطة المختارة',
                 font: 15.sp,
                 color: Colors.black,
                 weight: FontWeight.w700,
               ),
-              SizedBox(width: 13.w,),
+              SizedBox(
+                width: 13.w,
+              ),
               MainText(
                 text: 'الاساسية 2400 ريال',
                 font: 15.sp,
@@ -80,17 +83,23 @@ class NeedActivateItem extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(width: 9.w,),
+          SizedBox(
+            width: 9.w,
+          ),
           Row(
             children: [
-              SizedBox(width: 8.w,),
+              SizedBox(
+                width: 8.w,
+              ),
               MainText(
                 text: 'طريقة الدفع',
                 font: 15.sp,
                 color: Colors.black,
                 weight: FontWeight.w700,
               ),
-              SizedBox(width: 31.w,),
+              SizedBox(
+                width: 31.w,
+              ),
               MainText(
                 text: 'تحويل رقم 246545',
                 font: 15.sp,
@@ -99,17 +108,23 @@ class NeedActivateItem extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(width: 6.w,),
+          SizedBox(
+            width: 6.w,
+          ),
           Row(
             children: [
-              SizedBox(width: 8.w,),
+              SizedBox(
+                width: 8.w,
+              ),
               MainText(
                 text: 'عنوان',
                 font: 15.sp,
                 color: Colors.black,
                 weight: FontWeight.w700,
               ),
-              SizedBox(width: 61.w,),
+              SizedBox(
+                width: 61.w,
+              ),
               MainText(
                 text: 'جدة-الحي الخامس-قطعة 200',
                 font: 15.sp,
@@ -118,7 +133,9 @@ class NeedActivateItem extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(width: 14.w,),
+          SizedBox(
+            width: 14.w,
+          ),
           Row(
             children: [
               Expanded(
@@ -135,10 +152,11 @@ class NeedActivateItem extends StatelessWidget {
                       textColor: Colors.white,
                       weight: FontWeight.w800,
                       withBorder: false,
-                      onPressed: () async {
-                      },
+                      onPressed: () async {},
                     ),
-                    SizedBox(width: 5.w,),
+                    SizedBox(
+                      width: 5.w,
+                    ),
                     CustomButton(
                       horizontalPadding: 19.w,
                       title: 'رفض الطلب',
@@ -149,8 +167,7 @@ class NeedActivateItem extends StatelessWidget {
                       withBorder: false,
                       borderWidth: 1.0,
                       borderColor: Colors.white,
-                      onPressed: () async {
-                      },
+                      onPressed: () async {},
                     ),
                   ],
                 ),

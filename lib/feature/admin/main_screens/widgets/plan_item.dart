@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:golden_racks_admin/core/appStorage/shared_preference.dart';
+import 'package:golden_racks_admin/core/models/ready_plan_model.dart';
 
 import '../../../../constants.dart';
 import '../../../../core/provider/provider_ready_plan.dart';
@@ -10,6 +11,10 @@ import '../../../widgets/customButton.dart';
 import '../../../widgets/main_text.dart';
 
 class PlanItem extends StatefulWidget {
+  final ReadyPlanModel readyPlan;
+
+  const PlanItem({required this.readyPlan});
+
   @override
   State<PlanItem> createState() => _PlanItemState();
 }
@@ -47,7 +52,7 @@ class _PlanItemState extends State<PlanItem> {
                         textAlign: TextAlign.center,
                         text: readyPlanProvider.arabicPlanTypes[
                             readyPlanProvider.englishPlanTypes.indexOf(
-                          readyPlanProvider.chosenReadyPlan.planDuration!,
+                          widget.readyPlan.planDuration!,
                         )],
                         font: 16.sp,
                         color: kAccentColor,
@@ -55,8 +60,7 @@ class _PlanItemState extends State<PlanItem> {
                       ),
                       MainText(
                         textAlign: TextAlign.center,
-                        text:
-                            '${readyPlanProvider.chosenReadyPlan.planPrice} ر.س',
+                        text: '${widget.readyPlan.planPrice} ر.س',
                         font: 16.sp,
                         color: kAccentColor,
                         weight: FontWeight.bold,
@@ -86,8 +90,7 @@ class _PlanItemState extends State<PlanItem> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           MainText(
-                            text:
-                                'الخطة السنوية + ${readyPlanProvider.chosenReadyPlan.id}',
+                            text: 'الخطة السنوية + ${widget.readyPlan.id}',
                             font: 16.sp,
                             color: kBlackColor,
                             weight: FontWeight.bold,
@@ -135,14 +138,14 @@ class _PlanItemState extends State<PlanItem> {
                                     color: kAccentColor,
                                   ),
                                   onTap: () {
-                                    readyPlanProvider.increaseRack();
+                                    readyPlanProvider.increaseRack(
+                                        readyPlan: widget.readyPlan);
                                   },
                                 ),
                               ),
                               SizedBox(width: 10.w),
                               MainText(
-                                text:
-                                    '${readyPlanProvider.chosenReadyPlan.numberOfRacks}',
+                                text: '${widget.readyPlan.numberOfRacks}',
                                 font: 12.sp,
                                 color: kBlackColor,
                                 weight: FontWeight.bold,
@@ -163,7 +166,8 @@ class _PlanItemState extends State<PlanItem> {
                                   ),
                                   onTap: () {
                                     setState(() {
-                                      readyPlanProvider.increaseRack();
+                                      readyPlanProvider.increaseRack(
+                                          readyPlan: widget.readyPlan);
                                     });
                                   },
                                 ),
@@ -191,7 +195,7 @@ class _PlanItemState extends State<PlanItem> {
                                 ),
                                 child: MainText(
                                   text:
-                                      '${readyPlanProvider.chosenReadyPlan.numberOfFixedVisits}',
+                                      '${widget.readyPlan.numberOfFixedVisits}',
                                   font: 12.sp,
                                   color: kBlackColor,
                                   textAlign: TextAlign.center,
@@ -219,7 +223,7 @@ class _PlanItemState extends State<PlanItem> {
                                 padding: EdgeInsets.symmetric(horizontal: 25.w),
                                 child: MainText(
                                   text:
-                                      '${readyPlanProvider.chosenReadyPlan.numberOEmregencyVisits}',
+                                      '${widget.readyPlan.numberOEmregencyVisits}',
                                   font: 12.sp,
                                   color: kBlackColor,
                                   weight: FontWeight.bold,
@@ -266,10 +270,8 @@ class _PlanItemState extends State<PlanItem> {
                           Padding(
                             padding: EdgeInsets.symmetric(horizontal: 25.w),
                             child: MainText(
-                              text: readyPlanProvider
-                                      .chosenReadyPlan.isSpareParts!
-                                  ? 'نعم'
-                                  : 'لا',
+                              text:
+                                  widget.readyPlan.isSpareParts! ? 'نعم' : 'لا',
                               font: 12.sp,
                               color: kBlackColor,
                               textAlign: TextAlign.center,
@@ -288,51 +290,51 @@ class _PlanItemState extends State<PlanItem> {
         SizedBox(
           height: 16.h,
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Column(
-              children: [
-                MainText(
-                  text: 'اختر تاريخ بداية الخطة',
-                  font: 12.sp,
-                  weight: FontWeight.w400,
-                  color: Colors.black,
-                ),
-                SizedBox(
-                  height: 8.h,
-                ),
-                Container(
-                  height: 33.h,
-                  width: 42.w,
-                  // child: Image.asset(
-                  //   getAsset('calendar_icon'),
-                  // ),
-                ),
-              ],
-            ),
-            Column(
-              children: [
-                MainText(
-                  text: 'اختر تاريخ النهاية',
-                  font: 12.sp,
-                  weight: FontWeight.w400,
-                  color: Colors.black,
-                ),
-                SizedBox(
-                  height: 8.h,
-                ),
-                Container(
-                  height: 33.h,
-                  width: 42.w,
-                  // child: Image.asset(
-                  //   getAsset('calendar_icon'),
-                  // ),
-                ),
-              ],
-            ),
-          ],
-        ),
+        // Row(
+        //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        //   children: [
+        //     Column(
+        //       children: [
+        //         MainText(
+        //           text: 'اختر تاريخ بداية الخطة',
+        //           font: 12.sp,
+        //           weight: FontWeight.w400,
+        //           color: Colors.black,
+        //         ),
+        //         SizedBox(
+        //           height: 8.h,
+        //         ),
+        //         Container(
+        //           height: 33.h,
+        //           width: 42.w,
+        //           // child: Image.asset(
+        //           //   getAsset('calendar_icon'),
+        //           // ),
+        //         ),
+        //       ],
+        //     ),
+        //     Column(
+        //       children: [
+        //         MainText(
+        //           text: 'اختر تاريخ النهاية',
+        //           font: 12.sp,
+        //           weight: FontWeight.w400,
+        //           color: Colors.black,
+        //         ),
+        //         SizedBox(
+        //           height: 8.h,
+        //         ),
+        //         Container(
+        //           height: 33.h,
+        //           width: 42.w,
+        //           // child: Image.asset(
+        //           //   getAsset('calendar_icon'),
+        //           // ),
+        //         ),
+        //       ],
+        //     ),
+        //   ],
+        // ),
         SizedBox(
           height: 8.h,
         ),
@@ -342,21 +344,17 @@ class _PlanItemState extends State<PlanItem> {
           font: 12.sp,
           borderColor: Colors.transparent,
           onPressed: () async {
-            log('id > ' + readyPlanProvider.chosenReadyPlan.id.toString());
-            log('num of racks > ' +
-                readyPlanProvider.chosenReadyPlan.numberOfRacks.toString());
-            log('plan price > ' +
-                readyPlanProvider.chosenReadyPlan.planPrice.toString());
+            log('id > ' + widget.readyPlan.id.toString());
+            log('num of racks > ' + widget.readyPlan.numberOfRacks.toString());
+            log('plan price > ' + widget.readyPlan.planPrice.toString());
             await readyPlanProvider.subscribeToReadyPlan(
               UserId: _preferences.getRegisterdUserId,
-              ReadyPlanId: readyPlanProvider.chosenReadyPlan.id!,
+              ReadyPlanId: widget.readyPlan.id!,
               IsFree: false,
-              NumberOfRacks: readyPlanProvider.chosenReadyPlan.numberOfRacks!,
+              NumberOfRacks: widget.readyPlan.numberOfRacks!,
               StartDate: DateTime.now().toString(),
-              NumberOfFixedVisits:
-                  readyPlanProvider.chosenReadyPlan.numberOfFixedVisits!,
-              NumberOEmregencyVisits:
-                  readyPlanProvider.chosenReadyPlan.numberOEmregencyVisits!,
+              NumberOfFixedVisits: widget.readyPlan.numberOfFixedVisits!,
+              NumberOEmregencyVisits: widget.readyPlan.numberOEmregencyVisits!,
               PaymentMethod: 0,
               TransactionId: 1,
             );

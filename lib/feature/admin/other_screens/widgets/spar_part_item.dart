@@ -1,18 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:golden_racks_admin/core/router/router.dart';
-import 'package:golden_racks_admin/feature/admin/main_screens/requests_screen/unsubscribers_emergency_requests_screen.dart';
 import '../../../../constants.dart';
-import '../../../../core/bloc/language_cubit.dart';
-import '../../../../core/localization/demo_localization.dart';
 import '../../../widgets/customButton.dart';
 import '../../../widgets/main_text.dart';
 
 class SparPartItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final demo = DemoLocalization.of(context);
-    final lang = LanguageCubit.get(context);
     return Container(
       padding: EdgeInsets.symmetric(vertical: 10.w, horizontal: 20.h),
       margin: EdgeInsets.only(bottom: 8.h),
@@ -42,7 +36,9 @@ class SparPartItem extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(width: 16.w,),
+          SizedBox(
+            width: 16.w,
+          ),
           CustomButton(
             title: 'اضافة',
             width: 90.w,

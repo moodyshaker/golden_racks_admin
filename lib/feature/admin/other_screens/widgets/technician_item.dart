@@ -2,8 +2,6 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:golden_racks_admin/core/models/technical_model.dart';
-import 'package:golden_racks_admin/core/provider/provider_add_technation.dart';
 import '../../../../constants.dart';
 import '../../../widgets/main_text.dart';
 
@@ -21,7 +19,6 @@ class TechnicianItem extends StatefulWidget {
 class _TechnicianItemState extends State<TechnicianItem> {
   @override
   Widget build(BuildContext context) {
-    final technicalProvider = AddTechnationProvider.get(context);
     return Container(
       padding: EdgeInsets.symmetric(vertical: 10.w, horizontal: 20.h),
       margin: EdgeInsets.only(bottom: 8.h),

@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:golden_racks_admin/core/models/normal_plan_unsub_model.dart';
+import 'package:golden_racks_admin/core/provider/provider_assign_to_unsub_normal_plan.dart';
 import 'package:golden_racks_admin/core/router/router.dart';
+import 'package:golden_racks_admin/feature/admin/main_screens/widgets/admin_assign_technical_screen_for_normal_unsub.dart';
 import 'package:golden_racks_admin/feature/admin/main_screens/widgets/normal_unsub_ticket_view_screen.dart';
-import 'package:golden_racks_admin/feature/admin/other_screens/technician_view_screen.dart';
 import '../../../../constants.dart';
 import '../../../widgets/customButton.dart';
 import '../../../widgets/main_text.dart';
 
 class RequestsItemUnsubNormal extends StatefulWidget {
-  // final EmergencyPlanUnSubModel emergencyUnsub;
+  final NormalPlanUnSubModel normalUnsub;
 
-  // const RequestsItemUnsubNormal({required this.emergencyUnsub});
+  const RequestsItemUnsubNormal({required this.normalUnsub});
   @override
   State<RequestsItemUnsubNormal> createState() =>
       _RequestsItemUnsubNormalState();
@@ -19,6 +21,7 @@ class RequestsItemUnsubNormal extends StatefulWidget {
 class _RequestsItemUnsubNormalState extends State<RequestsItemUnsubNormal> {
   @override
   Widget build(BuildContext context) {
+    final normalUnsubProvider = AssignToUnsubNormalProvider.get(context);
     return Container(
       padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 12.w),
       margin: EdgeInsets.only(bottom: 5.0),
@@ -51,13 +54,13 @@ class _RequestsItemUnsubNormalState extends State<RequestsItemUnsubNormal> {
                     Column(
                       children: [
                         MainText(
-                          // text: '${widget.emergencyUnsub.id}',
+                          text: '${widget.normalUnsub.id}',
                           font: 15.sp,
                           weight: FontWeight.w700,
                           color: Colors.black,
                         ),
                         MainText(
-                          text: 'GR566-23',
+                          text: 'GR878657',
                           font: 14.sp,
                           weight: FontWeight.w300,
                           color: Colors.black,
@@ -103,7 +106,7 @@ class _RequestsItemUnsubNormalState extends State<RequestsItemUnsubNormal> {
                 width: 27.w,
               ),
               MainText(
-                // text: '${widget.emergencyUnsub.problemName}',
+                text: '${widget.normalUnsub.problemName}',
                 font: 15.sp,
                 color: Colors.black,
                 weight: FontWeight.w500,
@@ -114,7 +117,7 @@ class _RequestsItemUnsubNormalState extends State<RequestsItemUnsubNormal> {
             height: 7.h,
           ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               SizedBox(
                 width: 8.w,
@@ -127,22 +130,25 @@ class _RequestsItemUnsubNormalState extends State<RequestsItemUnsubNormal> {
                       font: 15.sp,
                       color: Colors.black,
                       weight: FontWeight.w700,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 2,
                     ),
                     SizedBox(
-                      width: 27.w,
+                      width: 10.w,
                     ),
-                    MainText(
-                      text: '21-1-2023',
-                      font: 15.sp,
-                      color: Colors.black,
-                      weight: FontWeight.w100,
+                    Flexible(
+                      child: MainText(
+                        text: formateDateTimeToDate(
+                            '${widget.normalUnsub.addedDate}'),
+                        font: 15.sp,
+                        color: Colors.black,
+                        weight: FontWeight.w100,
+                      ),
                     ),
                   ],
                 ),
               ),
-              SizedBox(
-                width: 18.w,
-              ),
+              SizedBox(width: 16.w),
               Expanded(
                 child: Row(
                   children: [
@@ -155,11 +161,14 @@ class _RequestsItemUnsubNormalState extends State<RequestsItemUnsubNormal> {
                     SizedBox(
                       width: 8.w,
                     ),
-                    MainText(
-                      text: '12.30 am',
-                      font: 15.sp,
-                      color: Colors.black,
-                      weight: FontWeight.w100,
+                    Flexible(
+                      child: MainText(
+                        text: formateDateTimeToTime(
+                            '${widget.normalUnsub.addedDate}'),
+                        font: 15.sp,
+                        color: Colors.black,
+                        weight: FontWeight.w100,
+                      ),
                     ),
                   ],
                 ),
@@ -183,11 +192,13 @@ class _RequestsItemUnsubNormalState extends State<RequestsItemUnsubNormal> {
               SizedBox(
                 width: 27.w,
               ),
-              MainText(
-                text: 'جدة-الحي الخامس-قطعة 200',
-                font: 15.sp,
-                color: Colors.black,
-                weight: FontWeight.w500,
+              Flexible(
+                child: MainText(
+                  text: '${widget.normalUnsub.address}',
+                  font: 15.sp,
+                  color: Colors.black,
+                  weight: FontWeight.w500,
+                ),
               ),
             ],
           ),
@@ -207,7 +218,9 @@ class _RequestsItemUnsubNormalState extends State<RequestsItemUnsubNormal> {
                 weight: FontWeight.w800,
                 withBorder: false,
                 onPressed: () async {
-                  MagicRouter.navigateTo(NormalUnsubTicketViewScreen());
+                  MagicRouter.navigateTo(NormalUnsubTicketViewScreen(
+                    normalUnsub: widget.normalUnsub,
+                  ));
                 },
               ),
               SizedBox(
@@ -226,7 +239,11 @@ class _RequestsItemUnsubNormalState extends State<RequestsItemUnsubNormal> {
                   borderWidth: 1.0,
                   borderColor: gray_40,
                   onPressed: () async {
-                    MagicRouter.navigateTo(TechnicianViewScreen());
+                    MagicRouter.navigateTo(
+                      AdminAssignTechnicalForNormalUnsubScreen(
+                        normalUnsub: widget.normalUnsub,
+                      ),
+                    );
                   },
                 ),
               ),
@@ -244,7 +261,9 @@ class _RequestsItemUnsubNormalState extends State<RequestsItemUnsubNormal> {
                 textColor: Colors.white,
                 withBorder: false,
                 onPressed: () async {
-                  // log(widget.emergencyUnsub.id.toString());
+                  await normalUnsubProvider.refuseNormalUnsubPlan(
+                    id: widget.normalUnsub.id!,
+                  );
                 },
               ),
             ],

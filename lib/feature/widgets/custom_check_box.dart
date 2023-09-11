@@ -18,7 +18,6 @@ class CustomCheckbox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final HomeCubit cubit = HomeCubit.get(context);
-    final size = MediaQuery.of(context).size;
     return GestureDetector(
       onTap: () {
         cubit.changeCheckbox(index);
@@ -29,7 +28,7 @@ class CustomCheckbox extends StatelessWidget {
           Container(
             width: 23.h,
             height: 23.h,
-            margin: EdgeInsets.only(right: 8.w,left: 4.w),
+            margin: EdgeInsets.only(right: 8.w, left: 4.w),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8.r),
               color: cubit.value == index ? kMainColor : Colors.transparent,
@@ -55,7 +54,9 @@ class CustomCheckbox extends StatelessWidget {
                   ),
                 )
               : Container(),
-          SizedBox(width: 8.w,),
+          SizedBox(
+            width: 8.w,
+          ),
         ],
       ),
     );

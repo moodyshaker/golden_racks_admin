@@ -135,7 +135,7 @@ class AddTechnationProvider extends ChangeNotifier {
 
       if (response.statusCode >= 200 && response.statusCode < 300) {
         print('Login Success');
-
+        log(response.body);
         MagicRouter.pop();
         showDialog(
           context: navigatorKey.currentContext!,

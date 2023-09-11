@@ -1,11 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../constants.dart';
 import '../../core/bloc/app_cubit.dart';
-import '../../core/bloc/auth_cubit.dart';
-import '../../core/bloc/language_cubit.dart';
 import '../../core/localization/demo_localization.dart';
 import '../../core/models/more_model.dart';
 import '../../core/models/nav_item.dart';
@@ -28,11 +25,11 @@ class MainScaffold extends StatefulWidget {
 
   const MainScaffold(
       {this.title,
-        this.title1,
-        this.title2,
-        this.title3,
-        this.hasBack = true,
-        required this.body,
+      this.title1,
+      this.title2,
+      this.title3,
+      this.hasBack = true,
+      required this.body,
       this.hasAppbar = true,
       this.hasNavBar = true,
       this.isHome = true,
@@ -60,8 +57,6 @@ class _MainScaffold extends State<MainScaffold> {
   Widget build(BuildContext context) {
     final cubit = AppCubit.get(context);
     final demo = DemoLocalization.of(context);
-    final lang = LanguageCubit.get(context);
-    final auth = AuthCubit.get(context);
     return WillPopScope(
       onWillPop: () async {
         if (!MagicRouter.canPop) {
@@ -89,21 +84,21 @@ class _MainScaffold extends State<MainScaffold> {
       child: Scaffold(
         body: SafeArea(
             child: Column(
-            children: [
+          children: [
             widget.hasAppbar
                 ? Column(children: [
                     Container(
                       height: 80.h,
                       decoration: BoxDecoration(
                         color: Colors.transparent,
-                          // gradient: LinearGradient(
-                          //     begin: Alignment.topCenter,
-                          //     end: Alignment.bottomCenter,
-                          //     colors: [
-                          //   Color(0xff258039),
-                          //   Color(0xff8FC742),
-                          // ],
-                          // ),
+                        // gradient: LinearGradient(
+                        //     begin: Alignment.topCenter,
+                        //     end: Alignment.bottomCenter,
+                        //     colors: [
+                        //   Color(0xff258039),
+                        //   Color(0xff8FC742),
+                        // ],
+                        // ),
                       ),
                       child: Row(
                         children: [
@@ -139,27 +134,28 @@ class _MainScaffold extends State<MainScaffold> {
                                   ),
                                 )
                               : Container(
-                                decoration: BoxDecoration(
-                                  color: Colors.transparent,
-                                  // gradient: LinearGradient(
-                                  //     begin: Alignment.topCenter,
-                                  //     end: Alignment.bottomCenter,
-                                  //     colors: [
-                                  //   Color(0xff258039),
-                                  //   Color(0xff8FC742),
-                                  // ],
-                                  // ),
-                                ),
+                                  decoration: BoxDecoration(
+                                    color: Colors.transparent,
+                                    // gradient: LinearGradient(
+                                    //     begin: Alignment.topCenter,
+                                    //     end: Alignment.bottomCenter,
+                                    //     colors: [
+                                    //   Color(0xff258039),
+                                    //   Color(0xff8FC742),
+                                    // ],
+                                    // ),
+                                  ),
                                   height: 41.h,
                                   width: 41.w,
                                   margin: EdgeInsets.only(left: 36.0),
                                   child: GestureDetector(
                                     child: Image.asset(getAsset('back')),
-                                      onTap: () {
-                                        if (!MagicRouter.canPop) {
-                                          showDialog(
-                                              context: navigatorKey.currentContext!,
-                                              builder: (c) => ActionDialog(
+                                    onTap: () {
+                                      if (!MagicRouter.canPop) {
+                                        showDialog(
+                                            context:
+                                                navigatorKey.currentContext!,
+                                            builder: (c) => ActionDialog(
                                                   content:
                                                       demo.getTranslatedValue(
                                                           'do_you_want_exit'),
@@ -177,14 +173,14 @@ class _MainScaffold extends State<MainScaffold> {
                                                     SystemNavigator.pop();
                                                   },
                                                 ));
-                                        } else {
-                                          widget.onBackPressed != null
+                                      } else {
+                                        widget.onBackPressed != null
                                             ? widget.onBackPressed!()
                                             : MagicRouter.pop();
-                                        }
-                                      },
+                                      }
+                                    },
                                   ),
-                              ),
+                                ),
                         ],
                       ),
                     ),

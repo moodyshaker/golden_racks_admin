@@ -5,54 +5,54 @@ import 'package:flutter/material.dart';
 import 'package:golden_racks_admin/core/dialogs/error_dialog.dart';
 import 'package:golden_racks_admin/core/dialogs/info_dialog.dart';
 import 'package:golden_racks_admin/core/httpHelper/http_helper.dart';
-import 'package:golden_racks_admin/core/models/emergency_plan_unsub_model.dart';
+import 'package:golden_racks_admin/core/models/normal_plan_unsub_model.dart';
 import 'package:golden_racks_admin/core/networkStatus/network_status.dart';
 import 'package:golden_racks_admin/core/router/router.dart';
-import 'package:golden_racks_admin/feature/admin/main_screens/requests_screen/unsubscribers_emergency_requests_screen.dart';
+import 'package:golden_racks_admin/feature/admin/main_screens/requests_screen/unsubscribers_normal_requests_screen.dart';
 import 'package:golden_racks_admin/feature/widgets/loading_dialog.dart';
 import 'package:http/http.dart';
 import 'package:provider/provider.dart';
 
-class AssignToUnsubEmergencyProvider extends ChangeNotifier {
-  static AssignToUnsubEmergencyProvider get(context) =>
-      Provider.of<AssignToUnsubEmergencyProvider>(context);
+class AssignToUnsubNormalProvider extends ChangeNotifier {
+  static AssignToUnsubNormalProvider get(context) =>
+      Provider.of<AssignToUnsubNormalProvider>(context);
 
-  static AssignToUnsubEmergencyProvider listenFalse(context) =>
-      Provider.of<AssignToUnsubEmergencyProvider>(context, listen: false);
+  static AssignToUnsubNormalProvider listenFalse(context) =>
+      Provider.of<AssignToUnsubNormalProvider>(context, listen: false);
 
-  List<EmergencyPlanUnSubModel> emergencyUnsubPlans = [];
-  NetworkStatus? emergencyUnsubStatus;
+  List<NormalPlanUnSubModel> normalUnsubPlans = [];
+  NetworkStatus? normalUnsubStatus;
 
-  Future<void> getEmergencyUnsubPlans({
+  Future<void> getNormalUnsubPlans({
     bool retry = false,
   }) async {
-    emergencyUnsubStatus = NetworkStatus.loading;
+    normalUnsubStatus = NetworkStatus.loading;
 
     if (retry) {
       notifyListeners();
     }
 
     try {
-      var response = await HttpHelper.instance.httpGet('EmergencyPlans', false);
+      var response = await HttpHelper.instance.httpGet('NormalPlans', false);
 
       if (response.statusCode >= 200 && response.statusCode < 300) {
         List jsonResponse = jsonDecode(response.body);
-        emergencyUnsubPlans = jsonResponse
-            .map((data) => EmergencyPlanUnSubModel.fromJson(data))
+        normalUnsubPlans = jsonResponse
+            .map((data) => NormalPlanUnSubModel.fromJson(data))
             .toList();
 
-        emergencyUnsubStatus = NetworkStatus.success;
+        normalUnsubStatus = NetworkStatus.success;
       } else {
-        log('error emergency unsub plans => ${response.body}');
-        emergencyUnsubStatus = NetworkStatus.error;
+        log('error normal unsub plans => ${response.body}');
+        normalUnsubStatus = NetworkStatus.error;
       }
     } catch (e) {
-      log('catch emergency unsub plans ${e.toString()}');
+      log('catch normal unsub plans ${e.toString()}');
     }
     notifyListeners();
   }
 
-  Future<void> refuseEmergencyUnsubPlan({
+  Future<void> refuseNormalUnsubPlan({
     required int id,
   }) async {
     try {
@@ -63,7 +63,7 @@ class AssignToUnsubEmergencyProvider extends ChangeNotifier {
       );
 
       var response = await HttpHelper.instance.httpPost(
-        'AssigningTechnicalForUnSubscribeEmergency/refuse-emeregency-order-without-subscriber/$id',
+        'AssigningTechnicalForUnSubscribeNormal/refuse-normal-order-without-subscriber/$id',
         false,
       );
 
@@ -77,7 +77,7 @@ class AssignToUnsubEmergencyProvider extends ChangeNotifier {
           ),
         ).then(
           (value) => MagicRouter.navigateAndPop(
-            UnSubscribersEmergencyRequestsAdminScreen(),
+            UnSubscribersNormalRequestsAdminScreen(),
           ),
         );
       } else {
@@ -91,12 +91,12 @@ class AssignToUnsubEmergencyProvider extends ChangeNotifier {
         );
       }
     } catch (e) {
-      log('catch refuse emergency unsub >> ' + e.toString());
+      log('catch refuse normal unsub >> ' + e.toString());
       MagicRouter.pop();
     }
   }
 
-  Future<void> assignTechForUnsubEmergency({
+  Future<void> assignTechForUnsubNormal({
     required String UserId,
     required String TechnicalId,
     required int VisitWithoutSubscripeId,
@@ -113,7 +113,7 @@ class AssignToUnsubEmergencyProvider extends ChangeNotifier {
       var request = MultipartRequest(
         'POST',
         Uri.parse(
-          '${base_url}AssigningTechnicalForUnSubscribeEmergency/assing-technical-for-unsubscribe-emergency',
+          '${base_url}AssigningTechnicalForUnSubscribeNormal/assing-technical-for-unsubscribe-normal',
         ),
       );
       request.fields['UserId'] = UserId;
@@ -148,7 +148,7 @@ class AssignToUnsubEmergencyProvider extends ChangeNotifier {
         );
       }
     } catch (e) {
-      log('carch assign emergency unsub > ${e.toString()}');
+      log('catch assign normal unsub > ${e.toString()}');
 
       MagicRouter.pop();
     }

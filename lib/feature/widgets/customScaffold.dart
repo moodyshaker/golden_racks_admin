@@ -1,7 +1,4 @@
-import 'dart:developer';
-
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -30,7 +27,7 @@ class CustomScaffold extends StatefulWidget {
   const CustomScaffold(
       {this.title,
       required this.body,
-        this.backgroundColor ,
+      this.backgroundColor,
       this.hasAppbar = true,
       this.hasNavBar = true,
       this.isHome = true,
@@ -85,8 +82,7 @@ class _CustomScaffoldState extends State<CustomScaffold> {
         return false;
       },
       child: Scaffold(
-
-        backgroundColor: widget.backgroundColor?? kAccentColor,
+        backgroundColor: widget.backgroundColor ?? kAccentColor,
         drawer: widget.isHome
             ? SafeArea(
                 child: Column(
@@ -109,8 +105,8 @@ class _CustomScaffoldState extends State<CustomScaffold> {
                                   child: Preferences
                                           .instance.getUserImage.isNotEmpty
                                       ? FancyShimmerImage(
-                                          imageUrl: Preferences
-                                              .instance.getUserImage,
+                                          imageUrl:
+                                              Preferences.instance.getUserImage,
                                           height: 100.h,
                                           width: 100.w,
                                           errorWidget: Image.asset(
@@ -130,10 +126,10 @@ class _CustomScaffoldState extends State<CustomScaffold> {
                                 height: 8.h,
                               ),
                               MainText(
-                                text: Preferences
-                                        .instance.getUserName.isNotEmpty
-                                    ? Preferences.instance.getUserName
-                                    : '',
+                                text:
+                                    Preferences.instance.getUserName.isNotEmpty
+                                        ? Preferences.instance.getUserName
+                                        : '',
                                 weight: FontWeight.bold,
                               ),
                             ],
@@ -209,14 +205,12 @@ class _CustomScaffoldState extends State<CustomScaffold> {
                                             break;
                                           case 'logout':
                                             showDialog(
-                                              context: navigatorKey
-                                                  .currentContext!,
+                                              context:
+                                                  navigatorKey.currentContext!,
                                               barrierDismissible: false,
-                                              builder: (ctx) =>
-                                                  ActionDialog(
-                                                content:
-                                                    demo.getTranslatedValue(
-                                                        'logout_dialog_content'),
+                                              builder: (ctx) => ActionDialog(
+                                                content: demo.getTranslatedValue(
+                                                    'logout_dialog_content'),
                                                 onApproveClick: () async {
                                                   MagicRouter.pop();
                                                   await auth.clearData();
@@ -300,18 +294,19 @@ class _CustomScaffoldState extends State<CustomScaffold> {
                                     ),
                                   )
                                 : Container(
-                                  decoration: BoxDecoration(
-                                    color: Colors.transparent,
-                                  ),
+                                    decoration: BoxDecoration(
+                                      color: Colors.transparent,
+                                    ),
                                     height: 41.h,
                                     width: 41.w,
                                     child: GestureDetector(
                                       child: Image.asset(getAsset('back')),
-                                        onTap: () {
-                                          if (!MagicRouter.canPop) {
-                                            showDialog(
-                                                context: navigatorKey.currentContext!,
-                                                builder: (c) => ActionDialog(
+                                      onTap: () {
+                                        if (!MagicRouter.canPop) {
+                                          showDialog(
+                                              context:
+                                                  navigatorKey.currentContext!,
+                                              builder: (c) => ActionDialog(
                                                     content:
                                                         demo.getTranslatedValue(
                                                             'do_you_want_exit'),
@@ -329,14 +324,14 @@ class _CustomScaffoldState extends State<CustomScaffold> {
                                                       SystemNavigator.pop();
                                                     },
                                                   ));
-                                          } else {
-                                            widget.onBackPressed != null
+                                        } else {
+                                          widget.onBackPressed != null
                                               ? widget.onBackPressed!()
                                               : MagicRouter.pop();
-                                          }
-                                        },
+                                        }
+                                      },
                                     ),
-                                ),
+                                  ),
                           ],
                         ),
                       ),
