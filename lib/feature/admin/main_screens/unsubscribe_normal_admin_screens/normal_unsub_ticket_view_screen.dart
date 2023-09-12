@@ -5,11 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:golden_racks_admin/core/models/normal_plan_unsub_model.dart';
 import 'package:golden_racks_admin/core/router/router.dart';
+import 'package:golden_racks_admin/feature/admin/main_screens/unsubscribe_emergency_admin_screens/video_preview_screen.dart';
 import 'package:golden_racks_admin/feature/admin/main_screens/unsubscribe_normal_admin_screens/admin_assign_technical_screen_for_normal_unsub.dart';
 import 'package:golden_racks_admin/feature/widgets/main_text.dart';
 import 'package:golden_racks_admin/feature/widgets/organizerCustomScaffold.dart';
 import 'package:path/path.dart' as pathFile;
-import 'package:video_player/video_player.dart';
 
 import '../../../../constants.dart';
 
@@ -338,60 +338,60 @@ class _CustomNetworkFileImageState extends State<CustomNetworkFileImage> {
   }
 }
 
-class CustomVideoPlayer extends StatefulWidget {
-  final String path;
+// class CustomVideoPlayer extends StatefulWidget {
+//   final String path;
 
-  CustomVideoPlayer({required this.path});
-  @override
-  State<CustomVideoPlayer> createState() => _CustomVideoPlayerState();
-}
+//   CustomVideoPlayer({required this.path});
+//   @override
+//   State<CustomVideoPlayer> createState() => _CustomVideoPlayerState();
+// }
 
-class _CustomVideoPlayerState extends State<CustomVideoPlayer> {
-  late VideoPlayerController? videoController;
-  bool load = false;
+// class _CustomVideoPlayerState extends State<CustomVideoPlayer> {
+//   late VideoPlayerController? videoController;
+//   bool load = false;
 
-  void initalizeVideoPlayer() async {
-    setState(() {
-      load = true;
-    });
-    videoController = await VideoPlayerController.networkUrl(
-      Uri.parse(widget.path),
-    )
-      ..initialize().then((_) {
-        setState(() {});
-      });
-    setState(() {
-      load = false;
-    });
-  }
+//   void initalizeVideoPlayer() async {
+//     setState(() {
+//       load = true;
+//     });
+//     videoController = await VideoPlayerController.networkUrl(
+//       Uri.parse(widget.path),
+//     )
+//       ..initialize().then((_) {
+//         setState(() {});
+//       });
+//     setState(() {
+//       load = false;
+//     });
+//   }
 
-  Widget videoPreview() {
-    if (videoController != null) {
-      return videoController!.value.isInitialized
-          ? AspectRatio(
-              aspectRatio: videoController!.value.aspectRatio,
-              child: VideoPlayer(videoController!),
-            )
-          : Container();
-    } else {
-      return CircularProgressIndicator();
-    }
-  }
+//   Widget videoPreview() {
+//     if (videoController != null) {
+//       return videoController!.value.isInitialized
+//           ? AspectRatio(
+//               aspectRatio: videoController!.value.aspectRatio,
+//               child: VideoPlayer(videoController!),
+//             )
+//           : Container();
+//     } else {
+//       return CircularProgressIndicator();
+//     }
+//   }
 
-  void initState() {
-    super.initState();
-    initalizeVideoPlayer();
-  }
+//   void initState() {
+//     super.initState();
+//     initalizeVideoPlayer();
+//   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Center(
-          child: videoPreview(),
-        ),
-        Text('sss'),
-      ],
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Column(
+//       children: [
+//         Center(
+//           child: videoPreview(),
+//         ),
+//         Text('sss'),
+//       ],
+//     );
+//   }
+// }

@@ -6,10 +6,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:golden_racks_admin/core/models/emergency_plan_unsub_model.dart';
 import 'package:golden_racks_admin/core/router/router.dart';
 import 'package:golden_racks_admin/feature/admin/main_screens/unsubscribe_emergency_admin_screens/admin_assign_technical_screen_for_emergency_unsub.dart';
+import 'package:golden_racks_admin/feature/admin/main_screens/unsubscribe_emergency_admin_screens/video_preview_screen.dart';
+import 'package:golden_racks_admin/feature/admin/main_screens/unsubscribe_normal_admin_screens/normal_unsub_ticket_view_screen.dart';
 import 'package:golden_racks_admin/feature/widgets/main_text.dart';
 import 'package:golden_racks_admin/feature/widgets/organizerCustomScaffold.dart';
 import 'package:path/path.dart' as pathFile;
-import 'package:video_player/video_player.dart';
 
 import '../../../../constants.dart';
 
@@ -296,6 +297,7 @@ class _CustomNetworkFileImageState extends State<CustomNetworkFileImage> {
   Widget build(BuildContext context) {
     bool isVideo = false;
     String extension = pathFile.extension(widget.path).toLowerCase();
+    log('$extension');
     if (extension == '.mp4' ||
         extension == '.avi' ||
         extension == '.mov' ||
@@ -333,67 +335,21 @@ class _CustomNetworkFileImageState extends State<CustomNetworkFileImage> {
       );
     } else {
       log(widget.path);
-      return CustomVideoPlayer(
-        path: widget.path,
-      );
-    }
-  }
-}
-
-class CustomVideoPlayer extends StatefulWidget {
-  final String path;
-
-  CustomVideoPlayer({required this.path});
-  @override
-  State<CustomVideoPlayer> createState() => _CustomVideoPlayerState();
-}
-
-class _CustomVideoPlayerState extends State<CustomVideoPlayer> {
-  late VideoPlayerController? videoController;
-  bool load = false;
-
-  void initalizeVideoPlayer() async {
-    setState(() {
-      load = true;
-    });
-    videoController = await VideoPlayerController.networkUrl(
-      Uri.parse(widget.path),
-    )
-      ..initialize().then((_) {
-        setState(() {});
-      });
-    setState(() {
-      load = false;
-    });
-  }
-
-  Widget videoPreview() {
-    if (videoController != null) {
-      return videoController!.value.isInitialized
-          ? AspectRatio(
-              aspectRatio: videoController!.value.aspectRatio,
-              child: VideoPlayer(videoController!),
-            )
-          : Container();
-    } else {
-      return CircularProgressIndicator();
-    }
-  }
-
-  void initState() {
-    super.initState();
-    initalizeVideoPlayer();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Center(
-          child: videoPreview(),
+      return InkWell(
+        child: Image.network(
+          'https://www.learntotrade.com.ph/assets-lttph/uploads/2016/04/video-preview-pic.jpg',
         ),
-        Text('sss'),
-      ],
-    );
+        onTap: () {
+          MagicRouter.navigateTo(
+            CustomVideoPlayer(
+              path: widget.path,
+            ),
+          );
+        },
+      );
+      // return CustomVideoPlayer(
+      //   path: widget.path,
+      // );
+    }
   }
 }

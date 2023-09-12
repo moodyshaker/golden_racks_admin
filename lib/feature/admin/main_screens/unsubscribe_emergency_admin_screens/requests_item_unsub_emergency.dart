@@ -55,7 +55,7 @@ class _RequestsItemUnsubEmergencyState
                     Column(
                       children: [
                         MainText(
-                          text: '${widget.emergencyUnsub.companyName_Ar}',
+                          text: '${widget.emergencyUnsub.id}',
                           font: 15.sp,
                           weight: FontWeight.w700,
                           color: Colors.black,
