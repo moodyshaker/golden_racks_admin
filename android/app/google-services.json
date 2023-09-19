@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "523738763572",
+    "project_id": "golden-racks-admin",
+    "storage_bucket": "golden-racks-admin.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:523738763572:android:9fc989ba70fb566b65d561",
+        "android_client_info": {
+          "package_name": "com.example.golden_racks_admin"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBmYzYRmoiUa70iWcjUNqxlR7KU4MSuUyA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

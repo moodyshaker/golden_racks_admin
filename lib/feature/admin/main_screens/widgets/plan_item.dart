@@ -50,8 +50,7 @@ class _PlanItemState extends State<PlanItem> {
                     children: [
                       MainText(
                         textAlign: TextAlign.center,
-                        text: readyPlanProvider.arabicPlanTypes[
-                            readyPlanProvider.englishPlanTypes.indexOf(
+                        text: arabicPlanTypes[englishPlanTypes.indexOf(
                           widget.readyPlan.planDuration!,
                         )],
                         font: 16.sp,

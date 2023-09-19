@@ -20,24 +20,6 @@ class ReadyPlanProvider extends ChangeNotifier {
   static ReadyPlanProvider listenFalse(context) =>
       Provider.of<ReadyPlanProvider>(context, listen: false);
 
-  List<String> arabicPlanTypes = [
-    'كل الخطط',
-    'خطة شهرية',
-    'خطة سنوية',
-    'خطة نصف سنوية',
-    'خطة ربع سنوية',
-    'زيارة طوارئ',
-  ];
-
-  List<String> englishPlanTypes = [
-    'None',
-    'Monthly',
-    'Annual',
-    'HalfAnnual',
-    'Quarterly',
-    'Emergency',
-  ];
-
   List<ReadyPlanModel> allReadyPlans = [];
   int chosenPlanDuration = 0;
 
@@ -185,7 +167,6 @@ class ReadyPlanProvider extends ChangeNotifier {
   }
 
   Future<void> getReadyPlan({required int planDuration}) async {
-    allReadyPlans = [];
     showDialog(
       context: navigatorKey.currentContext!,
       barrierDismissible: false,

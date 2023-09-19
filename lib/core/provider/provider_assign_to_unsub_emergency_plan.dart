@@ -20,7 +20,7 @@ class AssignToUnsubEmergencyProvider extends ChangeNotifier {
   static AssignToUnsubEmergencyProvider listenFalse(context) =>
       Provider.of<AssignToUnsubEmergencyProvider>(context, listen: false);
 
-  List<EmergencyPlanUnSubModel> emergencyUnsubPlans = [];
+  List<EmergencyPlanSubModel> emergencyUnsubPlans = [];
   NetworkStatus? emergencyUnsubStatus;
 
   Future<void> getEmergencyUnsubPlans({
@@ -38,7 +38,7 @@ class AssignToUnsubEmergencyProvider extends ChangeNotifier {
       if (response.statusCode >= 200 && response.statusCode < 300) {
         List jsonResponse = jsonDecode(response.body);
         emergencyUnsubPlans = jsonResponse
-            .map((data) => EmergencyPlanUnSubModel.fromJson(data))
+            .map((data) => EmergencyPlanSubModel.fromJson(data))
             .toList();
 
         emergencyUnsubStatus = NetworkStatus.success;
@@ -135,7 +135,7 @@ class AssignToUnsubEmergencyProvider extends ChangeNotifier {
           builder: (ctx) => InfoDialog(
             content: 'تم تخصيص الفني بنجاح',
           ),
-        );
+        ).then((value) => MagicRouter.pop());
       } else {
         log(response.body);
         MagicRouter.pop();

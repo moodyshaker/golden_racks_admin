@@ -10,7 +10,7 @@ import '../../../widgets/customButton.dart';
 import '../../../widgets/main_text.dart';
 
 class RequestsItemUnsubEmergency extends StatefulWidget {
-  final EmergencyPlanUnSubModel emergencyUnsub;
+  final EmergencyPlanSubModel emergencyUnsub;
 
   const RequestsItemUnsubEmergency({required this.emergencyUnsub});
   @override
@@ -27,7 +27,7 @@ class _RequestsItemUnsubEmergencyState
       padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 12.w),
       margin: EdgeInsets.only(bottom: 5.0),
       decoration: BoxDecoration(
-        color: Colors.transparent,
+        color: gray_20,
         borderRadius: BorderRadius.circular(15.r),
         border: Border.all(width: 1.0, color: kInactiveColor),
       ),
@@ -55,7 +55,7 @@ class _RequestsItemUnsubEmergencyState
                     Column(
                       children: [
                         MainText(
-                          text: '${widget.emergencyUnsub.id}',
+                          text: '${widget.emergencyUnsub.companyName_Ar}',
                           font: 15.sp,
                           weight: FontWeight.w700,
                           color: Colors.black,
@@ -77,7 +77,7 @@ class _RequestsItemUnsubEmergencyState
                           color: Colors.black,
                         ),
                         MainText(
-                          text: 'GR878657',
+                          text: '${widget.emergencyUnsub.ticketNumber!}',
                           font: 14.sp,
                           weight: FontWeight.w300,
                           color: Colors.black,
@@ -241,8 +241,8 @@ class _RequestsItemUnsubEmergencyState
                   borderColor: gray_40,
                   onPressed: () async {
                     MagicRouter.navigateTo(
-                      AdminAssignTechnicalForEmergencyUnsubScreen(
-                        emergencyUnsub: widget.emergencyUnsub,
+                      AdminAssignTechnicalForEmergencySubScreen(
+                        emergencySub: widget.emergencyUnsub,
                       ),
                     );
                   },

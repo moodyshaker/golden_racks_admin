@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:developer';
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:provider/provider.dart';
@@ -164,6 +165,12 @@ class AuthProvider extends ChangeNotifier {
         _preferences.setUserId(r['userId']);
         _preferences.setUserFullName(r['name']);
 
+        await setDeviceUserToken(
+          userid: r['userId'],
+          mobielType: Platform.isAndroid ? 'android' : 'ios',
+          deviceusertoken: _preferences.getFcmToken,
+        );
+
         MagicRouter.pop();
         showDialog(
           context: navigatorKey.currentContext!,
@@ -192,6 +199,27 @@ class AuthProvider extends ChangeNotifier {
     } catch (e) {
       log('catch admin login ${e.toString()}');
       MagicRouter.pop();
+    }
+  }
+
+  Future<void> setDeviceUserToken({
+    required String userid,
+    required String deviceusertoken,
+    required String mobielType,
+  }) async {
+    try {
+      var response = await HttpHelper.instance.httpPost(
+        'Account/DeviceUserToken/$userid/$deviceusertoken/$mobielType',
+        false,
+      );
+
+      if (response.statusCode >= 200 && response.statusCode < 300) {
+        log('device token set successfully');
+      } else {
+        log('error device token $response.body');
+      }
+    } catch (e) {
+      log('catch device token');
     }
   }
 }

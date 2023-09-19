@@ -38,31 +38,21 @@ class _CustomVideoPlayerState extends State<CustomVideoPlayer> {
 
   Widget videoPreview() {
     return load
-        ? Center(
-            child: CircularProgressIndicator(),
-          )
+        ? Center(child: CircularProgressIndicator())
         : videoController.value.isInitialized
             ? AspectRatio(
                 aspectRatio: videoController.value.aspectRatio,
                 child: VideoPlayer(videoController),
               )
-            : Container(
-                child: Text('not working'),
+            : Center(
+                child: CircularProgressIndicator(),
               );
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Text('sssssssss'),
-          Center(
-            child: videoPreview(),
-          ),
-        ],
-      ),
+    return Center(
+      child: videoPreview(),
     );
   }
 }

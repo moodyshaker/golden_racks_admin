@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:golden_racks_admin/core/notifications/firebase.dart';
 import '../../../constants.dart';
 import '../../../core/router/router.dart';
 import '../../widgets/customScaffold.dart';
@@ -16,6 +17,7 @@ class _SplashState extends State<Splash> {
   @override
   void initState() {
     super.initState();
+    FirebaseNotifications.getFCM();
     init();
   }
 

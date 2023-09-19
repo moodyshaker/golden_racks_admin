@@ -1,21 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:golden_racks_admin/core/models/emergency_plan_unsub_model.dart';
-import 'package:golden_racks_admin/feature/admin/main_screens/unsubscribe_emergency_admin_screens/emergency_unsub_ticket_view_screen.dart';
-import 'package:golden_racks_admin/feature/admin/other_screens/technician_view_screen.dart';
+import 'package:golden_racks_admin/core/models/today_appointment_model.dart';
+import 'package:golden_racks_admin/feature/admin/main_screens/subscribe_ready_admin_screens/admin_assign_technical_screen_for_ready_sub.dart';
 import '../../../../constants.dart';
 import '../../../../core/router/router.dart';
 import '../../../widgets/customButton.dart';
 import '../../../widgets/main_text.dart';
 
-class MaintenanceForSubscribersItem extends StatelessWidget {
+class RequestsItemSubReady extends StatefulWidget {
+  final TodayAppointmentModel appointment;
+
+  const RequestsItemSubReady({required this.appointment});
+  @override
+  State<RequestsItemSubReady> createState() => _RequestsItemSubReadyState();
+}
+
+class _RequestsItemSubReadyState extends State<RequestsItemSubReady> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 16.w),
+      padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 12.w),
       margin: EdgeInsets.only(bottom: 5.0),
       decoration: BoxDecoration(
-        color: Colors.transparent,
+        color: gray_20,
         borderRadius: BorderRadius.circular(15.r),
         border: Border.all(width: 1.0, color: kInactiveColor),
       ),
@@ -88,7 +95,8 @@ class MaintenanceForSubscribersItem extends StatelessWidget {
                 width: 27.h,
               ),
               MainText(
-                text: 'الأساسية رصيد الدورى المتبقي (8 )',
+                text:
+                    'الأساسية رصيد الدورى المتبقي (${widget.appointment.remaningNumberOfFixedVisits})',
                 font: 15.sp,
                 color: Colors.black,
                 weight: FontWeight.w500,
@@ -104,7 +112,7 @@ class MaintenanceForSubscribersItem extends StatelessWidget {
                 width: 8.h,
               ),
               MainText(
-                text: 'العطل',
+                text: 'الوصف',
                 font: 15.sp,
                 color: Colors.black,
                 weight: FontWeight.w700,
@@ -162,51 +170,23 @@ class MaintenanceForSubscribersItem extends StatelessWidget {
               ),
             ],
           ),
-          Row(
-            children: [
-              Expanded(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    CustomButton(
-                      horizontalPadding: 8.w,
-                      title: 'عرض التذكرة',
-                      color: kSecondaryColor,
-                      height: 50.h,
-                      font: 12.sp,
-                      family: 'Lato_bold',
-                      textColor: Colors.white,
-                      weight: FontWeight.w800,
-                      withBorder: false,
-                      onPressed: () async {
-                        MagicRouter.navigateTo(EmergencyUnsubTicketViewScreen(
-                          emergencyUnsub: EmergencyPlanUnSubModel(),
-                        ));
-                      },
-                    ),
-                    SizedBox(
-                      width: 5.w,
-                    ),
-                    CustomButton(
-                      horizontalPadding: 19.w,
-                      title: 'تخصيص فني',
-                      color: Colors.transparent,
-                      height: 50.h,
-                      font: 16.sp,
-                      family: 'Lato_bold',
-                      weight: FontWeight.w800,
-                      textColor: Colors.black,
-                      withBorder: true,
-                      borderWidth: 1.0,
-                      borderColor: gray_40,
-                      onPressed: () async {
-                        MagicRouter.navigateTo(TechnicianViewScreen());
-                      },
-                    ),
-                  ],
-                ),
-              ),
-            ],
+          CustomButton(
+            horizontalPadding: 19.w,
+            title: 'تخصيص فني',
+            color: Colors.transparent,
+            height: 50.h,
+            font: 16.sp,
+            family: 'Lato_bold',
+            weight: FontWeight.w800,
+            textColor: Colors.black,
+            withBorder: true,
+            borderWidth: 1.0,
+            borderColor: gray_40,
+            onPressed: () async {
+              MagicRouter.navigateTo(AdminAssignTechnicalForReadySubScreen(
+                appointment: widget.appointment,
+              ));
+            },
           ),
         ],
       ),

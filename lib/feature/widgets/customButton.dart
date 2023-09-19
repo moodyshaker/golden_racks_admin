@@ -75,10 +75,11 @@ class CustomButton extends StatelessWidget {
             Text(
               title,
               style: TextStyle(
-                  color: textColor ?? kAccentColor,
-                  fontSize: font ?? 16.sp,
-                  fontFamily: family ?? 'Cairo',
-                  fontWeight: weight ?? FontWeight.bold),
+                color: textColor ?? kAccentColor,
+                fontSize: font ?? 16.sp,
+                fontFamily: family ?? 'Cairo',
+                fontWeight: weight ?? FontWeight.bold,
+              ),
             ),
           ],
         ),

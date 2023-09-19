@@ -135,7 +135,7 @@ class AssignToUnsubNormalProvider extends ChangeNotifier {
           builder: (ctx) => InfoDialog(
             content: 'تم تخصيص الفني بنجاح',
           ),
-        );
+        ).then((value) => MagicRouter.pop());
       } else {
         log(response.body);
         MagicRouter.pop();

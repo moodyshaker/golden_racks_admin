@@ -204,7 +204,7 @@ class SubscribersRequestsItem extends StatelessWidget {
                       withBorder: false,
                       onPressed: () async {
                         MagicRouter.navigateTo(EmergencyUnsubTicketViewScreen(
-                          emergencyUnsub: EmergencyPlanUnSubModel(),
+                          emergencyUnsub: EmergencyPlanSubModel(),
                         ));
                       },
                     ),

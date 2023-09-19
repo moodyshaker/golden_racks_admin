@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:golden_racks_admin/feature/admin/main_screens/widgets/need_activate_item.dart';
+import 'package:golden_racks_admin/feature/technician/main_screens/requests_screen/need_activate_item_tech.dart';
 
 import '../../../../constants.dart';
 import '../../../widgets/organizerCustomScaffold.dart';
@@ -33,7 +33,8 @@ class _ActivatePlanTechScreenState extends State<ActivatePlanTechScreen> {
         body: Expanded(
           child: ListView.builder(
             padding: EdgeInsets.symmetric(horizontal: 22.w, vertical: 10.h),
-            itemBuilder: (BuildContext context, int i) => NeedActivateItem(),
+            itemBuilder: (BuildContext context, int i) =>
+                NeedActivateItemTech(),
             itemCount: 2,
           ),
         ),

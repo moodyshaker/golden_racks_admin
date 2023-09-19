@@ -62,7 +62,7 @@ class _AddPlanScreenState extends State<AddPlanScreen> {
                     width: 50.w,
                   ),
                   MainText(
-                    text: 'GR6545-23',
+                    text: '',
                     font: 16.sp,
                     color: Colors.black,
                     weight: FontWeight.w800,
@@ -74,10 +74,10 @@ class _AddPlanScreenState extends State<AddPlanScreen> {
               ),
               DropMenu(
                 hint: ('اختر مدة الخطة'),
-                items: readyPlanProvider.arabicPlanTypes,
+                items: arabicPlanTypes,
                 onChanged: (v) async {
                   readyPlanProvider.chosenPlanDuration =
-                      readyPlanProvider.arabicPlanTypes.indexOf(v!);
+                      arabicPlanTypes.indexOf(v!);
                   await readyPlanProvider.getReadyPlan(
                     planDuration: readyPlanProvider.chosenPlanDuration,
                   );
@@ -98,7 +98,7 @@ class _AddPlanScreenState extends State<AddPlanScreen> {
                     ? Center(
                         child: MainText(
                           text:
-                              'لا يوجد ${readyPlanProvider.arabicPlanTypes[readyPlanProvider.chosenPlanDuration]}',
+                              'لا يوجد ${arabicPlanTypes[readyPlanProvider.chosenPlanDuration]}',
                         ),
                       )
                     : ListView.builder(

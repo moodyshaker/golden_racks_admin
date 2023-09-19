@@ -210,7 +210,7 @@ class _RequestsItemUnsubNormalTechState
                 withBorder: false,
                 onPressed: () async {
                   MagicRouter.navigateTo(EmergencyUnsubTicketTechViewScreen(
-                    emergencyUnsub: EmergencyPlanUnSubModel(),
+                    emergencyUnsub: EmergencyPlanSubModel(),
                   ));
                 },
               ),

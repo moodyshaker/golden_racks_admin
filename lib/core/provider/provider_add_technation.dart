@@ -92,7 +92,7 @@ class AddTechnationProvider extends ChangeNotifier {
   Future<void> addNewTechnical({
     required String fullName,
     required String Password,
-    required File UploadImage,
+    File? UploadImage,
     required String mobileNumber,
     required String Email,
     required String UserName,
@@ -111,7 +111,6 @@ class AddTechnationProvider extends ChangeNotifier {
 
       log(fullName);
       log(Password);
-      log(UploadImage.path);
       log(mobileNumber);
       log(Email);
       log(UserName);
@@ -122,14 +121,16 @@ class AddTechnationProvider extends ChangeNotifier {
       request.fields['Email'] = Email;
       request.fields['UserName'] = UserName;
       request.fields['UserRole'] = 1.toString();
-      request.files.add(
-        await http.MultipartFile(
-          'UploadImage',
-          await UploadImage.readAsBytes().asStream(),
-          await UploadImage.lengthSync(),
-          filename: await UploadImage.path.split('/').last,
-        ),
-      );
+      if (UploadImage != null) {
+        request.files.add(
+          await http.MultipartFile(
+            'UploadImage',
+            await UploadImage.readAsBytes().asStream(),
+            await UploadImage.lengthSync(),
+            filename: await UploadImage.path.split('/').last,
+          ),
+        );
+      }
       var streamResponse = await request.send();
       Response response = await Response.fromStream(streamResponse);
 
@@ -143,7 +144,7 @@ class AddTechnationProvider extends ChangeNotifier {
           builder: (ctx) => InfoDialog(
             content: 'تم تسجيل حساب جديد بنجاح',
           ),
-        );
+        ).then((value) => MagicRouter.pop());
       } else {
         log('${response.body}');
         MagicRouter.pop();

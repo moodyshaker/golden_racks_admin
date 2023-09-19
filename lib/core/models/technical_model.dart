@@ -1,10 +1,13 @@
 class Technical {
-  String? email;
-  String? userName;
+  String? userId;
   String? mobileNumber;
+  String? email;
   String? fullName;
   String? image;
+  String? userName;
+
   Technical({
+    this.userId,
     this.email,
     this.userName,
     this.mobileNumber,
@@ -14,6 +17,7 @@ class Technical {
 
   Map<String, dynamic> toJson() {
     return <String, dynamic>{
+      'userId': userId,
       'email': email,
       'userName': userName,
       'mobileNumber': mobileNumber,
@@ -24,6 +28,7 @@ class Technical {
 
   factory Technical.fromJson(Map<String, dynamic> json) {
     return Technical(
+      userId: json['userId'] != null ? json['userId'] as String : null,
       email: json['email'] != null ? json['email'] as String : null,
       userName: json['userName'] != null ? json['userName'] as String : null,
       mobileNumber:

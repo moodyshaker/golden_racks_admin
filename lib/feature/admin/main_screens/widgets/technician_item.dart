@@ -1,15 +1,14 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:golden_racks_admin/core/models/technical_model.dart';
 import '../../../../constants.dart';
 import '../../../widgets/main_text.dart';
 
 class TechnicianItem extends StatefulWidget {
-  final tech;
+  final Technical tech;
 
   const TechnicianItem({
-    this.tech,
+    required this.tech,
   });
 
   @override
@@ -31,7 +30,7 @@ class _TechnicianItemState extends State<TechnicianItem> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           MainText(
-            text: widget.tech.fullName,
+            text: '${widget.tech.fullName}',
             font: 15.sp,
             color: Colors.black,
             weight: FontWeight.w500,
@@ -45,9 +44,7 @@ class _TechnicianItemState extends State<TechnicianItem> {
                 getAsset('eyes_icon'),
               ),
             ),
-            onTap: () {
-              log(widget.tech.userName!);
-            },
+            onTap: () {},
           ),
         ],
       ),

@@ -69,8 +69,8 @@ class _UnSubscribersEmergencyRequestsAdminScreenState
                             emergencyUnsubProvider.emergencyUnsubPlans.length,
                       )
                 : RetryWidget(
-                    retryCallback: () {
-                      emergencyUnsubProvider.getEmergencyUnsubPlans(
+                    retryCallback: () async {
+                      await emergencyUnsubProvider.getEmergencyUnsubPlans(
                         retry: true,
                       );
                     },

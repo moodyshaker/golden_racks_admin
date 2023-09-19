@@ -66,8 +66,8 @@ class _UnSubscribersNormalRequestsAdminScreenState
                         itemCount: NormalUnsubProvider.normalUnsubPlans.length,
                       )
                 : RetryWidget(
-                    retryCallback: () {
-                      NormalUnsubProvider.getNormalUnsubPlans(
+                    retryCallback: () async {
+                      await NormalUnsubProvider.getNormalUnsubPlans(
                         retry: true,
                       );
                     },

@@ -23,7 +23,7 @@ dependencies:
   flutter_image_compress:
   focus_detector:
   fancy_shimmer_image:
-  image_picker:
+  image_picker: ^1.0.2
   percent_indicator:
   intl:
   flutter_ringtone_player:
@@ -49,8 +49,11 @@ dependencies:
   flutter_launcher_icons:
   shimmer:
   google_fonts:
-  audioplayers:
-  video_player:
+  audioplayers: ^5.1.0
+  video_player: ^2.2.15
+  record: ^4.4.4
+  editable:
+
 
 
 dev_dependencies:

@@ -26,264 +26,276 @@ class _ShowTicketScreenState extends State<ShowTicketScreen> {
     return Container(
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: AssetImage(getAsset('background2')),
+          image: AssetImage(
+            getAsset('background2'),
+          ),
           fit: BoxFit.fill,
         ),
       ),
       child: TechnicianCustomScaffold(
-          backgroundColor: Colors.transparent,
-          hasAppbar: false,
-          isHome: true,
-          hasNavBar: false,
-          title1: 'التذكرة رقم\n GR27867637365 ',
-          body: Container(
-            margin: EdgeInsets.symmetric(horizontal: 20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(
-                  height: 16.h,
+        backgroundColor: Colors.transparent,
+        hasAppbar: false,
+        isHome: true,
+        hasNavBar: false,
+        title1: 'التذكرة رقم\n GR27867637365 ',
+        body: Container(
+          margin: EdgeInsets.symmetric(horizontal: 20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                height: 16.h,
+              ),
+              Container(
+                padding: EdgeInsets.symmetric(
+                  vertical: 10.w,
+                  horizontal: 10.h,
                 ),
-                Container(
-                  padding:
-                      EdgeInsets.symmetric(vertical: 10.w, horizontal: 10.h),
-                  margin: EdgeInsets.only(bottom: 8.0),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(16.r),
-                      border: Border.all(color: gray_40)),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          MainText(
-                            text: 'شركة امازون',
-                            font: 15.sp,
-                            weight: FontWeight.w500,
-                            color: Colors.black,
-                          ),
-                          MainText(
-                            text: ' رقم التذكرة  GR27867637365',
-                            font: 15.sp,
-                            weight: FontWeight.w500,
-                            color: Colors.black,
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 13.h,
-                      ),
-                      MainText(
-                        text: 'عطل فني ادي الي توقف العمل بالكامل',
-                        font: 12.sp,
-                        weight: FontWeight.bold,
-                        color: Colors.black,
-                      ),
-                      SizedBox(
-                        height: 13.h,
-                      ),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: Column(
-                              children: [
-                                Row(
-                                  children: [
-                                    MainText(
-                                      text: 'الفني',
-                                      font: 15.sp,
-                                      weight: FontWeight.w700,
-                                      color: Colors.black,
-                                    ),
-                                    SizedBox(
-                                      width: 8.w,
-                                    ),
-                                    MainText(
-                                      text: 'سامر احمد سيد',
-                                      font: 15.sp,
-                                      weight: FontWeight.w500,
-                                      color: Colors.black,
-                                    ),
-                                  ],
-                                ),
-                                Row(
-                                  children: [
-                                    MainText(
-                                      text: 'التاريخ',
-                                      font: 15.sp,
-                                      weight: FontWeight.w700,
-                                      color: Colors.black,
-                                    ),
-                                    SizedBox(
-                                      width: 8.w,
-                                    ),
-                                    MainText(
-                                      text: '21-1-2023',
-                                      font: 15.sp,
-                                      weight: FontWeight.w500,
-                                      color: Colors.black,
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ),
-                          SizedBox(
-                            width: 10.w,
-                          ),
-                          Expanded(
-                            child: GestureDetector(
-                              onTap: () {},
-                              child: Container(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 10.w, vertical: 5.h),
-                                decoration: BoxDecoration(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(8.0)),
-                                  color: Colors.yellow,
-                                ),
-                                child: Center(
-                                  child: MainText(
-                                    text: 'عرض التفاصيل',
-                                    color: Colors.black,
+                margin: EdgeInsets.only(bottom: 8.0),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(16.r),
+                  border: Border.all(color: gray_40),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        MainText(
+                          text: 'شركة امازون',
+                          font: 15.sp,
+                          weight: FontWeight.w500,
+                          color: Colors.black,
+                        ),
+                        MainText(
+                          text: ' رقم التذكرة  GR27867637365',
+                          font: 15.sp,
+                          weight: FontWeight.w500,
+                          color: Colors.black,
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 13.h,
+                    ),
+                    MainText(
+                      text: 'عطل فني ادي الي توقف العمل بالكامل',
+                      font: 12.sp,
+                      weight: FontWeight.bold,
+                      color: Colors.black,
+                    ),
+                    SizedBox(
+                      height: 13.h,
+                    ),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Column(
+                            children: [
+                              Row(
+                                children: [
+                                  MainText(
+                                    text: 'الفني',
                                     font: 15.sp,
                                     weight: FontWeight.w700,
+                                    color: Colors.black,
                                   ),
+                                  SizedBox(
+                                    width: 8.w,
+                                  ),
+                                  MainText(
+                                    text: 'سامر احمد سيد',
+                                    font: 15.sp,
+                                    weight: FontWeight.w500,
+                                    color: Colors.black,
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  MainText(
+                                    text: 'التاريخ',
+                                    font: 15.sp,
+                                    weight: FontWeight.w700,
+                                    color: Colors.black,
+                                  ),
+                                  SizedBox(
+                                    width: 8.w,
+                                  ),
+                                  MainText(
+                                    text: '21-1-2023',
+                                    font: 15.sp,
+                                    weight: FontWeight.w500,
+                                    color: Colors.black,
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                          width: 10.w,
+                        ),
+                        Expanded(
+                          child: GestureDetector(
+                            onTap: () {},
+                            child: Container(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 10.w, vertical: 5.h),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(8.0),
+                                ),
+                                color: Colors.yellow,
+                              ),
+                              child: Center(
+                                child: MainText(
+                                  text: 'عرض التفاصيل',
+                                  color: Colors.black,
+                                  font: 15.sp,
+                                  weight: FontWeight.w700,
                                 ),
                               ),
                             ),
                           ),
-                        ],
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 16.h,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: () {
+                        MagicRouter.navigateTo(TechnicalReportScreen());
+                      },
+                      child: Container(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 10.w, vertical: 5.h),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(16.0),
+                          ),
+                          color: Colors.transparent,
+                          border: Border.all(color: gray_40),
+                        ),
+                        child: Center(
+                          child: MainText(
+                            text: 'التقرير الفني',
+                            color: Colors.black,
+                            font: 15.sp,
+                            weight: FontWeight.w700,
+                          ),
+                        ),
                       ),
-                    ],
+                    ),
                   ),
-                ),
-                SizedBox(
-                  height: 16.h,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      child: GestureDetector(
-                        onTap: () {
-                          MagicRouter.navigateTo(TechnicalReportScreen());
-                        },
-                        child: Container(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 10.w, vertical: 5.h),
-                          decoration: BoxDecoration(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(16.0)),
-                            color: Colors.transparent,
-                            border: Border.all(color: gray_40),
+                  SizedBox(
+                    width: 16.w,
+                  ),
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: () {
+                        MagicRouter.navigateTo(
+                          AttendanceAndDepartureScreen(),
+                        );
+                      },
+                      child: Container(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 10.w, vertical: 5.h),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(16.0),
                           ),
-                          child: Center(
-                            child: MainText(
-                              text: 'التقرير الفني',
-                              color: Colors.black,
-                              font: 15.sp,
-                              weight: FontWeight.w700,
-                            ),
+                          color: Colors.transparent,
+                          border: Border.all(color: gray_40),
+                        ),
+                        child: Center(
+                          child: MainText(
+                            text: 'تسجيل الحضور والانصراف',
+                            color: Colors.black,
+                            font: 15.sp,
+                            weight: FontWeight.w700,
                           ),
                         ),
                       ),
                     ),
-                    SizedBox(
-                      width: 16.w,
-                    ),
-                    Expanded(
-                      child: GestureDetector(
-                        onTap: () {
-                          MagicRouter.navigateTo(
-                              AttendanceAndDepartureScreen());
-                        },
-                        child: Container(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 10.w, vertical: 5.h),
-                          decoration: BoxDecoration(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(16.0)),
-                            color: Colors.transparent,
-                            border: Border.all(color: gray_40),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 16.h,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: () {},
+                      child: Container(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 10.w, vertical: 5.h),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(16.0),
                           ),
-                          child: Center(
-                            child: MainText(
-                              text: 'تسجيل الحضور والانصراف',
-                              color: Colors.black,
-                              font: 15.sp,
-                              weight: FontWeight.w700,
-                            ),
+                          color: Colors.transparent,
+                          border: Border.all(color: gray_40),
+                        ),
+                        child: Center(
+                          child: MainText(
+                            text: 'اصدار الفاتورة',
+                            color: Colors.black,
+                            font: 15.sp,
+                            weight: FontWeight.w700,
                           ),
                         ),
                       ),
                     ),
-                  ],
-                ),
-                SizedBox(
-                  height: 16.h,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Expanded(
-                      child: GestureDetector(
-                        onTap: () {},
-                        child: Container(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 10.w, vertical: 5.h),
-                          decoration: BoxDecoration(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(16.0)),
-                            color: Colors.transparent,
-                            border: Border.all(color: gray_40),
+                  ),
+                  SizedBox(
+                    width: 16.w,
+                  ),
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: () {
+                        MagicRouter.navigateTo(SendAlertToCompanyTechScreen());
+                      },
+                      child: Container(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 10.w, vertical: 5.h),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(16.0),
                           ),
-                          child: Center(
-                            child: MainText(
-                              text: 'اصدار الفاتورة',
-                              color: Colors.black,
-                              font: 15.sp,
-                              weight: FontWeight.w700,
-                            ),
+                          color: Colors.transparent,
+                          border: Border.all(color: gray_40),
+                        ),
+                        child: Center(
+                          child: MainText(
+                            text: 'ارسال تنبيه للشركة',
+                            color: Colors.black,
+                            font: 15.sp,
+                            weight: FontWeight.w700,
                           ),
                         ),
                       ),
                     ),
-                    SizedBox(
-                      width: 16.w,
-                    ),
-                    Expanded(
-                      child: GestureDetector(
-                        onTap: () {
-                          MagicRouter.navigateTo(SendAlertToCompanyScreen());
-                        },
-                        child: Container(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 10.w, vertical: 5.h),
-                          decoration: BoxDecoration(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(16.0)),
-                            color: Colors.transparent,
-                            border: Border.all(color: gray_40),
-                          ),
-                          child: Center(
-                            child: MainText(
-                              text: 'ارسال تنبيه للشركة',
-                              color: Colors.black,
-                              font: 15.sp,
-                              weight: FontWeight.w700,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          )),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

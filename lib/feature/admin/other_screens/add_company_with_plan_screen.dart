@@ -3,8 +3,6 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:golden_racks_admin/core/provider/provider_auth.dart';
-import 'package:golden_racks_admin/core/router/router.dart';
-import 'package:golden_racks_admin/feature/admin/other_screens/add_plan_screen.dart';
 import '../../../../constants.dart';
 import '../../../core/localization/demo_localization.dart';
 import '../../../core/models/country_model.dart' as c;
@@ -318,25 +316,25 @@ class _AddCompanyWithPlanScreenState extends State<AddCompanyWithPlanScreen> {
                                           'strong_password',
                                         ),
                         ),
-                        SizedBox(
-                          height: 16.h,
-                        ),
-                        CustomButton(
-                          title: 'اختيار خطة',
-                          color: lightBlueColor,
-                          height: 50.h,
-                          font: 16.sp,
-                          family: 'Lato_bold',
-                          textColor: Colors.white,
-                          withBorder: false,
-                          onPressed: () async {
-                            await readyPlanProvider.getReadyPlan(
-                              planDuration:
-                                  readyPlanProvider.chosenPlanDuration,
-                            );
-                            MagicRouter.navigateTo(AddPlanScreen());
-                          },
-                        ),
+                        // SizedBox(
+                        //   height: 16.h,
+                        // ),
+                        // // CustomButton(
+                        // //   title: 'اختيار خطة',
+                        // //   color: lightBlueColor,
+                        // //   height: 50.h,
+                        // //   font: 16.sp,
+                        // //   family: 'Lato_bold',
+                        // //   textColor: Colors.white,
+                        // //   withBorder: false,
+                        // //   onPressed: () async {
+                        // //     await readyPlanProvider.getReadyPlan(
+                        // //       planDuration:
+                        // //           readyPlanProvider.chosenPlanDuration,
+                        // //     );
+                        // //     MagicRouter.navigateTo(AddPlanScreen());
+                        // //   },
+                        // // ),
                         SizedBox(
                           height: 18.h,
                         ),

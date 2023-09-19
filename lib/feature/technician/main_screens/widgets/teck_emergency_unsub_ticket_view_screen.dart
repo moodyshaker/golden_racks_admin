@@ -7,7 +7,7 @@ import 'package:golden_racks_admin/feature/widgets/organizerCustomScaffold.dart'
 import '../../../../constants.dart';
 
 class EmergencyUnsubTicketTechViewScreen extends StatefulWidget {
-  final EmergencyPlanUnSubModel emergencyUnsub;
+  final EmergencyPlanSubModel emergencyUnsub;
 
   const EmergencyUnsubTicketTechViewScreen({
     required this.emergencyUnsub,

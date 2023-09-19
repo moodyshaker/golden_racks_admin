@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:golden_racks_admin/core/router/router.dart';
 import 'package:golden_racks_admin/feature/admin/other_screens/add_company_with_plan_screen.dart';
-import 'package:golden_racks_admin/feature/admin/other_screens/widgets/technician_item.dart';
 import 'package:golden_racks_admin/feature/widgets/main_text.dart';
 
 import '../../../../constants.dart';
@@ -127,12 +126,12 @@ class _ShowPlansScreenState extends State<ShowPlansScreen> {
               ),
               Container(
                 height: 235.h,
-                child: ListView.builder(
-                  padding: EdgeInsets.symmetric(vertical: 10.h),
-                  itemBuilder: (BuildContext context, int i) =>
-                      TechnicianItem(),
-                  itemCount: 4,
-                ),
+                // child: ListView.builder(
+                //   padding: EdgeInsets.symmetric(vertical: 10.h),
+                //   itemBuilder: (BuildContext context, int i) =>
+                //       TechnicianItem(),
+                //   itemCount: 4,
+                // ),
               ),
               SizedBox(
                 height: 16.h,

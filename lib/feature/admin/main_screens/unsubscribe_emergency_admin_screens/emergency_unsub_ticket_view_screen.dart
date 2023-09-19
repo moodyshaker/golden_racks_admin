@@ -1,13 +1,10 @@
-import 'dart:developer';
-
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:golden_racks_admin/core/models/emergency_plan_unsub_model.dart';
 import 'package:golden_racks_admin/core/router/router.dart';
 import 'package:golden_racks_admin/feature/admin/main_screens/unsubscribe_emergency_admin_screens/admin_assign_technical_screen_for_emergency_unsub.dart';
-import 'package:golden_racks_admin/feature/admin/main_screens/unsubscribe_emergency_admin_screens/video_preview_screen.dart';
-import 'package:golden_racks_admin/feature/admin/main_screens/unsubscribe_normal_admin_screens/normal_unsub_ticket_view_screen.dart';
+import 'package:golden_racks_admin/feature/admin/main_screens/widgets/video_preview_screen.dart';
 import 'package:golden_racks_admin/feature/widgets/main_text.dart';
 import 'package:golden_racks_admin/feature/widgets/organizerCustomScaffold.dart';
 import 'package:path/path.dart' as pathFile;
@@ -15,7 +12,7 @@ import 'package:path/path.dart' as pathFile;
 import '../../../../constants.dart';
 
 class EmergencyUnsubTicketViewScreen extends StatefulWidget {
-  final EmergencyPlanUnSubModel emergencyUnsub;
+  final EmergencyPlanSubModel emergencyUnsub;
 
   const EmergencyUnsubTicketViewScreen({
     required this.emergencyUnsub,
@@ -28,9 +25,17 @@ class EmergencyUnsubTicketViewScreen extends StatefulWidget {
 
 class _EmergencyUnsubTicketViewScreenState
     extends State<EmergencyUnsubTicketViewScreen> {
+  late AudioPlayer player;
   @override
   void initState() {
     super.initState();
+    player = AudioPlayer();
+  }
+
+  @override
+  void dispose() {
+    player.dispose();
+    super.dispose();
   }
 
   @override
@@ -48,234 +53,236 @@ class _EmergencyUnsubTicketViewScreenState
         isHome: true,
         hasNavBar: false,
         title1: 'عرض تذكرة رقم ${widget.emergencyUnsub.ticketNumber}',
-        body: Container(
-          decoration: BoxDecoration(
-            color: Colors.transparent,
-            borderRadius: BorderRadius.circular(15.r),
-            border: Border.all(width: 1.0, color: kInactiveColor),
-          ),
-          margin: EdgeInsets.symmetric(horizontal: 16.w),
-          padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 19.h),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        body: Column(
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                color: gray_20,
+                borderRadius: BorderRadius.circular(15.r),
+                border: Border.all(width: 1.0, color: kInactiveColor),
+              ),
+              margin: EdgeInsets.symmetric(horizontal: 16.w),
+              padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 19.h),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Flexible(
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Flexible(
+                        child: MainText(
+                          text: '${widget.emergencyUnsub.companyName_Ar}',
+                          font: 15.sp,
+                          weight: FontWeight.w700,
+                          color: Colors.black,
+                        ),
+                      ),
+                      Flexible(
+                        child: MainText(
+                          text:
+                              'رقم التذكرة ${widget.emergencyUnsub.ticketNumber}',
+                          font: 15.sp,
+                          weight: FontWeight.w700,
+                          color: Colors.black,
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 27.h,
+                  ),
+                  Container(
+                    margin: EdgeInsets.symmetric(horizontal: 16.w),
                     child: MainText(
-                      text: '${widget.emergencyUnsub.companyName_Ar}',
-                      font: 15.sp,
-                      weight: FontWeight.w700,
+                      text: '${widget.emergencyUnsub.problemName}',
+                      font: 16.sp,
+                      weight: FontWeight.w500,
                       color: Colors.black,
                     ),
                   ),
-                  Flexible(
-                    child: MainText(
-                      text:
-                          '${widget.emergencyUnsub.ticketNumber} رقم التذكرة ',
-                      font: 15.sp,
-                      weight: FontWeight.w700,
-                      color: Colors.black,
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 27.h,
-              ),
-              Container(
-                margin: EdgeInsets.symmetric(horizontal: 16.w),
-                child: MainText(
-                  text: '${widget.emergencyUnsub.problemName}',
-                  font: 16.sp,
-                  weight: FontWeight.w500,
-                  color: Colors.black,
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.symmetric(horizontal: 16.w),
-                child: Row(
-                  children: [
-                    MainText(
-                      text: 'الفني',
-                      font: 12.sp,
-                      weight: FontWeight.w700,
-                      color: Colors.black,
-                    ),
-                    SizedBox(
-                      width: 20.w,
-                    ),
-                    InkWell(
-                      onTap: () {
-                        MagicRouter.navigateTo(
-                          AdminAssignTechnicalForEmergencyUnsubScreen(
-                            emergencyUnsub: widget.emergencyUnsub,
-                          ),
-                        );
-                      },
-                      child: MainText(
-                        text: 'تخصيص فني الان',
-                        font: 15.sp,
-                        weight: FontWeight.w600,
-                        color: kSecondaryColor,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.symmetric(horizontal: 16.w),
-                child: Row(
-                  children: [
-                    MainText(
-                      text: 'التاريخ',
-                      font: 12.sp,
-                      weight: FontWeight.w700,
-                      color: Colors.black,
-                    ),
-                    SizedBox(
-                      width: 20.w,
-                    ),
-                    MainText(
-                      text: formateDateTimeToDate(
-                        widget.emergencyUnsub.addedDate!,
-                      ),
-                      font: 15.sp,
-                      weight: FontWeight.w400,
-                      color: Colors.black,
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: 32.h,
-              ),
-              Container(
-                margin: EdgeInsets.symmetric(horizontal: 16.w),
-                child: MainText(
-                  text: 'تفاصيل المشكلة تسجيل صوتي',
-                  font: 12.sp,
-                  weight: FontWeight.w700,
-                  color: Colors.black,
-                ),
-              ),
-              SizedBox(
-                height: 16.h,
-              ),
-              Container(
-                margin: EdgeInsets.symmetric(horizontal: 16.w),
-                child: InkWell(
-                  onTap: () async {
-                    final player = AudioPlayer();
-                    var path =
-                        'http://75.119.156.82/${widget.emergencyUnsub.sound}';
-                    log(path);
-                    await player.play(
-                      UrlSource(path),
-                    );
-                  },
-                  child: Container(
-                    height: 56.h,
-                    width: double.infinity,
-                    padding: EdgeInsets.symmetric(
-                      vertical: 10.w,
-                      horizontal: 30.h,
-                    ),
-                    margin: EdgeInsets.only(bottom: 8.h),
-                    decoration: BoxDecoration(
-                      color: mainColor,
-                      borderRadius: BorderRadius.circular(30.r),
-                      border: Border.all(width: 1.0, color: mainColor),
-                    ),
+                  Container(
+                    margin: EdgeInsets.symmetric(horizontal: 16.w),
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Container(
-                          height: 24.h,
-                          width: 24.w,
-                          child: Image.asset(
-                            getAsset('play_icon'),
-                          ),
+                        MainText(
+                          text: 'الفني',
+                          font: 12.sp,
+                          weight: FontWeight.w700,
+                          color: Colors.black,
                         ),
                         SizedBox(
-                          width: 12.w,
+                          width: 20.w,
                         ),
-                        MainText(
-                          text: 'تشغيل الملف الصوتي الخاص بالمشكلة',
-                          color: Colors.white,
-                          font: 12.sp,
-                          weight: FontWeight.w400,
+                        InkWell(
+                          onTap: () {
+                            MagicRouter.navigateTo(
+                              AdminAssignTechnicalForEmergencySubScreen(
+                                emergencySub: widget.emergencyUnsub,
+                              ),
+                            );
+                          },
+                          child: MainText(
+                            text: 'تخصيص فني الان',
+                            font: 15.sp,
+                            weight: FontWeight.w600,
+                            color: kSecondaryColor,
+                          ),
                         ),
                       ],
                     ),
                   ),
-                ),
-              ),
-              SizedBox(
-                height: 19.h,
-              ),
-              Container(
-                margin: EdgeInsets.symmetric(horizontal: 16.w),
-                child: MainText(
-                  text: 'الصور والفيديو الخاصين بالمشكلة',
-                  font: 12.sp,
-                  weight: FontWeight.w700,
-                  color: Colors.black,
-                ),
-              ),
-              SizedBox(
-                height: 9.h,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
                   Container(
-                    height: 74.h,
-                    width: 74.w,
-                    child: widget.emergencyUnsub.problemDetails!.length < 1
-                        ? Image.asset(getAsset('no_pic'))
-                        : CustomNetworkFileImage(
-                            path:
-                                'http://75.119.156.82/${widget.emergencyUnsub.problemDetails![0].fileName}',
+                    margin: EdgeInsets.symmetric(horizontal: 16.w),
+                    child: Row(
+                      children: [
+                        MainText(
+                          text: 'التاريخ',
+                          font: 12.sp,
+                          weight: FontWeight.w700,
+                          color: Colors.black,
+                        ),
+                        SizedBox(
+                          width: 20.w,
+                        ),
+                        MainText(
+                          text: formateDateTimeToDate(
+                            widget.emergencyUnsub.addedDate!,
                           ),
+                          font: 15.sp,
+                          weight: FontWeight.w400,
+                          color: Colors.black,
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 32.h,
                   ),
                   Container(
-                    height: 74.h,
-                    width: 74.w,
-                    child: widget.emergencyUnsub.problemDetails!.length < 2
-                        ? Image.asset(getAsset('no_pic'))
-                        : CustomNetworkFileImage(
-                            path:
-                                'http://75.119.156.82/${widget.emergencyUnsub.problemDetails![1].fileName}',
-                          ),
+                    margin: EdgeInsets.symmetric(horizontal: 16.w),
+                    child: MainText(
+                      text: 'تفاصيل المشكلة تسجيل صوتي',
+                      font: 12.sp,
+                      weight: FontWeight.w700,
+                      color: Colors.black,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 16.h,
                   ),
                   Container(
-                    height: 74.h,
-                    width: 74.w,
-                    child: widget.emergencyUnsub.problemDetails!.length < 3
-                        ? Image.asset(getAsset('no_pic'))
-                        : CustomNetworkFileImage(
-                            path:
-                                'http://75.119.156.82/${widget.emergencyUnsub.problemDetails![2].fileName}',
+                    margin: EdgeInsets.symmetric(horizontal: 16.w),
+                    child: InkWell(
+                      onTap: () async {
+                        await player.play(
+                          UrlSource(
+                            'http://75.119.156.82/${widget.emergencyUnsub.sound}',
                           ),
+                        );
+                      },
+                      child: Container(
+                        height: 56.h,
+                        width: double.infinity,
+                        padding: EdgeInsets.symmetric(
+                          vertical: 10.w,
+                          horizontal: 30.h,
+                        ),
+                        margin: EdgeInsets.only(bottom: 8.h),
+                        decoration: BoxDecoration(
+                          color: mainColor,
+                          borderRadius: BorderRadius.circular(30.r),
+                          border: Border.all(width: 1.0, color: mainColor),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Container(
+                              height: 24.h,
+                              width: 24.w,
+                              child: Image.asset(
+                                getAsset('play_icon'),
+                              ),
+                            ),
+                            SizedBox(
+                              width: 12.w,
+                            ),
+                            MainText(
+                              text: 'تشغيل الملف الصوتي الخاص بالمشكلة',
+                              color: Colors.white,
+                              font: 12.sp,
+                              weight: FontWeight.w400,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 19.h,
                   ),
                   Container(
-                    height: 74.h,
-                    width: 74.w,
-                    child: widget.emergencyUnsub.problemDetails!.length < 4
-                        ? Image.asset(getAsset('no_pic'))
-                        : CustomNetworkFileImage(
-                            path:
-                                'http://75.119.156.82/${widget.emergencyUnsub.problemDetails![3].fileName}',
-                          ),
+                    margin: EdgeInsets.symmetric(horizontal: 16.w),
+                    child: MainText(
+                      text: 'الصور والفيديو الخاصين بالمشكلة',
+                      font: 12.sp,
+                      weight: FontWeight.w700,
+                      color: Colors.black,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 9.h,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Container(
+                        height: 74.h,
+                        width: 74.w,
+                        child: widget.emergencyUnsub.problemDetails!.length < 1
+                            ? Image.asset(getAsset('no_pic'))
+                            : CustomNetworkFileImage(
+                                path:
+                                    'http://75.119.156.82/${widget.emergencyUnsub.problemDetails![0].fileName}',
+                              ),
+                      ),
+                      Container(
+                        height: 74.h,
+                        width: 74.w,
+                        child: widget.emergencyUnsub.problemDetails!.length < 2
+                            ? Image.asset(getAsset('no_pic'))
+                            : CustomNetworkFileImage(
+                                path:
+                                    'http://75.119.156.82/${widget.emergencyUnsub.problemDetails![1].fileName}',
+                              ),
+                      ),
+                      Container(
+                        height: 74.h,
+                        width: 74.w,
+                        child: widget.emergencyUnsub.problemDetails!.length < 3
+                            ? Image.asset(getAsset('no_pic'))
+                            : CustomNetworkFileImage(
+                                path:
+                                    'http://75.119.156.82/${widget.emergencyUnsub.problemDetails![2].fileName}',
+                              ),
+                      ),
+                      Container(
+                        height: 74.h,
+                        width: 74.w,
+                        child: widget.emergencyUnsub.problemDetails!.length < 4
+                            ? Image.asset(getAsset('no_pic'))
+                            : CustomNetworkFileImage(
+                                path:
+                                    'http://75.119.156.82/${widget.emergencyUnsub.problemDetails![3].fileName}',
+                              ),
+                      ),
+                    ],
                   ),
                 ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
@@ -297,7 +304,6 @@ class _CustomNetworkFileImageState extends State<CustomNetworkFileImage> {
   Widget build(BuildContext context) {
     bool isVideo = false;
     String extension = pathFile.extension(widget.path).toLowerCase();
-    log('$extension');
     if (extension == '.mp4' ||
         extension == '.avi' ||
         extension == '.mov' ||
@@ -334,22 +340,27 @@ class _CustomNetworkFileImageState extends State<CustomNetworkFileImage> {
         },
       );
     } else {
-      log(widget.path);
       return InkWell(
-        child: Image.network(
-          'https://www.learntotrade.com.ph/assets-lttph/uploads/2016/04/video-preview-pic.jpg',
+        child: Image(
+          image: AssetImage(
+            getAsset('video_loading'),
+          ),
         ),
         onTap: () {
-          MagicRouter.navigateTo(
-            CustomVideoPlayer(
-              path: widget.path,
-            ),
+          showDialog(
+            context: context,
+            builder: (context) {
+              return AlertDialog(
+                backgroundColor: Colors.black,
+                contentPadding: EdgeInsets.zero,
+                content: CustomVideoPlayer(
+                  path: widget.path,
+                ),
+              );
+            },
           );
         },
       );
-      // return CustomVideoPlayer(
-      //   path: widget.path,
-      // );
     }
   }
 }

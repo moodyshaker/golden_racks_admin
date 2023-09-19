@@ -4,7 +4,8 @@ import 'package:golden_racks_admin/core/networkStatus/network_status.dart';
 import 'package:golden_racks_admin/core/provider/provider_add_technation.dart';
 import 'package:golden_racks_admin/core/router/router.dart';
 import 'package:golden_racks_admin/feature/admin/other_screens/add_technician_screen.dart';
-import 'package:golden_racks_admin/feature/admin/other_screens/widgets/technician_item.dart';
+import 'package:golden_racks_admin/feature/admin/main_screens/widgets/technician_item.dart';
+import 'package:golden_racks_admin/feature/widgets/loading_dialog.dart';
 import 'package:golden_racks_admin/feature/widgets/main_text.dart';
 import 'package:golden_racks_admin/feature/widgets/opacity_loading_logo.dart';
 import 'package:golden_racks_admin/feature/widgets/retry_widget.dart';
@@ -116,10 +117,15 @@ class _TechnicianViewScreenState extends State<TechnicianViewScreen> {
                                 ),
                               ),
                               onTap: () async {
+                                showDialog(
+                                  context: context,
+                                  builder: (context) => LoadingDialog(),
+                                );
                                 await addTechProvider.getallTechnation(
                                   userFullName:
                                       '${addTechProvider.searchTechController.text}',
                                 );
+                                MagicRouter.pop();
                               },
                             ),
                             hasHint: true,

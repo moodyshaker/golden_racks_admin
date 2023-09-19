@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:golden_racks_admin/feature/admin/main_screens/subscribe_ready_admin_screens/subscribers_ready_requests_screen.dart';
 import 'package:golden_racks_admin/feature/admin/main_screens/unsubscribe_emergency_admin_screens/unsubscribers_emergency_requests_screen.dart';
-import 'package:golden_racks_admin/feature/technician/main_screens/requests_screen/maintainance_for_subscribers.dart';
 import 'package:intl/intl.dart';
 
 import 'core/localization/demo_localization.dart';
 import 'core/models/more_model.dart';
 import 'core/models/nav_item.dart';
 import 'core/router/router.dart';
-import 'feature/admin/main_screens/active_plan_screens/activate_plane_screen.dart';
+import 'feature/admin/main_screens/active_plan_screens/activate_plane_admin_screen.dart';
 import 'feature/admin/main_screens/subscribe_emergency_admin_screens/subscribers_emergency_requests_screen.dart';
 import 'feature/admin/main_screens/unsubscribe_normal_admin_screens/unsubscribers_normal_requests_screen.dart';
 import 'feature/admin/other_screens/add_company_with_plan_screen.dart';
 import 'feature/admin/other_screens/add_spare_part_screen.dart';
 import 'feature/admin/other_screens/create_plan_screen.dart';
-import 'feature/admin/other_screens/share_company_data_screen.dart';
+import 'feature/admin/main_screens/subscribed_companies_admin/subscribed_company_data_screen.dart';
 import 'feature/admin/other_screens/technician_view_screen.dart';
 
 String getAsset(String imageName) => 'assets/images/$imageName.png';
@@ -33,6 +33,33 @@ String formateDateTimeToTime(String dateTimeString) {
   final String formatted = formatter.format(dateTime);
   return formatted;
 }
+
+String subtractTicketNumber(String ticketNumber) {
+  int hyphenIndex = ticketNumber.indexOf('-');
+  String firstSection = '';
+  if (hyphenIndex != -1) {
+    firstSection = ticketNumber.substring(0, hyphenIndex);
+  }
+  return firstSection;
+}
+
+List<String> arabicPlanTypes = [
+  'كل الخطط',
+  'خطة شهرية',
+  'خطة سنوية',
+  'خطة نصف سنوية',
+  'خطة ربع سنوية',
+  'زيارة طوارئ',
+];
+
+List<String> englishPlanTypes = [
+  'None',
+  'Monthly',
+  'Annual',
+  'HalfAnnual',
+  'Quarterly',
+  'Emergency',
+];
 
 const Color kMainColor = Color(0xFF098E4D);
 const Color kSecondaryColor = Color(0xFF846046);
@@ -153,33 +180,42 @@ class DrawerItemModel {
 
 List<DrawerItemModel> list = [
   DrawerItemModel(
-      title: 'تحديد فني لطلبات الطوارئ لغير المشتركين',
-      count: '2',
-      route: UnSubscribersEmergencyRequestsAdminScreen()),
+    title: 'تحديد فني لطلبات الطوارئ لغير المشتركين',
+    count: '2',
+    route: UnSubscribersEmergencyRequestsAdminScreen(),
+  ),
   DrawerItemModel(
-      title: 'تحديد فني لطلبات الدورية لغير المشتركين',
-      count: '5',
-      route: UnSubscribersNormalRequestsAdminScreen()),
+    title: 'تحديد فني لطلبات الدورية لغير المشتركين',
+    count: '5',
+    route: UnSubscribersNormalRequestsAdminScreen(),
+  ),
   DrawerItemModel(
-      title: 'تحديد فني لطلبات الطوارئ للمشتركين',
-      count: '7',
-      route: SubscribersEmergencyRequestsAdminScreen()),
+    title: 'تحديد فني لطلبات الطوارئ للمشتركين',
+    count: '7',
+    route: SubscribersEmergencyRequestsAdminScreen(),
+  ),
   DrawerItemModel(
-      title: 'تحديد فني للصيانة الدورية للمشتركين',
-      count: '8',
-      route: MaintenanceForSubscribers()),
+    title: 'تحديد فني للصيانة الدورية للمشتركين',
+    count: '8',
+    route: SubscribersReadyRequestsAdminScreen(),
+  ),
   DrawerItemModel(
-      count: '3',
-      title: 'حسابات في انتظار تفعيل الخطط لها',
-      route: ActivatePlanAdminScreen()),
+    count: '3',
+    title: 'حسابات في انتظار تفعيل الخطط لها',
+    route: ActivatePlanAdminScreen(),
+  ),
   DrawerItemModel(
-      title: 'انشاء حسابات الدخول للفنين', route: TechnicianViewScreen()),
+    title: 'انشاء حسابات الدخول للفنين',
+    route: TechnicianViewScreen(),
+  ),
   DrawerItemModel(
-      title: 'انشاء حسابات للشركات وربطها بخطة',
-      route: AddCompanyWithPlanScreen()),
+    title: 'انشاء حسابات للشركات وربطها بخطة',
+    route: AddCompanyWithPlanScreen(),
+  ),
   DrawerItemModel(
-      title: 'بيانات الشركات المشتركة في خطط',
-      route: SharedCompanyDataScreen()),
+    title: 'بيانات الشركات المشتركة في خطط',
+    route: SubscribedCompanyDataScreen(),
+  ),
   DrawerItemModel(title: 'اضافة قطع الغيار', route: AddASparePartScreen()),
   DrawerItemModel(title: 'انشاء خطط الصيانة', route: CreatePlanScreen()),
   DrawerItemModel(title: 'التقارير'),

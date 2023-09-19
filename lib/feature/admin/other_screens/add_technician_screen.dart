@@ -161,8 +161,11 @@ class _AddTechnicianScreenState extends State<AddTechnicianScreen> {
                           hintWeight: FontWeight.w400,
                           type: TextInputType.text,
                           valid: (String? v) {
-                            if (v!.isEmpty) {
+                            final n = num.tryParse(v!);
+                            if (v.isEmpty || n == null) {
                               return 'من فضلك ادخل رقم الجوال';
+                            } else if (v.length < 10) {
+                              return 'رقم المحمول يتكون من 10 ارقام';
                             } else {
                               return null;
                             }
@@ -214,7 +217,7 @@ class _AddTechnicianScreenState extends State<AddTechnicianScreen> {
                                 Password: addTechnationProvider
                                     .addTechPasswordController.text,
                                 UploadImage: addTechnationProvider
-                                    .selectedTechnicalImage!,
+                                    .selectedTechnicalImage,
                                 mobileNumber: addTechnationProvider
                                     .addTechmobileNumberController.text,
                                 Email: addTechnationProvider

@@ -39,125 +39,122 @@ class _OrganizerLoginState extends State<OrganizerLogin> {
       ),
       child: Scaffold(
         backgroundColor: Colors.transparent,
-        body: SafeArea(
+        body: Container(
+          margin: EdgeInsets.symmetric(horizontal: 24.w, vertical: 10),
           child: Column(
             children: [
               Expanded(
-                child: Form(
-                  key: _form,
-                  child: Container(
-                    margin: EdgeInsets.symmetric(horizontal: 20.w),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Expanded(
-                            child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Image.asset(
-                              getAsset('logo'),
-                            ),
-                          ],
-                        )),
-                        DropMenu(
-                          hint: 'اختر',
-                          items: type,
-                          onChanged: (v) {
-                            isAdmin = v == 'مدير التطبيق';
-                            print(isAdmin);
-                          },
-                          valid: (v) {
-                            if (v == null) {
-                              return 'اختر الدور';
-                            } else
-                              return null;
-                          },
-                        ),
-                        SizedBox(
-                          height: 10.h,
-                        ),
-                        CustomTextField(
-                          controller: auth.loginUserNameController,
-                          hasHeader: true,
-                          header: 'اسم المستخدم',
-                          hasHint: false,
-                          headerFont: 12.sp,
-                          headerTextColor: Colors.white,
-                          headerWeight: FontWeight.w400,
-                          headerFamily: 'Lato_regular',
-                          type: TextInputType.text,
-                          valid: (String? v) {
-                            if (v!.isEmpty) {
-                              return 'من فضلك ادخل اسم المستخدم';
-                            } else {
-                              return null;
-                            }
-                          },
-                        ),
-                        SizedBox(
-                          height: 10.h,
-                        ),
-                        CustomTextField(
-                          controller: auth.loginPasswordController,
-                          hasHint: false,
-                          hasHeader: true,
-                          header: 'كلمة المرور',
-                          headerFont: 12.sp,
-                          headerTextColor: Colors.white,
-                          headerWeight: FontWeight.w400,
-                          headerFamily: 'Lato_regular',
-                          type: TextInputType.visiblePassword,
-                          isPassword: true,
-                          valid: (String? v) => v!.isEmpty
-                              ? 'من فضلك ادخل كلمة المرور'
-                              : v.length < 8
-                                  ? demo.getTranslatedValue(
-                                      'password_8ch_validation',
-                                    )
-                                  : Validations.passwordVerified(v)
-                                      ? null
-                                      : demo.getTranslatedValue(
-                                          'strong_password',
-                                        ),
-                        ),
-                        SizedBox(
-                          height: 16.h,
-                        ),
-                        CustomButton(
-                          title: 'تسجيل الدخول',
-                          color: kSecondaryColor,
-                          height: 50.h,
-                          font: 16.sp,
-                          family: 'Lato_bold',
-                          textColor: Colors.white,
-                          withBorder: false,
-                          onPressed: () async {
-                            if (_form.currentState!.validate()) {
-                              await auth.authGetCountries();
-
-                              if (isAdmin) {
-                                log('Admin');
-                                await auth.authLogin(
-                                  UserName: auth.loginUserNameController.text,
-                                  Password: auth.loginPasswordController.text,
-                                  UserRole: 2,
-                                );
+                child: SingleChildScrollView(
+                  child: SafeArea(
+                    child: Form(
+                      key: _form,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Image.asset(
+                                getAsset('logo'),
+                              ),
+                            ],
+                          ),
+                          SizedBox(height: 80.h),
+                          DropMenu(
+                            hint: 'اختر',
+                            items: type,
+                            onChanged: (v) {
+                              isAdmin = v == 'مدير التطبيق';
+                              print(isAdmin);
+                            },
+                            valid: (v) {
+                              if (v == null) {
+                                return 'اختر الدور';
+                              } else
+                                return null;
+                            },
+                          ),
+                          CustomTextField(
+                            controller: auth.loginUserNameController,
+                            hasHeader: true,
+                            header: 'اسم المستخدم',
+                            hasHint: false,
+                            headerFont: 12.sp,
+                            headerTextColor: Colors.white,
+                            headerWeight: FontWeight.w400,
+                            headerFamily: 'Lato_regular',
+                            type: TextInputType.text,
+                            valid: (String? v) {
+                              if (v!.isEmpty) {
+                                return 'من فضلك ادخل اسم المستخدم';
                               } else {
-                                log('Technical');
-                                await auth.authLogin(
-                                  UserName: auth.loginUserNameController.text,
-                                  Password: auth.loginPasswordController.text,
-                                  UserRole: 1,
-                                );
+                                return null;
                               }
-                            }
-                          },
-                        ),
-                      ],
+                            },
+                          ),
+                          CustomTextField(
+                            controller: auth.loginPasswordController,
+                            hasHint: false,
+                            hasHeader: true,
+                            header: 'كلمة المرور',
+                            headerFont: 12.sp,
+                            headerTextColor: Colors.white,
+                            headerWeight: FontWeight.w400,
+                            headerFamily: 'Lato_regular',
+                            type: TextInputType.visiblePassword,
+                            isPassword: true,
+                            valid: (String? v) => v!.isEmpty
+                                ? 'من فضلك ادخل كلمة المرور'
+                                : v.length < 8
+                                    ? demo.getTranslatedValue(
+                                        'password_8ch_validation',
+                                      )
+                                    : Validations.passwordVerified(v)
+                                        ? null
+                                        : demo.getTranslatedValue(
+                                            'strong_password',
+                                          ),
+                          ),
+                          SizedBox(
+                            height: 16.h,
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
               ),
+              CustomButton(
+                title: 'تسجيل الدخول',
+                color: kSecondaryColor,
+                height: 50.h,
+                font: 16.sp,
+                family: 'Lato_bold',
+                textColor: Colors.white,
+                withBorder: false,
+                onPressed: () async {
+                  if (_form.currentState!.validate()) {
+                    await auth.authGetCountries();
+
+                    if (isAdmin) {
+                      log('Admin');
+                      await auth.authLogin(
+                        UserName: auth.loginUserNameController.text,
+                        Password: auth.loginPasswordController.text,
+                        UserRole: 2,
+                      );
+                    } else {
+                      log('Technical');
+                      await auth.authLogin(
+                        UserName: auth.loginUserNameController.text,
+                        Password: auth.loginPasswordController.text,
+                        UserRole: 1,
+                      );
+                    }
+                  }
+                },
+              ),
+              SizedBox(height: 12.h),
             ],
           ),
         ),

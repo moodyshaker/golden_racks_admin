@@ -4,7 +4,7 @@ import '../../../../constants.dart';
 import '../../../widgets/customButton.dart';
 import '../../../widgets/main_text.dart';
 
-class NeedActivateItem extends StatelessWidget {
+class NeedActivateItemTech extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(

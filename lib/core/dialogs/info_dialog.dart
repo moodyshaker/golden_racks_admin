@@ -45,6 +45,11 @@ class InfoDialog extends StatelessWidget {
                 fixedSize: MaterialStateProperty.all<Size>(
                   Size(100.w, 40.h),
                 ),
+                shape: MaterialStateProperty.all<OutlinedBorder>(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                ),
                 backgroundColor:
                     MaterialStateProperty.all<Color>(kSecondaryColor),
                 foregroundColor: MaterialStateProperty.all<Color>(Colors.white),

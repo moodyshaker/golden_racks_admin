@@ -26,7 +26,7 @@ class _RequestsItemUnsubNormalState extends State<RequestsItemUnsubNormal> {
       padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 12.w),
       margin: EdgeInsets.only(bottom: 5.0),
       decoration: BoxDecoration(
-        color: Colors.transparent,
+        color: gray_20,
         borderRadius: BorderRadius.circular(15.r),
         border: Border.all(width: 1.0, color: kInactiveColor),
       ),
@@ -54,13 +54,13 @@ class _RequestsItemUnsubNormalState extends State<RequestsItemUnsubNormal> {
                     Column(
                       children: [
                         MainText(
-                          text: '${widget.normalUnsub.id}',
+                          text: '${widget.normalUnsub.companyName_Ar}',
                           font: 15.sp,
                           weight: FontWeight.w700,
                           color: Colors.black,
                         ),
                         MainText(
-                          text: 'GR878657',
+                          text: '${widget.normalUnsub.accountNumber}',
                           font: 14.sp,
                           weight: FontWeight.w300,
                           color: Colors.black,
@@ -76,7 +76,7 @@ class _RequestsItemUnsubNormalState extends State<RequestsItemUnsubNormal> {
                           color: Colors.black,
                         ),
                         MainText(
-                          text: 'GR878657',
+                          text: '${widget.normalUnsub.ticketNumber!}',
                           font: 14.sp,
                           weight: FontWeight.w300,
                           color: Colors.black,

@@ -1,3 +1,5 @@
+import 'package:golden_racks_admin/constants.dart';
+
 class NormalPlanUnSubModel {
   int? id;
   String? ticketNumber;
@@ -12,9 +14,9 @@ class NormalPlanUnSubModel {
   String? address;
   bool? isRejected;
   String? addedDate;
-  // String? companyName_Ar;
-  // String? companyName_En;
-  // String? accountNumber;
+  String? companyName_Ar;
+  String? companyName_En;
+  String? accountNumber;
 
   NormalPlanUnSubModel({
     this.id,
@@ -30,9 +32,9 @@ class NormalPlanUnSubModel {
     this.address,
     this.isRejected,
     this.addedDate,
-    // this.companyName_Ar,
-    // this.companyName_En,
-    // this.accountNumber,
+    this.companyName_Ar,
+    this.companyName_En,
+    this.accountNumber,
   });
 
   Map<String, dynamic> toJson() {
@@ -50,17 +52,18 @@ class NormalPlanUnSubModel {
       'address': address,
       'isRejected': isRejected,
       'addedDate': addedDate,
-      // 'companyName_Ar': companyName_Ar,
-      // 'companyName_En': companyName_En,
-      // 'accountNumber': accountNumber,
+      'companyName_Ar': companyName_Ar,
+      'companyName_En': companyName_En,
+      'accountNumber': accountNumber,
     };
   }
 
   factory NormalPlanUnSubModel.fromJson(Map<String, dynamic> json) {
     return NormalPlanUnSubModel(
       id: json['id'] != null ? json['id'] as int : null,
-      ticketNumber:
-          json['ticketNumber'] != null ? json['ticketNumber'] as String : null,
+      ticketNumber: json['ticketNumber'] != null
+          ? subtractTicketNumber(json['ticketNumber'])
+          : null,
       userId: json['userId'] != null ? json['userId'] as String : null,
       problemId: json['problemId'] != null ? json['problemId'] as int : null,
       problemName:
@@ -81,15 +84,15 @@ class NormalPlanUnSubModel {
       isRejected:
           json['isRejected'] != null ? json['isRejected'] as bool : null,
       addedDate: json['addedDate'] != null ? json['addedDate'] as String : null,
-      // companyName_Ar: json['companyName_Ar'] != null
-      //     ? json['companyName_Ar'] as String
-      //     : null,
-      // companyName_En: json['companyName_En'] != null
-      //     ? json['companyName_En'] as String
-      //     : null,
-      // accountNumber: json['accountNumber'] != null
-      //     ? json['accountNumber'] as String
-      //     : null,
+      companyName_Ar: json['companyName_Ar'] != null
+          ? json['companyName_Ar'] as String
+          : null,
+      companyName_En: json['companyName_En'] != null
+          ? json['companyName_En'] as String
+          : null,
+      accountNumber: json['accountNumber'] != null
+          ? json['accountNumber'] as String
+          : null,
     );
   }
 }

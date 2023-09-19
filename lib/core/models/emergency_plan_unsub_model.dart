@@ -1,4 +1,6 @@
-class EmergencyPlanUnSubModel {
+import 'package:golden_racks_admin/constants.dart';
+
+class EmergencyPlanSubModel {
   int? id;
   String? ticketNumber;
   String? userId;
@@ -16,7 +18,7 @@ class EmergencyPlanUnSubModel {
   String? companyName_En;
   String? accountNumber;
 
-  EmergencyPlanUnSubModel({
+  EmergencyPlanSubModel({
     this.id,
     this.ticketNumber,
     this.userId,
@@ -56,11 +58,12 @@ class EmergencyPlanUnSubModel {
     };
   }
 
-  factory EmergencyPlanUnSubModel.fromJson(Map<String, dynamic> json) {
-    return EmergencyPlanUnSubModel(
+  factory EmergencyPlanSubModel.fromJson(Map<String, dynamic> json) {
+    return EmergencyPlanSubModel(
       id: json['id'] != null ? json['id'] as int : null,
-      ticketNumber:
-          json['ticketNumber'] != null ? json['ticketNumber'] as String : null,
+      ticketNumber: json['ticketNumber'] != null
+          ? subtractTicketNumber(json['ticketNumber'])
+          : null,
       userId: json['userId'] != null ? json['userId'] as String : null,
       problemId: json['problemId'] != null ? json['problemId'] as int : null,
       problemName:

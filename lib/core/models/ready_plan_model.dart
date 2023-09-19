@@ -14,6 +14,7 @@ class ReadyPlanModel {
   bool? isActive;
   int? numberOfRacks;
   double? racksUnitPrice;
+  List<String>? sparePartsImages;
 
   ReadyPlanModel({
     this.id,
@@ -31,6 +32,7 @@ class ReadyPlanModel {
     this.isActive,
     this.numberOfRacks,
     this.racksUnitPrice,
+    this.sparePartsImages,
   });
 
   factory ReadyPlanModel.fromJson(Map<String, dynamic> json) {
@@ -50,6 +52,11 @@ class ReadyPlanModel {
       isActive: json['isActive'],
       numberOfRacks: json['numberOfRacks'],
       racksUnitPrice: json['racksUnitPrice'],
+      sparePartsImages: json['sparePartsImages'] != null
+          ? List<String>.from(
+              (json['sparePartsImages'] as List<dynamic>),
+            )
+          : null,
     );
   }
 
@@ -70,6 +77,7 @@ class ReadyPlanModel {
     data['isActive'] = this.isActive;
     data['numberOfRacks'] = this.numberOfRacks;
     data['racksUnitPrice'] = this.racksUnitPrice;
+    data['sparePartsImages'] = this.sparePartsImages;
     return data;
   }
 }
