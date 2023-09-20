@@ -222,50 +222,6 @@ class _AddASparePartScreenState extends State<AddASparePartScreen> {
                       SizedBox(
                         height: 8.h,
                       ),
-                      CustomTextField(
-                        controller: readyPlanProvider.NumberOfRacksController,
-                        horizontalPadding: 20.w,
-                        hasHeader: false,
-                        hint: 'عدد المكينات',
-                        hasHint: true,
-                        hintFont: 15.sp,
-                        hintColor: gray_40,
-                        hintWeight: FontWeight.w400,
-                        type: TextInputType.number,
-                        valid: (String? v) {
-                          final n = num.tryParse(v!);
-                          if (v.isEmpty || n == null) {
-                            return 'ادخل عدد المكينات';
-                          } else {
-                            return null;
-                          }
-                        },
-                      ),
-                      SizedBox(
-                        height: 8.h,
-                      ),
-                      CustomTextField(
-                        controller: readyPlanProvider.RacksUnitPriceController,
-                        horizontalPadding: 20.w,
-                        hasHeader: false,
-                        hint: 'سعر المكينة الواحدة',
-                        hasHint: true,
-                        hintFont: 15.sp,
-                        hintColor: gray_40,
-                        hintWeight: FontWeight.w400,
-                        type: TextInputType.number,
-                        valid: (String? v) {
-                          final n = num.tryParse(v!);
-                          if (v.isEmpty || n == null) {
-                            return 'ادخل سعر المكينة الواحدة';
-                          } else {
-                            return null;
-                          }
-                        },
-                      ),
-                      SizedBox(
-                        height: 8.h,
-                      ),
                     ],
                   ),
                 ),

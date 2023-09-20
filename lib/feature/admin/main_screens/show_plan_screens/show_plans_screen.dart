@@ -1,19 +1,16 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:golden_racks_admin/core/router/router.dart';
-import 'package:golden_racks_admin/feature/admin/other_screens/add_company_with_plan_screen.dart';
+import 'package:golden_racks_admin/feature/admin/main_screens/show_plan_screens/show_plan_item.dart';
+import 'package:golden_racks_admin/feature/admin/other_screens/create_plan_screen.dart';
 import 'package:golden_racks_admin/feature/widgets/main_text.dart';
 
-import '../../../../constants.dart';
-import '../../widgets/customButton.dart';
-import '../../widgets/customTextFeild.dart';
-import '../../widgets/organizerCustomScaffold.dart';
+import '../../../../../constants.dart';
+import '../../../widgets/customButton.dart';
+import '../../../widgets/customTextFeild.dart';
+import '../../../widgets/organizerCustomScaffold.dart';
 
 class ShowPlansScreen extends StatefulWidget {
-  const ShowPlansScreen({Key? key}) : super(key: key);
-
   @override
   State<ShowPlansScreen> createState() => _ShowPlansScreenState();
 }
@@ -48,8 +45,7 @@ class _ShowPlansScreenState extends State<ShowPlansScreen> {
             children: [
               GestureDetector(
                 onTap: () {
-                  log('from showPlanScreen');
-                  MagicRouter.navigateTo(AddCompanyWithPlanScreen());
+                  MagicRouter.navigateTo(CreatePlanScreen());
                 },
                 child: Container(
                   height: 56.h,
@@ -96,11 +92,14 @@ class _ShowPlansScreenState extends State<ShowPlansScreen> {
                   suffixIcon: Container(
                     width: 60.w,
                     child: Center(
-                        child: Container(
-                      height: 32.h,
-                      width: 32.w,
-                      child: Image.asset(getAsset('search_icon')),
-                    )),
+                      child: Container(
+                        height: 32.h,
+                        width: 32.w,
+                        child: Image.asset(
+                          getAsset('search_icon'),
+                        ),
+                      ),
+                    ),
                   ),
                   hasHint: true,
                   suffixCallback: () {},
@@ -126,12 +125,13 @@ class _ShowPlansScreenState extends State<ShowPlansScreen> {
               ),
               Container(
                 height: 235.h,
-                // child: ListView.builder(
-                //   padding: EdgeInsets.symmetric(vertical: 10.h),
-                //   itemBuilder: (BuildContext context, int i) =>
-                //       TechnicianItem(),
-                //   itemCount: 4,
-                // ),
+                child: ListView.builder(
+                  padding: EdgeInsets.symmetric(vertical: 10.h),
+                  itemBuilder: (BuildContext context, int i) => ShowPlanItem(
+                    index: i,
+                  ),
+                  itemCount: 5,
+                ),
               ),
               SizedBox(
                 height: 16.h,

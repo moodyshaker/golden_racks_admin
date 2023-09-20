@@ -308,16 +308,19 @@ class _OrganizerCustomScaffoldState extends State<OrganizerCustomScaffold> {
                                       context: navigatorKey.currentContext!,
                                       builder: (c) => ActionDialog(
                                             content: demo.getTranslatedValue(
-                                                'do_you_want_exit'),
+                                              'do_you_want_exit',
+                                            ),
                                             onCancelClick: () {
                                               MagicRouter.pop();
                                             },
                                             approveAction:
                                                 demo.getTranslatedValue(
-                                                    'dialog_approve'),
+                                              'dialog_approve',
+                                            ),
                                             cancelAction:
                                                 demo.getTranslatedValue(
-                                                    'dialog_decline'),
+                                              'dialog_decline',
+                                            ),
                                             onApproveClick: () {
                                               MagicRouter.pop();
                                               SystemNavigator.pop();
@@ -349,64 +352,69 @@ class _OrganizerCustomScaffoldState extends State<OrganizerCustomScaffold> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: List.generate(
-                        navBar.length,
-                        (i) => GestureDetector(
-                              onTap: () {
-                                if (i == 2) {
-                                } else if (i == 0) {
-                                  _key.currentState!.openDrawer();
-                                } else {
-                                  cubit.changeCurrent(i);
-                                }
-                              },
-                              child: i == 2
-                                  ? Container(
-                                      height: 60.h,
-                                      width: 60.h,
-                                      padding: EdgeInsets.symmetric(
-                                          vertical: 6.h, horizontal: 6.w),
-                                      margin: EdgeInsets.symmetric(
-                                          vertical: 6.h, horizontal: 6.w),
-                                      decoration: BoxDecoration(
-                                          color: kAccentColor,
-                                          shape: BoxShape.circle),
-                                      child: Center(
-                                        child: Padding(
-                                          padding: EdgeInsets.only(bottom: 4.h),
-                                          child: Image.asset(
-                                              getAsset('${navBar[i].icon}'),
-                                              height: 24.h,
-                                              width: 24.w,
-                                              color: kBlackColor),
-                                        ),
-                                      ),
-                                    )
-                                  : Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        Image.asset(
-                                            getAsset('${navBar[i].icon}'),
-                                            height: cubit.i == i ? 30.h : 24.h,
-                                            width: cubit.i == i ? 30.w : 24.w,
-                                            color: cubit.i == i
-                                                ? kAccentColor
-                                                : kInactiveColor),
-                                        SizedBox(
-                                          height: 5.h,
-                                        ),
-                                        MainText(
-                                            text: navBar[i].title,
-                                            font: cubit.i == i ? 14.sp : 12.sp,
-                                            color: kAccentColor,
-                                            weight: cubit.i == i
-                                                ? FontWeight.bold
-                                                : FontWeight.w500),
-                                      ],
+                      navBar.length,
+                      (i) => GestureDetector(
+                        onTap: () {
+                          if (i == 2) {
+                          } else if (i == 0) {
+                            _key.currentState!.openDrawer();
+                          } else {
+                            cubit.changeCurrent(i);
+                          }
+                        },
+                        child: i == 2
+                            ? Container(
+                                height: 60.h,
+                                width: 60.h,
+                                padding: EdgeInsets.symmetric(
+                                  vertical: 6.h,
+                                  horizontal: 6.w,
+                                ),
+                                margin: EdgeInsets.symmetric(
+                                  vertical: 6.h,
+                                  horizontal: 6.w,
+                                ),
+                                decoration: BoxDecoration(
+                                  color: kAccentColor,
+                                  shape: BoxShape.circle,
+                                ),
+                                child: Center(
+                                  child: Padding(
+                                    padding: EdgeInsets.only(bottom: 4.h),
+                                    child: Image.asset(
+                                      getAsset('${navBar[i].icon}'),
+                                      height: 24.h,
+                                      width: 24.w,
+                                      color: kBlackColor,
                                     ),
-                            )),
+                                  ),
+                                ),
+                              )
+                            : Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Image.asset(
+                                    getAsset('${navBar[i].icon}'),
+                                    height: cubit.i == i ? 30.h : 24.h,
+                                    width: cubit.i == i ? 30.w : 24.w,
+                                    color: cubit.i == i
+                                        ? kAccentColor
+                                        : kInactiveColor,
+                                  ),
+                                  SizedBox(height: 5.h),
+                                  MainText(
+                                    text: navBar[i].title,
+                                    font: cubit.i == i ? 14.sp : 12.sp,
+                                    color: kAccentColor,
+                                    weight: cubit.i == i
+                                        ? FontWeight.bold
+                                        : FontWeight.w500,
+                                  ),
+                                ],
+                              ),
+                      ),
+                    ),
                   ),
                 ),
               )

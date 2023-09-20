@@ -83,12 +83,9 @@ class AuthProvider extends ChangeNotifier {
       var res = await request.send();
 
       Response response = await Response.fromStream(res);
-
-      log(response.body);
+      var r = json.decode(response.body);
 
       if (response.statusCode >= 200 && response.statusCode < 300) {
-        var r = json.decode(response.body);
-
         _preferences.setRegisterdUserId(r['userId']);
 
         MagicRouter.pop();
@@ -101,11 +98,18 @@ class AuthProvider extends ChangeNotifier {
         ).then((value) => MagicRouter.navigateTo(AddPlanScreen()));
       } else {
         MagicRouter.pop();
+
+        String errorString = r['errors']
+            .values
+            .first
+            .toString()
+            .replaceAll(RegExp(r'[\[\]]'), '');
+
         showDialog(
           context: navigatorKey.currentContext!,
           barrierDismissible: true,
           builder: (ctx) => ErrorDialog(
-            text: 'خطأ في التسجيل',
+            text: '${errorString}',
           ),
         );
       }
@@ -192,7 +196,7 @@ class AuthProvider extends ChangeNotifier {
           context: navigatorKey.currentContext!,
           barrierDismissible: false,
           builder: (ctx) => ErrorDialog(
-            text: 'خطأ في تسجيل الدخول',
+            text: 'اسم المستخدم او كلمة المرور غير صحيحة',
           ),
         );
       }

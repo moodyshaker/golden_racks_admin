@@ -26,12 +26,12 @@ class ActivePlanProvider extends ChangeNotifier {
   Future<void> getAllUnActivePlans({
     bool retry = false,
   }) async {
-    try {
-      unActivePlanStatus = NetworkStatus.loading;
-      if (retry) {
-        notifyListeners();
-      }
+    unActivePlanStatus = NetworkStatus.loading;
+    if (retry) {
+      notifyListeners();
+    }
 
+    try {
       var response = await HttpHelper.instance
           .httpGet('ReadyPlans/get-all-unActive-plan', false);
 
@@ -47,8 +47,7 @@ class ActivePlanProvider extends ChangeNotifier {
         unActivePlanStatus = NetworkStatus.error;
       }
     } catch (e) {
-      log('catch get unActive plan');
-      unActivePlanStatus = NetworkStatus.success;
+      log('catch get unActive plannn ${e.toString()}');
     }
     notifyListeners();
   }
@@ -81,6 +80,7 @@ class ActivePlanProvider extends ChangeNotifier {
         finalUri,
         headers: header,
       );
+      log(response.body);
 
       if (response.statusCode >= 200 && response.statusCode < 300) {
         MagicRouter.pop();

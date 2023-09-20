@@ -239,9 +239,16 @@ class _AdminAssignTechnicalForEmergencySubScreenState
                                                                     .problemDetails![
                                                                         0]
                                                                     .visitWithoutSubscripeId!,
-                                                                VisitDate:
-                                                                    chosenTime
-                                                                        .toString(),
+                                                                // VisitDate:
+                                                                //     chosenTime
+                                                                //         .toString(),
+
+                                                                VisitDate: DateTime
+                                                                        .now()
+                                                                    .add(Duration(
+                                                                        hours:
+                                                                            4))
+                                                                    .toString(),
                                                                 IsActive: true,
                                                               );
                                                             },
@@ -291,54 +298,54 @@ class _AdminAssignTechnicalForEmergencySubScreenState
                           SizedBox(
                             height: 27.h,
                           ),
-                          CustomButton(
-                            title: 'اختيار تاريخ الخطة',
-                            color: kSecondaryColor,
-                            height: 50.h,
-                            font: 16.sp,
-                            family: 'Lato_bold',
-                            textColor: Colors.white,
-                            withBorder: false,
-                            onPressed: () async {
-                              chosenTime = await showDatePicker(
-                                context: context,
-                                initialDate: chosenTime ??= DateTime.now(),
-                                firstDate: DateTime(2000),
-                                lastDate: DateTime(2101),
-                                builder: ((context, child) {
-                                  return Theme(
-                                    data: ThemeData.light().copyWith(
-                                      colorScheme: ColorScheme.light(
-                                        primary: Colors.brown,
-                                        onPrimary: Colors.white,
-                                        surface: Colors.white,
-                                        onSurface: Colors.brown,
-                                      ),
-                                    ),
-                                    child: child!,
-                                  );
-                                }),
-                              );
-                            },
-                          ),
-                          FormField(
-                            builder: (FormFieldState<String> state) {
-                              return MainText(
-                                text: state.errorText ?? '',
-                                color: Colors.red,
-                                font: 16.sp,
-                                horizontalPadding: 16.w,
-                                // verticalPadding: 8.h,
-                              );
-                            },
-                            validator: (v) {
-                              if (chosenTime == null) {
-                                return 'من فضلك ادخل تاريخ الخطة';
-                              } else {
-                                return null;
-                              }
-                            },
-                          ),
+                          // CustomButton(
+                          //   title: 'اختيار تاريخ الخطة',
+                          //   color: kSecondaryColor,
+                          //   height: 50.h,
+                          //   font: 16.sp,
+                          //   family: 'Lato_bold',
+                          //   textColor: Colors.white,
+                          //   withBorder: false,
+                          //   onPressed: () async {
+                          //     chosenTime = await showDatePicker(
+                          //       context: context,
+                          //       initialDate: chosenTime ??= DateTime.now(),
+                          //       firstDate: DateTime(2000),
+                          //       lastDate: DateTime(2101),
+                          //       builder: ((context, child) {
+                          //         return Theme(
+                          //           data: ThemeData.light().copyWith(
+                          //             colorScheme: ColorScheme.light(
+                          //               primary: Colors.brown,
+                          //               onPrimary: Colors.white,
+                          //               surface: Colors.white,
+                          //               onSurface: Colors.brown,
+                          //             ),
+                          //           ),
+                          //           child: child!,
+                          //         );
+                          //       }),
+                          //     );
+                          //   },
+                          // ),
+                          // FormField(
+                          //   builder: (FormFieldState<String> state) {
+                          //     return MainText(
+                          //       text: state.errorText ?? '',
+                          //       color: Colors.red,
+                          //       font: 16.sp,
+                          //       horizontalPadding: 16.w,
+                          //       // verticalPadding: 8.h,
+                          //     );
+                          //   },
+                          //   validator: (v) {
+                          //     if (chosenTime == null) {
+                          //       return 'من فضلك ادخل تاريخ الخطة';
+                          //     } else {
+                          //       return null;
+                          //     }
+                          //   },
+                          // ),
                         ],
                       ),
                     )

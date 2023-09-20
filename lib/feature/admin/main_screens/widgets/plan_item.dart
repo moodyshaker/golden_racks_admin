@@ -89,7 +89,7 @@ class _PlanItemState extends State<PlanItem> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           MainText(
-                            text: 'الخطة السنوية + ${widget.readyPlan.id}',
+                            text: 'الخطة السنوية',
                             font: 16.sp,
                             color: kBlackColor,
                             weight: FontWeight.bold,
@@ -349,7 +349,7 @@ class _PlanItemState extends State<PlanItem> {
             await readyPlanProvider.subscribeToReadyPlan(
               UserId: _preferences.getRegisterdUserId,
               ReadyPlanId: widget.readyPlan.id!,
-              IsFree: false,
+              IsFree: true,
               NumberOfRacks: widget.readyPlan.numberOfRacks!,
               StartDate: DateTime.now().toString(),
               NumberOfFixedVisits: widget.readyPlan.numberOfFixedVisits!,

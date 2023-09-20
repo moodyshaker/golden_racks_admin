@@ -50,8 +50,9 @@ class _UnSubscribersNormalRequestsAdminScreenState
             : NormalUnsubProvider.normalUnsubStatus == NetworkStatus.success
                 ? NormalUnsubProvider.normalUnsubPlans.isEmpty
                     ? Container(
+                        alignment: Alignment.center,
                         child: MainText(
-                          text: 'لا يوجد خطط دورية',
+                          text: 'لا يوجد خطط',
                         ),
                       )
                     : ListView.builder(

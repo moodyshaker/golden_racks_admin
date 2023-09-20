@@ -49,10 +49,8 @@ class _ActivatePlanAdminScreenState extends State<ActivatePlanAdminScreen> {
             : activePlanProvider.unActivePlanStatus == NetworkStatus.success
                 ? activePlanProvider.allUnActivePlans.isEmpty
                     ? Container(
-                        child: Flexible(
-                          child: MainText(
-                            text: 'لا يوجد طلبات تفعيل للخطط',
-                          ),
+                        child: MainText(
+                          text: 'لا يوجد طلبات تفعيل للخطط',
                         ),
                       )
                     : ListView.builder(

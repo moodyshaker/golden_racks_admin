@@ -91,7 +91,18 @@ class AssignToSubEmergencyProvider extends ChangeNotifier {
           builder: (ctx) => InfoDialog(
             content: 'تم تخصيص الفني بنجاح',
           ),
-        ).then((value) => MagicRouter.pop());
+        ).then(
+          (value) async {
+            showDialog(
+              context: navigatorKey.currentContext!,
+              barrierDismissible: false,
+              builder: (ctx) => LoadingDialog(),
+            );
+            await getEmergencySubPlans();
+            MagicRouter.pop();
+            MagicRouter.pop();
+          },
+        );
       } else {
         log(response.body);
         MagicRouter.pop();

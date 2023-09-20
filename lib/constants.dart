@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:golden_racks_admin/feature/admin/main_screens/subscribe_ready_admin_screens/subscribers_ready_requests_screen.dart';
 import 'package:golden_racks_admin/feature/admin/main_screens/unsubscribe_emergency_admin_screens/unsubscribers_emergency_requests_screen.dart';
+import 'package:golden_racks_admin/feature/admin/other_screens/create_plan_screen.dart';
 import 'package:intl/intl.dart';
 
 import 'core/localization/demo_localization.dart';
@@ -12,7 +13,6 @@ import 'feature/admin/main_screens/subscribe_emergency_admin_screens/subscribers
 import 'feature/admin/main_screens/unsubscribe_normal_admin_screens/unsubscribers_normal_requests_screen.dart';
 import 'feature/admin/other_screens/add_company_with_plan_screen.dart';
 import 'feature/admin/other_screens/add_spare_part_screen.dart';
-import 'feature/admin/other_screens/create_plan_screen.dart';
 import 'feature/admin/main_screens/subscribed_companies_admin/subscribed_company_data_screen.dart';
 import 'feature/admin/other_screens/technician_view_screen.dart';
 
@@ -216,9 +216,18 @@ List<DrawerItemModel> list = [
     title: 'بيانات الشركات المشتركة في خطط',
     route: SubscribedCompanyDataScreen(),
   ),
-  DrawerItemModel(title: 'اضافة قطع الغيار', route: AddASparePartScreen()),
-  DrawerItemModel(title: 'انشاء خطط الصيانة', route: CreatePlanScreen()),
-  DrawerItemModel(title: 'التقارير'),
+  DrawerItemModel(
+    title: 'اضافة قطع الغيار',
+    route: AddASparePartScreen(),
+  ),
+  DrawerItemModel(
+    title: 'انشاء خطط الصيانة',
+    route: CreatePlanScreen(),
+    // route: ShowPlansScreen(),
+  ),
+  DrawerItemModel(
+    title: 'التقارير',
+  ),
 ];
 
 List<MoreModel> moreList(DemoLocalization demo) => [

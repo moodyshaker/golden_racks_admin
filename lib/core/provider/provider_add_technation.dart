@@ -133,6 +133,7 @@ class AddTechnationProvider extends ChangeNotifier {
       }
       var streamResponse = await request.send();
       Response response = await Response.fromStream(streamResponse);
+      var r = json.decode(response.body);
 
       if (response.statusCode >= 200 && response.statusCode < 300) {
         print('Login Success');
@@ -146,13 +147,17 @@ class AddTechnationProvider extends ChangeNotifier {
           ),
         ).then((value) => MagicRouter.pop());
       } else {
-        log('${response.body}');
+        log('error create tech > ${response.body}');
+
+        String errorString =
+            r.values.first.toString().replaceAll(RegExp(r'[\[\]]'), '');
+
         MagicRouter.pop();
         showDialog(
           context: navigatorKey.currentContext!,
           barrierDismissible: false,
           builder: (ctx) => ErrorDialog(
-            text: 'خطأ في تسجيل الحساب',
+            text: '${errorString}',
           ),
         );
       }

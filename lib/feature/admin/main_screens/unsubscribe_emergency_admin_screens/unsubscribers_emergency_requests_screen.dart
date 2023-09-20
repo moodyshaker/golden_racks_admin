@@ -52,8 +52,9 @@ class _UnSubscribersEmergencyRequestsAdminScreenState
                     NetworkStatus.success
                 ? emergencyUnsubProvider.emergencyUnsubPlans.isEmpty
                     ? Container(
+                        alignment: Alignment.center,
                         child: MainText(
-                          text: 'لا يوجد خطط طوارئ',
+                          text: 'لا يوجد خطط',
                         ),
                       )
                     : ListView.builder(

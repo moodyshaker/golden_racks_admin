@@ -286,6 +286,8 @@ class _AddCompanyWithPlanScreenState extends State<AddCompanyWithPlanScreen> {
                             final n = num.tryParse(v!);
                             if (v.isEmpty || n == null) {
                               return 'من فضلك ادخل رقم الجوال';
+                            } else if (v.length != 10) {
+                              return 'يتكون رقم الجوال من 10 ارقام';
                             } else {
                               return null;
                             }
@@ -299,6 +301,7 @@ class _AddCompanyWithPlanScreenState extends State<AddCompanyWithPlanScreen> {
                           horizontalPadding: 20.w,
                           hasHeader: false,
                           hint: 'كلمة المرور',
+                          isPassword: true,
                           hasHint: true,
                           hintFont: 15.sp,
                           hintColor: gray_60,

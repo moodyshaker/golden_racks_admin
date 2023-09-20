@@ -324,10 +324,12 @@ class SubscribedPlanWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
+      backgroundColor: gray_40,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(24),
       ),
       content: ListView.separated(
+        shrinkWrap: true,
         separatorBuilder: (context, i) {
           return SizedBox(
             height: 10,
@@ -418,10 +420,12 @@ class EmergencyVisitsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
+      backgroundColor: gray_40,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(24),
       ),
       content: ListView.separated(
+        shrinkWrap: true,
         separatorBuilder: (context, i) {
           return SizedBox(
             height: 10,
@@ -539,10 +543,12 @@ class FixedVisitsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
+      backgroundColor: gray_40,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(24),
       ),
       content: ListView.separated(
+        shrinkWrap: true,
         separatorBuilder: (context, i) {
           return SizedBox(
             height: 10,

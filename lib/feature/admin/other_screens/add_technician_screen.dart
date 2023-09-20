@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:golden_racks_admin/core/localization/demo_localization.dart';
 import 'package:golden_racks_admin/core/provider/provider_add_technation.dart';
 import 'package:golden_racks_admin/core/validate/validation.dart';
+import 'package:golden_racks_admin/feature/widgets/main_text.dart';
 import '../../../../constants.dart';
 import '../../widgets/customButton.dart';
 import '../../widgets/customTextFeild.dart';
@@ -79,6 +80,25 @@ class _AddTechnicianScreenState extends State<AddTechnicianScreen> {
                                             .selectedTechnicalImage!,
                                       ),
                           ),
+                        ),
+                        FormField(
+                          builder: (FormFieldState<String> state) {
+                            return MainText(
+                              text: state.errorText ?? '',
+                              color: Colors.red,
+                              font: 16.sp,
+                              horizontalPadding: 16.w,
+                              // verticalPadding: 8.h,
+                            );
+                          },
+                          validator: (v) {
+                            if (addTechnationProvider.selectedTechnicalImage ==
+                                null) {
+                              return 'من فضلك ادخل صورة شخصية';
+                            } else {
+                              return null;
+                            }
+                          },
                         ),
                         SizedBox(
                           height: 22.h,

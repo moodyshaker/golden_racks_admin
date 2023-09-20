@@ -85,7 +85,19 @@ class AssignToSubReadyProvider extends ChangeNotifier {
           builder: (ctx) => InfoDialog(
             content: 'تم تخصيص الفني بنجاح',
           ),
-        ).then((value) => MagicRouter.pop());
+        ).then(
+          (value) async {
+            showDialog(
+              context: navigatorKey.currentContext!,
+              barrierDismissible: false,
+              builder: (ctx) => LoadingDialog(),
+            );
+            await getReadySubPlans();
+            MagicRouter.pop();
+            MagicRouter.pop();
+          },
+        );
+        ;
       } else {
         log('error assign ready sub> ${response.body}');
         MagicRouter.pop();

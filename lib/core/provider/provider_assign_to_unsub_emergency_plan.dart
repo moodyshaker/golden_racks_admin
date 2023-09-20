@@ -75,11 +75,11 @@ class AssignToUnsubEmergencyProvider extends ChangeNotifier {
           builder: (ctx) => InfoDialog(
             content: 'تم رفض الخطة بنجاح',
           ),
-        ).then(
-          (value) => MagicRouter.navigateAndPop(
+        ).then((value) {
+          MagicRouter.navigateAndPop(
             UnSubscribersEmergencyRequestsAdminScreen(),
-          ),
-        );
+          );
+        });
       } else {
         MagicRouter.pop();
         showDialog(
@@ -135,7 +135,18 @@ class AssignToUnsubEmergencyProvider extends ChangeNotifier {
           builder: (ctx) => InfoDialog(
             content: 'تم تخصيص الفني بنجاح',
           ),
-        ).then((value) => MagicRouter.pop());
+        ).then(
+          (value) async {
+            showDialog(
+              context: navigatorKey.currentContext!,
+              barrierDismissible: false,
+              builder: (ctx) => LoadingDialog(),
+            );
+            await getEmergencyUnsubPlans();
+            MagicRouter.pop();
+            MagicRouter.pop();
+          },
+        );
       } else {
         log(response.body);
         MagicRouter.pop();

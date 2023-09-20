@@ -29,13 +29,6 @@ class _CreatePlanScreenState extends State<CreatePlanScreen> {
 
   @override
   Widget build(BuildContext context) {
-    List<String> planTypes = [
-      'خطة شهرية',
-      'خطة سنوية',
-      'خطة نصف سنوية',
-      'خطة ربع سنوية',
-      'زيارة طوارئ',
-    ];
     List<String> isSparePartsType = ['نعم', 'لا'];
     final readyPlanProvider = ReadyPlanProvider.get(context);
     return OrganizerCustomScaffold(
@@ -66,11 +59,11 @@ class _CreatePlanScreenState extends State<CreatePlanScreen> {
                       ),
                       DropMenu(
                         hint: 'اختر مدة الخطة',
-                        items: planTypes,
+                        items: arabicPlanTypes.sublist(1),
                         // hintSize: 15.sp,
                         onChanged: (v) {
                           readyPlanProvider.PlanDurationController =
-                              planTypes.indexOf(v!) + 1;
+                              arabicPlanTypes.indexOf(v!);
 
                           log('plan duration > ${readyPlanProvider.PlanDurationController.toString()}');
                         },
@@ -178,6 +171,52 @@ class _CreatePlanScreenState extends State<CreatePlanScreen> {
                           final n = num.tryParse(v!);
                           if (v.isEmpty || n == null) {
                             return 'ادخل عدد ثمن الخطة';
+                          } else {
+                            return null;
+                          }
+                        },
+                      ),
+                      SizedBox(
+                        height: 8.h,
+                      ),
+                      CustomTextField(
+                        controller: readyPlanProvider.NumberOfRacksController,
+                        horizontalPadding: 20.w,
+                        hasHint: false,
+                        hasHeader: true,
+                        header: 'عدد المكينات',
+                        headerFont: 12.sp,
+                        headerTextColor: Colors.black,
+                        headerWeight: FontWeight.w400,
+                        headerFamily: 'Lato_regular',
+                        type: TextInputType.number,
+                        valid: (String? v) {
+                          final n = num.tryParse(v!);
+                          if (v.isEmpty || n == null) {
+                            return 'ادخل عدد المكينات';
+                          } else {
+                            return null;
+                          }
+                        },
+                      ),
+                      SizedBox(
+                        height: 8.h,
+                      ),
+                      CustomTextField(
+                        controller: readyPlanProvider.RacksUnitPriceController,
+                        horizontalPadding: 20.w,
+                        hasHint: false,
+                        hasHeader: true,
+                        header: 'سعر المكينة الواحدة',
+                        headerFont: 12.sp,
+                        headerTextColor: Colors.black,
+                        headerWeight: FontWeight.w400,
+                        headerFamily: 'Lato_regular',
+                        type: TextInputType.number,
+                        valid: (String? v) {
+                          final n = num.tryParse(v!);
+                          if (v.isEmpty || n == null) {
+                            return 'ادخل سعر المكينة الواحدة';
                           } else {
                             return null;
                           }

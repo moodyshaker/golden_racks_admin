@@ -8,7 +8,7 @@ class UnActivePlanModel {
   String? payedWay;
   String? address;
   String? planeName;
-  int? planePrice;
+  double? planePrice;
   String? ticketNumber;
 
   UnActivePlanModel({
@@ -20,7 +20,7 @@ class UnActivePlanModel {
     this.address,
     this.planeName,
     this.planePrice,
-    required this.ticketNumber,
+    this.ticketNumber,
   });
 
   Map<String, dynamic> toJson() {
@@ -52,7 +52,8 @@ class UnActivePlanModel {
       payedWay: json['payedWay'] != null ? json['payedWay'] as String : null,
       address: json['address'] != null ? json['address'] as String : null,
       planeName: json['planeName'] != null ? json['planeName'] as String : null,
-      planePrice: json['planePrice'] != null ? json['planePrice'] as int : null,
+      planePrice:
+          json['planePrice'] != null ? json['planePrice'] as double : null,
       ticketNumber: subtractTicketNumber(json['ticketNumber']),
     );
   }
