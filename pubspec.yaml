@@ -15,7 +15,7 @@ dependencies:
     sdk: flutter
 
 
-  cupertino_icons: ^1.0.2
+  cupertino_icons:
   flutter_screenutil:
   shared_preferences:
   http:
@@ -23,7 +23,7 @@ dependencies:
   flutter_image_compress:
   focus_detector:
   fancy_shimmer_image:
-  image_picker: ^1.0.2
+  image_picker: 
   percent_indicator:
   intl:
   flutter_ringtone_player:
@@ -31,8 +31,8 @@ dependencies:
   firebase_messaging:
   lottie:
   firebase_core:
-  pin_code_fields: ^7.3.0
-  url_launcher: ^6.0.12
+  pin_code_fields: 
+  url_launcher: 
   path_provider:
   path:
   provider:
@@ -49,9 +49,9 @@ dependencies:
   flutter_launcher_icons:
   shimmer:
   google_fonts:
-  audioplayers: ^5.1.0
-  video_player: ^2.2.15
-  record: ^4.4.4
+  audioplayers:
+  video_player:
+  record:
   editable:
 
 

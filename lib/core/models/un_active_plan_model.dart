@@ -2,8 +2,8 @@ import 'package:golden_racks_admin/constants.dart';
 
 class UnActivePlanModel {
   int? id;
-  String? companyNameAr;
-  String? companyNameEn;
+  String? companyName_Ar;
+  String? companyName_En;
   String? accountNumber;
   String? payedWay;
   String? address;
@@ -13,8 +13,8 @@ class UnActivePlanModel {
 
   UnActivePlanModel({
     this.id,
-    this.companyNameAr,
-    this.companyNameEn,
+    this.companyName_Ar,
+    this.companyName_En,
     this.accountNumber,
     this.payedWay,
     this.address,
@@ -26,8 +26,8 @@ class UnActivePlanModel {
   Map<String, dynamic> toJson() {
     return <String, dynamic>{
       'id': id,
-      'companyNameAr': companyNameAr,
-      'companyNameEn': companyNameEn,
+      'companyName_Ar': companyName_Ar,
+      'companyName_En': companyName_En,
       'accountNumber': accountNumber,
       'payedWay': payedWay,
       'address': address,
@@ -40,11 +40,11 @@ class UnActivePlanModel {
   factory UnActivePlanModel.fromJson(Map<String, dynamic> json) {
     return UnActivePlanModel(
       id: json['id'] != null ? json['id'] as int : null,
-      companyNameAr: json['companyNameAr'] != null
-          ? json['companyNameAr'] as String
+      companyName_Ar: json['companyName_Ar'] != null
+          ? json['companyName_Ar'] as String
           : null,
-      companyNameEn: json['companyNameEn'] != null
-          ? json['companyNameEn'] as String
+      companyName_En: json['companyName_En'] != null
+          ? json['companyName_En'] as String
           : null,
       accountNumber: json['accountNumber'] != null
           ? json['accountNumber'] as String

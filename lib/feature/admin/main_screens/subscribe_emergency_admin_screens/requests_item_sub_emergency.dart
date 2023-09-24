@@ -136,9 +136,8 @@ class _RequestsItemsubEmergencyState extends State<RequestsItemsubEmergency> {
                     ),
                     Flexible(
                       child: MainText(
-                        // text: formateDateTimeToDate(
-                        //     '${widget.emergencySub.addedDate}'),
-                        text: '',
+                        text: formateDateTimeToDate(
+                            '${widget.emergencySub.addedDate}'),
                         font: 15.sp,
                         color: Colors.black,
                         weight: FontWeight.w100,
@@ -162,9 +161,8 @@ class _RequestsItemsubEmergencyState extends State<RequestsItemsubEmergency> {
                     ),
                     Flexible(
                       child: MainText(
-                        // text: formateDateTimeToTime(
-                        //     '${widget.emergencySub.addedDate}'),
-                        text: '',
+                        text: formateDateTimeToTime(
+                            '${widget.emergencySub.addedDate}'),
                         font: 15.sp,
                         color: Colors.black,
                         weight: FontWeight.w100,

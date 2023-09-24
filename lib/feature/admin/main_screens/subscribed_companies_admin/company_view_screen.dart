@@ -49,7 +49,7 @@ class _CompanyViewScreenState extends State<CompanyViewScreen> {
         backgroundColor: Colors.transparent,
         hasAppbar: false,
         isHome: true,
-        hasNavBar: false,
+        hasNavBar: true,
         title1: 'بيانات الشركات المشتركة',
         body: SingleChildScrollView(
           child: Container(

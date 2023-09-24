@@ -42,7 +42,7 @@ class _SubscribersEmergencyRequestsAdminScreenState
         backgroundColor: Colors.transparent,
         hasAppbar: false,
         isHome: true,
-        hasNavBar: false,
+        hasNavBar: true,
         title1: 'تحديد فني لطلبات الطوارئ للمشتركين',
         body: emergencySubProvider.emergencySubStatus == NetworkStatus.loading
             ? OpacityLoadingLogo()

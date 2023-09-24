@@ -7,7 +7,7 @@ import 'package:golden_racks_admin/core/provider/provider_subscribed_Company.dar
 import 'package:golden_racks_admin/feature/widgets/customButton.dart';
 import 'package:golden_racks_admin/feature/widgets/customTextFeild.dart';
 import 'package:golden_racks_admin/feature/widgets/main_text.dart';
-import 'package:golden_racks_admin/feature/widgets/technicianCustomScaffold.dart';
+import 'package:golden_racks_admin/feature/widgets/organizerCustomScaffold.dart';
 
 class SendAlertToCompanyAdminScreen extends StatefulWidget {
   final SubscribedCompanyModel subscribedCompany;
@@ -35,11 +35,11 @@ class _SendAlertToCompanyAdminScreenState
           fit: BoxFit.fill,
         ),
       ),
-      child: TechnicianCustomScaffold(
+      child: OrganizerCustomScaffold(
         backgroundColor: Colors.transparent,
         hasAppbar: false,
         isHome: true,
-        hasNavBar: false,
+        hasNavBar: true,
         title1: 'ارسال تنبيه للشركة',
         body: Container(
           margin: EdgeInsets.symmetric(horizontal: 24.w),

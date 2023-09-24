@@ -43,7 +43,7 @@ class _UnSubscribersEmergencyRequestsAdminScreenState
         backgroundColor: Colors.transparent,
         hasAppbar: false,
         isHome: true,
-        hasNavBar: false,
+        hasNavBar: true,
         title1: 'تحديد فني لطلبات الطوارئ لغير المشتركين',
         body: emergencyUnsubProvider.emergencyUnsubStatus ==
                 NetworkStatus.loading

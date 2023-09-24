@@ -85,8 +85,9 @@ class ActionDialog extends StatelessWidget {
                                   ),
                                 ),
                                 backgroundColor:
-                                    MaterialStateProperty.all<Color>(
-                                        auth ? kPrimaryColor : kMainColor)),
+                                    MaterialStateProperty.all<Color>(auth
+                                        ? kPrimaryColor
+                                        : kSecondaryColor)),
                             onPressed: onApproveClick,
                             child: Text(
                               approveAction ?? '',
@@ -194,8 +195,9 @@ class ActionDialog extends StatelessWidget {
                                     ),
                                   ),
                                   backgroundColor:
-                                      MaterialStateProperty.all<Color>(
-                                          auth ? kPrimaryColor : kMainColor)),
+                                      MaterialStateProperty.all<Color>(auth
+                                          ? kPrimaryColor
+                                          : kSecondaryColor)),
                               onPressed: onApproveClick,
                               child: Text(
                                 approveAction ?? '',
@@ -226,8 +228,9 @@ class ActionDialog extends StatelessWidget {
                                     ),
                                   ),
                                   backgroundColor:
-                                      MaterialStateProperty.all<Color>(
-                                          auth ? kPrimaryColor : kMainColor)),
+                                      MaterialStateProperty.all<Color>(auth
+                                          ? kPrimaryColor
+                                          : kSecondaryColor)),
                               child: Text(
                                 cancelAction ?? '',
                                 style: TextStyle(

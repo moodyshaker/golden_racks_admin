@@ -1,3 +1,5 @@
+import 'package:golden_racks_admin/constants.dart';
+
 class TodayAppointmentModel {
   int? id;
   String? userId;
@@ -14,6 +16,12 @@ class TodayAppointmentModel {
   int? remaningNumberOEmregencyVisits;
   String? paymentMethod;
   int? transactionId;
+  String? planName;
+  String? companyName;
+  String? address;
+  String? ticketNumber;
+  String? userImage;
+  String? accountNumber;
 
   TodayAppointmentModel({
     this.id,
@@ -31,6 +39,12 @@ class TodayAppointmentModel {
     this.remaningNumberOEmregencyVisits,
     this.paymentMethod,
     this.transactionId,
+    this.planName,
+    this.companyName,
+    this.address,
+    this.ticketNumber,
+    this.userImage,
+    this.accountNumber,
   });
 
   factory TodayAppointmentModel.fromJson(Map<String, dynamic> json) {
@@ -50,6 +64,13 @@ class TodayAppointmentModel {
       remaningNumberOEmregencyVisits: json["remaningNumberOEmregencyVisits"],
       paymentMethod: json["paymentMethod"],
       transactionId: json["transactionId"],
+      planName: json["planName"],
+      companyName: json["companyName"],
+      address:
+          '${json["address"]['country']} - ${json["address"]['city']} - ${json["address"]['state']} - ${json["address"]['street']}',
+      ticketNumber: subtractTicketNumber(json["ticketNumber"]),
+      userImage: json["userImage"],
+      accountNumber: json["accountNumber"],
     );
   }
 
@@ -70,6 +91,12 @@ class TodayAppointmentModel {
       "remaningNumberOEmregencyVisits": remaningNumberOEmregencyVisits,
       "paymentMethod": paymentMethod,
       "transactionId": transactionId,
+      "planName": planName,
+      "companyName": companyName,
+      // "address": address,
+      "ticketNumber": ticketNumber,
+      "userImage": userImage,
+      "accountNumber": accountNumber,
     };
   }
 }

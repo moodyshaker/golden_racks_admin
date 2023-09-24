@@ -62,7 +62,7 @@ class _AdminAssignTechnicalForReadySubScreenState
           backgroundColor: Colors.transparent,
           hasAppbar: false,
           isHome: true,
-          hasNavBar: false,
+          hasNavBar: true,
           title1: 'اضافة فني للزيارة الدورية للمشتركين',
           body: addTechProvider.techStatus == NetworkStatus.loading
               ? OpacityLoadingLogo()
@@ -234,6 +234,10 @@ class _AdminAssignTechnicalForReadySubScreenState
                                                                         .allTechnicals[
                                                                             i]
                                                                         .userId!,
+                                                                subsribeToReadyPlanId:
+                                                                    widget
+                                                                        .appointment
+                                                                        .id!,
                                                                 VisitDate:
                                                                     chosenTime!
                                                                         .toIso8601String(),

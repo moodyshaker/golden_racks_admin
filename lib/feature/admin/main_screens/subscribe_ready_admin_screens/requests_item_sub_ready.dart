@@ -44,13 +44,13 @@ class _RequestsItemSubReadyState extends State<RequestsItemSubReady> {
                   Column(
                     children: [
                       MainText(
-                        text: 'شركة امازون',
+                        text: '${widget.appointment.companyName}',
                         font: 15.sp,
                         weight: FontWeight.w700,
                         color: Colors.black,
                       ),
                       MainText(
-                        text: 'GR566-23',
+                        text: '${widget.appointment.accountNumber}',
                         font: 14.sp,
                         weight: FontWeight.w300,
                         color: Colors.black,
@@ -68,7 +68,7 @@ class _RequestsItemSubReadyState extends State<RequestsItemSubReady> {
                     color: Colors.black,
                   ),
                   MainText(
-                    text: 'GR878657',
+                    text: '${widget.appointment.ticketNumber}',
                     font: 14.sp,
                     weight: FontWeight.w300,
                     color: Colors.black,
@@ -94,12 +94,14 @@ class _RequestsItemSubReadyState extends State<RequestsItemSubReady> {
               SizedBox(
                 width: 27.h,
               ),
-              MainText(
-                text:
-                    'الأساسية رصيد الدورى المتبقي (${widget.appointment.remaningNumberOfFixedVisits})',
-                font: 15.sp,
-                color: Colors.black,
-                weight: FontWeight.w500,
+              Flexible(
+                child: MainText(
+                  text:
+                      '${arabicPlanTypes[englishPlanTypes.indexOf(widget.appointment.planName!)]}',
+                  font: 15.sp,
+                  color: Colors.black,
+                  weight: FontWeight.w500,
+                ),
               ),
             ],
           ),
@@ -121,7 +123,8 @@ class _RequestsItemSubReadyState extends State<RequestsItemSubReady> {
                 width: 62.w,
               ),
               MainText(
-                text: 'الصيانة الشهرية الدورية',
+                text:
+                    'خطة الصيانة (${arabicPlanTypes[englishPlanTypes.indexOf(widget.appointment.planName!)]}) الدورية',
                 font: 15.sp,
                 color: Colors.black,
                 weight: FontWeight.w500,
@@ -145,11 +148,13 @@ class _RequestsItemSubReadyState extends State<RequestsItemSubReady> {
               SizedBox(
                 width: 56.w,
               ),
-              MainText(
-                text: 'جدة - الحي الخامس - قطعه 200',
-                font: 15.sp,
-                color: Colors.black,
-                weight: FontWeight.w500,
+              Flexible(
+                child: MainText(
+                  text: '${widget.appointment.address}',
+                  font: 15.sp,
+                  color: Colors.black,
+                  weight: FontWeight.w500,
+                ),
               ),
             ],
           ),
@@ -183,9 +188,11 @@ class _RequestsItemSubReadyState extends State<RequestsItemSubReady> {
             borderWidth: 1.0,
             borderColor: gray_40,
             onPressed: () async {
-              MagicRouter.navigateTo(AdminAssignTechnicalForReadySubScreen(
-                appointment: widget.appointment,
-              ));
+              MagicRouter.navigateTo(
+                AdminAssignTechnicalForReadySubScreen(
+                  appointment: widget.appointment,
+                ),
+              );
             },
           ),
         ],

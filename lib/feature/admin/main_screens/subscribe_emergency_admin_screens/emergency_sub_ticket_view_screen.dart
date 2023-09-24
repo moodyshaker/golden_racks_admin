@@ -54,7 +54,7 @@ class _EmergencySubTicketViewScreenState
         backgroundColor: Colors.transparent,
         hasAppbar: false,
         isHome: true,
-        hasNavBar: false,
+        hasNavBar: true,
         title1: 'عرض تذكرة رقم ${widget.emergencySub.ticketNumber}',
         body: Column(
           children: [

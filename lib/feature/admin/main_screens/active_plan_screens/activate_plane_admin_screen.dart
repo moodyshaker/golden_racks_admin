@@ -42,13 +42,13 @@ class _ActivatePlanAdminScreenState extends State<ActivatePlanAdminScreen> {
         backgroundColor: Colors.transparent,
         hasAppbar: false,
         isHome: true,
-        hasNavBar: false,
+        hasNavBar: true,
         title1: 'حسابات في انتظار تفعيل الخطط لها',
         body: activePlanProvider.unActivePlanStatus == NetworkStatus.loading
             ? OpacityLoadingLogo()
             : activePlanProvider.unActivePlanStatus == NetworkStatus.success
                 ? activePlanProvider.allUnActivePlans.isEmpty
-                    ? Container(
+                    ? Center(
                         child: MainText(
                           text: 'لا يوجد طلبات تفعيل للخطط',
                         ),

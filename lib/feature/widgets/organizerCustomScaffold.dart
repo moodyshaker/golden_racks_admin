@@ -1,7 +1,10 @@
+import 'dart:developer';
+
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:golden_racks_admin/feature/admin/main_screens/home.dart';
 import '../../constants.dart';
 import '../../core/bloc/language_cubit.dart';
 import '../../core/bloc/organizer_app_cubit.dart';
@@ -305,27 +308,26 @@ class _OrganizerCustomScaffoldState extends State<OrganizerCustomScaffold> {
                               onTap: () {
                                 if (!MagicRouter.canPop) {
                                   showDialog(
-                                      context: navigatorKey.currentContext!,
-                                      builder: (c) => ActionDialog(
-                                            content: demo.getTranslatedValue(
-                                              'do_you_want_exit',
-                                            ),
-                                            onCancelClick: () {
-                                              MagicRouter.pop();
-                                            },
-                                            approveAction:
-                                                demo.getTranslatedValue(
-                                              'dialog_approve',
-                                            ),
-                                            cancelAction:
-                                                demo.getTranslatedValue(
-                                              'dialog_decline',
-                                            ),
-                                            onApproveClick: () {
-                                              MagicRouter.pop();
-                                              SystemNavigator.pop();
-                                            },
-                                          ));
+                                    context: navigatorKey.currentContext!,
+                                    builder: (c) => ActionDialog(
+                                      content: demo.getTranslatedValue(
+                                        'do_you_want_exit',
+                                      ),
+                                      onCancelClick: () {
+                                        MagicRouter.pop();
+                                      },
+                                      approveAction: demo.getTranslatedValue(
+                                        'dialog_approve',
+                                      ),
+                                      cancelAction: demo.getTranslatedValue(
+                                        'dialog_decline',
+                                      ),
+                                      onApproveClick: () {
+                                        MagicRouter.pop();
+                                        SystemNavigator.pop();
+                                      },
+                                    ),
+                                  );
                                 } else {
                                   widget.onBackPressed != null
                                       ? widget.onBackPressed!()
@@ -356,6 +358,8 @@ class _OrganizerCustomScaffoldState extends State<OrganizerCustomScaffold> {
                       (i) => GestureDetector(
                         onTap: () {
                           if (i == 2) {
+                            log('home');
+                            MagicRouter.navigateAndPopAll(AdminHome());
                           } else if (i == 0) {
                             _key.currentState!.openDrawer();
                           } else {
@@ -363,29 +367,37 @@ class _OrganizerCustomScaffoldState extends State<OrganizerCustomScaffold> {
                           }
                         },
                         child: i == 2
-                            ? Container(
-                                height: 60.h,
-                                width: 60.h,
-                                padding: EdgeInsets.symmetric(
-                                  vertical: 6.h,
-                                  horizontal: 6.w,
-                                ),
-                                margin: EdgeInsets.symmetric(
-                                  vertical: 6.h,
-                                  horizontal: 6.w,
-                                ),
-                                decoration: BoxDecoration(
-                                  color: kAccentColor,
-                                  shape: BoxShape.circle,
-                                ),
-                                child: Center(
-                                  child: Padding(
-                                    padding: EdgeInsets.only(bottom: 4.h),
-                                    child: Image.asset(
-                                      getAsset('${navBar[i].icon}'),
-                                      height: 24.h,
-                                      width: 24.w,
-                                      color: kBlackColor,
+                            ? Padding(
+                                padding: EdgeInsets.only(bottom: 6.h),
+                                child: Container(
+                                  height: 60.h,
+                                  width: 60.h,
+                                  padding: EdgeInsets.symmetric(
+                                    vertical: 6.h,
+                                    horizontal: 6.w,
+                                  ),
+                                  margin: EdgeInsets.symmetric(
+                                    vertical: 6.h,
+                                    horizontal: 6.w,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: kAccentColor,
+                                    shape: BoxShape.circle,
+                                  ),
+                                  child: Center(
+                                    child: Padding(
+                                      padding: EdgeInsets.only(bottom: 4.h),
+                                      // child: Image.asset(
+                                      //   getAsset('${navBar[i].icon}'),
+                                      //   height: 24.h,
+                                      //   width: 24.w,
+                                      //   color: kBlackColor,
+                                      // ),
+                                      child: Icon(
+                                        Icons.home,
+                                        color: kSecondaryColor,
+                                        size: 32,
+                                      ),
                                     ),
                                   ),
                                 ),

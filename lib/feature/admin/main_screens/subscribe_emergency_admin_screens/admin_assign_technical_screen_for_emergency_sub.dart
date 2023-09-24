@@ -62,7 +62,7 @@ class _AdminAssignTechnicalForEmergencySubScreenState
           backgroundColor: Colors.transparent,
           hasAppbar: false,
           isHome: true,
-          hasNavBar: false,
+          hasNavBar: true,
           title1: 'اضافة فني لخطة صيانة',
           body: addTechProvider.techStatus == NetworkStatus.loading
               ? OpacityLoadingLogo()

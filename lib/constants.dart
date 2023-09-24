@@ -157,7 +157,7 @@ List<NavItem> navItems = [
 ];
 
 List<NavItem> organizerNavItems = [
-  NavItem(icon: 'home_icon', title: 'القائمة'),
+  NavItem(icon: 'menu_icon', title: 'القائمة'),
   NavItem(icon: 'icon', title: 'الإحصائيات'),
   NavItem(icon: 'add_new_icon', title: ''),
   NavItem(icon: 'ticket_icon', title: 'التذاكر'),

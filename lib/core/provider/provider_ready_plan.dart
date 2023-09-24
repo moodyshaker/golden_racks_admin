@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:golden_racks_admin/feature/admin/main_screens/home.dart';
 import 'package:http/http.dart';
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
@@ -148,7 +149,7 @@ class ReadyPlanProvider extends ChangeNotifier {
           builder: (ctx) => InfoDialog(
             content: 'تم اضافة الخطة بنجاح',
           ),
-        );
+        ).then((value) => MagicRouter.navigateTo(AdminHome()));
       } else {
         log('error >> ${response.body}');
         MagicRouter.pop();
@@ -270,7 +271,7 @@ class ReadyPlanProvider extends ChangeNotifier {
           builder: (ctx) => InfoDialog(
             content: 'تم الاشتراك في الخطة',
           ),
-        );
+        ).then((value) => MagicRouter.navigateAndPopAll(AdminHome()));
       } else {
         log('erro >> ${response.body}');
         MagicRouter.pop();

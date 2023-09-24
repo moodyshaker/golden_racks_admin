@@ -51,13 +51,13 @@ class _NeedActivateItemAdminState extends State<NeedActivateItemAdmin> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         MainText(
-                          text: '${widget.unActivePlan.id}',
+                          text: '${widget.unActivePlan.companyName_Ar}',
                           font: 15.sp,
                           weight: FontWeight.w700,
                           color: Colors.black,
                         ),
                         MainText(
-                          text: 'GR566-23',
+                          text: '${widget.unActivePlan.accountNumber}',
                           font: 14.sp,
                           weight: FontWeight.w300,
                           color: Colors.black,
@@ -87,7 +87,8 @@ class _NeedActivateItemAdminState extends State<NeedActivateItemAdmin> {
                 width: 13.w,
               ),
               MainText(
-                text: 'الاساسية ${widget.unActivePlan.planePrice}',
+                text:
+                    '${arabicPlanTypes[englishPlanTypes.indexOf(widget.unActivePlan.planeName!)]}  ${widget.unActivePlan.planePrice}',
                 font: 15.sp,
                 color: Colors.black,
                 weight: FontWeight.w500,
@@ -136,11 +137,13 @@ class _NeedActivateItemAdminState extends State<NeedActivateItemAdmin> {
               SizedBox(
                 width: 61.w,
               ),
-              MainText(
-                text: 'جدة-الحي الخامس-قطعة 200',
-                font: 15.sp,
-                color: Colors.black,
-                weight: FontWeight.w500,
+              Flexible(
+                child: MainText(
+                  text: '${widget.unActivePlan.address}',
+                  font: 15.sp,
+                  color: Colors.black,
+                  weight: FontWeight.w500,
+                ),
               ),
             ],
           ),

@@ -35,7 +35,7 @@ class _CreatePlanScreenState extends State<CreatePlanScreen> {
       backgroundColor: Colors.white,
       hasAppbar: false,
       isHome: true,
-      hasNavBar: false,
+      hasNavBar: true,
       title1: 'انشاء خطة صيانة',
       body: Container(
         margin: EdgeInsets.symmetric(horizontal: 16.w),

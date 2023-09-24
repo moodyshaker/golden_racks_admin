@@ -36,7 +36,7 @@ class _ShowPlansScreenState extends State<ShowPlansScreen> {
         backgroundColor: Colors.transparent,
         hasAppbar: false,
         isHome: true,
-        hasNavBar: false,
+        hasNavBar: true,
         title1: 'انشاء خطة صيانة',
         body: Container(
           margin: EdgeInsets.symmetric(horizontal: 22.w),

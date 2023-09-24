@@ -348,14 +348,16 @@ class _CustomScaffoldState extends State<CustomScaffold> {
                   margin: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
                   padding: EdgeInsets.symmetric(horizontal: 8.w),
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30.r),
-                      gradient: LinearGradient(
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
-                          colors: [
-                            Color(0xff258039),
-                            Color(0xff8FC742),
-                          ])),
+                    borderRadius: BorderRadius.circular(30.r),
+                    gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [
+                        Color(0xff258039),
+                        Color(0xff8FC742),
+                      ],
+                    ),
+                  ),
                   child: Row(
                     children: List.generate(
                         navBar.length,

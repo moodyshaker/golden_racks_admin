@@ -56,6 +56,7 @@ class AssignToSubReadyProvider extends ChangeNotifier {
   Future<void> assignTechForSubReady({
     required String UserId,
     required String TechnicalId,
+    required int subsribeToReadyPlanId,
     required String VisitDate,
     required bool IsActive,
   }) async {
@@ -74,6 +75,7 @@ class AssignToSubReadyProvider extends ChangeNotifier {
           'TechnicalId': TechnicalId,
           'VisitDate': VisitDate,
           'IsActive': IsActive,
+          'subsribeToReadyPlanId': subsribeToReadyPlanId,
         },
       );
 

@@ -43,7 +43,7 @@ class _AddTechnicianScreenState extends State<AddTechnicianScreen> {
         backgroundColor: Colors.transparent,
         hasAppbar: false,
         isHome: true,
-        hasNavBar: false,
+        hasNavBar: true,
         title1: 'انشاء حسابات الدخول للفنين',
         body: Container(
           margin: EdgeInsets.symmetric(horizontal: 22.w),
@@ -221,37 +221,38 @@ class _AddTechnicianScreenState extends State<AddTechnicianScreen> {
                         SizedBox(
                           height: 22.h,
                         ),
-                        CustomButton(
-                          title: 'تسجيل الحساب',
-                          color: kSecondaryColor,
-                          height: 50.h,
-                          font: 16.sp,
-                          family: 'Lato_bold',
-                          textColor: Colors.white,
-                          withBorder: false,
-                          onPressed: () async {
-                            if (_form.currentState!.validate()) {
-                              await addTechnationProvider.addNewTechnical(
-                                fullName: addTechnationProvider
-                                    .addTechfullNameController.text,
-                                Password: addTechnationProvider
-                                    .addTechPasswordController.text,
-                                UploadImage: addTechnationProvider
-                                    .selectedTechnicalImage,
-                                mobileNumber: addTechnationProvider
-                                    .addTechmobileNumberController.text,
-                                Email: addTechnationProvider
-                                    .addTechEmailController.text,
-                                UserName: addTechnationProvider
-                                    .addTechUserNameController.text,
-                              );
-                            }
-                          },
-                        ),
                       ],
                     ),
                   ),
                 ),
+              ),
+              CustomButton(
+                title: 'تسجيل الحساب',
+                color: kSecondaryColor,
+                height: 50.h,
+                font: 16.sp,
+                family: 'Lato_bold',
+                textColor: Colors.white,
+                withBorder: false,
+                onPressed: () async {
+                  if (_form.currentState!.validate()) {
+                    await addTechnationProvider.addNewTechnical(
+                      fullName:
+                          addTechnationProvider.addTechfullNameController.text,
+                      Password:
+                          addTechnationProvider.addTechPasswordController.text,
+                      UploadImage: addTechnationProvider.selectedTechnicalImage,
+                      mobileNumber: addTechnationProvider
+                          .addTechmobileNumberController.text,
+                      Email: addTechnationProvider.addTechEmailController.text,
+                      UserName:
+                          addTechnationProvider.addTechUserNameController.text,
+                    );
+                  }
+                },
+              ),
+              SizedBox(
+                height: 16.h,
               ),
             ],
           ),

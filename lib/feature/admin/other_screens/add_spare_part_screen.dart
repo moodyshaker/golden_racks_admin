@@ -31,7 +31,7 @@ class _AddASparePartScreenState extends State<AddASparePartScreen> {
       backgroundColor: Colors.white,
       hasAppbar: false,
       isHome: true,
-      hasNavBar: false,
+      hasNavBar: true,
       title1: 'انشاء خطة صيانة',
       body: Container(
         margin: EdgeInsets.symmetric(horizontal: 16.w),

@@ -56,7 +56,7 @@ class _AddCompanyWithPlanScreenState extends State<AddCompanyWithPlanScreen> {
         backgroundColor: Colors.transparent,
         hasAppbar: false,
         isHome: true,
-        hasNavBar: false,
+        hasNavBar: true,
         title1: 'انشاء حسابات للشركات وربطها بخطة',
         body: Container(
           margin: EdgeInsets.symmetric(horizontal: 22.w),
@@ -341,32 +341,34 @@ class _AddCompanyWithPlanScreenState extends State<AddCompanyWithPlanScreen> {
                         SizedBox(
                           height: 18.h,
                         ),
-                        CustomButton(
-                          title: 'تسجيل الحساب',
-                          color: kSecondaryColor,
-                          height: 50.h,
-                          font: 16.sp,
-                          family: 'Lato_bold',
-                          textColor: Colors.white,
-                          withBorder: false,
-                          onPressed: () async {
-                            if (_form.currentState!.validate()) {
-                              await readyPlanProvider.getReadyPlan(
-                                planDuration:
-                                    readyPlanProvider.chosenPlanDuration,
-                              );
-                              await auth.authRegister(
-                                countryId: selectedCountry!.id!,
-                                cityId: selectedCity!.id!,
-                                stateId: selectedState!.id!,
-                              );
-                            }
-                          },
-                        ),
                       ],
                     ),
                   ),
                 ),
+              ),
+              CustomButton(
+                title: 'تسجيل الحساب',
+                color: kSecondaryColor,
+                height: 50.h,
+                font: 16.sp,
+                family: 'Lato_bold',
+                textColor: Colors.white,
+                withBorder: false,
+                onPressed: () async {
+                  if (_form.currentState!.validate()) {
+                    await readyPlanProvider.getReadyPlan(
+                      planDuration: readyPlanProvider.chosenPlanDuration,
+                    );
+                    await auth.authRegister(
+                      countryId: selectedCountry!.id!,
+                      cityId: selectedCity!.id!,
+                      stateId: selectedState!.id!,
+                    );
+                  }
+                },
+              ),
+              SizedBox(
+                height: 18.h,
               ),
             ],
           ),

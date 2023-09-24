@@ -43,7 +43,7 @@ class _UnSubscribersNormalRequestsAdminScreenState
         backgroundColor: Colors.transparent,
         hasAppbar: false,
         isHome: true,
-        hasNavBar: false,
+        hasNavBar: true,
         title1: 'تحديد فني لطلبات الدورية لغير المشتركين',
         body: NormalUnsubProvider.normalUnsubStatus == NetworkStatus.loading
             ? OpacityLoadingLogo()

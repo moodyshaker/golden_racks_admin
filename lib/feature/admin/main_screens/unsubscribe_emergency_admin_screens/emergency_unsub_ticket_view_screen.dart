@@ -51,7 +51,7 @@ class _EmergencyUnsubTicketViewScreenState
         backgroundColor: Colors.transparent,
         hasAppbar: false,
         isHome: true,
-        hasNavBar: false,
+        hasNavBar: true,
         title1: 'عرض تذكرة رقم ${widget.emergencyUnsub.ticketNumber}',
         body: Column(
           children: [

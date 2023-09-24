@@ -39,7 +39,7 @@ class _AddPlanScreenState extends State<AddPlanScreen> {
         backgroundColor: Colors.transparent,
         hasAppbar: false,
         isHome: true,
-        hasNavBar: false,
+        hasNavBar: true,
         title1: 'اضافة خطة صيانة للحساب',
         body: Container(
           margin: EdgeInsets.symmetric(horizontal: 22.w),

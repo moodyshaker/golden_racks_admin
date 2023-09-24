@@ -43,7 +43,7 @@ class _NormalUnsubTicketViewScreenState
         backgroundColor: Colors.transparent,
         hasAppbar: false,
         isHome: true,
-        hasNavBar: false,
+        hasNavBar: true,
         title1: 'عرض تذكرة رقم  ${widget.normalUnsub.ticketNumber}',
         body: Column(
           children: [
