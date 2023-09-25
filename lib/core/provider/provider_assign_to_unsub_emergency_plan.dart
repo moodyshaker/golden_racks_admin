@@ -144,6 +144,8 @@ class AssignToUnsubEmergencyProvider extends ChangeNotifier {
             );
             await getEmergencyUnsubPlans();
             MagicRouter.pop();
+            // OrganizerAppCubit.listenFalse(navigatorKey.currentContext!)
+            //     .changeCurrent(2);
             MagicRouter.pop();
           },
         );

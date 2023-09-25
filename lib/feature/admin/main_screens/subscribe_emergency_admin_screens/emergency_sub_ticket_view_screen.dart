@@ -149,11 +149,9 @@ class _EmergencySubTicketViewScreenState
                           width: 20.w,
                         ),
                         MainText(
-                          // text: formateDateTimeToDate(
-                          //   widget.emergencySub.addedDate!,
-                          // ),
-                          text: '',
-
+                          text: formateDateTimeToDate(
+                            widget.emergencySub.addedDate!,
+                          ),
                           font: 15.sp,
                           weight: FontWeight.w400,
                           color: Colors.black,

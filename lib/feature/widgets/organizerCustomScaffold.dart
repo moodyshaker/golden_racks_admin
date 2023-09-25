@@ -28,19 +28,19 @@ class OrganizerCustomScaffold extends StatefulWidget {
 
   final Function()? onBackPressed;
 
-  const OrganizerCustomScaffold(
-      {this.title1,
-      this.title2,
-      this.title3,
-      this.backgroundColor,
-      this.pic = 'amazon_logo',
-      required this.body,
-      this.hasAppbar = true,
-      this.hasNavBar = true,
-      this.isHome = true,
-      this.onBackPressed,
-      Key? key})
-      : super(key: key);
+  const OrganizerCustomScaffold({
+    this.title1,
+    this.title2,
+    this.title3,
+    this.backgroundColor,
+    this.pic = 'amazon_logo',
+    required this.body,
+    this.hasAppbar = true,
+    this.hasNavBar = true,
+    this.isHome = true,
+    this.onBackPressed,
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<OrganizerCustomScaffold> createState() =>
@@ -276,9 +276,7 @@ class _OrganizerCustomScaffoldState extends State<OrganizerCustomScaffold> {
                           ],
                         ),
                       ),
-                      SizedBox(
-                        height: 20.h,
-                      ),
+                      SizedBox(height: 20.h),
                     ])
                   : Container(
                       margin: EdgeInsets.symmetric(horizontal: 22.w),
@@ -360,7 +358,9 @@ class _OrganizerCustomScaffoldState extends State<OrganizerCustomScaffold> {
                           if (i == 2) {
                             log('home');
                             MagicRouter.navigateAndPopAll(AdminHome());
+                            cubit.changeCurrent(i);
                           } else if (i == 0) {
+                            cubit.changeCurrent(i);
                             _key.currentState!.openDrawer();
                           } else {
                             cubit.changeCurrent(i);
@@ -370,8 +370,8 @@ class _OrganizerCustomScaffoldState extends State<OrganizerCustomScaffold> {
                             ? Padding(
                                 padding: EdgeInsets.only(bottom: 6.h),
                                 child: Container(
-                                  height: 60.h,
-                                  width: 60.h,
+                                  height: cubit.i == i ? 60.h : 55.h,
+                                  width: cubit.i == i ? 60.w : 55.w,
                                   padding: EdgeInsets.symmetric(
                                     vertical: 6.h,
                                     horizontal: 6.w,

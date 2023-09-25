@@ -117,13 +117,15 @@ class SubscribedCompanyProvider extends ChangeNotifier {
 
       if (response.statusCode >= 200 && response.statusCode < 300) {
         MagicRouter.pop();
+        notificationController.clear();
         showDialog(
           context: navigatorKey.currentContext!,
           barrierDismissible: false,
           builder: (ctx) => InfoDialog(
             content: 'تم ارسال الاشعار بنجاح',
           ),
-        );
+        ).then((value) => MagicRouter.pop());
+        notificationController.clear();
       } else {
         MagicRouter.pop();
         showDialog(

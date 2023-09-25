@@ -239,9 +239,6 @@ class _AdminAssignTechnicalForEmergencySubScreenState
                                                                     .problemDetails![
                                                                         0]
                                                                     .visitWithSubscripeId!,
-                                                                // VisitDate:
-                                                                //     chosenTime
-                                                                //         .toString(),
                                                                 VisitDate: DateTime
                                                                         .now()
                                                                     .add(Duration(

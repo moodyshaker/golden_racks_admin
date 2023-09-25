@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:golden_racks_admin/constants.dart';
@@ -79,6 +81,10 @@ class _SendAlertToCompanyAdminScreenState
                 textColor: Colors.white,
                 withBorder: false,
                 onPressed: () async {
+                  log(Preferences.instance.getUserId);
+                  log(widget.subscribedCompany.userId!);
+                  log(subscriberCompanyProvider.notificationController.text);
+
                   await subscriberCompanyProvider.sendNotification(
                     SenderId: Preferences.instance.getUserId,
                     ReceiverId: widget.subscribedCompany.userId!,

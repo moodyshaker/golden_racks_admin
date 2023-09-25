@@ -68,278 +68,288 @@ class _AdminAssignTechnicalForNormalUnsubScreenState
               : addTechProvider.techStatus == NetworkStatus.success
                   ? Container(
                       margin: EdgeInsets.symmetric(horizontal: 22.w),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          GestureDetector(
-                            onTap: () {
-                              MagicRouter.navigateTo(AddTechnicianScreen());
-                            },
-                            child: Container(
-                              height: 56.h,
-                              width: 200.h,
-                              padding: EdgeInsets.symmetric(
-                                vertical: 10.w,
-                                horizontal: 30.h,
-                              ),
-                              margin: EdgeInsets.only(
-                                bottom: 8.h,
-                              ),
-                              decoration: BoxDecoration(
-                                color: mainColor,
-                                borderRadius: BorderRadius.circular(30.r),
-                                border:
-                                    Border.all(width: 1.0, color: mainColor),
-                              ),
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Container(
-                                    height: 32.h,
-                                    width: 32.w,
-                                    child: Image.asset(
-                                      getAsset('add_icon'),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 12.w,
-                                  ),
-                                  MainText(
-                                    text: 'اضافة فني',
-                                    color: Colors.white,
-                                    font: 16.sp,
-                                    weight: FontWeight.w700,
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 20.h,
-                          ),
-                          Container(
-                            child: CustomTextField(
-                              controller: addTechProvider.searchTechController,
-                              borderColor: mainColor,
-                              hint: 'ابحث عن فني',
-                              horizontalPadding: 16.w,
-                              suffixIcon: InkWell(
-                                child: Container(
-                                  width: 60.w,
-                                  child: Center(
-                                    child: Container(
+                      child: SingleChildScrollView(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                MagicRouter.navigateTo(AddTechnicianScreen());
+                              },
+                              child: Container(
+                                height: 56.h,
+                                width: 200.h,
+                                padding: EdgeInsets.symmetric(
+                                  vertical: 10.w,
+                                  horizontal: 30.h,
+                                ),
+                                margin: EdgeInsets.only(
+                                  bottom: 8.h,
+                                ),
+                                decoration: BoxDecoration(
+                                  color: mainColor,
+                                  borderRadius: BorderRadius.circular(30.r),
+                                  border:
+                                      Border.all(width: 1.0, color: mainColor),
+                                ),
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Container(
                                       height: 32.h,
                                       width: 32.w,
                                       child: Image.asset(
-                                        getAsset('search_icon'),
+                                        getAsset('add_icon'),
                                       ),
                                     ),
-                                  ),
+                                    SizedBox(
+                                      width: 12.w,
+                                    ),
+                                    MainText(
+                                      text: 'اضافة فني',
+                                      color: Colors.white,
+                                      font: 16.sp,
+                                      weight: FontWeight.w700,
+                                    ),
+                                  ],
                                 ),
-                                onTap: () async {
-                                  showDialog(
-                                    context: context,
-                                    builder: (context) => LoadingDialog(),
-                                  );
-                                  await addTechProvider.getallTechnation(
-                                    userFullName:
-                                        '${addTechProvider.searchTechController.text}',
-                                  );
-                                  MagicRouter.pop();
-                                },
                               ),
-                              hasHint: true,
-                              suffixCallback: () {},
                             ),
-                          ),
-                          SizedBox(
-                            height: 20.h,
-                          ),
-                          CustomButton(
-                            title: 'اسم الفني',
-                            color: backColor,
-                            height: 50.h,
-                            font: 15.sp,
-                            radius: 8.r,
-                            family: 'Lato_bold',
-                            weight: FontWeight.w800,
-                            textColor: Colors.black,
-                            withBorder: false,
-                            onPressed: () async {},
-                          ),
-                          SizedBox(
-                            height: 6.h,
-                          ),
-                          Container(
-                            height: 235.h,
-                            child: addTechProvider.allTechnicals.isEmpty
-                                ? MainText(
-                                    text: 'لا يوجد فني بهذا الاسم',
-                                  )
-                                : ListView.separated(
-                                    padding:
-                                        EdgeInsets.symmetric(vertical: 10.h),
-                                    itemBuilder: (BuildContext context, int i) {
-                                      return InkWell(
-                                        onTap: () {
-                                          if (_form.currentState!.validate()) {
-                                            log('${chosenTime.toString()}');
-
-                                            showDialog(
-                                              context: context,
-                                              builder: (context) {
-                                                return AlertDialog(
-                                                  shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                      16.0,
-                                                    ),
-                                                  ),
-                                                  content: Column(
-                                                    mainAxisSize:
-                                                        MainAxisSize.min,
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .center,
-                                                    children: [
-                                                      MainText(
-                                                        text:
-                                                            'هل تريد اضافة هذا الفني ؟',
-                                                      ),
-                                                      SizedBox(height: 6),
-                                                      Row(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .spaceEvenly,
-                                                        children: [
-                                                          MaterialButton(
-                                                            shape:
-                                                                RoundedRectangleBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          6),
-                                                            ),
-                                                            color: Colors.green,
-                                                            onPressed:
-                                                                () async {
-                                                              MagicRouter.pop();
-                                                              await normalUnsubProvider
-                                                                  .assignTechForUnsubNormal(
-                                                                UserId: widget
-                                                                    .normalUnsub
-                                                                    .userId!,
-                                                                TechnicalId:
-                                                                    addTechProvider
-                                                                        .allTechnicals[
-                                                                            i]
-                                                                        .userId!,
-                                                                VisitWithoutSubscripeId: widget
-                                                                    .normalUnsub
-                                                                    .problemDetails![
-                                                                        0]
-                                                                    .visitWithoutSubscripeId!,
-                                                                VisitDate:
-                                                                    chosenTime
-                                                                        .toString(),
-                                                                IsActive: true,
-                                                              );
-                                                            },
-                                                            child: MainText(
-                                                              text: 'OK',
-                                                            ),
-                                                          ),
-                                                          MaterialButton(
-                                                            shape:
-                                                                RoundedRectangleBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          6),
-                                                            ),
-                                                            color: Colors.red,
-                                                            onPressed: () {
-                                                              MagicRouter.pop();
-                                                            },
-                                                            child: MainText(
-                                                              text: 'NO',
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ],
-                                                  ),
-                                                );
-                                              },
-                                            );
-                                          }
-                                        },
-                                        child: TechnicianItem(
-                                          tech:
-                                              addTechProvider.allTechnicals[i],
+                            SizedBox(
+                              height: 20.h,
+                            ),
+                            Container(
+                              child: CustomTextField(
+                                controller:
+                                    addTechProvider.searchTechController,
+                                borderColor: mainColor,
+                                hint: 'ابحث عن فني',
+                                horizontalPadding: 16.w,
+                                suffixIcon: InkWell(
+                                  child: Container(
+                                    width: 60.w,
+                                    child: Center(
+                                      child: Container(
+                                        height: 32.h,
+                                        width: 32.w,
+                                        child: Image.asset(
+                                          getAsset('search_icon'),
                                         ),
-                                      );
-                                    },
-                                    itemCount:
-                                        addTechProvider.allTechnicals.length,
-                                    separatorBuilder: ((context, index) =>
-                                        SizedBox(
-                                          height: 8.h,
-                                        )),
-                                  ),
-                          ),
-                          SizedBox(
-                            height: 27.h,
-                          ),
-                          CustomButton(
-                            title: 'اختيار تاريخ الخطة',
-                            color: kSecondaryColor,
-                            height: 50.h,
-                            font: 16.sp,
-                            family: 'Lato_bold',
-                            textColor: Colors.white,
-                            withBorder: false,
-                            onPressed: () async {
-                              chosenTime = await showDatePicker(
-                                context: context,
-                                initialDate: chosenTime ??= DateTime.now(),
-                                firstDate: DateTime(2000),
-                                lastDate: DateTime(2101),
-                                builder: ((context, child) {
-                                  return Theme(
-                                    data: ThemeData.light().copyWith(
-                                      colorScheme: ColorScheme.light(
-                                        primary: Colors.brown,
-                                        onPrimary: Colors.white,
-                                        surface: Colors.white,
-                                        onSurface: Colors.brown,
                                       ),
                                     ),
-                                    child: child!,
-                                  );
-                                }),
-                              );
-                            },
-                          ),
-                          FormField(
-                            builder: (FormFieldState<String> state) {
-                              return MainText(
-                                text: state.errorText ?? '',
-                                color: Colors.red,
-                                font: 16.sp,
-                                horizontalPadding: 16.w,
-                                // verticalPadding: 8.h,
-                              );
-                            },
-                            validator: (v) {
-                              if (chosenTime == null) {
-                                return 'من فضلك ادخل تاريخ الخطة';
-                              } else {
-                                return null;
-                              }
-                            },
-                          ),
-                        ],
+                                  ),
+                                  onTap: () async {
+                                    showDialog(
+                                      context: context,
+                                      builder: (context) => LoadingDialog(),
+                                    );
+                                    await addTechProvider.getallTechnation(
+                                      userFullName:
+                                          '${addTechProvider.searchTechController.text}',
+                                    );
+                                    MagicRouter.pop();
+                                  },
+                                ),
+                                hasHint: true,
+                                suffixCallback: () {},
+                              ),
+                            ),
+                            SizedBox(
+                              height: 20.h,
+                            ),
+                            CustomButton(
+                              title: 'اسم الفني',
+                              color: backColor,
+                              height: 50.h,
+                              font: 15.sp,
+                              radius: 8.r,
+                              family: 'Lato_bold',
+                              weight: FontWeight.w800,
+                              textColor: Colors.black,
+                              withBorder: false,
+                              onPressed: () async {},
+                            ),
+                            SizedBox(
+                              height: 6.h,
+                            ),
+                            Container(
+                              height: 200.h,
+                              child: addTechProvider.allTechnicals.isEmpty
+                                  ? MainText(
+                                      text: 'لا يوجد فني بهذا الاسم',
+                                    )
+                                  : ListView.separated(
+                                      padding:
+                                          EdgeInsets.symmetric(vertical: 10.h),
+                                      itemBuilder:
+                                          (BuildContext context, int i) {
+                                        return InkWell(
+                                          onTap: () {
+                                            if (_form.currentState!
+                                                .validate()) {
+                                              log('${chosenTime.toString()}');
+
+                                              showDialog(
+                                                context: context,
+                                                builder: (context) {
+                                                  return AlertDialog(
+                                                    shape:
+                                                        RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                        16.0,
+                                                      ),
+                                                    ),
+                                                    content: Column(
+                                                      mainAxisSize:
+                                                          MainAxisSize.min,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .center,
+                                                      children: [
+                                                        MainText(
+                                                          text:
+                                                              'هل تريد اضافة هذا الفني ؟',
+                                                        ),
+                                                        SizedBox(height: 6),
+                                                        Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceEvenly,
+                                                          children: [
+                                                            MaterialButton(
+                                                              shape:
+                                                                  RoundedRectangleBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            6),
+                                                              ),
+                                                              color:
+                                                                  Colors.green,
+                                                              onPressed:
+                                                                  () async {
+                                                                MagicRouter
+                                                                    .pop();
+                                                                await normalUnsubProvider
+                                                                    .assignTechForUnsubNormal(
+                                                                  UserId: widget
+                                                                      .normalUnsub
+                                                                      .userId!,
+                                                                  TechnicalId:
+                                                                      addTechProvider
+                                                                          .allTechnicals[
+                                                                              i]
+                                                                          .userId!,
+                                                                  VisitWithoutSubscripeId: widget
+                                                                      .normalUnsub
+                                                                      .problemDetails![
+                                                                          0]
+                                                                      .visitWithoutSubscripeId!,
+                                                                  VisitDate:
+                                                                      chosenTime
+                                                                          .toString(),
+                                                                  IsActive:
+                                                                      true,
+                                                                );
+                                                              },
+                                                              child: MainText(
+                                                                text: 'OK',
+                                                              ),
+                                                            ),
+                                                            MaterialButton(
+                                                              shape:
+                                                                  RoundedRectangleBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            6),
+                                                              ),
+                                                              color: Colors.red,
+                                                              onPressed: () {
+                                                                MagicRouter
+                                                                    .pop();
+                                                              },
+                                                              child: MainText(
+                                                                text: 'NO',
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  );
+                                                },
+                                              );
+                                            }
+                                          },
+                                          child: TechnicianItem(
+                                            tech: addTechProvider
+                                                .allTechnicals[i],
+                                          ),
+                                        );
+                                      },
+                                      itemCount:
+                                          addTechProvider.allTechnicals.length,
+                                      separatorBuilder: ((context, index) =>
+                                          SizedBox(
+                                            height: 8.h,
+                                          )),
+                                    ),
+                            ),
+                            SizedBox(
+                              height: 27.h,
+                            ),
+                            CustomButton(
+                              title: 'اختيار تاريخ الخطة',
+                              color: kSecondaryColor,
+                              height: 50.h,
+                              font: 16.sp,
+                              family: 'Lato_bold',
+                              textColor: Colors.white,
+                              withBorder: false,
+                              onPressed: () async {
+                                chosenTime = await showDatePicker(
+                                  context: context,
+                                  initialDate: chosenTime ??= DateTime.now(),
+                                  firstDate: DateTime(2000),
+                                  lastDate: DateTime(2101),
+                                  builder: ((context, child) {
+                                    return Theme(
+                                      data: ThemeData.light().copyWith(
+                                        colorScheme: ColorScheme.light(
+                                          primary: Colors.brown,
+                                          onPrimary: Colors.white,
+                                          surface: Colors.white,
+                                          onSurface: Colors.brown,
+                                        ),
+                                      ),
+                                      child: child!,
+                                    );
+                                  }),
+                                );
+                              },
+                            ),
+                            FormField(
+                              builder: (FormFieldState<String> state) {
+                                return MainText(
+                                  text: state.errorText ?? '',
+                                  color: Colors.red,
+                                  font: 16.sp,
+                                  horizontalPadding: 16.w,
+                                  // verticalPadding: 8.h,
+                                );
+                              },
+                              validator: (v) {
+                                if (chosenTime == null) {
+                                  return 'من فضلك ادخل تاريخ الخطة';
+                                } else {
+                                  return null;
+                                }
+                              },
+                            ),
+                          ],
+                        ),
                       ),
                     )
                   : RetryWidget(

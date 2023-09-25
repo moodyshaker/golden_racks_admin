@@ -50,6 +50,7 @@ List<String> arabicPlanTypes = [
   'خطة نصف سنوية',
   'خطة ربع سنوية',
   'زيارة طوارئ',
+  'خطة اساسية'
 ];
 
 List<String> englishPlanTypes = [
@@ -59,6 +60,7 @@ List<String> englishPlanTypes = [
   'HalfAnnual',
   'Quarterly',
   'Emergency',
+  'main'
 ];
 
 const Color kMainColor = Color(0xFF098E4D);
