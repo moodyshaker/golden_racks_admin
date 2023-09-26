@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:golden_racks_admin/feature/admin/other_screens/widgets/spar_part_item.dart';
+import 'package:golden_racks_admin/feature/technician/main_screens/widgets/spar_part_item.dart';
 
 import '../../../../constants.dart';
 import '../../widgets/customTextFeild.dart';

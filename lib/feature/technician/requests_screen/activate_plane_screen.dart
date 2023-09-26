@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:golden_racks_admin/feature/technician/main_screens/requests_screen/need_activate_item_tech.dart';
+import 'package:golden_racks_admin/feature/technician/requests_screen/need_activate_item_tech.dart';
 
-import '../../../../constants.dart';
-import '../../../widgets/organizerCustomScaffold.dart';
+import '../../../constants.dart';
+import '../../widgets/organizerCustomScaffold.dart';
 
 class ActivatePlanTechScreen extends StatefulWidget {
   const ActivatePlanTechScreen({Key? key}) : super(key: key);

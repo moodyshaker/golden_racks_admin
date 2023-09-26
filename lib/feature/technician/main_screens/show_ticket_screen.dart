@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:golden_racks_admin/constants.dart';
 import 'package:golden_racks_admin/core/router/router.dart';
 import 'package:golden_racks_admin/feature/technician/main_screens/attendance_and_departure_screen.dart';
-import 'package:golden_racks_admin/feature/technician/main_screens/send_alert_to_company_screen.dart';
+import 'package:golden_racks_admin/feature/technician/main_screens/send_alert_to_company_screen_tech.dart';
 import 'package:golden_racks_admin/feature/technician/main_screens/technical_report_screen.dart';
 import 'package:golden_racks_admin/feature/widgets/main_text.dart';
 import 'package:golden_racks_admin/feature/widgets/technicianCustomScaffold.dart';

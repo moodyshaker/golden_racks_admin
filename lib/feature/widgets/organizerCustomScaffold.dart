@@ -357,7 +357,7 @@ class _OrganizerCustomScaffoldState extends State<OrganizerCustomScaffold> {
                         onTap: () {
                           if (i == 2) {
                             log('home');
-                            MagicRouter.navigateAndPopAll(AdminHome());
+                            MagicRouter.navigateAndPop(AdminHome());
                             cubit.changeCurrent(i);
                           } else if (i == 0) {
                             cubit.changeCurrent(i);

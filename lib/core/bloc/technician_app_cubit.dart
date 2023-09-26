@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:golden_racks_admin/feature/technician/main_screens/flow_only.dart';
 import 'package:golden_racks_admin/feature/technician/main_screens/units/technician_main.dart';
@@ -85,8 +84,8 @@ class TechnicianAppCubit extends ChangeNotifier {
   }
 
   void changeCurrent(int i) {
-    log('${_i}');
-    log('${_w.runtimeType}');
+    // log('${_i}');
+    // log('${_w.runtimeType}');
     _i = i;
     _getCurrentScreen();
     notifyListeners();
@@ -96,6 +95,7 @@ class TechnicianAppCubit extends ChangeNotifier {
     switch (_i) {
       case 0:
         _w = TechnicianMain();
+
         _title = 'main';
         break;
       case 1:

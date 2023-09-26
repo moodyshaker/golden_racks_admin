@@ -2,20 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:golden_racks_admin/feature/admin/main_screens/widgets/subscribers_request_item.dart';
 
-import '../../../../constants.dart';
-import '../../../../core/bloc/home_cubit.dart';
-import '../../../widgets/organizerCustomScaffold.dart';
+import '../../../constants.dart';
+import '../../../core/bloc/home_cubit.dart';
+import '../../widgets/organizerCustomScaffold.dart';
 
-class SubscribersPeriodicRequestsTechScreen extends StatefulWidget {
-  const SubscribersPeriodicRequestsTechScreen({Key? key}) : super(key: key);
+class SubscribersEmergencyRequestsTechScreen extends StatefulWidget {
+  const SubscribersEmergencyRequestsTechScreen({Key? key}) : super(key: key);
 
   @override
-  State<SubscribersPeriodicRequestsTechScreen> createState() =>
-      _SubscribersPeriodicRequestsTechScreenState();
+  State<SubscribersEmergencyRequestsTechScreen> createState() =>
+      _SubscribersEmergencyRequestsTechScreenState();
 }
 
-class _SubscribersPeriodicRequestsTechScreenState
-    extends State<SubscribersPeriodicRequestsTechScreen> {
+class _SubscribersEmergencyRequestsTechScreenState
+    extends State<SubscribersEmergencyRequestsTechScreen> {
   @override
   void initState() {
     super.initState();
@@ -38,7 +38,7 @@ class _SubscribersPeriodicRequestsTechScreenState
         hasAppbar: false,
         isHome: true,
         hasNavBar: false,
-        title1: 'تحديد فني لطلبات الدورية لغير المشتركين',
+        title1: 'تحديد فني لطلبات الطوارئ للمشتركين',
         body: Expanded(
           child: ListView.builder(
             padding: EdgeInsets.symmetric(horizontal: 22.w, vertical: 10.h),

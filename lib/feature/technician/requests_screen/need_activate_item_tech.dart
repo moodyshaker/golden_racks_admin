@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../../constants.dart';
-import '../../../widgets/customButton.dart';
-import '../../../widgets/main_text.dart';
+import '../../../constants.dart';
+import '../../widgets/customButton.dart';
+import '../../widgets/main_text.dart';
 
 class NeedActivateItemTech extends StatelessWidget {
   @override

@@ -29,78 +29,80 @@ class _AttendanceAndDepartureScreenState
         ),
       ),
       child: TechnicianCustomScaffold(
-          backgroundColor: Colors.transparent,
-          hasAppbar: false,
-          isHome: true,
-          hasNavBar: false,
-          title1: 'تسجيل الحضور والانصراف للمهمة',
-          body: Container(
-            margin: EdgeInsets.symmetric(horizontal: 20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(
-                  height: 32.h,
-                ),
-                Container(
-                  margin: EdgeInsets.symmetric(horizontal: 10.w),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Expanded(
-                        child: GestureDetector(
-                          onTap: () {},
-                          child: Container(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 10.w, vertical: 10.h),
-                            decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(100.0)),
-                              color: lightBlueColor,
-                            ),
-                            child: Center(
-                              child: MainText(
-                                text: 'تسجيل الحضور',
-                                color: Colors.white,
-                                font: 15.sp,
-                                weight: FontWeight.w700,
-                              ),
+        backgroundColor: Colors.transparent,
+        hasAppbar: false,
+        isHome: true,
+        hasNavBar: false,
+        title1: 'تسجيل الحضور والانصراف للمهمة',
+        body: Container(
+          margin: EdgeInsets.symmetric(horizontal: 20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                height: 32.h,
+              ),
+              Container(
+                margin: EdgeInsets.symmetric(horizontal: 10.w),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      child: GestureDetector(
+                        onTap: () {},
+                        child: Container(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 10.w, vertical: 10.h),
+                          decoration: BoxDecoration(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(100.0)),
+                            color: lightBlueColor,
+                          ),
+                          child: Center(
+                            child: MainText(
+                              text: 'تسجيل الحضور',
+                              color: Colors.white,
+                              font: 15.sp,
+                              weight: FontWeight.w700,
                             ),
                           ),
                         ),
                       ),
-                      SizedBox(
-                        width: 16.w,
-                      ),
-                      Expanded(
-                        child: GestureDetector(
-                          onTap: () {},
-                          child: Container(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 10.w, vertical: 10.h),
-                            decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(100.0)),
-                              color: Colors.red,
+                    ),
+                    SizedBox(
+                      width: 16.w,
+                    ),
+                    Expanded(
+                      child: GestureDetector(
+                        onTap: () {},
+                        child: Container(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 10.w, vertical: 10.h),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(100.0),
                             ),
-                            child: Center(
-                              child: MainText(
-                                text: 'تسجيل الانصراف',
-                                color: Colors.white,
-                                font: 15.sp,
-                                weight: FontWeight.w700,
-                              ),
+                            color: Colors.red,
+                          ),
+                          child: Center(
+                            child: MainText(
+                              text: 'تسجيل الانصراف',
+                              color: Colors.white,
+                              font: 15.sp,
+                              weight: FontWeight.w700,
                             ),
                           ),
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-              ],
-            ),
-          )),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

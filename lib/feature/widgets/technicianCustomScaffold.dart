@@ -85,13 +85,16 @@ class _TechnicianCustomScaffoldState extends State<TechnicianCustomScaffold> {
             ? SafeArea(
                 child: Drawer(
                   shape: RoundedRectangleBorder(
-                      borderRadius: lang.locale.languageCode == 'ar'
-                          ? BorderRadius.only(
-                              topLeft: Radius.circular(50.r),
-                              bottomLeft: Radius.circular(50.r))
-                          : BorderRadius.only(
-                              topRight: Radius.circular(50.r),
-                              bottomRight: Radius.circular(50.r))),
+                    borderRadius: lang.locale.languageCode == 'ar'
+                        ? BorderRadius.only(
+                            topLeft: Radius.circular(50.r),
+                            bottomLeft: Radius.circular(50.r),
+                          )
+                        : BorderRadius.only(
+                            topRight: Radius.circular(50.r),
+                            bottomRight: Radius.circular(50.r),
+                          ),
+                  ),
                   child: Padding(
                     padding:
                         EdgeInsets.only(top: 50.h, right: 20.w, left: 20.w),
@@ -136,9 +139,7 @@ class _TechnicianCustomScaffoldState extends State<TechnicianCustomScaffold> {
                             ],
                           ),
                         ),
-                        SizedBox(
-                          height: 40.h,
-                        ),
+                        SizedBox(height: 40.h),
                       ],
                     ),
                   ),
@@ -149,76 +150,79 @@ class _TechnicianCustomScaffoldState extends State<TechnicianCustomScaffold> {
           child: Column(
             children: [
               widget.hasAppbar
-                  ? Column(children: [
-                      Container(
-                        margin: EdgeInsets.only(top: 10.h, left: 20, right: 20),
-                        decoration: BoxDecoration(color: Colors.transparent),
-                        child: Row(
-                          children: [
-                            Center(
-                              child: GestureDetector(
-                                onTap: () {},
-                                child: Container(
-                                  height: 24.h,
-                                  width: 24.w,
-                                  child: Image.asset(
-                                    getAsset('notification_icon'),
+                  ? Column(
+                      children: [
+                        Container(
+                          margin:
+                              EdgeInsets.only(top: 10.h, left: 20, right: 20),
+                          decoration: BoxDecoration(color: Colors.transparent),
+                          child: Row(
+                            children: [
+                              Center(
+                                child: GestureDetector(
+                                  onTap: () {},
+                                  child: Container(
+                                    height: 24.h,
+                                    width: 24.w,
+                                    child: Image.asset(
+                                      getAsset('notification_icon'),
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                            Expanded(
-                              child: Container(
-                                margin: EdgeInsets.only(right: 20.0),
-                                child: Column(
-                                  children: [
-                                    Center(
-                                      child: MainText(
-                                        text: widget.title1,
-                                        color: Colors.black,
-                                        font: 12.sp,
-                                        weight: FontWeight.w800,
-                                      ),
-                                    ),
-                                    Center(
-                                      child: MainText(
-                                        text: widget.title2,
-                                        color: Colors.black,
-                                        font: 12.sp,
-                                        weight: FontWeight.w800,
-                                      ),
-                                    ),
-                                    Center(
-                                      child: MainText(
-                                        text: widget.title3,
-                                        color: Colors.brown,
-                                        font: 8.sp,
-                                        weight: FontWeight.w300,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            Center(
-                              child: GestureDetector(
-                                onTap: () {},
+                              Expanded(
                                 child: Container(
-                                  height: 33.h,
-                                  width: 68.w,
-                                  child: Image.asset(
-                                    getAsset(widget.pic!),
+                                  margin: EdgeInsets.only(right: 20.0),
+                                  child: Column(
+                                    children: [
+                                      Center(
+                                        child: MainText(
+                                          text: widget.title1,
+                                          color: Colors.black,
+                                          font: 12.sp,
+                                          weight: FontWeight.w800,
+                                        ),
+                                      ),
+                                      Center(
+                                        child: MainText(
+                                          text: widget.title2,
+                                          color: Colors.black,
+                                          font: 12.sp,
+                                          weight: FontWeight.w800,
+                                        ),
+                                      ),
+                                      Center(
+                                        child: MainText(
+                                          text: widget.title3,
+                                          color: Colors.brown,
+                                          font: 8.sp,
+                                          weight: FontWeight.w300,
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ),
                               ),
-                            ),
-                          ],
+                              Center(
+                                child: GestureDetector(
+                                  onTap: () {},
+                                  child: Container(
+                                    height: 33.h,
+                                    width: 68.w,
+                                    child: Image.asset(
+                                      getAsset(widget.pic!),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                      SizedBox(
-                        height: 20.h,
-                      ),
-                    ])
+                        SizedBox(
+                          height: 20.h,
+                        ),
+                      ],
+                    )
                   : Container(
                       margin: EdgeInsets.symmetric(horizontal: 22.w),
                       height: 80.h,
@@ -247,24 +251,23 @@ class _TechnicianCustomScaffoldState extends State<TechnicianCustomScaffold> {
                               onTap: () {
                                 if (!MagicRouter.canPop) {
                                   showDialog(
-                                      context: navigatorKey.currentContext!,
-                                      builder: (c) => ActionDialog(
-                                            content: demo.getTranslatedValue(
-                                                'do_you_want_exit'),
-                                            onCancelClick: () {
-                                              MagicRouter.pop();
-                                            },
-                                            approveAction:
-                                                demo.getTranslatedValue(
-                                                    'dialog_approve'),
-                                            cancelAction:
-                                                demo.getTranslatedValue(
-                                                    'dialog_decline'),
-                                            onApproveClick: () {
-                                              MagicRouter.pop();
-                                              SystemNavigator.pop();
-                                            },
-                                          ));
+                                    context: navigatorKey.currentContext!,
+                                    builder: (c) => ActionDialog(
+                                      content: demo.getTranslatedValue(
+                                          'do_you_want_exit'),
+                                      onCancelClick: () {
+                                        MagicRouter.pop();
+                                      },
+                                      approveAction: demo
+                                          .getTranslatedValue('dialog_approve'),
+                                      cancelAction: demo
+                                          .getTranslatedValue('dialog_decline'),
+                                      onApproveClick: () {
+                                        MagicRouter.pop();
+                                        SystemNavigator.pop();
+                                      },
+                                    ),
+                                  );
                                 } else {
                                   widget.onBackPressed != null
                                       ? widget.onBackPressed!()
@@ -291,79 +294,47 @@ class _TechnicianCustomScaffoldState extends State<TechnicianCustomScaffold> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: List.generate(
-                        navBar.length,
-                        (i) => GestureDetector(
-                              onTap: () {
-                                if (i == 2) {
-                                } else {
-                                  cubit.changeCurrent(i);
-                                }
-                              },
-                              child:
-                                  // i == 2
-                                  //     ? Container(
-                                  //         height: 80.h,
-                                  //         width: 80.h,
-                                  //         padding: EdgeInsets.symmetric(
-                                  //             vertical: 6.h, horizontal: 6.w),
-                                  //         margin: EdgeInsets.symmetric(
-                                  //             vertical: 6.h, horizontal: 6.w),
-                                  //         decoration: BoxDecoration(
-                                  //             color: kAccentColor,
-                                  //             shape: BoxShape.circle),
-                                  //         child: Column(
-                                  //           mainAxisAlignment:
-                                  //               MainAxisAlignment.center,
-                                  //           crossAxisAlignment:
-                                  //               CrossAxisAlignment.center,
-                                  //           children: [
-                                  //             Image.asset(
-                                  //                 getAsset('${navBar[i].icon}'),
-                                  //                 height: 24.h,
-                                  //                 width: 24.w,
-                                  //                 color: kBlackColor),
-                                  //             SizedBox(
-                                  //               height: 4.h,
-                                  //             ),
-                                  //             MainText(
-                                  //                 text: navBar[i].title,
-                                  //                 font: 10.sp,
-                                  //                 color: kBlackColor,
-                                  //                 weight: FontWeight.bold),
-                                  //           ],
-                                  //         ),
-                                  //       )
-                                  //     :
-                                  Container(
-                                margin: EdgeInsets.symmetric(
-                                    vertical: 6.h, horizontal: 6.w),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(16.r),
-                                ),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Image.asset(getAsset('${navBar[i].icon}'),
-                                        height: cubit.i == i ? 30.h : 24.h,
-                                        width: cubit.i == i ? 30.w : 24.w,
-                                        color: cubit.i == i
-                                            ? kAccentColor
-                                            : kInactiveColor),
-                                    SizedBox(
-                                      height: 5.h,
-                                    ),
-                                    MainText(
-                                        text: navBar[i].title,
-                                        font: cubit.i == i ? 14.sp : 12.sp,
-                                        color: kAccentColor,
-                                        weight: cubit.i == i
-                                            ? FontWeight.bold
-                                            : FontWeight.w500),
-                                  ],
-                                ),
+                      navBar.length,
+                      (i) => GestureDetector(
+                        onTap: () {
+                          cubit.changeCurrent(i);
+                        },
+                        child: Container(
+                          margin: EdgeInsets.symmetric(
+                            vertical: 6.h,
+                            horizontal: 6.w,
+                          ),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(16.r),
+                          ),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Image.asset(
+                                getAsset('${navBar[i].icon}'),
+                                height: cubit.i == i ? 30.h : 24.h,
+                                width: cubit.i == i ? 30.w : 24.w,
+                                color: cubit.i == i
+                                    ? kAccentColor
+                                    : kInactiveColor,
                               ),
-                            )),
+                              SizedBox(
+                                height: 5.h,
+                              ),
+                              MainText(
+                                text: navBar[i].title,
+                                font: cubit.i == i ? 14.sp : 12.sp,
+                                color: kAccentColor,
+                                weight: cubit.i == i
+                                    ? FontWeight.bold
+                                    : FontWeight.w500,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
                   ),
                 ),
               )

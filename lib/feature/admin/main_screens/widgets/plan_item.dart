@@ -170,7 +170,7 @@ class _PlanItemState extends State<PlanItem> {
                                     ),
                                     onTap: () {
                                       setState(() {
-                                        readyPlanProvider.increaseRack(
+                                        readyPlanProvider.decreaseRack(
                                             readyPlan: widget.readyPlan);
                                       });
                                     },

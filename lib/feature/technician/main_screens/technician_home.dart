@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:golden_racks_admin/core/appStorage/shared_preference.dart';
 import 'package:golden_racks_admin/core/bloc/technician_app_cubit.dart';
 import 'package:golden_racks_admin/feature/widgets/technicianCustomScaffold.dart';
 
@@ -18,7 +19,7 @@ class _TechnicianHomeState extends State<TechnicianHome> {
       isHome: true,
       hasAppbar: true,
       title1: 'اهلا وسهلا',
-      title2: 'فني محمد ابراهيم',
+      title2: 'فني ${Preferences.instance.getUserFullName}',
       title3: '',
       pic: 'profile',
       hasNavBar: true,
