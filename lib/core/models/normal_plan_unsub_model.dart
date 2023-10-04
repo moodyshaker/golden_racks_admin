@@ -17,6 +17,7 @@ class NormalPlanUnSubModel {
   String? companyName_Ar;
   String? companyName_En;
   String? accountNumber;
+  String? completeTicketNumber;
 
   NormalPlanUnSubModel({
     this.id,
@@ -35,6 +36,7 @@ class NormalPlanUnSubModel {
     this.companyName_Ar,
     this.companyName_En,
     this.accountNumber,
+    this.completeTicketNumber,
   });
 
   Map<String, dynamic> toJson() {
@@ -64,6 +66,8 @@ class NormalPlanUnSubModel {
       ticketNumber: json['ticketNumber'] != null
           ? subtractTicketNumber(json['ticketNumber'])
           : null,
+      completeTicketNumber:
+          json['ticketNumber'] != null ? (json['ticketNumber']) : null,
       userId: json['userId'] != null ? json['userId'] as String : null,
       problemId: json['problemId'] != null ? json['problemId'] as int : null,
       problemName:

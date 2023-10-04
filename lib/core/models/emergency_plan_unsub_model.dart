@@ -17,6 +17,7 @@ class EmergencyPlanSubModel {
   String? companyName_Ar;
   String? companyName_En;
   String? accountNumber;
+  String? completeTicketNumber;
 
   EmergencyPlanSubModel({
     this.id,
@@ -35,6 +36,7 @@ class EmergencyPlanSubModel {
     this.companyName_Ar,
     this.companyName_En,
     this.accountNumber,
+    this.completeTicketNumber,
   });
 
   Map<String, dynamic> toJson() {
@@ -64,6 +66,8 @@ class EmergencyPlanSubModel {
       ticketNumber: json['ticketNumber'] != null
           ? subtractTicketNumber(json['ticketNumber'])
           : null,
+      completeTicketNumber:
+          json['ticketNumber'] != null ? (json['ticketNumber']) : null,
       userId: json['userId'] != null ? json['userId'] as String : null,
       problemId: json['problemId'] != null ? json['problemId'] as int : null,
       problemName:

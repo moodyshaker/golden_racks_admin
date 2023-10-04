@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:golden_racks_admin/core/bloc/technician_app_cubit.dart';
+import 'package:golden_racks_admin/feature/technician/main_screens/flow_only.dart';
+import 'package:golden_racks_admin/feature/technician/main_screens/technician_home.dart';
 import '../../constants.dart';
 import '../../core/bloc/language_cubit.dart';
 import '../../core/localization/demo_localization.dart';
@@ -298,6 +300,18 @@ class _TechnicianCustomScaffoldState extends State<TechnicianCustomScaffold> {
                       (i) => GestureDetector(
                         onTap: () {
                           cubit.changeCurrent(i);
+
+                          if (i == 0) {
+                            print('home sweet home');
+                            MagicRouter.navigateAndPopAll(TechnicianHome());
+                          } else if (i == 1) {
+                            print('tickets 50 cents');
+                            MagicRouter.navigateAndPopAll(
+                              FlowOnly(),
+                            );
+                          } else if (i == 2) {
+                            print('board board');
+                          }
                         },
                         child: Container(
                           margin: EdgeInsets.symmetric(

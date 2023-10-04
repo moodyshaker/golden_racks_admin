@@ -53,7 +53,7 @@ class AuthProvider extends ChangeNotifier {
       );
       var request = MultipartRequest(
         'POST',
-        Uri.parse('${base_url}/Account/Register'),
+        Uri.parse('${base_url}Account/Register'),
       );
 
       Map<String, String> headers = {
@@ -184,8 +184,8 @@ class AuthProvider extends ChangeNotifier {
           ),
         ).then(
           (value) => UserRole == 2
-              ? MagicRouter.navigateTo(AdminHome())
-              : MagicRouter.navigateTo(
+              ? MagicRouter.navigateAndPopAll(AdminHome())
+              : MagicRouter.navigateAndPopAll(
                   TechnicianHome(),
                 ),
         );

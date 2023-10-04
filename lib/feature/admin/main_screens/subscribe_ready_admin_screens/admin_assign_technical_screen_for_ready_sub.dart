@@ -245,6 +245,9 @@ class _AdminAssignTechnicalForReadySubScreenState
                                                                       .toIso8601String(),
                                                                   IsActive:
                                                                       true,
+                                                                  readyPlanId: widget
+                                                                      .appointment
+                                                                      .readyPlanId!,
                                                                 );
                                                               },
                                                               child: MainText(

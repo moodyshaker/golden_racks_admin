@@ -8,7 +8,7 @@ import 'header_config.dart';
 
 // final String base_url = 'https://malqaapi.webxy.net/api/';
 final String base_url = 'http://75.119.156.82/api/';
-final String base_url_image = 'http://109.123.244.24:8081/';
+final String base_url_image = 'http://75.119.156.82/';
 
 class HttpHelper {
   static final HttpHelper instance = HttpHelper._instance();

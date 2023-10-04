@@ -219,7 +219,9 @@ class _AddCompanyWithPlanScreenState extends State<AddCompanyWithPlanScreen> {
                               return null;
                           },
                         ),
-
+                        SizedBox(
+                          height: 11.h,
+                        ),
                         /////STATE///////
                         DropMenu(
                           hintColor: gray_60,

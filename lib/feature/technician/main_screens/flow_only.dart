@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:golden_racks_admin/core/router/router.dart';
 import 'package:golden_racks_admin/feature/technician/main_screens/notification_screen.dart';
-import 'package:golden_racks_admin/feature/technician/main_screens/show_spar_parts_screen.dart';
-import 'package:golden_racks_admin/feature/technician/main_screens/tickets_screen.dart';
+import 'package:golden_racks_admin/feature/technician/main_screens/search_tickets_screen.dart';
+import 'package:golden_racks_admin/feature/widgets/technicianCustomScaffold.dart';
 import '../../../../constants.dart';
 import '../../widgets/customButton.dart';
-import '../../widgets/organizerCustomScaffold.dart';
 
 class FlowOnly extends StatefulWidget {
   const FlowOnly({Key? key}) : super(key: key);
@@ -32,11 +31,11 @@ class _FlowOnlyState extends State<FlowOnly> {
           fit: BoxFit.fill,
         ),
       ),
-      child: OrganizerCustomScaffold(
+      child: TechnicianCustomScaffold(
         backgroundColor: Colors.transparent,
         hasAppbar: false,
         isHome: true,
-        hasNavBar: false,
+        hasNavBar: true,
         title1: 'للدخول للصفحات فقط',
         body: Container(
           margin: EdgeInsets.symmetric(horizontal: 22.w),
@@ -52,19 +51,7 @@ class _FlowOnlyState extends State<FlowOnly> {
                 textColor: Colors.white,
                 withBorder: false,
                 onPressed: () async {
-                  MagicRouter.navigateTo(TicketsScreen());
-                },
-              ),
-              CustomButton(
-                title: 'عرض قطع الغيار',
-                color: kSecondaryColor,
-                height: 50.h,
-                font: 16.sp,
-                family: 'Lato_bold',
-                textColor: Colors.white,
-                withBorder: false,
-                onPressed: () async {
-                  MagicRouter.navigateTo(ShowSparPartsScreen());
+                  MagicRouter.navigateTo(SearchTicketsScreen());
                 },
               ),
               CustomButton(
@@ -77,18 +64,6 @@ class _FlowOnlyState extends State<FlowOnly> {
                 withBorder: false,
                 onPressed: () async {
                   MagicRouter.navigateTo(NotificationScreen());
-                },
-              ),
-              CustomButton(
-                title: 'عرض التذكرة',
-                color: kSecondaryColor,
-                height: 50.h,
-                font: 16.sp,
-                family: 'Lato_bold',
-                textColor: Colors.white,
-                withBorder: false,
-                onPressed: () async {
-                  // MagicRouter.navigateTo(EmergencyUnsubTicketViewScreen());
                 },
               ),
             ],

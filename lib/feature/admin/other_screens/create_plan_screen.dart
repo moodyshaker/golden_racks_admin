@@ -137,14 +137,8 @@ class _CreatePlanScreenState extends State<CreatePlanScreen> {
                         onChanged: (v) {
                           if (v == 'نعم') {
                             readyPlanProvider.IsSparePartsController = true;
-                            log('yes');
-                            log(readyPlanProvider.IsSparePartsController
-                                .toString());
                           } else {
                             readyPlanProvider.IsSparePartsController = false;
-                            log('no');
-                            log(readyPlanProvider.IsSparePartsController
-                                .toString());
                           }
                         },
                         valid: (v) {
@@ -240,7 +234,36 @@ class _CreatePlanScreenState extends State<CreatePlanScreen> {
               withBorder: false,
               onPressed: () async {
                 if (_form.currentState!.validate()) {
-                  MagicRouter.navigateTo(AddASparePartScreen());
+                  if (readyPlanProvider.IsSparePartsController) {
+                    MagicRouter.navigateTo(AddASparePartScreen());
+                  } else {
+                    await readyPlanProvider.addReadyPlan(
+                      PlanDuration: readyPlanProvider.PlanDurationController!,
+                      NumberOfFixedVisits: int.parse(
+                        readyPlanProvider.NumberOfFixedVisitsController.text,
+                      ),
+                      NumberOEmregencyVisits: int.parse(
+                        readyPlanProvider.NumberOEmregencyVisitsController.text,
+                      ),
+                      NumberOfRacks: int.parse(
+                        readyPlanProvider.NumberOfRacksController.text,
+                      ),
+                      RacksUnitPrice: double.parse(
+                        readyPlanProvider.RacksUnitPriceController.text,
+                      ),
+                      IsActive: readyPlanProvider.IsActiveController,
+                      IsSpareParts: readyPlanProvider.IsSparePartsController,
+                      ///////////take only the apove/////////////
+                      SparePartsName: 'sss',
+                      SparePartsPrice: 0,
+                      TotalCost: 0,
+                      SparePartsDescription: 'sss',
+                      QuntityInStock: 0,
+                      MadeIn: 'sss',
+                      SparePartImages: [],
+                      NumberOfFreeSparePartQuantity: 0,
+                    );
+                  }
                 }
               },
             ),

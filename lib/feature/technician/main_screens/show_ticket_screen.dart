@@ -1,16 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'package:golden_racks_admin/constants.dart';
+import 'package:golden_racks_admin/core/models/search_ticket_model.dart';
 import 'package:golden_racks_admin/core/router/router.dart';
 import 'package:golden_racks_admin/feature/technician/main_screens/attendance_and_departure_screen.dart';
+import 'package:golden_racks_admin/feature/technician/main_screens/ticket_invoice_screen.dart';
 import 'package:golden_racks_admin/feature/technician/main_screens/send_alert_to_company_screen_tech.dart';
 import 'package:golden_racks_admin/feature/technician/main_screens/technical_report_screen.dart';
+import 'package:golden_racks_admin/feature/technician/main_screens/widgets/technical_search_ticket_view_screen.dart';
 import 'package:golden_racks_admin/feature/widgets/main_text.dart';
 import 'package:golden_racks_admin/feature/widgets/technicianCustomScaffold.dart';
 
 class ShowTicketScreen extends StatefulWidget {
-  const ShowTicketScreen({Key? key}) : super(key: key);
-
+  final SearchTicketModel searchTicket;
+  ShowTicketScreen({
+    required this.searchTicket,
+  });
   @override
   State<ShowTicketScreen> createState() => _ShowTicketScreenState();
 }
@@ -36,8 +42,8 @@ class _ShowTicketScreenState extends State<ShowTicketScreen> {
         backgroundColor: Colors.transparent,
         hasAppbar: false,
         isHome: true,
-        hasNavBar: false,
-        title1: 'التذكرة رقم\n GR27867637365 ',
+        hasNavBar: true,
+        title1: 'التذكرة رقم\n ${widget.searchTicket.ticketNumber}',
         body: Container(
           margin: EdgeInsets.symmetric(horizontal: 20),
           child: Column(
@@ -63,13 +69,14 @@ class _ShowTicketScreenState extends State<ShowTicketScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         MainText(
-                          text: 'شركة امازون',
+                          text: '${widget.searchTicket.companyName}',
                           font: 15.sp,
                           weight: FontWeight.w500,
                           color: Colors.black,
                         ),
                         MainText(
-                          text: ' رقم التذكرة  GR27867637365',
+                          text:
+                              ' رقم التذكرة  ${widget.searchTicket.ticketNumber}',
                           font: 15.sp,
                           weight: FontWeight.w500,
                           color: Colors.black,
@@ -80,7 +87,7 @@ class _ShowTicketScreenState extends State<ShowTicketScreen> {
                       height: 13.h,
                     ),
                     MainText(
-                      text: 'عطل فني ادي الي توقف العمل بالكامل',
+                      text: '${widget.searchTicket.problemName}',
                       font: 12.sp,
                       weight: FontWeight.bold,
                       color: Colors.black,
@@ -104,11 +111,14 @@ class _ShowTicketScreenState extends State<ShowTicketScreen> {
                                   SizedBox(
                                     width: 8.w,
                                   ),
-                                  MainText(
-                                    text: 'سامر احمد سيد',
-                                    font: 15.sp,
-                                    weight: FontWeight.w500,
-                                    color: Colors.black,
+                                  Flexible(
+                                    child: MainText(
+                                      text:
+                                          '${widget.searchTicket.technicalName}',
+                                      font: 15.sp,
+                                      weight: FontWeight.w500,
+                                      color: Colors.black,
+                                    ),
                                   ),
                                 ],
                               ),
@@ -124,7 +134,8 @@ class _ShowTicketScreenState extends State<ShowTicketScreen> {
                                     width: 8.w,
                                   ),
                                   MainText(
-                                    text: '21-1-2023',
+                                    text:
+                                        '${formateDateTimeToDate(widget.searchTicket.visitDate!)}',
                                     font: 15.sp,
                                     weight: FontWeight.w500,
                                     color: Colors.black,
@@ -139,7 +150,13 @@ class _ShowTicketScreenState extends State<ShowTicketScreen> {
                         ),
                         Expanded(
                           child: GestureDetector(
-                            onTap: () {},
+                            onTap: () {
+                              MagicRouter.navigateTo(
+                                TechnicalSearchTicketView(
+                                  searchTicket: widget.searchTicket,
+                                ),
+                              );
+                            },
                             child: Container(
                               padding: EdgeInsets.symmetric(
                                   horizontal: 10.w, vertical: 5.h),
@@ -147,7 +164,7 @@ class _ShowTicketScreenState extends State<ShowTicketScreen> {
                                 borderRadius: BorderRadius.all(
                                   Radius.circular(8.0),
                                 ),
-                                color: Colors.yellow,
+                                color: Colors.yellow.shade700,
                               ),
                               child: Center(
                                 child: MainText(
@@ -175,7 +192,11 @@ class _ShowTicketScreenState extends State<ShowTicketScreen> {
                   Expanded(
                     child: GestureDetector(
                       onTap: () {
-                        MagicRouter.navigateTo(TechnicalReportScreen());
+                        MagicRouter.navigateTo(
+                          TechnicalReportScreen(
+                            searchTicket: widget.searchTicket,
+                          ),
+                        );
                       },
                       child: Container(
                         padding: EdgeInsets.symmetric(
@@ -205,7 +226,9 @@ class _ShowTicketScreenState extends State<ShowTicketScreen> {
                     child: GestureDetector(
                       onTap: () {
                         MagicRouter.navigateTo(
-                          AttendanceAndDepartureScreen(),
+                          AttendanceAndDepartureScreen(
+                            searchTicket: widget.searchTicket,
+                          ),
                         );
                       },
                       child: Container(
@@ -239,7 +262,11 @@ class _ShowTicketScreenState extends State<ShowTicketScreen> {
                 children: [
                   Expanded(
                     child: GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        MagicRouter.navigateTo(TicketInvoiceScreen(
+                          searchTicket: widget.searchTicket,
+                        ));
+                      },
                       child: Container(
                         padding: EdgeInsets.symmetric(
                             horizontal: 10.w, vertical: 5.h),
@@ -267,7 +294,9 @@ class _ShowTicketScreenState extends State<ShowTicketScreen> {
                   Expanded(
                     child: GestureDetector(
                       onTap: () {
-                        MagicRouter.navigateTo(SendAlertToCompanyTechScreen());
+                        MagicRouter.navigateTo(SendAlertToCompanyTechScreen(
+                          searchTicket: widget.searchTicket,
+                        ));
                       },
                       child: Container(
                         padding: EdgeInsets.symmetric(

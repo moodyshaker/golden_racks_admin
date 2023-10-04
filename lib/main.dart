@@ -15,6 +15,7 @@ import 'package:golden_racks_admin/core/provider/provider_assign_to_unsub_emerge
 import 'package:golden_racks_admin/core/provider/provider_assign_to_unsub_normal_plan.dart';
 import 'package:golden_racks_admin/core/provider/provider_daily_tasks.dart';
 import 'package:golden_racks_admin/core/provider/provider_ready_plan.dart';
+import 'package:golden_racks_admin/core/provider/provider_search_tickets.dart';
 import 'package:golden_racks_admin/core/provider/provider_subscribed_Company.dart';
 import 'package:provider/provider.dart';
 import 'core/appStorage/shared_preference.dart';
@@ -80,6 +81,7 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider(create: (_) => ActivePlanProvider()),
           ChangeNotifierProvider(create: (_) => SubscribedCompanyProvider()),
           ChangeNotifierProvider(create: (_) => DailyTasksProvider()),
+          ChangeNotifierProvider(create: (_) => SearchTicketProvider()),
         ],
         child: Builder(
           builder: (BuildContext c) => MaterialApp(

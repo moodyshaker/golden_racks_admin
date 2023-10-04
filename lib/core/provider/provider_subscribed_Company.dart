@@ -125,7 +125,6 @@ class SubscribedCompanyProvider extends ChangeNotifier {
             content: 'تم ارسال الاشعار بنجاح',
           ),
         ).then((value) => MagicRouter.pop());
-        notificationController.clear();
       } else {
         MagicRouter.pop();
         showDialog(
@@ -138,6 +137,7 @@ class SubscribedCompanyProvider extends ChangeNotifier {
       }
     } catch (e) {
       log('catch send notification ${e.toString}');
+      MagicRouter.pop();
     }
   }
 }

@@ -22,6 +22,7 @@ class TodayAppointmentModel {
   String? ticketNumber;
   String? userImage;
   String? accountNumber;
+  String? completeTicketNumber;
 
   TodayAppointmentModel({
     this.id,
@@ -45,6 +46,7 @@ class TodayAppointmentModel {
     this.ticketNumber,
     this.userImage,
     this.accountNumber,
+    this.completeTicketNumber,
   });
 
   factory TodayAppointmentModel.fromJson(Map<String, dynamic> json) {
@@ -69,6 +71,7 @@ class TodayAppointmentModel {
       address:
           '${json["address"]['country']} - ${json["address"]['city']} - ${json["address"]['state']} - ${json["address"]['street']}',
       ticketNumber: subtractTicketNumber(json["ticketNumber"]),
+      completeTicketNumber: (json["ticketNumber"]),
       userImage: json["userImage"],
       accountNumber: json["accountNumber"],
     );

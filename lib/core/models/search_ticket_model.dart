@@ -1,6 +1,8 @@
 import 'package:golden_racks_admin/constants.dart';
 
-class AgendaModel {
+class SearchTicketModel {
+  int? subscribeId;
+  String? ticketStatus;
   String? ticketNumber;
   String? technicalId;
   String? technicalName;
@@ -12,11 +14,12 @@ class AgendaModel {
   String? problemName;
   String? sound;
   List<ImagesAndVideos>? imagesAndVideos;
-
   List<ReadyPlanDetails>? readyPlanDetails;
   String? completeTicketNumber;
 
-  AgendaModel({
+  SearchTicketModel({
+    this.subscribeId,
+    this.ticketStatus,
     this.ticketNumber,
     this.technicalId,
     this.technicalName,
@@ -34,6 +37,8 @@ class AgendaModel {
 
   Map<String, dynamic> toJson() {
     return <String, dynamic>{
+      'subscribeId': subscribeId,
+      'ticketStatus': ticketStatus,
       'ticketNumber': ticketNumber,
       'technicalId': technicalId,
       'technicalName': technicalName,
@@ -49,10 +54,12 @@ class AgendaModel {
     };
   }
 
-  factory AgendaModel.fromJson(Map<String, dynamic> json) {
-    return AgendaModel(
+  factory SearchTicketModel.fromJson(Map<String, dynamic> json) {
+    return SearchTicketModel(
+      subscribeId: json['subscribeId'],
+      ticketStatus: json['ticketStatus'],
       ticketNumber: subtractTicketNumber(json['ticketNumber']),
-      completeTicketNumber: json['ticketNumber'],
+      completeTicketNumber: (json['ticketNumber']),
       technicalId:
           json['technicalId'] != null ? json['technicalId'] as String : null,
       technicalName: json['technicalName'] != null

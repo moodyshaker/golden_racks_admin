@@ -122,12 +122,14 @@ class _RequestsItemSubReadyState extends State<RequestsItemSubReady> {
               SizedBox(
                 width: 62.w,
               ),
-              MainText(
-                text:
-                    'خطة الصيانة (${arabicPlanTypes[englishPlanTypes.indexOf(widget.appointment.planName!)]}) الدورية',
-                font: 15.sp,
-                color: Colors.black,
-                weight: FontWeight.w500,
+              Flexible(
+                child: MainText(
+                  text:
+                      'خطة الصيانة (${arabicPlanTypes[englishPlanTypes.indexOf(widget.appointment.planName!)]}) الدورية',
+                  font: 15.sp,
+                  color: Colors.black,
+                  weight: FontWeight.w500,
+                ),
               ),
             ],
           ),

@@ -355,15 +355,13 @@ class _OrganizerCustomScaffoldState extends State<OrganizerCustomScaffold> {
                       navBar.length,
                       (i) => GestureDetector(
                         onTap: () {
+                          cubit.changeCurrent(i);
+
                           if (i == 2) {
                             log('home');
                             MagicRouter.navigateAndPop(AdminHome());
-                            cubit.changeCurrent(i);
                           } else if (i == 0) {
-                            cubit.changeCurrent(i);
                             _key.currentState!.openDrawer();
-                          } else {
-                            cubit.changeCurrent(i);
                           }
                         },
                         child: i == 2

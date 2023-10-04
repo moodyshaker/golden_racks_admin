@@ -55,9 +55,9 @@ class _PlanItemState extends State<PlanItem> {
                       children: [
                         MainText(
                           textAlign: TextAlign.center,
-                          text: arabicPlanTypes[englishPlanTypes.indexOf(
-                            widget.readyPlan.planDuration!,
-                          )],
+                          text: widget.readyPlan.planDuration == 'None'
+                              ? 'بلا مدة معينة'
+                              : '${arabicPlanTypes[englishPlanTypes.indexOf(widget.readyPlan.planDuration!)]}',
                           font: 16.sp,
                           color: kAccentColor,
                           weight: FontWeight.bold,
@@ -94,7 +94,9 @@ class _PlanItemState extends State<PlanItem> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             MainText(
-                              text: 'الخطة السنوية',
+                              text: widget.readyPlan.planDuration == 'None'
+                                  ? 'بلا مدة معينة'
+                                  : '${arabicPlanTypes[englishPlanTypes.indexOf(widget.readyPlan.planDuration!)]}',
                               font: 16.sp,
                               color: kBlackColor,
                               weight: FontWeight.bold,
@@ -343,23 +345,26 @@ class _PlanItemState extends State<PlanItem> {
               ],
             ),
           ),
-          FormField(
-            builder: (FormFieldState<String> state) {
-              return MainText(
-                text: state.errorText ?? '',
-                color: Colors.red,
-                font: 16.sp,
-                horizontalPadding: 16.w,
-                // verticalPadding: 8.h,
-              );
-            },
-            validator: (v) {
-              if (chosenTime == null) {
-                return 'من فضلك ادخل تاريخ بداية الخطة';
-              } else {
-                return null;
-              }
-            },
+          Align(
+            alignment: Alignment.topRight,
+            child: FormField(
+              builder: (FormFieldState<String> state) {
+                return MainText(
+                  text: state.errorText ?? '',
+                  color: Colors.red,
+                  font: 16.sp,
+                  horizontalPadding: 16.w,
+                  // verticalPadding: 8.h,
+                );
+              },
+              validator: (v) {
+                if (chosenTime == null) {
+                  return 'من فضلك ادخل تاريخ بداية الخطة';
+                } else {
+                  return null;
+                }
+              },
+            ),
           ),
           SizedBox(
             height: 8.h,

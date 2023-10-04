@@ -31,8 +31,7 @@ class ReadyPlanProvider extends ChangeNotifier {
     readyPlan.numberOfRacks = readyPlan.numberOfRacks! + 1;
 
     readyPlan.planPrice =
-        (readyPlan.racksUnitPrice! * readyPlan.numberOfRacks!) +
-            readyPlan.totalCost!;
+        (readyPlan.racksUnitPrice! * readyPlan.numberOfRacks!);
 
     log('id > ' + readyPlan.id.toString());
     log('num of racks > ' + readyPlan.numberOfRacks.toString());
@@ -48,8 +47,7 @@ class ReadyPlanProvider extends ChangeNotifier {
     readyPlan.numberOfRacks = readyPlan.numberOfRacks! - 1;
 
     readyPlan.planPrice =
-        (readyPlan.racksUnitPrice! * readyPlan.numberOfRacks!) +
-            readyPlan.totalCost!;
+        (readyPlan.racksUnitPrice! * readyPlan.numberOfRacks!);
     log('id > ' + readyPlan.id.toString());
     log('num of racks > ' + readyPlan.numberOfRacks.toString());
     log('plan price > ' + readyPlan.planPrice.toString());
@@ -70,8 +68,10 @@ class ReadyPlanProvider extends ChangeNotifier {
   TextEditingController MadeInController = TextEditingController();
   TextEditingController NumberOfRacksController = TextEditingController();
   TextEditingController RacksUnitPriceController = TextEditingController();
+  TextEditingController NumberOfFreeSparePartQuantityController =
+      TextEditingController();
 
-  bool IsSparePartsController = true;
+  bool IsSparePartsController = false;
   bool IsActiveController = true;
   int? PlanDurationController;
 
@@ -90,6 +90,7 @@ class ReadyPlanProvider extends ChangeNotifier {
     required int NumberOfRacks,
     required double RacksUnitPrice,
     required List<File> SparePartImages,
+    required int NumberOfFreeSparePartQuantity,
   }) async {
     try {
       showDialog(
@@ -112,16 +113,20 @@ class ReadyPlanProvider extends ChangeNotifier {
       request.fields['NumberOfFixedVisits'] = NumberOfFixedVisits.toString();
       request.fields['NumberOEmregencyVisits'] =
           NumberOEmregencyVisits.toString();
+      request.fields['NumberOfRacks'] = NumberOfRacks.toString();
+      request.fields['RacksUnitPrice'] = RacksUnitPrice.toString();
+      request.fields['IsActive'] = IsActive.toString();
       request.fields['IsSpareParts'] = IsSpareParts.toString();
+
+      // if (IsSpareParts) {
       request.fields['SparePartsName'] = SparePartsName;
       request.fields['SparePartsPrice'] = SparePartsPrice.toString();
       request.fields['TotalCost'] = TotalCost.toString();
       request.fields['SparePartsDescription'] = SparePartsDescription;
       request.fields['QuntityInStock'] = QuntityInStock.toString();
       request.fields['MadeIn'] = MadeIn;
-      request.fields['IsActive'] = IsActive.toString();
-      request.fields['NumberOfRacks'] = NumberOfRacks.toString();
-      request.fields['RacksUnitPrice'] = RacksUnitPrice.toString();
+      request.fields['NumberOfFreeSparePartQuantity'] =
+          NumberOfFreeSparePartQuantity.toString();
 
       for (var image in SparePartImages) {
         request.files.add(
@@ -132,6 +137,7 @@ class ReadyPlanProvider extends ChangeNotifier {
             filename: image.path.split('/').last,
           ),
         );
+        // }
       }
 
       request.headers.addAll(headers);

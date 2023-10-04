@@ -3,26 +3,26 @@ import 'dart:developer';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:golden_racks_admin/core/models/agenda_model.dart';
-import 'package:golden_racks_admin/feature/admin/main_screens/widgets/video_preview_screen.dart';
 
+import 'package:golden_racks_admin/constants.dart';
+import 'package:golden_racks_admin/core/models/search_ticket_model.dart';
+import 'package:golden_racks_admin/feature/admin/main_screens/widgets/video_preview_screen.dart';
 import 'package:golden_racks_admin/feature/widgets/main_text.dart';
 import 'package:golden_racks_admin/feature/widgets/technicianCustomScaffold.dart';
 import 'package:path/path.dart' as pathFile;
 
-import '../../../../constants.dart';
-
-class TechnicalTicketViewScreen extends StatefulWidget {
-  final AgendaModel dailyTicket;
-
-  const TechnicalTicketViewScreen({required this.dailyTicket});
+class TechnicalSearchTicketView extends StatefulWidget {
+  final SearchTicketModel searchTicket;
+  TechnicalSearchTicketView({
+    required this.searchTicket,
+  });
 
   @override
-  State<TechnicalTicketViewScreen> createState() =>
-      _TechnicalTicketViewScreenState();
+  State<TechnicalSearchTicketView> createState() =>
+      _TechnicalSearchTicketViewState();
 }
 
-class _TechnicalTicketViewScreenState extends State<TechnicalTicketViewScreen> {
+class _TechnicalSearchTicketViewState extends State<TechnicalSearchTicketView> {
   @override
   void initState() {
     super.initState();
@@ -42,7 +42,7 @@ class _TechnicalTicketViewScreenState extends State<TechnicalTicketViewScreen> {
         hasAppbar: false,
         isHome: true,
         hasNavBar: true,
-        title1: 'عرض تذكرة رقم  ${widget.dailyTicket.ticketNumber}',
+        title1: 'عرض تذكرة رقم  ${widget.searchTicket.ticketNumber}',
         body: Column(
           children: [
             Container(
@@ -62,7 +62,7 @@ class _TechnicalTicketViewScreenState extends State<TechnicalTicketViewScreen> {
                     children: [
                       Flexible(
                         child: MainText(
-                          text: 'شركة ${widget.dailyTicket.companyName}',
+                          text: 'شركة ${widget.searchTicket.companyName}',
                           font: 16.sp,
                           weight: FontWeight.w800,
                           color: Colors.black,
@@ -71,7 +71,7 @@ class _TechnicalTicketViewScreenState extends State<TechnicalTicketViewScreen> {
                       Flexible(
                         child: MainText(
                           text:
-                              'رقم التذكرة ${widget.dailyTicket.ticketNumber}',
+                              'رقم التذكرة ${widget.searchTicket.ticketNumber}',
                           font: 14.sp,
                           weight: FontWeight.w400,
                           color: Colors.black,
@@ -85,7 +85,7 @@ class _TechnicalTicketViewScreenState extends State<TechnicalTicketViewScreen> {
                   Container(
                     margin: EdgeInsets.symmetric(horizontal: 16.w),
                     child: MainText(
-                      text: '${widget.dailyTicket.problemName}',
+                      text: '${widget.searchTicket.problemName}',
                       font: 16.sp,
                       weight: FontWeight.w500,
                       color: Colors.black,
@@ -106,7 +106,7 @@ class _TechnicalTicketViewScreenState extends State<TechnicalTicketViewScreen> {
                           width: 20.w,
                         ),
                         MainText(
-                          text: '${widget.dailyTicket.technicalName}',
+                          text: '${widget.searchTicket.technicalName}',
                           font: 15.sp,
                           weight: FontWeight.w600,
                           color: kSecondaryColor,
@@ -129,7 +129,7 @@ class _TechnicalTicketViewScreenState extends State<TechnicalTicketViewScreen> {
                         ),
                         MainText(
                           text: formateDateTimeToDate(
-                            widget.dailyTicket.visitDate!,
+                            widget.searchTicket.visitDate!,
                           ),
                           font: 15.sp,
                           weight: FontWeight.w400,
@@ -156,19 +156,15 @@ class _TechnicalTicketViewScreenState extends State<TechnicalTicketViewScreen> {
                   Container(
                     margin: EdgeInsets.symmetric(horizontal: 16.w),
                     child: InkWell(
-                      onTap: '${widget.dailyTicket.sound}' != ''
-                          ? () async {
-                              final player = AudioPlayer();
-                              var path =
-                                  'http://75.119.156.82/${widget.dailyTicket.sound}';
-                              log(path);
-                              await player.play(
-                                UrlSource(path),
-                              );
-                            }
-                          : () {
-                              print('null');
-                            },
+                      onTap: () async {
+                        final player = AudioPlayer();
+                        var path =
+                            'http://75.119.156.82/${widget.searchTicket.sound}';
+                        log(path);
+                        await player.play(
+                          UrlSource(path),
+                        );
+                      },
                       child: Container(
                         height: 56.h,
                         width: double.infinity,
@@ -222,61 +218,51 @@ class _TechnicalTicketViewScreenState extends State<TechnicalTicketViewScreen> {
                   SizedBox(
                     height: 9.h,
                   ),
-                  widget.dailyTicket.imagesAndVideos!.isEmpty
-                      ? Center(
-                          child: MainText(
-                            text: 'لا يوجد صور او فيديوهات',
-                          ),
-                        )
-                      : Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Container(
-                              height: 74.h,
-                              width: 74.w,
-                              child:
-                                  widget.dailyTicket.imagesAndVideos!.length < 1
-                                      ? Image.asset(getAsset('no_pic'))
-                                      : CustomNetworkFileImage(
-                                          path:
-                                              'http://75.119.156.82/${widget.dailyTicket.imagesAndVideos![0].fileName}',
-                                        ),
-                            ),
-                            Container(
-                              height: 74.h,
-                              width: 74.w,
-                              child:
-                                  widget.dailyTicket.imagesAndVideos!.length < 2
-                                      ? Image.asset(getAsset('no_pic'))
-                                      : CustomNetworkFileImage(
-                                          path:
-                                              'http://75.119.156.82/${widget.dailyTicket.imagesAndVideos![1].fileName}',
-                                        ),
-                            ),
-                            Container(
-                              height: 74.h,
-                              width: 74.w,
-                              child:
-                                  widget.dailyTicket.imagesAndVideos!.length < 3
-                                      ? Image.asset(getAsset('no_pic'))
-                                      : CustomNetworkFileImage(
-                                          path:
-                                              'http://75.119.156.82/${widget.dailyTicket.imagesAndVideos![2].fileName}',
-                                        ),
-                            ),
-                            Container(
-                              height: 74.h,
-                              width: 74.w,
-                              child:
-                                  widget.dailyTicket.imagesAndVideos!.length < 4
-                                      ? Image.asset(getAsset('no_pic'))
-                                      : CustomNetworkFileImage(
-                                          path:
-                                              'http://75.119.156.82/${widget.dailyTicket.imagesAndVideos![3].fileName}',
-                                        ),
-                            ),
-                          ],
-                        ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Container(
+                        height: 74.h,
+                        width: 74.w,
+                        child: widget.searchTicket.imagesAndVideos!.length < 1
+                            ? Image.asset(getAsset('no_pic'))
+                            : CustomNetworkFileImage(
+                                path:
+                                    'http://75.119.156.82/${widget.searchTicket.imagesAndVideos![0].fileName}',
+                              ),
+                      ),
+                      Container(
+                        height: 74.h,
+                        width: 74.w,
+                        child: widget.searchTicket.imagesAndVideos!.length < 2
+                            ? Image.asset(getAsset('no_pic'))
+                            : CustomNetworkFileImage(
+                                path:
+                                    'http://75.119.156.82/${widget.searchTicket.imagesAndVideos![1].fileName}',
+                              ),
+                      ),
+                      Container(
+                        height: 74.h,
+                        width: 74.w,
+                        child: widget.searchTicket.imagesAndVideos!.length < 3
+                            ? Image.asset(getAsset('no_pic'))
+                            : CustomNetworkFileImage(
+                                path:
+                                    'http://75.119.156.82/${widget.searchTicket.imagesAndVideos![2]}.fileName',
+                              ),
+                      ),
+                      Container(
+                        height: 74.h,
+                        width: 74.w,
+                        child: widget.searchTicket.imagesAndVideos!.length < 4
+                            ? Image.asset(getAsset('no_pic'))
+                            : CustomNetworkFileImage(
+                                path:
+                                    'http://75.119.156.82/${widget.searchTicket.imagesAndVideos![3]}.fileName',
+                              ),
+                      ),
+                    ],
+                  ),
                 ],
               ),
             ),
@@ -324,6 +310,7 @@ class _CustomNetworkFileImageState extends State<CustomNetworkFileImage> {
           '${widget.path}',
         ),
         onTap: () {
+          log(widget.path);
           showDialog(
             context: context,
             builder: (context) {

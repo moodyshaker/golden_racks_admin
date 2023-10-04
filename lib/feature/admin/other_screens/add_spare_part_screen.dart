@@ -177,9 +177,7 @@ class _AddASparePartScreenState extends State<AddASparePartScreen> {
                       ),
                       CustomTextField(
                         controller: readyPlanProvider.QuntityInStockController,
-
                         horizontalPadding: 20.w,
-                        // controller: organizer.loginEmailController,
                         hasHeader: false,
                         hint: 'الكمية في المخزن',
                         hasHint: true,
@@ -191,6 +189,29 @@ class _AddASparePartScreenState extends State<AddASparePartScreen> {
                           final n = num.tryParse(v!);
                           if (v.isEmpty || n == null) {
                             return 'ادخل الكمية في المخزن';
+                          } else {
+                            return null;
+                          }
+                        },
+                      ),
+                      SizedBox(
+                        height: 11.h,
+                      ),
+                      CustomTextField(
+                        controller: readyPlanProvider
+                            .NumberOfFreeSparePartQuantityController,
+                        horizontalPadding: 20.w,
+                        hasHeader: false,
+                        hint: 'عدد قطع الغيار المجانية',
+                        hasHint: true,
+                        hintFont: 15.sp,
+                        hintColor: gray_40,
+                        hintWeight: FontWeight.w400,
+                        type: TextInputType.number,
+                        valid: (String? v) {
+                          final n = num.tryParse(v!);
+                          if (v.isEmpty || n == null) {
+                            return 'ادخل عدد قطع الغيار المجانية';
                           } else {
                             return null;
                           }
@@ -252,7 +273,15 @@ class _AddASparePartScreenState extends State<AddASparePartScreen> {
                     NumberOEmregencyVisits: int.parse(
                       readyPlanProvider.NumberOEmregencyVisitsController.text,
                     ),
+                    NumberOfRacks: int.parse(
+                      readyPlanProvider.NumberOfRacksController.text,
+                    ),
+                    RacksUnitPrice: double.parse(
+                      readyPlanProvider.RacksUnitPriceController.text,
+                    ),
+                    IsActive: readyPlanProvider.IsActiveController,
                     IsSpareParts: readyPlanProvider.IsSparePartsController,
+                    /////////take all of them///////////////
                     SparePartsName:
                         readyPlanProvider.SparePartsNameController.text,
                     SparePartsPrice: double.parse(
@@ -267,14 +296,11 @@ class _AddASparePartScreenState extends State<AddASparePartScreen> {
                       readyPlanProvider.QuntityInStockController.text,
                     ),
                     MadeIn: readyPlanProvider.MadeInController.text,
-                    IsActive: readyPlanProvider.IsActiveController,
-                    NumberOfRacks: int.parse(
-                      readyPlanProvider.NumberOfRacksController.text,
-                    ),
-                    RacksUnitPrice: double.parse(
-                      readyPlanProvider.RacksUnitPriceController.text,
-                    ),
                     SparePartImages: files,
+                    NumberOfFreeSparePartQuantity: int.parse(
+                      readyPlanProvider
+                          .NumberOfFreeSparePartQuantityController.text,
+                    ),
                   );
                 }
               },
