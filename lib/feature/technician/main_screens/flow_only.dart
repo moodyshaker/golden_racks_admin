@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:golden_racks_admin/core/router/router.dart';
-import 'package:golden_racks_admin/feature/technician/main_screens/notification_screen.dart';
+import 'package:golden_racks_admin/feature/technician/main_screens/technical_notification_screen.dart';
 import 'package:golden_racks_admin/feature/technician/main_screens/search_tickets_screen.dart';
 import 'package:golden_racks_admin/feature/widgets/technicianCustomScaffold.dart';
 import '../../../../constants.dart';
@@ -63,7 +63,7 @@ class _FlowOnlyState extends State<FlowOnly> {
                 textColor: Colors.white,
                 withBorder: false,
                 onPressed: () async {
-                  MagicRouter.navigateTo(NotificationScreen());
+                  MagicRouter.navigateTo(TechnicalNotificationScreen());
                 },
               ),
             ],

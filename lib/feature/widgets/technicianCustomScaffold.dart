@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:golden_racks_admin/core/bloc/technician_app_cubit.dart';
-import 'package:golden_racks_admin/feature/technician/main_screens/flow_only.dart';
+import 'package:golden_racks_admin/feature/technician/main_screens/search_tickets_screen.dart';
+import 'package:golden_racks_admin/feature/technician/main_screens/technical_notification_screen.dart';
 import 'package:golden_racks_admin/feature/technician/main_screens/technician_home.dart';
 import '../../constants.dart';
 import '../../core/bloc/language_cubit.dart';
@@ -162,7 +163,11 @@ class _TechnicianCustomScaffoldState extends State<TechnicianCustomScaffold> {
                             children: [
                               Center(
                                 child: GestureDetector(
-                                  onTap: () {},
+                                  onTap: () {
+                                    MagicRouter.navigateTo(
+                                      TechnicalNotificationScreen(),
+                                    );
+                                  },
                                   child: Container(
                                     height: 24.h,
                                     width: 24.w,
@@ -307,7 +312,7 @@ class _TechnicianCustomScaffoldState extends State<TechnicianCustomScaffold> {
                           } else if (i == 1) {
                             print('tickets 50 cents');
                             MagicRouter.navigateAndPopAll(
-                              FlowOnly(),
+                              SearchTicketsScreen(),
                             );
                           } else if (i == 2) {
                             print('board board');

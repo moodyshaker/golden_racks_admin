@@ -4,6 +4,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:golden_racks_admin/core/models/table_object_model.dart';
 import 'package:golden_racks_admin/core/models/ticket_invoice_details_model.dart';
+import 'package:golden_racks_admin/feature/technician/main_screens/search_tickets_screen.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 import 'package:provider/provider.dart';
@@ -319,14 +320,14 @@ class SearchTicketProvider extends ChangeNotifier {
           builder: (ctx) => InfoDialog(
             content: 'تم تسجيل الانصراف بنجاح',
           ),
-        ).then((value) => MagicRouter.pop());
+        ).then((value) => MagicRouter.navigateAndPopAll(SearchTicketsScreen()));
       } else {
         MagicRouter.pop();
         showDialog(
           context: navigatorKey.currentContext!,
           barrierDismissible: true,
           builder: (ctx) => ErrorDialog(
-            text: 'خطأ في تسجيل الانصراف',
+            text: 'يجب تسجيل الحضور اولا',
           ),
         );
       }

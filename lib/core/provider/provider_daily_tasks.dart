@@ -4,6 +4,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:golden_racks_admin/core/httpHelper/http_helper.dart';
 import 'package:golden_racks_admin/core/models/agenda_model.dart';
+import 'package:golden_racks_admin/core/models/notification_model.dart';
 import 'package:golden_racks_admin/core/networkStatus/network_status.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
@@ -20,6 +21,9 @@ class DailyTasksProvider extends ChangeNotifier {
 
   List<AgendaModel> allDailyTasks = [];
   NetworkStatus? dailyTasksStatus;
+
+  List<NotificationModel> allNotifications = [];
+  NetworkStatus? notificationStatus;
 
   Future<void> getAllDailyTasks({
     required String technicalId,
@@ -102,6 +106,49 @@ class DailyTasksProvider extends ChangeNotifier {
       }
     } catch (e) {
       log('catch get Agenda > ${e.toString()}');
+    }
+    notifyListeners();
+  }
+
+  Future<void> getNotification({
+    required String userId,
+    bool retry = false,
+  }) async {
+    notificationStatus = NetworkStatus.loading;
+    if (retry) {
+      notifyListeners();
+    }
+
+    try {
+      var params = {"userId": userId};
+
+      Uri uri = Uri.parse('${base_url}SendNotifications/get-all-notification');
+      final finalUri = uri.replace(queryParameters: params);
+
+      var response = await http.get(
+        finalUri,
+        headers: {
+          'Accept-Language': 'ar',
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+      );
+
+      if (response.statusCode >= 200 && response.statusCode < 300) {
+        List jsonResponse = jsonDecode(response.body);
+        allNotifications =
+            jsonResponse.map((e) => NotificationModel.fromJson(e)).toList();
+
+        print('all companies length ${allNotifications.length}');
+
+        notificationStatus = NetworkStatus.success;
+      } else {
+        print('error get notifications > ${response.body}');
+
+        notificationStatus = NetworkStatus.error;
+      }
+    } catch (e) {
+      print('catch get notifications ${e.toString()}');
     }
     notifyListeners();
   }

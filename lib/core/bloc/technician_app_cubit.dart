@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:golden_racks_admin/feature/technician/main_screens/flow_only.dart';
+import 'package:golden_racks_admin/feature/technician/main_screens/search_tickets_screen.dart';
 import 'package:golden_racks_admin/feature/technician/main_screens/units/technician_main.dart';
 import 'package:provider/provider.dart';
 import '../appStorage/shared_preference.dart';
@@ -84,8 +84,6 @@ class TechnicianAppCubit extends ChangeNotifier {
   }
 
   void changeCurrent(int i) {
-    // log('${_i}');
-    // log('${_w.runtimeType}');
     _i = i;
     _getCurrentScreen();
     notifyListeners();
@@ -99,7 +97,7 @@ class TechnicianAppCubit extends ChangeNotifier {
         _title = 'main';
         break;
       case 1:
-        _w = FlowOnly();
+        _w = SearchTicketWidget();
         break;
       case 2:
         break;

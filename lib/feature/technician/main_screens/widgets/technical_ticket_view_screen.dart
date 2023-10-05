@@ -4,7 +4,9 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:golden_racks_admin/core/models/agenda_model.dart';
+import 'package:golden_racks_admin/core/router/router.dart';
 import 'package:golden_racks_admin/feature/admin/main_screens/widgets/video_preview_screen.dart';
+import 'package:golden_racks_admin/feature/widgets/action_dialog.dart';
 
 import 'package:golden_racks_admin/feature/widgets/main_text.dart';
 import 'package:golden_racks_admin/feature/widgets/technicianCustomScaffold.dart';
@@ -167,7 +169,14 @@ class _TechnicalTicketViewScreenState extends State<TechnicalTicketViewScreen> {
                               );
                             }
                           : () {
-                              print('null');
+                              showDialog(
+                                context: context,
+                                builder: (_) => ActionDialog(
+                                  content: 'لا يوجد ملف صوتي',
+                                  approveAction: 'حسنا',
+                                  onApproveClick: MagicRouter.pop,
+                                ),
+                              );
                             },
                       child: Container(
                         height: 56.h,

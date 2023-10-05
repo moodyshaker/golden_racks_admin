@@ -5,13 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:golden_racks_admin/feature/admin/main_screens/home.dart';
+import 'package:golden_racks_admin/feature/admin/other_screens/admin_notification_screen.dart';
 import '../../constants.dart';
 import '../../core/bloc/language_cubit.dart';
 import '../../core/bloc/organizer_app_cubit.dart';
 import '../../core/localization/demo_localization.dart';
 import '../../core/models/nav_item.dart';
 import '../../core/router/router.dart';
-import '../technician/main_screens/notification_screen.dart';
 import 'action_dialog.dart';
 import 'main_text.dart';
 
@@ -217,7 +217,8 @@ class _OrganizerCustomScaffoldState extends State<OrganizerCustomScaffold> {
                             Center(
                               child: GestureDetector(
                                 onTap: () {
-                                  MagicRouter.navigateTo(NotificationScreen());
+                                  MagicRouter.navigateTo(
+                                      AdminNotificationScreen());
                                 },
                                 child: Container(
                                   height: 24.h,

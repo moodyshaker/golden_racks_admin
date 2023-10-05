@@ -25,9 +25,6 @@ class ReadyPlanProvider extends ChangeNotifier {
   int chosenPlanDuration = 0;
 
   void increaseRack({required ReadyPlanModel readyPlan}) {
-    log('id > ' + readyPlan.id.toString());
-    log('num of racks > ' + readyPlan.numberOfRacks.toString());
-    log('plan price > ' + readyPlan.planPrice.toString());
     readyPlan.numberOfRacks = readyPlan.numberOfRacks! + 1;
 
     readyPlan.planPrice =
@@ -41,10 +38,9 @@ class ReadyPlanProvider extends ChangeNotifier {
   }
 
   void decreaseRack({required ReadyPlanModel readyPlan}) {
-    log('id > ' + readyPlan.id.toString());
-    log('num of racks > ' + readyPlan.numberOfRacks.toString());
-    log('plan price > ' + readyPlan.planPrice.toString());
-    readyPlan.numberOfRacks = readyPlan.numberOfRacks! - 1;
+    if (readyPlan.numberOfRacks! > 0) {
+      readyPlan.numberOfRacks = readyPlan.numberOfRacks! - 1;
+    }
 
     readyPlan.planPrice =
         (readyPlan.racksUnitPrice! * readyPlan.numberOfRacks!);

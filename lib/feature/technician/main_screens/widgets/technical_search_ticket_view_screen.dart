@@ -6,7 +6,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:golden_racks_admin/constants.dart';
 import 'package:golden_racks_admin/core/models/search_ticket_model.dart';
+import 'package:golden_racks_admin/core/router/router.dart';
 import 'package:golden_racks_admin/feature/admin/main_screens/widgets/video_preview_screen.dart';
+import 'package:golden_racks_admin/feature/widgets/action_dialog.dart';
 import 'package:golden_racks_admin/feature/widgets/main_text.dart';
 import 'package:golden_racks_admin/feature/widgets/technicianCustomScaffold.dart';
 import 'package:path/path.dart' as pathFile;
@@ -156,15 +158,26 @@ class _TechnicalSearchTicketViewState extends State<TechnicalSearchTicketView> {
                   Container(
                     margin: EdgeInsets.symmetric(horizontal: 16.w),
                     child: InkWell(
-                      onTap: () async {
-                        final player = AudioPlayer();
-                        var path =
-                            'http://75.119.156.82/${widget.searchTicket.sound}';
-                        log(path);
-                        await player.play(
-                          UrlSource(path),
-                        );
-                      },
+                      onTap: '${widget.searchTicket.sound}' != ''
+                          ? () async {
+                              final player = AudioPlayer();
+                              var path =
+                                  'http://75.119.156.82/${widget.searchTicket.sound}';
+                              log(path);
+                              await player.play(
+                                UrlSource(path),
+                              );
+                            }
+                          : () {
+                              showDialog(
+                                context: context,
+                                builder: (_) => ActionDialog(
+                                  content: 'لا يوجد ملف صوتي',
+                                  approveAction: 'حسنا',
+                                  onApproveClick: MagicRouter.pop,
+                                ),
+                              );
+                            },
                       child: Container(
                         height: 56.h,
                         width: double.infinity,
@@ -218,51 +231,65 @@ class _TechnicalSearchTicketViewState extends State<TechnicalSearchTicketView> {
                   SizedBox(
                     height: 9.h,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Container(
-                        height: 74.h,
-                        width: 74.w,
-                        child: widget.searchTicket.imagesAndVideos!.length < 1
-                            ? Image.asset(getAsset('no_pic'))
-                            : CustomNetworkFileImage(
-                                path:
-                                    'http://75.119.156.82/${widget.searchTicket.imagesAndVideos![0].fileName}',
-                              ),
-                      ),
-                      Container(
-                        height: 74.h,
-                        width: 74.w,
-                        child: widget.searchTicket.imagesAndVideos!.length < 2
-                            ? Image.asset(getAsset('no_pic'))
-                            : CustomNetworkFileImage(
-                                path:
-                                    'http://75.119.156.82/${widget.searchTicket.imagesAndVideos![1].fileName}',
-                              ),
-                      ),
-                      Container(
-                        height: 74.h,
-                        width: 74.w,
-                        child: widget.searchTicket.imagesAndVideos!.length < 3
-                            ? Image.asset(getAsset('no_pic'))
-                            : CustomNetworkFileImage(
-                                path:
-                                    'http://75.119.156.82/${widget.searchTicket.imagesAndVideos![2]}.fileName',
-                              ),
-                      ),
-                      Container(
-                        height: 74.h,
-                        width: 74.w,
-                        child: widget.searchTicket.imagesAndVideos!.length < 4
-                            ? Image.asset(getAsset('no_pic'))
-                            : CustomNetworkFileImage(
-                                path:
-                                    'http://75.119.156.82/${widget.searchTicket.imagesAndVideos![3]}.fileName',
-                              ),
-                      ),
-                    ],
-                  ),
+                  widget.searchTicket.imagesAndVideos!.isEmpty
+                      ? Center(
+                          child: MainText(
+                            text: 'لا يوجد صور او فيديوهات',
+                          ),
+                        )
+                      : Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Container(
+                              height: 74.h,
+                              width: 74.w,
+                              child:
+                                  widget.searchTicket.imagesAndVideos!.length <
+                                          1
+                                      ? Image.asset(getAsset('no_pic'))
+                                      : CustomNetworkFileImage(
+                                          path:
+                                              'http://75.119.156.82/${widget.searchTicket.imagesAndVideos![0].fileName}',
+                                        ),
+                            ),
+                            Container(
+                              height: 74.h,
+                              width: 74.w,
+                              child:
+                                  widget.searchTicket.imagesAndVideos!.length <
+                                          2
+                                      ? Image.asset(getAsset('no_pic'))
+                                      : CustomNetworkFileImage(
+                                          path:
+                                              'http://75.119.156.82/${widget.searchTicket.imagesAndVideos![1].fileName}',
+                                        ),
+                            ),
+                            Container(
+                              height: 74.h,
+                              width: 74.w,
+                              child:
+                                  widget.searchTicket.imagesAndVideos!.length <
+                                          3
+                                      ? Image.asset(getAsset('no_pic'))
+                                      : CustomNetworkFileImage(
+                                          path:
+                                              'http://75.119.156.82/${widget.searchTicket.imagesAndVideos![2]}.fileName',
+                                        ),
+                            ),
+                            Container(
+                              height: 74.h,
+                              width: 74.w,
+                              child:
+                                  widget.searchTicket.imagesAndVideos!.length <
+                                          4
+                                      ? Image.asset(getAsset('no_pic'))
+                                      : CustomNetworkFileImage(
+                                          path:
+                                              'http://75.119.156.82/${widget.searchTicket.imagesAndVideos![3]}.fileName',
+                                        ),
+                            ),
+                          ],
+                        ),
                 ],
               ),
             ),

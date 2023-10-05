@@ -4,7 +4,7 @@ import 'package:golden_racks_admin/constants.dart';
 import 'package:golden_racks_admin/core/appStorage/shared_preference.dart';
 import 'package:golden_racks_admin/core/networkStatus/network_status.dart';
 import 'package:golden_racks_admin/core/provider/provider_search_tickets.dart';
-import 'package:golden_racks_admin/feature/admin/other_screens/widgets/search_ticket_item.dart';
+import 'package:golden_racks_admin/feature/technician/main_screens/widgets/search_ticket_item.dart';
 import 'package:golden_racks_admin/feature/widgets/main_text.dart';
 import 'package:golden_racks_admin/feature/widgets/opacity_loading_logo.dart';
 import 'package:golden_racks_admin/feature/widgets/retry_widget.dart';
@@ -21,6 +21,10 @@ class _SearchTicketsScreenState extends State<SearchTicketsScreen> {
   @override
   void initState() {
     super.initState();
+    SearchTicketProvider.listenFalse(context).getSearchTickets(
+      technicalId: Preferences.instance.getUserId,
+      ticketType: 0,
+    );
   }
 
   @override
@@ -34,36 +38,61 @@ class _SearchTicketsScreenState extends State<SearchTicketsScreen> {
       ),
       child: TechnicianCustomScaffold(
         backgroundColor: Colors.transparent,
-        hasAppbar: false,
+        hasAppbar: true,
+        // title1: 'اهلا وسهلا',
+        title2: 'فني ${Preferences.instance.getUserFullName}',
+        title3: '',
         isHome: true,
         hasNavBar: true,
+        pic: 'profile',
         title1: 'التذاكر',
-        body: DefaultTabController(
-          length: 4,
-          child: Container(
-            margin: EdgeInsets.symmetric(horizontal: 16.w),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                CustomTabBar(),
-                SizedBox(height: 12.h),
-                Expanded(
-                  child: Container(
-                    child: TabBarView(
-                      children: [
-                        TicketTypeNew(),
-                        TicketTypeWorking(),
-                        TicketTypeFinished(),
-                        TicketTypeAll(),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
+        body: SearchTicketWidget(),
       ),
+    );
+  }
+}
+
+class SearchTicketWidget extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final searchTicketProvider = SearchTicketProvider.get(context);
+
+    return DefaultTabController(
+      length: 4,
+      child: searchTicketProvider.searchTicketStatus == NetworkStatus.loading
+          ? OpacityLoadingLogo()
+          : searchTicketProvider.searchTicketStatus == NetworkStatus.success
+              ? Container(
+                  margin: EdgeInsets.symmetric(horizontal: 16.w),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      CustomTabBar(),
+                      SizedBox(height: 12.h),
+                      Expanded(
+                        child: Container(
+                          child: TabBarView(
+                            children: [
+                              TicketTypeNew(),
+                              TicketTypeWorking(),
+                              TicketTypeFinished(),
+                              TicketTypeAll(),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                )
+              : RetryWidget(
+                  retryCallback: () async {
+                    await searchTicketProvider.getSearchTickets(
+                      technicalId: Preferences.instance.getUserId,
+                      ticketType: 0,
+                      retry: true,
+                    );
+                  },
+                ),
     );
   }
 }
@@ -87,33 +116,19 @@ class _TicketTypeAllState extends State<TicketTypeAll> {
   Widget build(BuildContext context) {
     final searchTicketProvider = SearchTicketProvider.get(context);
 
-    return searchTicketProvider.searchTicketStatus == NetworkStatus.loading
-        ? OpacityLoadingLogo()
-        : searchTicketProvider.searchTicketStatus == NetworkStatus.success
-            ? searchTicketProvider.allSearchTickets.isEmpty
-                ? Center(
-                    child: MainText(
-                      text: 'لا يوجد تذاكر',
-                    ),
-                  )
-                : ListView.builder(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 5.w, vertical: 10.h),
-                    itemBuilder: (BuildContext context, int i) =>
-                        SearchTicketItem(
-                      searchTicket: searchTicketProvider.allSearchTickets[i],
-                    ),
-                    itemCount: searchTicketProvider.allSearchTickets.length,
-                  )
-            : RetryWidget(
-                retryCallback: () async {
-                  await searchTicketProvider.getSearchTickets(
-                    technicalId: Preferences.instance.getUserId,
-                    ticketType: 0,
-                    retry: true,
-                  );
-                },
-              );
+    return searchTicketProvider.allSearchTickets.isEmpty
+        ? Center(
+            child: MainText(
+              text: 'لا يوجد تذاكر',
+            ),
+          )
+        : ListView.builder(
+            padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 10.h),
+            itemBuilder: (BuildContext context, int i) => SearchTicketItem(
+              searchTicket: searchTicketProvider.allSearchTickets[i],
+            ),
+            itemCount: searchTicketProvider.allSearchTickets.length,
+          );
   }
 }
 

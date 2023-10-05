@@ -9,6 +9,7 @@ import 'package:golden_racks_admin/feature/technician/main_screens/ticket_invoic
 import 'package:golden_racks_admin/feature/technician/main_screens/send_alert_to_company_screen_tech.dart';
 import 'package:golden_racks_admin/feature/technician/main_screens/technical_report_screen.dart';
 import 'package:golden_racks_admin/feature/technician/main_screens/widgets/technical_search_ticket_view_screen.dart';
+import 'package:golden_racks_admin/feature/widgets/action_dialog.dart';
 import 'package:golden_racks_admin/feature/widgets/main_text.dart';
 import 'package:golden_racks_admin/feature/widgets/technicianCustomScaffold.dart';
 
@@ -192,11 +193,22 @@ class _ShowTicketScreenState extends State<ShowTicketScreen> {
                   Expanded(
                     child: GestureDetector(
                       onTap: () {
-                        MagicRouter.navigateTo(
-                          TechnicalReportScreen(
-                            searchTicket: widget.searchTicket,
-                          ),
-                        );
+                        if (widget.searchTicket.ticketStatus == 'Expired') {
+                          showDialog(
+                            context: context,
+                            builder: (_) => ActionDialog(
+                              content: 'التذكرة منتهية',
+                              approveAction: 'حسنا',
+                              onApproveClick: MagicRouter.pop,
+                            ),
+                          );
+                        } else {
+                          MagicRouter.navigateTo(
+                            TechnicalReportScreen(
+                              searchTicket: widget.searchTicket,
+                            ),
+                          );
+                        }
                       },
                       child: Container(
                         padding: EdgeInsets.symmetric(
@@ -225,11 +237,22 @@ class _ShowTicketScreenState extends State<ShowTicketScreen> {
                   Expanded(
                     child: GestureDetector(
                       onTap: () {
-                        MagicRouter.navigateTo(
-                          AttendanceAndDepartureScreen(
-                            searchTicket: widget.searchTicket,
-                          ),
-                        );
+                        if (widget.searchTicket.ticketStatus == 'Expired') {
+                          showDialog(
+                            context: context,
+                            builder: (_) => ActionDialog(
+                              content: 'التذكرة منتهية',
+                              approveAction: 'حسنا',
+                              onApproveClick: MagicRouter.pop,
+                            ),
+                          );
+                        } else {
+                          MagicRouter.navigateTo(
+                            AttendanceAndDepartureScreen(
+                              searchTicket: widget.searchTicket,
+                            ),
+                          );
+                        }
                       },
                       child: Container(
                         padding: EdgeInsets.symmetric(
@@ -263,9 +286,22 @@ class _ShowTicketScreenState extends State<ShowTicketScreen> {
                   Expanded(
                     child: GestureDetector(
                       onTap: () {
-                        MagicRouter.navigateTo(TicketInvoiceScreen(
-                          searchTicket: widget.searchTicket,
-                        ));
+                        if (widget.searchTicket.ticketStatus == 'Expired') {
+                          showDialog(
+                            context: context,
+                            builder: (_) => ActionDialog(
+                              content: 'التذكرة منتهية',
+                              approveAction: 'حسنا',
+                              onApproveClick: MagicRouter.pop,
+                            ),
+                          );
+                        } else {
+                          MagicRouter.navigateTo(
+                            TicketInvoiceScreen(
+                              searchTicket: widget.searchTicket,
+                            ),
+                          );
+                        }
                       },
                       child: Container(
                         padding: EdgeInsets.symmetric(
@@ -294,9 +330,22 @@ class _ShowTicketScreenState extends State<ShowTicketScreen> {
                   Expanded(
                     child: GestureDetector(
                       onTap: () {
-                        MagicRouter.navigateTo(SendAlertToCompanyTechScreen(
-                          searchTicket: widget.searchTicket,
-                        ));
+                        if (widget.searchTicket.ticketStatus == 'Expired') {
+                          showDialog(
+                            context: context,
+                            builder: (_) => ActionDialog(
+                              content: 'التذكرة منتهية',
+                              approveAction: 'حسنا',
+                              onApproveClick: MagicRouter.pop,
+                            ),
+                          );
+                        } else {
+                          MagicRouter.navigateTo(
+                            SendAlertToCompanyTechScreen(
+                              searchTicket: widget.searchTicket,
+                            ),
+                          );
+                        }
                       },
                       child: Container(
                         padding: EdgeInsets.symmetric(

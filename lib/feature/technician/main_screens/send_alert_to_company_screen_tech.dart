@@ -84,8 +84,8 @@ class _SendAlertToCompanyTechScreenState
                   withBorder: false,
                   onPressed: () async {
                     await searchTicketProvider.sendAlertToCompany(
-                      SenderId: Preferences.instance.getUserId + 'sss',
-                      ReceiverId: widget.searchTicket.companyId! + 'sss',
+                      SenderId: Preferences.instance.getUserId,
+                      ReceiverId: widget.searchTicket.companyId!,
                       Message: searchTicketProvider
                           .sendAlertToCompanyController.text,
                     );

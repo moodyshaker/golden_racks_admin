@@ -1,6 +1,8 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import '../../constants.dart';
 import '../../core/bloc/language_cubit.dart';
 import 'main_text.dart';
@@ -54,56 +56,59 @@ class CustomTextField extends StatefulWidget {
   final bool underlineBorder;
   final double? horizontalPadding;
   final double? verticalPadding;
+  final bool? enable;
 
   CustomTextField({
+    Key? key,
     this.hint,
     this.header,
     this.headerFamily,
-    this.onSubmit,
-    this.maxLines,
-    this.onsave,
-    this.hasHeader = false,
-    this.headerWeight,
-    this.headerColor,
-    this.hintWeight,
-    this.headerFont,
-    this.hintFont,
-    this.underlineBorder = true,
-    this.onTap,
-    this.borderColor,
-    this.radius,
-    this.headerTextColor,
     this.minLines,
+    this.maxLines,
+    this.hasLabel,
+    this.hasHint,
     this.hintColor,
-    this.suffixCallback,
-    this.withPasswordIcon = true,
-    this.suffixIcon,
-    this.type,
     this.maxLength,
     this.nullMax = false,
+    this.hasHeader = false,
+    this.type,
     this.inputFormatters,
-    this.fillColor,
-    this.valid,
-    this.action,
-    this.hasHint,
-    this.align,
+    this.onsave,
+    this.suffixCallback,
     this.onChange,
-    this.isPassword = false,
     this.iconCallback,
+    this.valid,
+    this.validationMode,
+    this.suffixIcon,
+    this.fillColor,
+    this.headerTextColor,
+    this.headerColor,
+    this.isPassword = false,
+    this.headerFont,
+    this.radius,
+    this.headerWeight,
+    this.hintWeight,
+    this.hintFont,
     this.controller,
-    this.isPhone = false,
+    this.onTap,
+    this.onSubmit,
+    this.prefixIcon,
     this.focus,
     this.autoFocus = false,
-    this.prefixIcon,
-    this.hasLabel,
     this.read,
+    this.withPasswordIcon = true,
+    this.isPhone = false,
+    this.flag,
+    this.align,
+    this.action,
     this.edit,
     this.isEdit,
-    this.flag,
     this.hor,
-    this.validationMode,
-    this.verticalPadding,
+    this.borderColor,
+    this.underlineBorder = true,
     this.horizontalPadding,
+    this.verticalPadding,
+    this.enable,
   });
 
   @override
@@ -136,6 +141,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
               )
             : Container(),
         TextFormField(
+          enabled: widget.enable,
           onTap: widget.onTap,
           onFieldSubmitted: widget.onSubmit,
           validator: widget.valid,
@@ -229,20 +235,18 @@ class _CustomTextFieldState extends State<CustomTextField> {
                     ),
                   ),
             enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                        color: widget.borderColor ?? gray_40,
-                        width: 1),
-                    borderRadius: BorderRadius.circular(24.r),
-                  ),
+              borderSide:
+                  BorderSide(color: widget.borderColor ?? gray_40, width: 1),
+              borderRadius: BorderRadius.circular(24.r),
+            ),
             focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                        color: widget.borderColor ?? gray_40,
-                        width: 1),
-                    borderRadius: BorderRadius.circular(24.r),
-                  ),
+              borderSide:
+                  BorderSide(color: widget.borderColor ?? gray_40, width: 1),
+              borderRadius: BorderRadius.circular(24.r),
+            ),
             border: OutlineInputBorder(
-              borderSide: BorderSide(
-                  color: widget.borderColor ?? gray_40, width: 1),
+              borderSide:
+                  BorderSide(color: widget.borderColor ?? gray_40, width: 1),
               borderRadius: BorderRadius.circular(24.r),
             ),
           ),
