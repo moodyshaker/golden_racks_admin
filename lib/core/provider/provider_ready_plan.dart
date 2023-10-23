@@ -219,6 +219,85 @@ class ReadyPlanProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  Future<void> addSingleSparePart({
+    required String Name,
+    required double SellingPrice,
+    required double PurchasingPrice,
+    required String Description,
+    required int QuantityInStock,
+    required String MadeIn,
+    required bool IsActive,
+    required List<File> SparePartImages,
+  }) async {
+    try {
+      showDialog(
+        context: navigatorKey.currentContext!,
+        barrierDismissible: false,
+        builder: (ctx) => LoadingDialog(),
+      );
+
+      var request = MultipartRequest(
+        'POST',
+        Uri.parse('${base_url}SpareParts'),
+      );
+
+      Map<String, String> headers = {
+        "Content-type": "multipart/form-data",
+        'Accept-Language': 'ar',
+        'Accept': 'application/json',
+      };
+      request.fields['Name'] = Name;
+      request.fields['SellingPrice'] = SellingPrice.toString();
+      request.fields['PurchasingPrice'] = PurchasingPrice.toString();
+      request.fields['Description'] = Description;
+      request.fields['QuantityInStock'] = QuantityInStock.toString();
+      request.fields['MadeIn'] = MadeIn;
+      request.fields['IsActive'] = IsActive.toString();
+
+      for (var image in SparePartImages) {
+        request.files.add(
+          await http.MultipartFile(
+            'SparePartImages',
+            await image.readAsBytes().asStream(),
+            await image.length(),
+            filename: image.path.split('/').last,
+          ),
+        );
+      }
+
+      request.headers.addAll(headers);
+
+      var res = await request.send();
+
+      Response response = await Response.fromStream(res);
+
+      if (response.statusCode >= 200 && response.statusCode < 300) {
+        log(response.body);
+        MagicRouter.pop();
+        showDialog(
+          context: navigatorKey.currentContext!,
+          barrierDismissible: false,
+          builder: (ctx) => InfoDialog(
+            content: 'تم اضافة قطعة الغيار بنجاح',
+          ),
+        ).then((value) => MagicRouter.navigateTo(AdminHome()));
+      } else {
+        log('error add single spare part >> ${response.body}');
+        MagicRouter.pop();
+        showDialog(
+          context: navigatorKey.currentContext!,
+          barrierDismissible: false,
+          builder: (ctx) => ErrorDialog(
+            text: 'خطأ اضافة قطعة غيار',
+          ),
+        );
+      }
+    } catch (e) {
+      log('catch add add single spare part > ${e.toString()}');
+      MagicRouter.pop();
+    }
+  }
+
   Future<void> subscribeToReadyPlan({
     required String UserId,
     required int ReadyPlanId,
@@ -265,6 +344,27 @@ class ReadyPlanProvider extends ChangeNotifier {
       Response response = await Response.fromStream(res);
 
       if (response.statusCode >= 200 && response.statusCode < 300) {
+        //activate the plan
+        var r = json.decode(response.body);
+        int subscribedPlanId = int.parse(r["id"]);
+
+        Uri subscribeUri = Uri.parse(
+          '${base_url}ReadyPlans/activation-status-for-ready-plan',
+        );
+        final subscribeFinalUri = subscribeUri.replace(queryParameters: {
+          'id': subscribedPlanId.toString(),
+          'isActive': true.toString(),
+        });
+
+        await http.post(
+          subscribeFinalUri,
+          headers: {
+            'Accept-Language': 'ar',
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+          },
+        );
+
         log(response.body);
         MagicRouter.pop();
         showDialog(
@@ -275,7 +375,7 @@ class ReadyPlanProvider extends ChangeNotifier {
           ),
         ).then((value) => MagicRouter.navigateAndPopAll(AdminHome()));
       } else {
-        log('erro >> ${response.body}');
+        print('erro >> ${response.body}');
         MagicRouter.pop();
         showDialog(
           context: navigatorKey.currentContext!,
@@ -286,7 +386,7 @@ class ReadyPlanProvider extends ChangeNotifier {
         );
       }
     } catch (e) {
-      log('catch subscribe to ready plan ${e.toString()}');
+      print('catch subscribe to ready plan ${e.toString()}');
       MagicRouter.pop();
     }
   }

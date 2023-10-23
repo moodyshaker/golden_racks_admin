@@ -1,19 +1,21 @@
 import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:golden_racks_admin/constants.dart';
 import 'package:golden_racks_admin/core/provider/provider_ready_plan.dart';
+import 'package:golden_racks_admin/feature/widgets/customButton.dart';
+import 'package:golden_racks_admin/feature/widgets/customTextFeild.dart';
 import 'package:golden_racks_admin/feature/widgets/main_text.dart';
-import '../../../../constants.dart';
-import '../../widgets/customButton.dart';
-import '../../widgets/customTextFeild.dart';
-import '../../widgets/organizerCustomScaffold.dart';
+import 'package:golden_racks_admin/feature/widgets/organizerCustomScaffold.dart';
 
-class AddASparePartScreen extends StatefulWidget {
+class AddSingleSparePartScreen extends StatefulWidget {
   @override
-  State<AddASparePartScreen> createState() => _AddASparePartScreenState();
+  State<AddSingleSparePartScreen> createState() =>
+      _AddSingleSparePartScreenState();
 }
 
-class _AddASparePartScreenState extends State<AddASparePartScreen> {
+class _AddSingleSparePartScreenState extends State<AddSingleSparePartScreen> {
   List<String?> images = List.generate(3, (i) => null);
   final GlobalKey<FormState> _form = GlobalKey<FormState>();
 
@@ -31,7 +33,7 @@ class _AddASparePartScreenState extends State<AddASparePartScreen> {
       hasAppbar: false,
       isHome: true,
       hasNavBar: true,
-      title1: 'انشاء خطة صيانة',
+      title1: 'اضافة قطعة غيار',
       body: Container(
         margin: EdgeInsets.symmetric(horizontal: 16.w),
         child: Column(
@@ -217,29 +219,6 @@ class _AddASparePartScreenState extends State<AddASparePartScreen> {
                         height: 11.h,
                       ),
                       CustomTextField(
-                        controller: readyPlanProvider
-                            .NumberOfFreeSparePartQuantityController,
-                        horizontalPadding: 20.w,
-                        hasHeader: false,
-                        hint: 'عدد قطع الغيار المجانية',
-                        hasHint: true,
-                        hintFont: 15.sp,
-                        hintColor: gray_40,
-                        hintWeight: FontWeight.w400,
-                        type: TextInputType.number,
-                        valid: (String? v) {
-                          final n = num.tryParse(v!);
-                          if (v.isEmpty || n == null) {
-                            return 'ادخل عدد قطع الغيار المجانية';
-                          } else {
-                            return null;
-                          }
-                        },
-                      ),
-                      SizedBox(
-                        height: 11.h,
-                      ),
-                      CustomTextField(
                         controller: readyPlanProvider.MadeInController,
 
                         horizontalPadding: 20.w,
@@ -284,42 +263,22 @@ class _AddASparePartScreenState extends State<AddASparePartScreen> {
                     }
                   });
 
-                  await readyPlanProvider.addReadyPlan(
-                    PlanDuration: readyPlanProvider.PlanDurationController!,
-                    NumberOfFixedVisits: int.parse(
-                      readyPlanProvider.NumberOfFixedVisitsController.text,
-                    ),
-                    NumberOEmregencyVisits: int.parse(
-                      readyPlanProvider.NumberOEmregencyVisitsController.text,
-                    ),
-                    NumberOfRacks: int.parse(
-                      readyPlanProvider.NumberOfRacksController.text,
-                    ),
-                    RacksUnitPrice: double.parse(
-                      readyPlanProvider.RacksUnitPriceController.text,
-                    ),
-                    IsActive: readyPlanProvider.IsActiveController,
-                    IsSpareParts: readyPlanProvider.IsSparePartsController,
-                    /////////take all of them///////////////
-                    SparePartsName:
-                        readyPlanProvider.SparePartsNameController.text,
-                    SparePartsPrice: double.parse(
+                  await readyPlanProvider.addSingleSparePart(
+                    Name: readyPlanProvider.SparePartsNameController.text,
+                    SellingPrice: double.parse(
                       readyPlanProvider.SparePartsPriceController.text,
                     ),
-                    TotalCost: double.parse(
+                    PurchasingPrice: double.parse(
                       readyPlanProvider.TotalCostController.text,
                     ),
-                    SparePartsDescription:
+                    Description:
                         readyPlanProvider.SparePartsDescriptionController.text,
-                    QuntityInStock: int.parse(
+                    QuantityInStock: int.parse(
                       readyPlanProvider.QuntityInStockController.text,
                     ),
                     MadeIn: readyPlanProvider.MadeInController.text,
+                    IsActive: readyPlanProvider.IsActiveController,
                     SparePartImages: files,
-                    NumberOfFreeSparePartQuantity: int.parse(
-                      readyPlanProvider
-                          .NumberOfFreeSparePartQuantityController.text,
-                    ),
                   );
                 }
               },

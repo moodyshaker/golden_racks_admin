@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:golden_racks_admin/feature/admin/main_screens/subscribe_ready_admin_screens/subscribers_ready_requests_screen.dart';
 import 'package:golden_racks_admin/feature/admin/main_screens/unsubscribe_emergency_admin_screens/unsubscribers_emergency_requests_screen.dart';
+import 'package:golden_racks_admin/feature/admin/other_screens/add_single_spare_part_screen.dart';
 import 'package:golden_racks_admin/feature/admin/other_screens/create_plan_screen.dart';
 import 'package:intl/intl.dart';
 
@@ -12,7 +13,6 @@ import 'feature/admin/main_screens/active_plan_screens/activate_plane_admin_scre
 import 'feature/admin/main_screens/subscribe_emergency_admin_screens/subscribers_emergency_requests_screen.dart';
 import 'feature/admin/main_screens/unsubscribe_normal_admin_screens/unsubscribers_normal_requests_screen.dart';
 import 'feature/admin/other_screens/add_company_with_plan_screen.dart';
-import 'feature/admin/other_screens/add_spare_part_screen.dart';
 import 'feature/admin/main_screens/subscribed_companies_admin/subscribed_company_data_screen.dart';
 import 'feature/admin/other_screens/technician_view_screen.dart';
 
@@ -182,6 +182,15 @@ class DrawerItemModel {
 
 List<DrawerItemModel> list = [
   DrawerItemModel(
+    count: '3',
+    title: 'حسابات في انتظار تفعيل الخطط لها',
+    route: ActivatePlanAdminScreen(),
+  ),
+  DrawerItemModel(
+    title: 'انشاء حسابات للشركات وربطها بخطة',
+    route: AddCompanyWithPlanScreen(),
+  ),
+  DrawerItemModel(
     title: 'تحديد فني لطلبات الطوارئ لغير المشتركين',
     count: '2',
     route: UnSubscribersEmergencyRequestsAdminScreen(),
@@ -202,17 +211,8 @@ List<DrawerItemModel> list = [
     route: SubscribersReadyRequestsAdminScreen(),
   ),
   DrawerItemModel(
-    count: '3',
-    title: 'حسابات في انتظار تفعيل الخطط لها',
-    route: ActivatePlanAdminScreen(),
-  ),
-  DrawerItemModel(
     title: 'انشاء حسابات الدخول للفنين',
     route: TechnicianViewScreen(),
-  ),
-  DrawerItemModel(
-    title: 'انشاء حسابات للشركات وربطها بخطة',
-    route: AddCompanyWithPlanScreen(),
   ),
   DrawerItemModel(
     title: 'بيانات الشركات المشتركة في خطط',
@@ -220,7 +220,7 @@ List<DrawerItemModel> list = [
   ),
   DrawerItemModel(
     title: 'اضافة قطع الغيار',
-    route: AddASparePartScreen(),
+    route: AddSingleSparePartScreen(),
   ),
   DrawerItemModel(
     title: 'انشاء خطط الصيانة',

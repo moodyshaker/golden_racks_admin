@@ -134,7 +134,7 @@ class _OrganizerLoginState extends State<OrganizerLogin> {
                 withBorder: false,
                 onPressed: () async {
                   if (_form.currentState!.validate()) {
-                    await auth.authGetCountries();
+                    await auth.getAllCountries();
 
                     if (isAdmin) {
                       log('Admin');

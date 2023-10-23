@@ -5,7 +5,6 @@ import 'package:golden_racks_admin/feature/admin/main_screens/widgets/plan_item.
 import 'package:golden_racks_admin/feature/widgets/main_text.dart';
 
 import '../../../../constants.dart';
-import '../../../../core/bloc/home_cubit.dart';
 import '../../widgets/drop_menu.dart';
 import '../../widgets/organizerCustomScaffold.dart';
 
@@ -20,7 +19,6 @@ class _AddPlanScreenState extends State<AddPlanScreen> {
   @override
   void initState() {
     super.initState();
-    HomeCubit.listenFalse(context).getEventCategory();
   }
 
   @override

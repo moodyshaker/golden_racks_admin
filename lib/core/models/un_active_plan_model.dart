@@ -1,5 +1,3 @@
-import 'package:golden_racks_admin/constants.dart';
-
 class UnActivePlanModel {
   int? id;
   String? companyName_Ar;
@@ -9,8 +7,6 @@ class UnActivePlanModel {
   String? address;
   String? planeName;
   double? planePrice;
-  String? ticketNumber;
-  String? completeTicketNumber;
 
   UnActivePlanModel({
     this.id,
@@ -21,8 +17,6 @@ class UnActivePlanModel {
     this.address,
     this.planeName,
     this.planePrice,
-    this.ticketNumber,
-    this.completeTicketNumber,
   });
 
   Map<String, dynamic> toJson() {
@@ -35,7 +29,6 @@ class UnActivePlanModel {
       'address': address,
       'planeName': planeName,
       'planePrice': planePrice,
-      'ticketNumber': ticketNumber,
     };
   }
 
@@ -56,8 +49,6 @@ class UnActivePlanModel {
       planeName: json['planeName'] != null ? json['planeName'] as String : null,
       planePrice:
           json['planePrice'] != null ? json['planePrice'] as double : null,
-      ticketNumber: subtractTicketNumber(json['ticketNumber']),
-      completeTicketNumber: (json['ticketNumber']),
     );
   }
 }

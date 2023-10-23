@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:golden_racks_admin/core/appStorage/shared_preference.dart';
 import 'package:golden_racks_admin/core/dialogs/error_dialog.dart';
 import 'package:golden_racks_admin/core/dialogs/info_dialog.dart';
 import 'package:golden_racks_admin/core/httpHelper/http_helper.dart';
@@ -68,6 +69,7 @@ class AddTechnationProvider extends ChangeNotifier {
           'Accept-Language': 'ar',
           'Accept': 'application/json',
           'Content-Type': 'application/json',
+          'Authorization': 'Bearer ${Preferences.instance.getUserToken}'
         },
       );
 
@@ -126,6 +128,13 @@ class AddTechnationProvider extends ChangeNotifier {
           ),
         );
       }
+      var headers = {
+        'Accept-Language': 'ar',
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ${Preferences.instance.getUserToken}'
+      };
+      request.headers.addAll(headers);
       var streamResponse = await request.send();
       Response response = await Response.fromStream(streamResponse);
       var r = json.decode(response.body);
@@ -143,12 +152,12 @@ class AddTechnationProvider extends ChangeNotifier {
         ).then(
             (value) => MagicRouter.navigateAndPopAll(TechnicianViewScreen()));
       } else {
-        log('error create tech > ${response.body}');
+        MagicRouter.pop();
+        print('error create tech > ${response.body}');
 
         String errorString =
             r.values.first.toString().replaceAll(RegExp(r'[\[\]]'), '');
 
-        MagicRouter.pop();
         showDialog(
           context: navigatorKey.currentContext!,
           barrierDismissible: false,
@@ -158,7 +167,7 @@ class AddTechnationProvider extends ChangeNotifier {
         );
       }
     } catch (e) {
-      log('catch add new technical ${e.toString()}');
+      print('catch add new technical ${e.toString()}');
       MagicRouter.pop();
     }
   }

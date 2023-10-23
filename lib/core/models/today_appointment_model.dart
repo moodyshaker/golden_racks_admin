@@ -96,8 +96,7 @@ class TodayAppointmentModel {
       "transactionId": transactionId,
       "planName": planName,
       "companyName": companyName,
-      // "address": address,
-      "ticketNumber": ticketNumber,
+      "ticketNumber": completeTicketNumber,
       "userImage": userImage,
       "accountNumber": accountNumber,
     };

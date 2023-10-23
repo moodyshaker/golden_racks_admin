@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:golden_racks_admin/core/appStorage/shared_preference.dart';
 import 'package:golden_racks_admin/core/models/table_object_model.dart';
 import 'package:golden_racks_admin/core/models/ticket_invoice_details_model.dart';
 import 'package:golden_racks_admin/feature/technician/main_screens/search_tickets_screen.dart';
@@ -60,6 +61,7 @@ class SearchTicketProvider extends ChangeNotifier {
           'Accept-Language': 'ar',
           'Accept': 'application/json',
           'Content-Type': 'application/json',
+          'Authorization': 'Bearer ${Preferences.instance.getUserToken}'
         },
       );
       log(response.statusCode.toString());
@@ -108,6 +110,7 @@ class SearchTicketProvider extends ChangeNotifier {
         "Content-type": "multipart/form-data",
         'Accept-Language': 'ar',
         'Accept': 'application/json',
+        'Authorization': 'Bearer ${Preferences.instance.getUserToken}'
       };
       request.fields['TechnicalId'] = TechnicalId;
       request.fields['CompanyId'] = CompanyId;
@@ -451,7 +454,7 @@ class SearchTicketProvider extends ChangeNotifier {
       };
       var response = await HttpHelper.instance.httpPost(
         'TicketInvoice',
-        false,
+        true,
         body: body,
       );
 

@@ -60,6 +60,7 @@ class AssignToSubReadyProvider extends ChangeNotifier {
     required String VisitDate,
     required bool IsActive,
     required int readyPlanId,
+    required String ticketNumber,
   }) async {
     try {
       showDialog(
@@ -78,6 +79,7 @@ class AssignToSubReadyProvider extends ChangeNotifier {
           'IsActive': IsActive,
           'subsribeToReadyPlanId': subsribeToReadyPlanId,
           'readyPlanId': readyPlanId,
+          'ticketNumber': ticketNumber,
         },
       );
 

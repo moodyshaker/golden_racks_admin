@@ -13,7 +13,7 @@ import '../../../widgets/main_text.dart';
 class PlanItem extends StatefulWidget {
   final ReadyPlanModel readyPlan;
 
-  const PlanItem({required this.readyPlan});
+  PlanItem({required this.readyPlan});
 
   @override
   State<PlanItem> createState() => _PlanItemState();
@@ -57,7 +57,7 @@ class _PlanItemState extends State<PlanItem> {
                           textAlign: TextAlign.center,
                           text: widget.readyPlan.planDuration == 'None'
                               ? 'بلا مدة معينة'
-                              : '${arabicPlanTypes[englishPlanTypes.indexOf(widget.readyPlan.planDuration!)]}',
+                              : '${widget.readyPlan.id} ${arabicPlanTypes[englishPlanTypes.indexOf(widget.readyPlan.planDuration!)]}',
                           font: 16.sp,
                           color: kAccentColor,
                           weight: FontWeight.bold,

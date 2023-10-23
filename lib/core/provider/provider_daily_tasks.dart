@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:golden_racks_admin/core/appStorage/shared_preference.dart';
 import 'package:golden_racks_admin/core/httpHelper/http_helper.dart';
 import 'package:golden_racks_admin/core/models/agenda_model.dart';
 import 'package:golden_racks_admin/core/models/notification_model.dart';
@@ -48,6 +49,7 @@ class DailyTasksProvider extends ChangeNotifier {
           'Accept-Language': 'ar',
           'Accept': 'application/json',
           'Content-Type': 'application/json',
+          'Authorization': 'Bearer ${Preferences.instance.getUserToken}'
         },
       );
 
@@ -91,6 +93,7 @@ class DailyTasksProvider extends ChangeNotifier {
           'Accept-Language': 'ar',
           'Accept': 'application/json',
           'Content-Type': 'application/json',
+          'Authorization': 'Bearer ${Preferences.instance.getUserToken}'
         },
       );
 

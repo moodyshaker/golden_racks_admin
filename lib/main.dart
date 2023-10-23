@@ -122,3 +122,7 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+/*
+  'Authorization': 'Bearer ${Preferences.instance.getUserToken}'
+
+*/

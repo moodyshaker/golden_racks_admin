@@ -52,13 +52,18 @@ class ActivePlanProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> activateUnActivePlan({required int planId}) async {
+  Future<void> activateUnActivePlan({
+    required int planId,
+    bool fromSubscribe = false,
+  }) async {
     try {
-      showDialog(
-        context: navigatorKey.currentContext!,
-        barrierDismissible: false,
-        builder: (ctx) => LoadingDialog(),
-      );
+      if (!fromSubscribe) {
+        showDialog(
+          context: navigatorKey.currentContext!,
+          barrierDismissible: false,
+          builder: (ctx) => LoadingDialog(),
+        );
+      }
 
       Map<String, dynamic> params = {
         'id': planId.toString(),
@@ -81,27 +86,28 @@ class ActivePlanProvider extends ChangeNotifier {
         headers: header,
       );
       log(response.body);
-
-      if (response.statusCode >= 200 && response.statusCode < 300) {
-        MagicRouter.pop();
-        showDialog(
-          context: navigatorKey.currentContext!,
-          barrierDismissible: false,
-          builder: (ctx) => InfoDialog(
-            content: 'تم تفعيل الخطة بنجاح',
-          ),
-        ).then(
-          (value) => MagicRouter.navigateAndPop(ActivatePlanAdminScreen()),
-        );
-      } else {
-        MagicRouter.pop();
-        showDialog(
-          context: navigatorKey.currentContext!,
-          barrierDismissible: true,
-          builder: (ctx) => ErrorDialog(
-            text: 'خطأ في تفعيل الخطة',
-          ),
-        );
+      if (!fromSubscribe) {
+        if (response.statusCode >= 200 && response.statusCode < 300) {
+          MagicRouter.pop();
+          showDialog(
+            context: navigatorKey.currentContext!,
+            barrierDismissible: false,
+            builder: (ctx) => InfoDialog(
+              content: 'تم تفعيل الخطة بنجاح',
+            ),
+          ).then(
+            (value) => MagicRouter.navigateAndPop(ActivatePlanAdminScreen()),
+          );
+        } else {
+          MagicRouter.pop();
+          showDialog(
+            context: navigatorKey.currentContext!,
+            barrierDismissible: true,
+            builder: (ctx) => ErrorDialog(
+              text: 'خطأ في تفعيل الخطة',
+            ),
+          );
+        }
       }
     } catch (e) {
       log('catch activate activePlan >> ' + e.toString());

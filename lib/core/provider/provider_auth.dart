@@ -23,7 +23,7 @@ class AuthProvider extends ChangeNotifier {
 
   Preferences _preferences = Preferences.instance;
 
-  List<Country> countries = [];
+  List<Country> allCountries = [];
 
   //register controllers
   TextEditingController registerUserNameController = TextEditingController();
@@ -119,24 +119,6 @@ class AuthProvider extends ChangeNotifier {
     }
   }
 
-  Future<void> authGetCountries() async {
-    showDialog(
-      context: navigatorKey.currentContext!,
-      barrierDismissible: false,
-      builder: (ctx) => LoadingDialog(),
-    );
-
-    var response = await HttpHelper.instance.httpGet('Countries', false);
-
-    if (response.statusCode >= 200 && response.statusCode < 300) {
-      List jsonResponse = jsonDecode(response.body);
-      countries = jsonResponse.map((data) => Country.fromJson(data)).toList();
-    } else {
-      log('error countries => ${response.statusCode}');
-    }
-    MagicRouter.pop();
-  }
-
   Future<void> authLogin({
     required String UserName,
     required String Password,
@@ -168,6 +150,7 @@ class AuthProvider extends ChangeNotifier {
         _preferences.setUserEmail(r['email']);
         _preferences.setUserId(r['userId']);
         _preferences.setUserFullName(r['name']);
+        _preferences.setUserName(UserName);
 
         await setDeviceUserToken(
           userid: r['userId'],
@@ -204,6 +187,25 @@ class AuthProvider extends ChangeNotifier {
       log('catch admin login ${e.toString()}');
       MagicRouter.pop();
     }
+  }
+
+  Future<void> getAllCountries() async {
+    showDialog(
+      context: navigatorKey.currentContext!,
+      barrierDismissible: false,
+      builder: (ctx) => LoadingDialog(),
+    );
+
+    var response = await HttpHelper.instance.httpGet('Countries', false);
+
+    if (response.statusCode >= 200 && response.statusCode < 300) {
+      List jsonResponse = jsonDecode(response.body);
+      allCountries =
+          jsonResponse.map((data) => Country.fromJson(data)).toList();
+    } else {
+      log('error countries => ${response.statusCode}');
+    }
+    MagicRouter.pop();
   }
 
   Future<void> setDeviceUserToken({

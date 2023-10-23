@@ -161,7 +161,7 @@ class _AddCompanyWithPlanScreenState extends State<AddCompanyWithPlanScreen> {
                         DropMenu(
                           hintColor: gray_60,
                           hint: 'اختر الدولة',
-                          items: auth.countries
+                          items: auth.allCountries
                               .where((e) => e.cities!.isNotEmpty)
                               .map((e) => e.countryName!)
                               .toList(),
@@ -171,7 +171,7 @@ class _AddCompanyWithPlanScreenState extends State<AddCompanyWithPlanScreen> {
                               () {
                                 selectedCityValue = null;
                                 selectedStateValue = null;
-                                selectedCountry = auth.countries
+                                selectedCountry = auth.allCountries
                                     .where((e) => (v == e.countryName!))
                                     .toList()[0];
                                 selectedCountryValue = v!;
@@ -279,6 +279,7 @@ class _AddCompanyWithPlanScreenState extends State<AddCompanyWithPlanScreen> {
                           horizontalPadding: 20.w,
                           hasHeader: false,
                           hint: 'رقم الجوال',
+                          maxLength: 10,
                           hasHint: true,
                           hintFont: 15.sp,
                           hintColor: gray_60,

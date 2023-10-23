@@ -248,6 +248,9 @@ class _AdminAssignTechnicalForReadySubScreenState
                                                                   readyPlanId: widget
                                                                       .appointment
                                                                       .readyPlanId!,
+                                                                  ticketNumber: widget
+                                                                      .appointment
+                                                                      .completeTicketNumber!,
                                                                 );
                                                               },
                                                               child: MainText(

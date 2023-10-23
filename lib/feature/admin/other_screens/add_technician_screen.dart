@@ -175,6 +175,7 @@ class _AddTechnicianScreenState extends State<AddTechnicianScreen> {
                               .addTechmobileNumberController,
                           hasHeader: false,
                           hint: 'رقم الجوال',
+                          maxLength: 10,
                           hasHint: true,
                           hintFont: 15.sp,
                           hintColor: gray_40,
@@ -184,7 +185,7 @@ class _AddTechnicianScreenState extends State<AddTechnicianScreen> {
                             final n = num.tryParse(v!);
                             if (v.isEmpty || n == null) {
                               return 'من فضلك ادخل رقم الجوال';
-                            } else if (v.length < 10) {
+                            } else if (v.length != 10) {
                               return 'رقم المحمول يتكون من 10 ارقام';
                             } else {
                               return null;
