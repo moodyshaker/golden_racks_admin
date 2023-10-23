@@ -2,6 +2,8 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:golden_racks_admin/constants.dart';
+import 'package:golden_racks_admin/core/networkStatus/network_status.dart';
 import 'package:http/http.dart';
 import 'package:provider/provider.dart';
 import '../../feature/admin/main_screens/home.dart';
@@ -39,6 +41,8 @@ class AuthProvider extends ChangeNotifier {
   //login controllers
   TextEditingController loginUserNameController = TextEditingController();
   TextEditingController loginPasswordController = TextEditingController();
+
+  NetworkStatus? countryStatus;
 
   Future<void> authRegister({
     required int countryId,
@@ -146,10 +150,11 @@ class AuthProvider extends ChangeNotifier {
         print('Login Success');
 
         var r = json.decode(response.body);
-        _preferences.setUserToken(r['token']);
-        _preferences.setUserEmail(r['email']);
-        _preferences.setUserId(r['userId']);
-        _preferences.setUserFullName(r['name']);
+        _preferences.setUserToken(r['token'] ?? '');
+        _preferences.setUserEmail(r['email'] ?? '');
+        _preferences.setUserId(r['userId'] ?? '');
+        _preferences.setUserFullName(r['name'] ?? '');
+        _preferences.setUserImage(r['image'] ?? '');
         _preferences.setUserName(UserName);
 
         await setDeviceUserToken(
@@ -165,13 +170,17 @@ class AuthProvider extends ChangeNotifier {
           builder: (ctx) => InfoDialog(
             content: 'تم تسجيل الدخول بنجاح',
           ),
-        ).then(
-          (value) => UserRole == 2
-              ? MagicRouter.navigateAndPopAll(AdminHome())
-              : MagicRouter.navigateAndPopAll(
-                  TechnicianHome(),
-                ),
-        );
+        ).then((value) => UserRole == 2
+            ? {
+                MagicRouter.navigateAndPopAll(AdminHome()),
+                isAdmin = true,
+                Preferences.instance.setUserStatus('admin'),
+              }
+            : {
+                MagicRouter.navigateAndPopAll(TechnicianHome()),
+                isAdmin = false,
+                Preferences.instance.setUserStatus('tech'),
+              });
       } else {
         print('Login Failed');
         MagicRouter.pop();
@@ -189,23 +198,31 @@ class AuthProvider extends ChangeNotifier {
     }
   }
 
-  Future<void> getAllCountries() async {
-    showDialog(
-      context: navigatorKey.currentContext!,
-      barrierDismissible: false,
-      builder: (ctx) => LoadingDialog(),
-    );
+  Future<void> getAllCountries({
+    bool retry = false,
+  }) async {
+    countryStatus = NetworkStatus.loading;
 
-    var response = await HttpHelper.instance.httpGet('Countries', false);
-
-    if (response.statusCode >= 200 && response.statusCode < 300) {
-      List jsonResponse = jsonDecode(response.body);
-      allCountries =
-          jsonResponse.map((data) => Country.fromJson(data)).toList();
-    } else {
-      log('error countries => ${response.statusCode}');
+    if (retry) {
+      notifyListeners();
     }
-    MagicRouter.pop();
+    try {
+      var response = await HttpHelper.instance.httpGet('Countries', false);
+
+      if (response.statusCode >= 200 && response.statusCode < 300) {
+        List jsonResponse = jsonDecode(response.body);
+        allCountries =
+            jsonResponse.map((data) => Country.fromJson(data)).toList();
+        print('all countries length > ${allCountries.length}');
+        countryStatus = NetworkStatus.success;
+      } else {
+        log('error countries => ${response.statusCode}');
+        countryStatus = NetworkStatus.error;
+      }
+    } catch (e) {
+      print('catch get countries ${e.toString()}');
+    }
+    notifyListeners();
   }
 
   Future<void> setDeviceUserToken({

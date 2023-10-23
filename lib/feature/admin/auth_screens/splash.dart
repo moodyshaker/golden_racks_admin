@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:golden_racks_admin/core/appStorage/shared_preference.dart';
 import 'package:golden_racks_admin/core/notifications/firebase.dart';
+import 'package:golden_racks_admin/feature/admin/main_screens/home.dart';
+import 'package:golden_racks_admin/feature/technician/main_screens/technician_home.dart';
 import '../../../constants.dart';
 import '../../../core/router/router.dart';
 import '../../widgets/customScaffold.dart';
@@ -24,9 +27,29 @@ class _SplashState extends State<Splash> {
   void init() async {
     Future.delayed(
       const Duration(milliseconds: 1000),
-      () => MagicRouter.navigateAndPopAll(
-        OrganizerLogin(),
-      ),
+      () => {
+        if (Preferences.instance.getUserId == '')
+          {
+            MagicRouter.navigateAndPopAll(OrganizerLogin()),
+          }
+        else
+          {
+            if (Preferences.instance.getUserStatus == 'admin')
+              {
+                MagicRouter.navigateAndPopAll(AdminHome()),
+                isAdmin = true,
+              }
+            else if (Preferences.instance.getUserStatus == 'tech')
+              {
+                MagicRouter.navigateAndPopAll(TechnicianHome()),
+                isAdmin = false,
+              }
+            else
+              {
+                MagicRouter.navigateAndPopAll(OrganizerLogin()),
+              }
+          }
+      },
     );
   }
 

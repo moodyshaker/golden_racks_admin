@@ -22,6 +22,7 @@ class Preferences {
   static const String type = 'malqa_type';
   static const String fullName = 'goldenRakcs_fullName';
   static const String registerdUserId = 'goldenRakcs_registerdUserId';
+  static const String userStatus = 'goldenRakcs_userStatus';
 
   Preferences._instance();
 
@@ -125,6 +126,11 @@ class Preferences {
     return isSet;
   }
 
+  Future<bool> setUserStatus(String value) async {
+    bool isSet = await _preferences!.setString(userStatus, value);
+    return isSet;
+  }
+
   Future<bool> logout() async {
     bool isSet = await _preferences!.clear();
     return isSet;
@@ -168,4 +174,6 @@ class Preferences {
 
   String get getRegisterdUserId =>
       _preferences!.getString(registerdUserId) ?? '';
+
+  String get getUserStatus => _preferences!.getString(userStatus) ?? '';
 }

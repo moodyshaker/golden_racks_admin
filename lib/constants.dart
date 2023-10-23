@@ -27,6 +27,8 @@ String formateDateTimeToDate(String dateTimeString) {
   return formatted;
 }
 
+bool? isAdmin;
+
 String formateDateTimeToTime(String dateTimeString) {
   DateTime dateTime = DateTime.parse(dateTimeString);
   final DateFormat formatter = DateFormat('h.mm a');

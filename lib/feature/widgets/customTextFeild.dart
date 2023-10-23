@@ -57,6 +57,7 @@ class CustomTextField extends StatefulWidget {
   final double? horizontalPadding;
   final double? verticalPadding;
   final bool? enable;
+  final bool? disableBorder;
 
   CustomTextField({
     Key? key,
@@ -109,6 +110,7 @@ class CustomTextField extends StatefulWidget {
     this.horizontalPadding,
     this.verticalPadding,
     this.enable,
+    this.disableBorder,
   });
 
   @override
@@ -237,6 +239,15 @@ class _CustomTextFieldState extends State<CustomTextField> {
             enabledBorder: OutlineInputBorder(
               borderSide:
                   BorderSide(color: widget.borderColor ?? gray_40, width: 1),
+              borderRadius: BorderRadius.circular(24.r),
+            ),
+            disabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                  color: widget.disableBorder == null ||
+                          widget.disableBorder == false
+                      ? gray_40
+                      : Colors.black,
+                  width: 1),
               borderRadius: BorderRadius.circular(24.r),
             ),
             focusedBorder: OutlineInputBorder(

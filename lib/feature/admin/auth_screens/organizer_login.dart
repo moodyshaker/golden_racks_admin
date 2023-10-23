@@ -19,7 +19,7 @@ class OrganizerLogin extends StatefulWidget {
 
 class _OrganizerLoginState extends State<OrganizerLogin> {
   final GlobalKey<FormState> _form = GlobalKey<FormState>();
-  bool isAdmin = true;
+  bool isLoginAdmin = true;
 
   @override
   Widget build(BuildContext context) {
@@ -64,8 +64,8 @@ class _OrganizerLoginState extends State<OrganizerLogin> {
                             hint: 'اختر',
                             items: type,
                             onChanged: (v) {
-                              isAdmin = v == 'مدير التطبيق';
-                              print(isAdmin);
+                              isLoginAdmin = v == 'مدير التطبيق';
+                              print(isLoginAdmin);
                             },
                             valid: (v) {
                               if (v == null) {
@@ -136,7 +136,7 @@ class _OrganizerLoginState extends State<OrganizerLogin> {
                   if (_form.currentState!.validate()) {
                     await auth.getAllCountries();
 
-                    if (isAdmin) {
+                    if (isLoginAdmin) {
                       log('Admin');
                       await auth.authLogin(
                         UserName: auth.loginUserNameController.text,

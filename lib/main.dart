@@ -14,6 +14,7 @@ import 'package:golden_racks_admin/core/provider/provider_assign_to_sub_ready_pl
 import 'package:golden_racks_admin/core/provider/provider_assign_to_unsub_emergency_plan.dart';
 import 'package:golden_racks_admin/core/provider/provider_assign_to_unsub_normal_plan.dart';
 import 'package:golden_racks_admin/core/provider/provider_daily_tasks.dart';
+import 'package:golden_racks_admin/core/provider/provider_profile.dart';
 import 'package:golden_racks_admin/core/provider/provider_ready_plan.dart';
 import 'package:golden_racks_admin/core/provider/provider_search_tickets.dart';
 import 'package:golden_racks_admin/core/provider/provider_subscribed_Company.dart';
@@ -46,6 +47,7 @@ void main() async {
     badge: true,
     sound: true,
   );
+
   await Preferences.instance.initPref();
   runApp(const MyApp());
 }
@@ -82,6 +84,7 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider(create: (_) => SubscribedCompanyProvider()),
           ChangeNotifierProvider(create: (_) => DailyTasksProvider()),
           ChangeNotifierProvider(create: (_) => SearchTicketProvider()),
+          ChangeNotifierProvider(create: (_) => ProfileProvider()),
         ],
         child: Builder(
           builder: (BuildContext c) => MaterialApp(
@@ -122,7 +125,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-/*
-  'Authorization': 'Bearer ${Preferences.instance.getUserToken}'
-
-*/

@@ -4,8 +4,12 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:golden_racks_admin/core/appStorage/shared_preference.dart';
+import 'package:golden_racks_admin/core/httpHelper/http_helper.dart';
+import 'package:golden_racks_admin/feature/admin/auth_screens/organizer_login.dart';
 import 'package:golden_racks_admin/feature/admin/main_screens/home.dart';
 import 'package:golden_racks_admin/feature/admin/other_screens/admin_notification_screen.dart';
+import 'package:golden_racks_admin/feature/screens/profile_screen.dart';
 import '../../constants.dart';
 import '../../core/bloc/language_cubit.dart';
 import '../../core/bloc/organizer_app_cubit.dart';
@@ -33,7 +37,7 @@ class OrganizerCustomScaffold extends StatefulWidget {
     this.title2,
     this.title3,
     this.backgroundColor,
-    this.pic = 'amazon_logo',
+    this.pic = 'icon_background',
     required this.body,
     this.hasAppbar = true,
     this.hasNavBar = true,
@@ -263,15 +267,84 @@ class _OrganizerCustomScaffoldState extends State<OrganizerCustomScaffold> {
                               ),
                             ),
                             Center(
-                              child: GestureDetector(
-                                onTap: () {},
+                              child: InkWell(
                                 child: Container(
-                                  height: 33.h,
-                                  width: 68.w,
-                                  child: Image.asset(
-                                    getAsset(widget.pic!),
+                                  height: 46.h,
+                                  width: 46.w,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    border: Border.all(
+                                      color: kSecondaryColor,
+                                      width: 2.0,
+                                    ),
+                                    image: DecorationImage(
+                                      fit: BoxFit.cover,
+                                      image:
+                                          Preferences.instance.getUserImage ==
+                                                  ''
+                                              ? Image.asset(
+                                                  getAsset('icon_background'),
+                                                ).image
+                                              : Image.network(
+                                                  '${base_url_image}${Preferences.instance.getUserImage}',
+                                                ).image,
+                                    ),
                                   ),
                                 ),
+                                onTap: () {
+                                  showMenu(
+                                    context: context,
+                                    position:
+                                        RelativeRect.fromLTRB(0, 0, 100, 100),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(15),
+                                    ),
+                                    items: <PopupMenuEntry<String>>[
+                                      PopupMenuItem<String>(
+                                        value: 'Profile',
+                                        child: Text('عرض البيانات الشخصية'),
+                                      ),
+                                      PopupMenuItem<String>(
+                                        value: 'Log Out',
+                                        child: Text('تسجيل الخروج'),
+                                      ),
+                                    ],
+                                  ).then(
+                                    (value) => {
+                                      if (value != null)
+                                        {
+                                          if (value == 'Profile')
+                                            {
+                                              MagicRouter
+                                                  .navigateAndPopUntilFirstPage(
+                                                      ProfileScreen()),
+                                            }
+                                          else if (value == 'Log Out')
+                                            {
+                                              showDialog(
+                                                context: context,
+                                                builder: (_) => ActionDialog(
+                                                  content:
+                                                      'هل تود تسجيل الخروج؟',
+                                                  approveAction: 'نعم',
+                                                  cancelAction: 'لا',
+                                                  onApproveClick: () async {
+                                                    await Preferences.instance
+                                                        .logout();
+                                                    MagicRouter
+                                                        .navigateAndPopAll(
+                                                      OrganizerLogin(),
+                                                    );
+                                                  },
+                                                  onCancelClick:
+                                                      MagicRouter.pop,
+                                                ),
+                                              ),
+                                            }
+                                        }
+                                    },
+                                  );
+                                },
                               ),
                             ),
                           ],
