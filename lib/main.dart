@@ -49,7 +49,7 @@ void main() async {
   );
 
   await Preferences.instance.initPref();
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {

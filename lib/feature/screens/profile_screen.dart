@@ -8,6 +8,7 @@ import 'package:golden_racks_admin/core/networkStatus/network_status.dart';
 import 'package:golden_racks_admin/core/provider/provider_profile.dart';
 import 'package:golden_racks_admin/core/router/router.dart';
 import 'package:golden_racks_admin/feature/screens/edit_profile_screen.dart';
+import 'package:golden_racks_admin/feature/screens/reset_password_screen.dart';
 import 'package:golden_racks_admin/feature/widgets/main_text.dart';
 import 'package:golden_racks_admin/feature/widgets/opacity_loading_logo.dart';
 import 'package:golden_racks_admin/feature/widgets/organizerCustomScaffold.dart';
@@ -133,25 +134,52 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
             ),
             SizedBox(height: 8.h),
-            InkWell(
-              child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 5.h),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(8.r)),
-                  color: Colors.brown,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                InkWell(
+                  child: Container(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 16.w, vertical: 5.h),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(8.r)),
+                      color: Colors.brown,
+                    ),
+                    child: MainText(
+                      text: 'تعديل بيانات الحساب',
+                      textAlign: TextAlign.center,
+                      color: Colors.white,
+                      font: 12.sp,
+                      weight: FontWeight.w700,
+                    ),
+                  ),
+                  onTap: () {
+                    MagicRouter.navigateTo(EditProfileScreen(
+                      profileModel: profile,
+                    ));
+                  },
                 ),
-                child: MainText(
-                  text: 'تعديل بيانات الحساب',
-                  color: Colors.white,
-                  font: 12.sp,
-                  weight: FontWeight.w700,
+                InkWell(
+                  child: Container(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 16.w, vertical: 5.h),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(8.r)),
+                      color: Colors.brown,
+                    ),
+                    child: MainText(
+                      text: 'تعديل كلمة المرور',
+                      textAlign: TextAlign.center,
+                      color: Colors.white,
+                      font: 12.sp,
+                      weight: FontWeight.w700,
+                    ),
+                  ),
+                  onTap: () {
+                    MagicRouter.navigateTo(ResetPasswordScreen());
+                  },
                 ),
-              ),
-              onTap: () {
-                MagicRouter.navigateTo(EditProfileScreen(
-                  profileModel: profile,
-                ));
-              },
+              ],
             ),
             SizedBox(height: 12.h),
             Container(
@@ -165,7 +193,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     title: '${profile.userName}',
                   ),
                   ProfileDataItemWidget(
-                    head: 'اسم الشخص المفوض عن الشركة',
+                    head: 'الاسم الكامل',
                     title: '${profile.fullName}',
                   ),
                   ProfileDataItemWidget(
@@ -179,23 +207,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ProfileDataItemWidget(
                     head: 'البريد الالكتروني',
                     title: '${profile.email}',
-                  ),
-                  ProfileDataItemWidget(
-                    head: 'اسم الشركة باللغة العربية',
-                    title: '${profile.companyNameAr}',
-                  ),
-                  ProfileDataItemWidget(
-                    head: 'اسم الشركة باللغة الانجليزية',
-                    title: '${profile.companyNameEn}',
-                  ),
-                  ProfileDataItemWidget(
-                    head: 'الرقم الضريبي',
-                    title: '${profile.taxNumber}',
-                  ),
-                  ProfileDataItemWidget(
-                    head: 'العنوان',
-                    title:
-                        '${profile.country}-${profile.city}-${profile.state}-${profile.street}-${profile.buildingNumber}',
                   ),
                 ],
               ),

@@ -39,11 +39,14 @@ class ProfileProvider extends ChangeNotifier {
   TextEditingController profileStreetController = TextEditingController();
   TextEditingController profileBuildingNumberController =
       TextEditingController();
-
   //not in the end point
   TextEditingController profileUserNameController = TextEditingController();
-  TextEditingController profilePasswordController = TextEditingController();
   TextEditingController profileEmailController = TextEditingController();
+
+  //reset password controllers
+  TextEditingController oldPasswordController = TextEditingController();
+  TextEditingController newPasswordController = TextEditingController();
+  TextEditingController confirmNewPasswordController = TextEditingController();
 
   NetworkStatus? getProfileStatus;
   ProfileModel profileData = ProfileModel();
@@ -79,32 +82,141 @@ class ProfileProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> editProdile({
-    required String UserId,
-    required String FullName,
-    required String MobileNumber,
-    required String FixedNumber,
-    required String CompanyName_En,
-    required String CompanyName_Ar,
-    required String TaxNumber,
-    File? Image,
-    required int CountryId,
-    required int CityId,
-    required int StateId,
-    required String Street,
-    required String BuildingNumber,
-    required String UserName,
-    required String Email,
-  }) async {
+  Future<void> editProdile(
+      {required String UserId,
+      required String FullName,
+      required String MobileNumber,
+      required String FixedNumber,
+      required String CompanyName_En,
+      required String CompanyName_Ar,
+      required String TaxNumber,
+      File? Image,
+      required int CountryId,
+      required int CityId,
+      required int StateId,
+      required String Street,
+      required String BuildingNumber,
+      required String UserName,
+      required String Email,
+      required bool sameMobile}) async {
     try {
       showDialog(
         context: navigatorKey.currentContext!,
         barrierDismissible: false,
         builder: (ctx) => LoadingDialog(),
       );
+
+      Response? validateMobile = await validateUserData(
+        Mobile: MobileNumber,
+        Email: 'Email',
+        UserName: 'UserName',
+      );
+
+      if (!(validateMobile!.statusCode >= 200 &&
+              validateMobile.statusCode < 300) &&
+          !sameMobile) {
+        MagicRouter.pop();
+        showDialog(
+          context: navigatorKey.currentContext!,
+          barrierDismissible: true,
+          builder: (ctx) => ErrorDialog(
+            text: '${validateMobile.body.replaceAll('"', '')}',
+          ),
+        );
+      } else {
+        var request = MultipartRequest(
+          'POST',
+          Uri.parse('${base_url}Account/update-user-info'),
+        );
+
+        Map<String, String> headers = {
+          "Content-type": "multipart/form-data",
+          'Accept-Language': 'ar',
+          'Accept': 'application/json',
+        };
+
+        if (Image != null) {
+          request.files.add(
+            await http.MultipartFile(
+              'Image',
+              await Image.readAsBytes().asStream(),
+              await Image.lengthSync(),
+              filename: await Image.path.split('/').last,
+            ),
+          );
+        }
+
+        request.fields['UserId'] = UserId;
+        request.fields['FullName'] = FullName;
+        request.fields['MobileNumber'] = MobileNumber;
+        request.fields['FixedNumber'] = FixedNumber;
+        // request.fields['CompanyName_En'] = CompanyName_En;
+        // request.fields['CompanyName_Ar'] = CompanyName_Ar;
+        // request.fields['TaxNumber'] = TaxNumber;
+        // request.fields['CountryId'] = CountryId.toString();
+        // request.fields['CityId'] = CityId.toString();
+        // request.fields['StateId'] = StateId.toString();
+        // request.fields['Street'] = Street;
+        // request.fields['BuildingNumber'] = BuildingNumber;
+
+        // request.fields['UserName'] = UserName;
+        // request.fields['Email'] = Email;
+
+        request.headers.addAll(headers);
+        var res = await request.send();
+        Response response = await Response.fromStream(res);
+
+        if (response.statusCode >= 200 && response.statusCode < 300) {
+          if (FullName.isNotEmpty) {
+            _preferences.setUserFullName(FullName);
+          }
+          if (Image != null) {
+            Preferences.instance.setUserImage(jsonDecode(response.body));
+          }
+          MagicRouter.pop();
+          showDialog(
+            context: navigatorKey.currentContext!,
+            barrierDismissible: false,
+            builder: (ctx) => InfoDialog(
+              content: 'تم تعديل بيانات الحساب بنجاح',
+            ),
+          ).then((value) => {
+                if (isAdmin!)
+                  {
+                    MagicRouter.navigateAndPopAll(AdminHome()),
+                  }
+                else
+                  {
+                    MagicRouter.navigateAndPopAll(TechnicianHome()),
+                  }
+              });
+        } else {
+          print('error edit profile ${response.body}');
+          MagicRouter.pop();
+
+          showDialog(
+            context: navigatorKey.currentContext!,
+            barrierDismissible: true,
+            builder: (ctx) => ErrorDialog(
+              text: 'خطأ في تعديل الحساب',
+            ),
+          );
+        }
+      }
+    } catch (e) {
+      print('catch edit profile >> ' + e.toString());
+    }
+  }
+
+  Future<Response?> validateUserData({
+    required String Email,
+    required String Mobile,
+    required String UserName,
+  }) async {
+    try {
       var request = MultipartRequest(
         'POST',
-        Uri.parse('${base_url}Account/update-user-info'),
+        Uri.parse('${base_url}Account/validate-user-credentials'),
       );
 
       Map<String, String> headers = {
@@ -113,80 +225,75 @@ class ProfileProvider extends ChangeNotifier {
         'Accept': 'application/json',
       };
 
-      if (Image != null) {
-        request.files.add(
-          await http.MultipartFile(
-            'Image',
-            await Image.readAsBytes().asStream(),
-            await Image.lengthSync(),
-            filename: await Image.path.split('/').last,
-          ),
-        );
-      }
-
-      request.fields['UserId'] = UserId;
-      request.fields['FullName'] = FullName;
-      // request.fields['MobileNumber'] = MobileNumber;
-      // request.fields['FixedNumber'] = FixedNumber;
-      request.fields['CompanyName_En'] = CompanyName_En;
-      request.fields['CompanyName_Ar'] = CompanyName_Ar;
-      request.fields['TaxNumber'] = TaxNumber;
-      request.fields['CountryId'] = CountryId.toString();
-      request.fields['CityId'] = CityId.toString();
-      request.fields['StateId'] = StateId.toString();
-      request.fields['Street'] = Street;
-      request.fields['BuildingNumber'] = BuildingNumber;
-      // request.fields['UserName'] = UserName;
-      // request.fields['Email'] = Email;
+      request.fields['Mobile'] = Mobile;
+      request.fields['Email'] = '!!@@##%%^^';
+      request.fields['UserName'] = '!!@@##%%^^';
 
       request.headers.addAll(headers);
-      var res = await request.send();
-      Response response = await Response.fromStream(res);
 
+      var streamResponse = await request.send();
+
+      Response response = await Response.fromStream(streamResponse);
       if (response.statusCode >= 200 && response.statusCode < 300) {
-        if (FullName.isNotEmpty) {
-          _preferences.setUserFullName(FullName);
-        }
-        if (Image != null) {
-          Preferences.instance.setUserImage(jsonDecode(response.body));
-        }
+        print('valid');
+      } else {
+        print('notValid');
+      }
+      return response;
+    } catch (e) {
+      print('catch validate register data ${e.toString()}');
+      return null;
+    }
+  }
+
+  Future<void> resetPassword({
+    required String userId,
+    required String oldPassword,
+    required String newPassword,
+    required String confirmNewPassword,
+  }) async {
+    try {
+      showDialog(
+        context: navigatorKey.currentContext!,
+        barrierDismissible: false,
+        builder: (ctx) => LoadingDialog(),
+      );
+
+      var response = await HttpHelper.instance.httpPost(
+        'Account/ChangePassword',
+        body: {
+          "userId": "$userId",
+          "oldPassword": "$oldPassword",
+          "newPassword": "$newPassword",
+          "confirmNewPassword": "$confirmNewPassword",
+        },
+        false,
+      );
+      if (response.statusCode >= 200 && response.statusCode < 300) {
         MagicRouter.pop();
+        oldPasswordController.clear();
+        newPasswordController.clear();
+        confirmNewPasswordController.clear();
         showDialog(
           context: navigatorKey.currentContext!,
           barrierDismissible: false,
           builder: (ctx) => InfoDialog(
-            content: 'تم تعديل بيانات الحساب بنجاح',
+            content: "تم تغيير كلمة المرور بنجاح",
           ),
-        ).then((value) => {
-              if (isAdmin!)
-                {
-                  MagicRouter.navigateAndPopAll(AdminHome()),
-                }
-              else
-                {
-                  MagicRouter.navigateAndPopAll(TechnicianHome()),
-                }
-            });
+        ).then((value) => MagicRouter.pop());
       } else {
-        print('error edit profile ${response.body}');
         MagicRouter.pop();
-
-        // String errorString = r['errors']
-        //     .values
-        //     .first
-        //     .toString()
-        //     .replaceAll(RegExp(r'[\[\]]'), '');
-
+        print(response.body);
         showDialog(
           context: navigatorKey.currentContext!,
-          barrierDismissible: true,
+          barrierDismissible: false,
           builder: (ctx) => ErrorDialog(
-            text: 'خطأ في تعديل الحساب',
+            text: 'كلمة المرور غير صحيحة',
           ),
         );
       }
     } catch (e) {
-      print('catch edit profile >> ' + e.toString());
+      print('Exception ==> ${e.toString()}');
     }
   }
 

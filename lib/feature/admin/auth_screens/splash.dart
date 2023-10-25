@@ -28,7 +28,7 @@ class _SplashState extends State<Splash> {
     Future.delayed(
       const Duration(milliseconds: 1000),
       () => {
-        if (Preferences.instance.getUserId == '')
+        if (Preferences.instance.getUserId.isEmpty)
           {
             MagicRouter.navigateAndPopAll(OrganizerLogin()),
           }
