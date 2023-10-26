@@ -82,23 +82,24 @@ class ProfileProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> editProdile(
-      {required String UserId,
-      required String FullName,
-      required String MobileNumber,
-      required String FixedNumber,
-      required String CompanyName_En,
-      required String CompanyName_Ar,
-      required String TaxNumber,
-      File? Image,
-      required int CountryId,
-      required int CityId,
-      required int StateId,
-      required String Street,
-      required String BuildingNumber,
-      required String UserName,
-      required String Email,
-      required bool sameMobile}) async {
+  Future<void> editProdile({
+    required String UserId,
+    required String FullName,
+    required String MobileNumber,
+    required String FixedNumber,
+    required String CompanyName_En,
+    required String CompanyName_Ar,
+    required String TaxNumber,
+    File? Image,
+    required int CountryId,
+    required int CityId,
+    required int StateId,
+    required String Street,
+    required String BuildingNumber,
+    required String UserName,
+    required String Email,
+    required bool sameMobile,
+  }) async {
     try {
       showDialog(
         context: navigatorKey.currentContext!,

@@ -57,7 +57,7 @@ class _TicketInvoiceScreenState extends State<TicketInvoiceScreen> {
         hasAppbar: false,
         isHome: true,
         hasNavBar: false,
-        title1: 'الفاتورة للتذكرة\n',
+        title1: 'الفاتورة للتذكرة ${widget.searchTicket.ticketNumber}',
         onBackPressed: () {
           searchTicketProvider.tableList.clear();
           searchTicketProvider.totalPrice = 0;
@@ -116,96 +116,107 @@ class _TicketInvoiceScreenState extends State<TicketInvoiceScreen> {
                         ),
                       ],
                     ),
-                    ...searchTicketProvider.tableList.map(
-                      (e) => buildRow(
-                        cells: [
-                          MainText(
-                            textAlign: TextAlign.center,
-                            text:
-                                '${searchTicketProvider.tableList.indexOf(e) + 1}',
-                            color: Colors.blue.shade900,
-                            weight: FontWeight.bold,
-                            font: 14.sp,
-                          ),
-                          MainText(
-                            textAlign: TextAlign.center,
-                            text: '${e.title}',
-                            color: Colors.blue.shade900,
-                            weight: FontWeight.bold,
-                            font: 14.sp,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              Container(
-                                height: 17.h,
-                                width: 17.h,
-                                decoration: BoxDecoration(
-                                  color: kSecondaryColor,
-                                  shape: BoxShape.circle,
-                                ),
-                                child: InkWell(
-                                  child: Icon(
-                                    Icons.add,
-                                    size: 10,
-                                    color: kAccentColor,
-                                  ),
-                                  onTap: () {
-                                    setState(() {
-                                      e.quantity++;
-                                      searchTicketProvider.totalQuantity++;
-                                      searchTicketProvider.totalPrice +=
-                                          e.price;
-                                    });
-                                  },
-                                ),
-                              ),
+                    ...searchTicketProvider.tableList
+                        // .where((e) => e.quantity != 0)
+                        .map(
+                          (e) => buildRow(
+                            cells: [
                               MainText(
                                 textAlign: TextAlign.center,
-                                text: '${e.quantity}',
+                                text:
+                                    '${searchTicketProvider.tableList.indexOf(e) + 1}',
                                 color: Colors.blue.shade900,
                                 weight: FontWeight.bold,
                                 font: 14.sp,
                               ),
-                              Container(
-                                height: 17.h,
-                                width: 17.h,
-                                decoration: BoxDecoration(
-                                  color: kSecondaryColor,
-                                  shape: BoxShape.circle,
-                                ),
-                                child: InkWell(
-                                  child: Icon(
-                                    Icons.remove,
-                                    size: 10,
-                                    color: kAccentColor,
-                                  ),
-                                  onTap: () {
-                                    setState(
-                                      () {
-                                        if (e.quantity > 0) {
-                                          e.quantity--;
-                                          searchTicketProvider.totalQuantity--;
-                                          searchTicketProvider.totalPrice -=
+                              MainText(
+                                textAlign: TextAlign.center,
+                                text: '${e.title}',
+                                color: Colors.blue.shade900,
+                                weight: FontWeight.bold,
+                                font: 14.sp,
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: [
+                                  Container(
+                                    height: 17.h,
+                                    width: 17.h,
+                                    decoration: BoxDecoration(
+                                      color: kSecondaryColor,
+                                      shape: BoxShape.circle,
+                                    ),
+                                    child: InkWell(
+                                      child: Icon(
+                                        Icons.add,
+                                        size: 10,
+                                        color: kAccentColor,
+                                      ),
+                                      onTap: () {
+                                        setState(() {
+                                          e.quantity++;
+                                          searchTicketProvider.totalQuantity++;
+                                          searchTicketProvider.totalPrice +=
                                               e.price;
-                                        }
+                                        });
                                       },
-                                    );
-                                  },
-                                ),
+                                    ),
+                                  ),
+                                  MainText(
+                                    textAlign: TextAlign.center,
+                                    text: '${e.quantity}',
+                                    color: Colors.blue.shade900,
+                                    weight: FontWeight.bold,
+                                    font: 14.sp,
+                                  ),
+                                  Container(
+                                    height: 17.h,
+                                    width: 17.h,
+                                    decoration: BoxDecoration(
+                                      color: kSecondaryColor,
+                                      shape: BoxShape.circle,
+                                    ),
+                                    child: InkWell(
+                                      child: Icon(
+                                        Icons.remove,
+                                        size: 10,
+                                        color: kAccentColor,
+                                      ),
+                                      onTap: () {
+                                        setState(
+                                          () {
+                                            if (e.quantity > 0) {
+                                              e.quantity--;
+                                              searchTicketProvider
+                                                  .totalQuantity--;
+                                              searchTicketProvider.totalPrice -=
+                                                  e.price;
+                                              print(searchTicketProvider
+                                                  .tableList.length);
+                                            }
+                                            if (e.quantity == 0) {
+                                              searchTicketProvider.tableList
+                                                  .remove(e);
+                                            }
+                                          },
+                                        );
+                                      },
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              MainText(
+                                textAlign: TextAlign.center,
+                                text: '${(e.price * e.quantity).toDouble()}',
+                                color: Colors.blue.shade900,
+                                weight: FontWeight.bold,
+                                font: 14.sp,
                               ),
                             ],
                           ),
-                          MainText(
-                            textAlign: TextAlign.center,
-                            text: '${(e.price * e.quantity).toDouble()}',
-                            color: Colors.blue.shade900,
-                            weight: FontWeight.bold,
-                            font: 14.sp,
-                          ),
-                        ],
-                      ),
-                    ),
+                        )
+                        .toList(),
                     buildRow(
                       cells: [
                         MainText(

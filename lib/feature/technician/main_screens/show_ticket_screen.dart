@@ -9,7 +9,6 @@ import 'package:golden_racks_admin/feature/technician/main_screens/ticket_invoic
 import 'package:golden_racks_admin/feature/technician/main_screens/send_alert_to_company_screen_tech.dart';
 import 'package:golden_racks_admin/feature/technician/main_screens/technical_report_screen.dart';
 import 'package:golden_racks_admin/feature/technician/main_screens/widgets/technical_search_ticket_view_screen.dart';
-import 'package:golden_racks_admin/feature/widgets/action_dialog.dart';
 import 'package:golden_racks_admin/feature/widgets/main_text.dart';
 import 'package:golden_racks_admin/feature/widgets/technicianCustomScaffold.dart';
 
@@ -186,190 +185,151 @@ class _ShowTicketScreenState extends State<ShowTicketScreen> {
               SizedBox(
                 height: 16.h,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Expanded(
-                    child: GestureDetector(
-                      onTap: () {
-                        if (widget.searchTicket.ticketStatus == 'Expired') {
-                          showDialog(
-                            context: context,
-                            builder: (_) => ActionDialog(
-                              content: 'التذكرة منتهية',
-                              approveAction: 'حسنا',
-                              onApproveClick: MagicRouter.pop,
+              widget.searchTicket.ticketStatus != 'Expired'
+                  ? Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Expanded(
+                              child: GestureDetector(
+                                onTap: () {
+                                  MagicRouter.navigateTo(
+                                    TechnicalReportScreen(
+                                      searchTicket: widget.searchTicket,
+                                    ),
+                                  );
+                                },
+                                child: Container(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 10.w, vertical: 5.h),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(16.0),
+                                    ),
+                                    color: Colors.transparent,
+                                    border: Border.all(color: gray_40),
+                                  ),
+                                  child: Center(
+                                    child: MainText(
+                                      text: 'التقرير الفني',
+                                      color: Colors.black,
+                                      font: 15.sp,
+                                      weight: FontWeight.w700,
+                                    ),
+                                  ),
+                                ),
+                              ),
                             ),
-                          );
-                        } else {
-                          MagicRouter.navigateTo(
-                            TechnicalReportScreen(
-                              searchTicket: widget.searchTicket,
+                            SizedBox(
+                              width: 16.w,
                             ),
-                          );
-                        }
-                      },
-                      child: Container(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 10.w, vertical: 5.h),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(16.0),
-                          ),
-                          color: Colors.transparent,
-                          border: Border.all(color: gray_40),
-                        ),
-                        child: Center(
-                          child: MainText(
-                            text: 'التقرير الفني',
-                            color: Colors.black,
-                            font: 15.sp,
-                            weight: FontWeight.w700,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 16.w,
-                  ),
-                  Expanded(
-                    child: GestureDetector(
-                      onTap: () {
-                        if (widget.searchTicket.ticketStatus == 'Expired') {
-                          showDialog(
-                            context: context,
-                            builder: (_) => ActionDialog(
-                              content: 'التذكرة منتهية',
-                              approveAction: 'حسنا',
-                              onApproveClick: MagicRouter.pop,
+                            Expanded(
+                              child: GestureDetector(
+                                onTap: () {
+                                  MagicRouter.navigateTo(
+                                    AttendanceAndDepartureScreen(
+                                      searchTicket: widget.searchTicket,
+                                    ),
+                                  );
+                                },
+                                child: Container(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 10.w, vertical: 5.h),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(16.0),
+                                    ),
+                                    color: Colors.transparent,
+                                    border: Border.all(color: gray_40),
+                                  ),
+                                  child: Center(
+                                    child: MainText(
+                                      text: 'تسجيل الحضور والانصراف',
+                                      color: Colors.black,
+                                      font: 15.sp,
+                                      weight: FontWeight.w700,
+                                    ),
+                                  ),
+                                ),
+                              ),
                             ),
-                          );
-                        } else {
-                          MagicRouter.navigateTo(
-                            AttendanceAndDepartureScreen(
-                              searchTicket: widget.searchTicket,
+                          ],
+                        ),
+                        SizedBox(height: 16.h),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Expanded(
+                              child: GestureDetector(
+                                onTap: () {
+                                  MagicRouter.navigateTo(
+                                    TicketInvoiceScreen(
+                                      searchTicket: widget.searchTicket,
+                                    ),
+                                  );
+                                },
+                                child: Container(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 10.w, vertical: 5.h),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(16.0),
+                                    ),
+                                    color: Colors.transparent,
+                                    border: Border.all(color: gray_40),
+                                  ),
+                                  child: Center(
+                                    child: MainText(
+                                      text: 'اصدار الفاتورة',
+                                      color: Colors.black,
+                                      font: 15.sp,
+                                      weight: FontWeight.w700,
+                                    ),
+                                  ),
+                                ),
+                              ),
                             ),
-                          );
-                        }
-                      },
-                      child: Container(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 10.w, vertical: 5.h),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(16.0),
-                          ),
-                          color: Colors.transparent,
-                          border: Border.all(color: gray_40),
-                        ),
-                        child: Center(
-                          child: MainText(
-                            text: 'تسجيل الحضور والانصراف',
-                            color: Colors.black,
-                            font: 15.sp,
-                            weight: FontWeight.w700,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 16.h,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                    child: GestureDetector(
-                      onTap: () {
-                        if (widget.searchTicket.ticketStatus == 'Expired') {
-                          showDialog(
-                            context: context,
-                            builder: (_) => ActionDialog(
-                              content: 'التذكرة منتهية',
-                              approveAction: 'حسنا',
-                              onApproveClick: MagicRouter.pop,
+                            SizedBox(
+                              width: 16.w,
                             ),
-                          );
-                        } else {
-                          MagicRouter.navigateTo(
-                            TicketInvoiceScreen(
-                              searchTicket: widget.searchTicket,
+                            Expanded(
+                              child: GestureDetector(
+                                onTap: () {
+                                  MagicRouter.navigateTo(
+                                    SendAlertToCompanyTechScreen(
+                                      searchTicket: widget.searchTicket,
+                                    ),
+                                  );
+                                },
+                                child: Container(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 10.w, vertical: 5.h),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(16.0),
+                                    ),
+                                    color: Colors.transparent,
+                                    border: Border.all(color: gray_40),
+                                  ),
+                                  child: Center(
+                                    child: MainText(
+                                      text: 'ارسال تنبيه للشركة',
+                                      color: Colors.black,
+                                      font: 15.sp,
+                                      weight: FontWeight.w700,
+                                    ),
+                                  ),
+                                ),
+                              ),
                             ),
-                          );
-                        }
-                      },
-                      child: Container(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 10.w, vertical: 5.h),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(16.0),
-                          ),
-                          color: Colors.transparent,
-                          border: Border.all(color: gray_40),
+                          ],
                         ),
-                        child: Center(
-                          child: MainText(
-                            text: 'اصدار الفاتورة',
-                            color: Colors.black,
-                            font: 15.sp,
-                            weight: FontWeight.w700,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 16.w,
-                  ),
-                  Expanded(
-                    child: GestureDetector(
-                      onTap: () {
-                        if (widget.searchTicket.ticketStatus == 'Expired') {
-                          showDialog(
-                            context: context,
-                            builder: (_) => ActionDialog(
-                              content: 'التذكرة منتهية',
-                              approveAction: 'حسنا',
-                              onApproveClick: MagicRouter.pop,
-                            ),
-                          );
-                        } else {
-                          MagicRouter.navigateTo(
-                            SendAlertToCompanyTechScreen(
-                              searchTicket: widget.searchTicket,
-                            ),
-                          );
-                        }
-                      },
-                      child: Container(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 10.w, vertical: 5.h),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(16.0),
-                          ),
-                          color: Colors.transparent,
-                          border: Border.all(color: gray_40),
-                        ),
-                        child: Center(
-                          child: MainText(
-                            text: 'ارسال تنبيه للشركة',
-                            color: Colors.black,
-                            font: 15.sp,
-                            weight: FontWeight.w700,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+                      ],
+                    )
+                  : Container(),
             ],
           ),
         ),
