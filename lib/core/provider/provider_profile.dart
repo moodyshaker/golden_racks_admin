@@ -10,7 +10,7 @@ import 'package:golden_racks_admin/core/httpHelper/http_helper.dart';
 import 'package:golden_racks_admin/core/models/profile_model.dart';
 import 'package:golden_racks_admin/core/networkStatus/network_status.dart';
 import 'package:golden_racks_admin/core/router/router.dart';
-import 'package:golden_racks_admin/feature/admin/main_screens/home.dart';
+import 'package:golden_racks_admin/feature/admin/other_screens/units/admin_home_screen.dart';
 import 'package:golden_racks_admin/feature/technician/main_screens/technician_home.dart';
 import 'package:golden_racks_admin/feature/widgets/loading_dialog.dart';
 import 'package:http/http.dart';

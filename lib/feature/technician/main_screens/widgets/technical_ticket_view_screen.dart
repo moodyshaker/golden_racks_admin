@@ -3,11 +3,9 @@ import 'dart:developer';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:golden_racks_admin/core/httpHelper/http_helper.dart';
 import 'package:golden_racks_admin/core/models/agenda_model.dart';
-import 'package:golden_racks_admin/core/router/router.dart';
 import 'package:golden_racks_admin/feature/admin/main_screens/widgets/video_preview_screen.dart';
-import 'package:golden_racks_admin/feature/widgets/action_dialog.dart';
-
 import 'package:golden_racks_admin/feature/widgets/main_text.dart';
 import 'package:golden_racks_admin/feature/widgets/technicianCustomScaffold.dart';
 import 'package:path/path.dart' as pathFile;
@@ -25,9 +23,60 @@ class TechnicalTicketViewScreen extends StatefulWidget {
 }
 
 class _TechnicalTicketViewScreenState extends State<TechnicalTicketViewScreen> {
+  late AudioPlayer player;
+  double _currentPosition = 0.0;
+  Duration _duration = Duration.zero;
+  bool isPlaying = false;
+
   @override
   void initState() {
     super.initState();
+    player = AudioPlayer();
+
+    player.onDurationChanged.listen((duration) {
+      setState(() {
+        _duration = duration;
+      });
+    });
+
+    player.onPositionChanged.listen((position) {
+      setState(() {
+        _currentPosition = position.inMilliseconds.toDouble();
+      });
+    });
+
+    player.onPlayerComplete.listen((event) {
+      setState(() {
+        isPlaying = false;
+        _currentPosition = 0.0;
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    player.dispose();
+    super.dispose();
+  }
+
+  void playAudio(String audioPath) async {
+    if (isPlaying) {
+      await player.pause();
+    } else {
+      await player.play(UrlSource(audioPath));
+    }
+    setState(() {
+      isPlaying = !isPlaying;
+    });
+  }
+
+  void seekTo(double milliseconds) {
+    Duration newPosition = Duration(milliseconds: milliseconds.round());
+    player.seek(newPosition);
+  }
+
+  String formatDuration(Duration duration) {
+    return '${duration.inMinutes.remainder(60)}:${(duration.inSeconds.remainder(60)).toString().padLeft(2, '0')}';
   }
 
   @override
@@ -152,32 +201,16 @@ class _TechnicalTicketViewScreenState extends State<TechnicalTicketViewScreen> {
                       color: Colors.black,
                     ),
                   ),
-                  SizedBox(
-                    height: 16.h,
-                  ),
+                  SizedBox(height: 16.h),
                   Container(
                     margin: EdgeInsets.symmetric(horizontal: 16.w),
                     child: InkWell(
-                      onTap: '${widget.dailyTicket.sound}' != ''
-                          ? () async {
-                              final player = AudioPlayer();
-                              var path =
-                                  'http://75.119.156.82/${widget.dailyTicket.sound}';
-                              log(path);
-                              await player.play(
-                                UrlSource(path),
-                              );
-                            }
-                          : () {
-                              showDialog(
-                                context: context,
-                                builder: (_) => ActionDialog(
-                                  content: 'لا يوجد ملف صوتي',
-                                  approveAction: 'حسنا',
-                                  onApproveClick: MagicRouter.pop,
-                                ),
-                              );
-                            },
+                      onTap: () async {
+                        var path = '$base_url_image${widget.dailyTicket.sound}';
+                        log(path);
+
+                        playAudio(path);
+                      },
                       child: Container(
                         height: 56.h,
                         width: double.infinity,
@@ -198,8 +231,9 @@ class _TechnicalTicketViewScreenState extends State<TechnicalTicketViewScreen> {
                             Container(
                               height: 24.h,
                               width: 24.w,
-                              child: Image.asset(
-                                getAsset('play_icon'),
+                              child: Icon(
+                                isPlaying ? Icons.pause : Icons.play_arrow,
+                                color: Colors.white,
                               ),
                             ),
                             SizedBox(
@@ -216,9 +250,23 @@ class _TechnicalTicketViewScreenState extends State<TechnicalTicketViewScreen> {
                       ),
                     ),
                   ),
-                  SizedBox(
-                    height: 19.h,
+                  Row(
+                    children: [
+                      Slider(
+                        activeColor: kSecondaryColor,
+                        value: _currentPosition,
+                        min: 0.0,
+                        max: _duration.inMilliseconds.toDouble(),
+                        onChanged: (value) {
+                          seekTo(value);
+                        },
+                      ),
+                      Text(
+                        '${formatDuration(Duration(milliseconds: _currentPosition.toInt()))} / ${formatDuration(_duration)}',
+                      ),
+                    ],
                   ),
+                  SizedBox(height: 20.h),
                   Container(
                     margin: EdgeInsets.symmetric(horizontal: 16.w),
                     child: MainText(

@@ -1,15 +1,18 @@
-import 'dart:developer';
-
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:golden_racks_admin/core/appStorage/shared_preference.dart';
 import 'package:golden_racks_admin/core/httpHelper/http_helper.dart';
+import 'package:golden_racks_admin/core/networkStatus/network_status.dart';
+import 'package:golden_racks_admin/core/provider/provider_auth.dart';
 import 'package:golden_racks_admin/feature/admin/auth_screens/organizer_login.dart';
-import 'package:golden_racks_admin/feature/admin/main_screens/home.dart';
+import 'package:golden_racks_admin/feature/admin/main_screens/tickets_screens/admin_tickets_screen.dart';
 import 'package:golden_racks_admin/feature/admin/other_screens/admin_notification_screen.dart';
+import 'package:golden_racks_admin/feature/admin/other_screens/units/admin_home_screen.dart';
 import 'package:golden_racks_admin/feature/screens/profile_screen.dart';
+import 'package:golden_racks_admin/feature/widgets/opacity_loading_logo.dart';
+import 'package:golden_racks_admin/feature/widgets/retry_widget.dart';
 import '../../constants.dart';
 import '../../core/bloc/language_cubit.dart';
 import '../../core/bloc/organizer_app_cubit.dart';
@@ -64,7 +67,14 @@ class _OrganizerCustomScaffoldState extends State<OrganizerCustomScaffold> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    AuthProvider.listenFalse(context).getStatistics();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final authProvider = AuthProvider.get(context);
     final cubit = OrganizerAppCubit.get(context);
     final demo = DemoLocalization.of(context);
     final lang = LanguageCubit.get(context);
@@ -97,117 +107,131 @@ class _OrganizerCustomScaffoldState extends State<OrganizerCustomScaffold> {
         key: _key,
         backgroundColor: widget.backgroundColor ?? kAccentColor,
         drawer: widget.isHome
-            ? SafeArea(
-                child: Drawer(
-                  width: 330.w,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: lang.locale.languageCode == 'ar'
-                        ? BorderRadius.only(
-                            topLeft: Radius.circular(50.r),
-                            bottomLeft: Radius.circular(50.r),
-                          )
-                        : BorderRadius.only(
-                            topRight: Radius.circular(50.r),
-                            bottomRight: Radius.circular(50.r),
-                          ),
-                  ),
-                  child: Padding(
-                    padding: EdgeInsets.only(top: 50.h, right: 8.w, left: 8.w),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 16.w),
-                          child: MainText(
-                            text: 'القائمة الرئيسية',
-                            font: 24.sp,
-                            weight: FontWeight.bold,
-                          ),
-                        ),
-                        SizedBox(
-                          height: 40.h,
-                        ),
-                        Expanded(
-                          child: SingleChildScrollView(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: List.generate(
-                                list.length,
-                                (i) => ListTile(
-                                  onTap: () {
-                                    if (list[i].route != null) {
-                                      MagicRouter.pop();
-                                      MagicRouter.navigateTo(list[i].route!);
-                                    } else {
-                                      MagicRouter.pop();
-                                    }
-                                  },
-                                  contentPadding: EdgeInsets.symmetric(
-                                    horizontal: 16.w,
-                                    vertical: 0.h,
+            ? authProvider.statisticsStatus == NetworkStatus.loading
+                ? OpacityLoadingLogo()
+                : authProvider.statisticsStatus == NetworkStatus.success
+                    ? SafeArea(
+                        child: Drawer(
+                          width: 330.w,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: lang.locale.languageCode == 'ar'
+                                ? BorderRadius.only(
+                                    topLeft: Radius.circular(50.r),
+                                    bottomLeft: Radius.circular(50.r),
+                                  )
+                                : BorderRadius.only(
+                                    topRight: Radius.circular(50.r),
+                                    bottomRight: Radius.circular(50.r),
                                   ),
-                                  subtitle: Row(
-                                    children: List.generate(
-                                      15,
-                                      (index) => Container(
-                                        color: kBorderColor,
-                                        width: 4.w,
-                                        height: 1.h,
-                                        margin: EdgeInsets.symmetric(
-                                          horizontal: 2.w,
+                          ),
+                          child: Padding(
+                            padding: EdgeInsets.only(
+                                top: 50.h, right: 8.w, left: 8.w),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: [
+                                Padding(
+                                  padding:
+                                      EdgeInsets.symmetric(horizontal: 16.w),
+                                  child: MainText(
+                                    text: 'القائمة الرئيسية',
+                                    font: 24.sp,
+                                    weight: FontWeight.bold,
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 40.h,
+                                ),
+                                Expanded(
+                                  child: SingleChildScrollView(
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: List.generate(
+                                        list.length,
+                                        (i) => ListTile(
+                                          onTap: () {
+                                            if (list[i].route != null) {
+                                              MagicRouter.pop();
+                                              MagicRouter.navigateTo(
+                                                  list[i].route!);
+                                            } else {
+                                              MagicRouter.pop();
+                                            }
+                                          },
+                                          contentPadding: EdgeInsets.symmetric(
+                                            horizontal: 16.w,
+                                            vertical: 0.h,
+                                          ),
+                                          subtitle: Row(
+                                            children: List.generate(
+                                              15,
+                                              (index) => Container(
+                                                color: kBorderColor,
+                                                width: 4.w,
+                                                height: 1.h,
+                                                margin: EdgeInsets.symmetric(
+                                                  horizontal: 2.w,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          title: Row(
+                                            children: [
+                                              Expanded(
+                                                child: MainText(
+                                                  text: list[i].title,
+                                                  font: 14.sp,
+                                                  weight: FontWeight.bold,
+                                                ),
+                                              ),
+                                              list[i].count != null
+                                                  ? DottedBorder(
+                                                      color: kSecondaryColor,
+                                                      borderType:
+                                                          BorderType.Circle,
+                                                      padding:
+                                                          EdgeInsets.symmetric(
+                                                        horizontal: 8.w,
+                                                        vertical: 8.h,
+                                                      ),
+                                                      strokeWidth: 1,
+                                                      child: Center(
+                                                        child: MainText(
+                                                          text: list[i].count,
+                                                          font: 14.sp,
+                                                          color: kBlackColor,
+                                                        ),
+                                                      ),
+                                                    )
+                                                  : Container(),
+                                              SizedBox(
+                                                width: 4.w,
+                                              ),
+                                              Image.asset(
+                                                getAsset('double_arrow'),
+                                                color: Colors.black54,
+                                                height: 18.h,
+                                                width: 18.w,
+                                              ),
+                                            ],
+                                          ),
                                         ),
                                       ),
                                     ),
                                   ),
-                                  title: Row(
-                                    children: [
-                                      Expanded(
-                                        child: MainText(
-                                          text: list[i].title,
-                                          font: 14.sp,
-                                          weight: FontWeight.bold,
-                                        ),
-                                      ),
-                                      list[i].count != null
-                                          ? DottedBorder(
-                                              color: kSecondaryColor,
-                                              borderType: BorderType.Circle,
-                                              padding: EdgeInsets.symmetric(
-                                                horizontal: 8.w,
-                                                vertical: 8.h,
-                                              ),
-                                              strokeWidth: 1,
-                                              child: Center(
-                                                child: MainText(
-                                                  text: list[i].count,
-                                                  font: 14.sp,
-                                                  color: kBlackColor,
-                                                ),
-                                              ),
-                                            )
-                                          : Container(),
-                                      SizedBox(
-                                        width: 4.w,
-                                      ),
-                                      Image.asset(
-                                        getAsset('double_arrow'),
-                                        color: Colors.black54,
-                                        height: 18.h,
-                                        width: 18.w,
-                                      ),
-                                    ],
-                                  ),
                                 ),
-                              ),
+                              ],
                             ),
                           ),
                         ),
-                      ],
-                    ),
-                  ),
-                ),
-              )
-            : null,
+                      )
+                    : null
+            : RetryWidget(
+                retryCallback: () async {
+                  await authProvider.getStatistics(retry: true);
+                },
+              ),
         body: SafeArea(
           child: Column(
             children: [
@@ -432,10 +456,11 @@ class _OrganizerCustomScaffoldState extends State<OrganizerCustomScaffold> {
                           cubit.changeCurrent(i);
 
                           if (i == 2) {
-                            log('home');
-                            MagicRouter.navigateAndPop(AdminHome());
+                            MagicRouter.navigateAndPopAll(AdminHome());
                           } else if (i == 0) {
                             _key.currentState!.openDrawer();
+                          } else if (i == 3) {
+                            MagicRouter.navigateAndPopAll(AdminTicketsScreen());
                           }
                         },
                         child: i == 2

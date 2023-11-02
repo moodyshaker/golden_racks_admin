@@ -57,7 +57,7 @@ class _PlanItemState extends State<PlanItem> {
                           textAlign: TextAlign.center,
                           text: widget.readyPlan.planDuration == 'None'
                               ? 'بلا مدة معينة'
-                              : '${widget.readyPlan.id} ${arabicPlanTypes[englishPlanTypes.indexOf(widget.readyPlan.planDuration!)]}',
+                              : '${arabicPlanTypes[englishPlanTypes.indexOf(widget.readyPlan.planDuration!)]}',
                           font: 16.sp,
                           color: kAccentColor,
                           weight: FontWeight.bold,

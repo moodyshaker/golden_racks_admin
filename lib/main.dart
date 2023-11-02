@@ -9,6 +9,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:golden_racks_admin/core/bloc/technician_app_cubit.dart';
 import 'package:golden_racks_admin/core/provider/provider_active_plan.dart';
 import 'package:golden_racks_admin/core/provider/provider_add_technation.dart';
+import 'package:golden_racks_admin/core/provider/provider_admin_tickets.dart';
 import 'package:golden_racks_admin/core/provider/provider_assign_to_sub_emergency_plan.dart';
 import 'package:golden_racks_admin/core/provider/provider_assign_to_sub_ready_plan.dart';
 import 'package:golden_racks_admin/core/provider/provider_assign_to_unsub_emergency_plan.dart';
@@ -18,6 +19,7 @@ import 'package:golden_racks_admin/core/provider/provider_profile.dart';
 import 'package:golden_racks_admin/core/provider/provider_ready_plan.dart';
 import 'package:golden_racks_admin/core/provider/provider_search_tickets.dart';
 import 'package:golden_racks_admin/core/provider/provider_subscribed_Company.dart';
+import 'package:golden_racks_admin/feature/screens/test_widget_screen.dart';
 import 'package:provider/provider.dart';
 import 'core/appStorage/shared_preference.dart';
 import 'core/bloc/app_cubit.dart';
@@ -52,8 +54,16 @@ void main() async {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class MyApp extends StatefulWidget {
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -85,6 +95,7 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider(create: (_) => DailyTasksProvider()),
           ChangeNotifierProvider(create: (_) => SearchTicketProvider()),
           ChangeNotifierProvider(create: (_) => ProfileProvider()),
+          ChangeNotifierProvider(create: (_) => AdminTicketsProvider()),
         ],
         child: Builder(
           builder: (BuildContext c) => MaterialApp(
@@ -118,7 +129,7 @@ class MyApp extends StatelessWidget {
                   ? TextDirection.rtl
                   : TextDirection.ltr,
             ),
-            home: Splash(),
+            home: CustomCalendarTable(),
           ),
         ),
       ),

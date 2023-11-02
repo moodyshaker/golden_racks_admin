@@ -3,10 +3,11 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:golden_racks_admin/feature/admin/main_screens/tickets_screens/admin_tickets_screen.dart';
 import 'package:http/http.dart';
 import 'package:provider/provider.dart';
 import '../../feature/admin/auth_screens/organizer_login.dart';
-import '../../feature/admin/other_screens/units/admin_main_screen.dart';
+import '../../feature/admin/other_screens/units/admin_home_screen.dart';
 import '../../feature/widgets/loading_dialog.dart';
 import '../appStorage/shared_preference.dart';
 import '../dialogs/error_dialog.dart';
@@ -22,8 +23,8 @@ class OrganizerAppCubit extends ChangeNotifier {
 
   static OrganizerAppCubit listenFalse(context) =>
       Provider.of<OrganizerAppCubit>(context, listen: false);
-  int _i = 0;
-  Widget _w = OrganizerMain();
+  int _i = 2;
+  Widget _w = AdminHome();
   String _title = 'main';
   TextEditingController loginEmailController = TextEditingController();
   TextEditingController loginPasswordController = TextEditingController();
@@ -129,11 +130,12 @@ class OrganizerAppCubit extends ChangeNotifier {
       case 0:
         break;
       case 1:
-        _w = OrganizerMain();
         break;
       case 2:
+        _w = AdminHome();
         break;
       case 3:
+        _w = AdminTicketsScreen();
         break;
       case 4:
         break;

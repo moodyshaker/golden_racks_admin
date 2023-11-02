@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:golden_racks_admin/core/httpHelper/http_helper.dart';
 import 'package:golden_racks_admin/core/models/normal_plan_unsub_model.dart';
 import 'package:golden_racks_admin/core/router/router.dart';
 import 'package:golden_racks_admin/feature/admin/main_screens/widgets/video_preview_screen.dart';
@@ -25,9 +26,60 @@ class NormalUnsubTicketViewScreen extends StatefulWidget {
 
 class _NormalUnsubTicketViewScreenState
     extends State<NormalUnsubTicketViewScreen> {
+  late AudioPlayer player;
+  double _currentPosition = 0.0;
+  Duration _duration = Duration.zero;
+  bool isPlaying = false;
+
   @override
   void initState() {
     super.initState();
+    player = AudioPlayer();
+
+    player.onDurationChanged.listen((duration) {
+      setState(() {
+        _duration = duration;
+      });
+    });
+
+    player.onPositionChanged.listen((position) {
+      setState(() {
+        _currentPosition = position.inMilliseconds.toDouble();
+      });
+    });
+
+    player.onPlayerComplete.listen((event) {
+      setState(() {
+        isPlaying = false;
+        _currentPosition = 0.0;
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    player.dispose();
+    super.dispose();
+  }
+
+  void playAudio(String audioPath) async {
+    if (isPlaying) {
+      await player.pause();
+    } else {
+      await player.play(UrlSource(audioPath));
+    }
+    setState(() {
+      isPlaying = !isPlaying;
+    });
+  }
+
+  void seekTo(double milliseconds) {
+    Duration newPosition = Duration(milliseconds: milliseconds.round());
+    player.seek(newPosition);
+  }
+
+  String formatDuration(Duration duration) {
+    return '${duration.inMinutes.remainder(60)}:${(duration.inSeconds.remainder(60)).toString().padLeft(2, '0')}';
   }
 
   @override
@@ -161,20 +213,15 @@ class _NormalUnsubTicketViewScreenState
                       color: Colors.black,
                     ),
                   ),
-                  SizedBox(
-                    height: 16.h,
-                  ),
+                  SizedBox(height: 16.h),
                   Container(
                     margin: EdgeInsets.symmetric(horizontal: 16.w),
                     child: InkWell(
                       onTap: () async {
-                        final player = AudioPlayer();
-                        var path =
-                            'http://75.119.156.82/${widget.normalUnsub.sound}';
+                        var path = '$base_url_image${widget.normalUnsub.sound}';
                         log(path);
-                        await player.play(
-                          UrlSource(path),
-                        );
+
+                        playAudio(path);
                       },
                       child: Container(
                         height: 56.h,
@@ -196,8 +243,9 @@ class _NormalUnsubTicketViewScreenState
                             Container(
                               height: 24.h,
                               width: 24.w,
-                              child: Image.asset(
-                                getAsset('play_icon'),
+                              child: Icon(
+                                isPlaying ? Icons.pause : Icons.play_arrow,
+                                color: Colors.white,
                               ),
                             ),
                             SizedBox(
@@ -214,9 +262,23 @@ class _NormalUnsubTicketViewScreenState
                       ),
                     ),
                   ),
-                  SizedBox(
-                    height: 19.h,
+                  Row(
+                    children: [
+                      Slider(
+                        activeColor: kSecondaryColor,
+                        value: _currentPosition,
+                        min: 0.0,
+                        max: _duration.inMilliseconds.toDouble(),
+                        onChanged: (value) {
+                          seekTo(value);
+                        },
+                      ),
+                      Text(
+                        '${formatDuration(Duration(milliseconds: _currentPosition.toInt()))} / ${formatDuration(_duration)}',
+                      ),
+                    ],
                   ),
+                  SizedBox(height: 20.h),
                   Container(
                     margin: EdgeInsets.symmetric(horizontal: 16.w),
                     child: MainText(

@@ -3,10 +3,11 @@ import 'dart:developer';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:golden_racks_admin/constants.dart';
+import 'package:golden_racks_admin/core/models/admin_statistics_model.dart';
 import 'package:golden_racks_admin/core/networkStatus/network_status.dart';
+import 'package:golden_racks_admin/feature/admin/other_screens/units/admin_home_screen.dart';
 import 'package:http/http.dart';
 import 'package:provider/provider.dart';
-import '../../feature/admin/main_screens/home.dart';
 import '../../feature/admin/other_screens/add_plan_screen.dart';
 import '../../feature/technician/main_screens/technician_home.dart';
 import '../../feature/widgets/loading_dialog.dart';
@@ -25,8 +26,6 @@ class AuthProvider extends ChangeNotifier {
 
   Preferences _preferences = Preferences.instance;
 
-  List<Country> allCountries = [];
-
   //register controllers
   TextEditingController registerUserNameController = TextEditingController();
   TextEditingController registerPasswordController = TextEditingController();
@@ -43,6 +42,10 @@ class AuthProvider extends ChangeNotifier {
   TextEditingController loginPasswordController = TextEditingController();
 
   NetworkStatus? countryStatus;
+  List<Country> allCountries = [];
+
+  NetworkStatus? statisticsStatus;
+  StatisticsModel statisticsModel = StatisticsModel();
 
   Future<void> authRegister({
     required int countryId,
@@ -93,13 +96,28 @@ class AuthProvider extends ChangeNotifier {
         _preferences.setRegisterdUserId(r['userId']);
 
         MagicRouter.pop();
+        bool navigated = false;
         showDialog(
           context: navigatorKey.currentContext!,
           barrierDismissible: false,
           builder: (ctx) => InfoDialog(
             content: 'تم تسجيل الحساب بنجاح',
           ),
-        ).then((value) => MagicRouter.navigateTo(AddPlanScreen()));
+        ).then(
+          (value) => {
+            navigated = true,
+            MagicRouter.navigateTo(AddPlanScreen()),
+          },
+        );
+
+        Future.delayed(Duration(seconds: 3), () {
+          if (!navigated) {
+            if (Navigator.canPop(navigatorKey.currentContext!)) {
+              Navigator.pop(navigatorKey.currentContext!);
+            }
+            MagicRouter.navigateAndPopAll(AddPlanScreen());
+          }
+        });
       } else {
         MagicRouter.pop();
 
@@ -164,6 +182,7 @@ class AuthProvider extends ChangeNotifier {
         );
 
         MagicRouter.pop();
+        bool navigated = false;
         showDialog(
           context: navigatorKey.currentContext!,
           barrierDismissible: false,
@@ -172,15 +191,31 @@ class AuthProvider extends ChangeNotifier {
           ),
         ).then((value) => UserRole == 2
             ? {
+                navigated = true,
                 MagicRouter.navigateAndPopAll(AdminHome()),
                 isAdmin = true,
                 Preferences.instance.setUserStatus('admin'),
               }
             : {
+                navigated = true,
                 MagicRouter.navigateAndPopAll(TechnicianHome()),
                 isAdmin = false,
                 Preferences.instance.setUserStatus('tech'),
               });
+
+        Future.delayed(Duration(seconds: 3), () {
+          if (!navigated) {
+            if (Navigator.canPop(navigatorKey.currentContext!)) {
+              Navigator.pop(navigatorKey.currentContext!);
+            }
+
+            if (isAdmin!) {
+              MagicRouter.navigateAndPopAll(AdminHome());
+            } else {
+              MagicRouter.navigateAndPopAll(TechnicianHome());
+            }
+          }
+        });
       } else {
         print('Login Failed');
         MagicRouter.pop();
@@ -244,5 +279,33 @@ class AuthProvider extends ChangeNotifier {
     } catch (e) {
       log('catch device token');
     }
+  }
+
+  Future<void> getStatistics({
+    bool retry = false,
+  }) async {
+    statisticsStatus = NetworkStatus.loading;
+
+    if (retry) {
+      notifyListeners();
+    }
+    try {
+      var response = await HttpHelper.instance.httpGet(
+        'Statistics/get-all-home-statistic',
+        true,
+      );
+      if (response.statusCode >= 200 && response.statusCode < 300) {
+        statisticsModel = StatisticsModel.fromJson(jsonDecode(response.body));
+        mainStatistics = statisticsModel;
+        statisticsStatus = NetworkStatus.success;
+      } else {
+        print('error get statistics > ${response.body}');
+        statisticsStatus = NetworkStatus.error;
+      }
+    } catch (e) {
+      print('catch get statistics > ${e.toString()}');
+      statisticsStatus = NetworkStatus.error;
+    }
+    notifyListeners();
   }
 }

@@ -54,6 +54,8 @@ dependencies:
   record:
   editable:
   calendar_date_picker2:
+  jwt_decoder:
+  table_calendar:
 
 
 

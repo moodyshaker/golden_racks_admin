@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:golden_racks_admin/core/models/admin_statistics_model.dart';
 import 'package:golden_racks_admin/feature/admin/main_screens/subscribe_ready_admin_screens/subscribers_ready_requests_screen.dart';
 import 'package:golden_racks_admin/feature/admin/main_screens/unsubscribe_emergency_admin_screens/unsubscribers_emergency_requests_screen.dart';
 import 'package:golden_racks_admin/feature/admin/other_screens/add_single_spare_part_screen.dart';
@@ -184,7 +185,7 @@ class DrawerItemModel {
 
 List<DrawerItemModel> list = [
   DrawerItemModel(
-    count: '3',
+    count: '${mainStatistics.numberOfWaitingActivation}',
     title: 'حسابات في انتظار تفعيل الخطط لها',
     route: ActivatePlanAdminScreen(),
   ),
@@ -194,22 +195,22 @@ List<DrawerItemModel> list = [
   ),
   DrawerItemModel(
     title: 'تحديد فني لطلبات الطوارئ لغير المشتركين',
-    count: '2',
+    count: '${mainStatistics.numberOfUnSubscriberEmergency}',
     route: UnSubscribersEmergencyRequestsAdminScreen(),
   ),
   DrawerItemModel(
     title: 'تحديد فني لطلبات الدورية لغير المشتركين',
-    count: '5',
+    count: '${mainStatistics.numberOfUnSubscriberNormal}',
     route: UnSubscribersNormalRequestsAdminScreen(),
   ),
   DrawerItemModel(
     title: 'تحديد فني لطلبات الطوارئ للمشتركين',
-    count: '7',
+    count: '${mainStatistics.numberOfSubscriberEmergency}',
     route: SubscribersEmergencyRequestsAdminScreen(),
   ),
   DrawerItemModel(
     title: 'تحديد فني للصيانة الدورية للمشتركين',
-    count: '8',
+    count: '${mainStatistics.numberOfSubscriberNormalComeFromSystem}',
     route: SubscribersReadyRequestsAdminScreen(),
   ),
   DrawerItemModel(
@@ -268,25 +269,8 @@ const List<String> mainCategories = [
   'workshop',
 ];
 
-// Future<File> compressFile(String path) async {
-//   var splited = path.split('/');
-//   String original = path
-//       .split('/')
-//       .last
-//       .split('.')
-//       .first;
-//   String extension = path
-//       .split('/')
-//       .last
-//       .split('.')
-//       .last;
-//   String outputName =
-//       '${splited.sublist(0, splited.length - 1).join(
-//       '/')}/${original}_out.$extension';
-//   File? compressedFile = (await FlutterImageCompress.compressAndGetFile(
-//     path,
-//     outputName,
-//     quality: 50,
-//   )) as File?;
-//   return compressedFile!;
-// }
+StatisticsModel mainStatistics = StatisticsModel();
+
+/////////playing audio/////////////
+
+

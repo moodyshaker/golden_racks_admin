@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:golden_racks_admin/core/appStorage/shared_preference.dart';
 import 'package:golden_racks_admin/core/notifications/firebase.dart';
-import 'package:golden_racks_admin/feature/admin/main_screens/home.dart';
+import 'package:golden_racks_admin/feature/admin/other_screens/units/admin_home_screen.dart';
 import 'package:golden_racks_admin/feature/technician/main_screens/technician_home.dart';
+import 'package:jwt_decoder/jwt_decoder.dart';
 import '../../../constants.dart';
 import '../../../core/router/router.dart';
 import '../../widgets/customScaffold.dart';
@@ -25,28 +26,37 @@ class _SplashState extends State<Splash> {
   }
 
   void init() async {
+    bool isExpired;
     Future.delayed(
       const Duration(milliseconds: 1000),
-      () => {
-        if (Preferences.instance.getUserId.isEmpty)
+      () async => {
+        if (Preferences.instance.getUserToken.isEmpty)
           {
             MagicRouter.navigateAndPopAll(OrganizerLogin()),
           }
         else
           {
-            if (Preferences.instance.getUserStatus == 'admin')
+            isExpired = JwtDecoder.isExpired(Preferences.instance.getUserToken),
+            if (isExpired)
               {
-                MagicRouter.navigateAndPopAll(AdminHome()),
-                isAdmin = true,
-              }
-            else if (Preferences.instance.getUserStatus == 'tech')
-              {
-                MagicRouter.navigateAndPopAll(TechnicianHome()),
-                isAdmin = false,
+                MagicRouter.navigateAndPopAll(OrganizerLogin()),
               }
             else
               {
-                MagicRouter.navigateAndPopAll(OrganizerLogin()),
+                if (Preferences.instance.getUserStatus == 'admin')
+                  {
+                    MagicRouter.navigateAndPopAll(AdminHome()),
+                    isAdmin = true,
+                  }
+                else if (Preferences.instance.getUserStatus == 'tech')
+                  {
+                    MagicRouter.navigateAndPopAll(TechnicianHome()),
+                    isAdmin = false,
+                  }
+                else
+                  {
+                    MagicRouter.navigateAndPopAll(OrganizerLogin()),
+                  }
               }
           }
       },
