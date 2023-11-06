@@ -93,13 +93,13 @@ class _PlanItemState extends State<PlanItem> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            MainText(
-                              text: widget.readyPlan.planDuration == 'None'
-                                  ? 'بلا مدة معينة'
-                                  : '${arabicPlanTypes[englishPlanTypes.indexOf(widget.readyPlan.planDuration!)]}',
-                              font: 16.sp,
-                              color: kBlackColor,
-                              weight: FontWeight.bold,
+                            Flexible(
+                              child: MainText(
+                                text: '${widget.readyPlan.planName}',
+                                font: 16.sp,
+                                color: kBlackColor,
+                                weight: FontWeight.bold,
+                              ),
                             ),
                             Container(
                               width: 58.w,

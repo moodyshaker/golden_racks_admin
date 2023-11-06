@@ -78,6 +78,27 @@ class _CreatePlanScreenState extends State<CreatePlanScreen> {
                         height: 10.h,
                       ),
                       CustomTextField(
+                        controller: readyPlanProvider.PlanNameController,
+                        hasHint: false,
+                        hasHeader: true,
+                        header: 'اسم الخطة',
+                        headerFont: 12.sp,
+                        headerTextColor: Colors.black,
+                        headerWeight: FontWeight.w400,
+                        headerFamily: 'Lato_regular',
+                        type: TextInputType.text,
+                        valid: (String? v) {
+                          if (v!.isEmpty) {
+                            return 'ادخل اسم الخطة';
+                          } else {
+                            return null;
+                          }
+                        },
+                      ),
+                      SizedBox(
+                        height: 8.h,
+                      ),
+                      CustomTextField(
                         controller:
                             readyPlanProvider.NumberOfFixedVisitsController,
                         hasHeader: true,
@@ -152,28 +173,6 @@ class _CreatePlanScreenState extends State<CreatePlanScreen> {
                         height: 10.h,
                       ),
                       CustomTextField(
-                        hasHint: false,
-                        hasHeader: true,
-                        header: 'ثمن الخطة',
-                        headerFont: 12.sp,
-                        headerTextColor: Colors.black,
-                        headerWeight: FontWeight.w400,
-                        headerFamily: 'Lato_regular',
-                        type: TextInputType.number,
-                        isPassword: false,
-                        valid: (String? v) {
-                          final n = num.tryParse(v!);
-                          if (v.isEmpty || n == null) {
-                            return 'ادخل عدد ثمن الخطة';
-                          } else {
-                            return null;
-                          }
-                        },
-                      ),
-                      SizedBox(
-                        height: 8.h,
-                      ),
-                      CustomTextField(
                         controller: readyPlanProvider.NumberOfRacksController,
                         horizontalPadding: 20.w,
                         hasHint: false,
@@ -239,6 +238,7 @@ class _CreatePlanScreenState extends State<CreatePlanScreen> {
                   } else {
                     await readyPlanProvider.addReadyPlan(
                       PlanDuration: readyPlanProvider.PlanDurationController!,
+                      PlanName: readyPlanProvider.PlanNameController.text,
                       NumberOfFixedVisits: int.parse(
                         readyPlanProvider.NumberOfFixedVisitsController.text,
                       ),

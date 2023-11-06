@@ -1,5 +1,6 @@
 class ReadyPlanModel {
   int? id;
+  String? planName;
   String? planDuration;
   int? numberOfFixedVisits;
   int? numberOEmregencyVisits;
@@ -11,6 +12,7 @@ class ReadyPlanModel {
 
   ReadyPlanModel({
     this.id,
+    this.planName,
     this.planDuration,
     this.numberOfFixedVisits,
     this.numberOEmregencyVisits,
@@ -24,6 +26,7 @@ class ReadyPlanModel {
   Map<String, dynamic> toJson() {
     return <String, dynamic>{
       'id': id,
+      'planName': planName,
       'planDuration': planDuration,
       'numberOfFixedVisits': numberOfFixedVisits,
       'numberOEmregencyVisits': numberOEmregencyVisits,
@@ -38,6 +41,7 @@ class ReadyPlanModel {
   factory ReadyPlanModel.fromJson(Map<String, dynamic> json) {
     return ReadyPlanModel(
       id: json['id'] != null ? json['id'] as int : null,
+      planName: json['planName'] != null ? json['planName'] as String : null,
       planDuration:
           json['planDuration'] != null ? json['planDuration'] as String : null,
       numberOfFixedVisits: json['numberOfFixedVisits'] != null

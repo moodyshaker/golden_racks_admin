@@ -19,7 +19,6 @@ import 'package:golden_racks_admin/core/provider/provider_profile.dart';
 import 'package:golden_racks_admin/core/provider/provider_ready_plan.dart';
 import 'package:golden_racks_admin/core/provider/provider_search_tickets.dart';
 import 'package:golden_racks_admin/core/provider/provider_subscribed_Company.dart';
-import 'package:golden_racks_admin/feature/screens/test_widget_screen.dart';
 import 'package:provider/provider.dart';
 import 'core/appStorage/shared_preference.dart';
 import 'core/bloc/app_cubit.dart';
@@ -129,7 +128,7 @@ class _MyAppState extends State<MyApp> {
                   ? TextDirection.rtl
                   : TextDirection.ltr,
             ),
-            home: CustomCalendarTable(),
+            home: Splash(),
           ),
         ),
       ),

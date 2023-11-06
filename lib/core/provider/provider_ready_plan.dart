@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:golden_racks_admin/core/networkStatus/network_status.dart';
 import 'package:golden_racks_admin/feature/admin/other_screens/units/admin_home_screen.dart';
 import 'package:http/http.dart';
 import 'package:http/http.dart' as http;
@@ -23,6 +24,7 @@ class ReadyPlanProvider extends ChangeNotifier {
 
   List<ReadyPlanModel> allReadyPlans = [];
   int chosenPlanDuration = 0;
+  NetworkStatus? getReadyPlanStatus;
 
   void increaseRack({required ReadyPlanModel readyPlan}) {
     readyPlan.numberOfRacks = readyPlan.numberOfRacks! + 1;
@@ -52,6 +54,7 @@ class ReadyPlanProvider extends ChangeNotifier {
   }
 
   //ready plan controllers
+  TextEditingController PlanNameController = TextEditingController();
   TextEditingController NumberOfFixedVisitsController = TextEditingController();
   TextEditingController NumberOEmregencyVisitsController =
       TextEditingController();
@@ -67,12 +70,15 @@ class ReadyPlanProvider extends ChangeNotifier {
   TextEditingController NumberOfFreeSparePartQuantityController =
       TextEditingController();
 
+  TextEditingController searchPlanNameController = TextEditingController();
+
   bool IsSparePartsController = false;
   bool IsActiveController = true;
   int? PlanDurationController;
 
   Future<void> addReadyPlan({
     required int PlanDuration,
+    required String PlanName,
     required int NumberOfFixedVisits,
     required int NumberOEmregencyVisits,
     required bool IsSpareParts,
@@ -106,6 +112,7 @@ class ReadyPlanProvider extends ChangeNotifier {
         'Accept': 'application/json',
       };
       request.fields['PlanDuration'] = PlanDuration.toString();
+      request.fields['PlanName'] = PlanName;
       request.fields['NumberOfFixedVisits'] = NumberOfFixedVisits.toString();
       request.fields['NumberOEmregencyVisits'] =
           NumberOEmregencyVisits.toString();
@@ -169,20 +176,27 @@ class ReadyPlanProvider extends ChangeNotifier {
     }
   }
 
-  Future<void> getReadyPlan({required int planDuration}) async {
-    showDialog(
-      context: navigatorKey.currentContext!,
-      barrierDismissible: false,
-      builder: (ctx) => LoadingDialog(),
-    );
+  Future<void> getReadyPlan({
+    required int planDuration,
+    required String planName,
+    bool retry = false,
+  }) async {
+    getReadyPlanStatus = NetworkStatus.loading;
+    if (retry) {
+      notifyListeners();
+    }
+
     try {
       Map<String, dynamic> params = {};
 
       if (planDuration == 0) {
-        params = {};
+        params = {
+          "planName": planName,
+        };
       } else {
         params = {
           "planDuration": planDuration.toString(),
+          "planName": planName,
         };
       }
 
@@ -199,22 +213,21 @@ class ReadyPlanProvider extends ChangeNotifier {
       );
 
       if (response.statusCode >= 200 && response.statusCode < 300) {
-        print(response.statusCode);
         List jsonResponse = jsonDecode(response.body);
         allReadyPlans =
             jsonResponse.map((e) => ReadyPlanModel.fromJson(e)).toList();
 
         log('all Ready length ${allReadyPlans.length}');
 
-        MagicRouter.pop();
+        getReadyPlanStatus = NetworkStatus.success;
       } else {
         log('Error get ready plans > ${response.body}');
 
-        MagicRouter.pop();
+        getReadyPlanStatus = NetworkStatus.error;
       }
     } catch (e) {
       log('catch get ready plans > ${e.toString()}');
-      MagicRouter.pop();
+      getReadyPlanStatus = NetworkStatus.error;
     }
     notifyListeners();
   }

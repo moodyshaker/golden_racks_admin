@@ -241,9 +241,7 @@ class _AddASparePartScreenState extends State<AddASparePartScreen> {
                       ),
                       CustomTextField(
                         controller: readyPlanProvider.MadeInController,
-
                         horizontalPadding: 20.w,
-                        // controller: organizer.loginEmailController,
                         hasHeader: false,
                         hint: 'بلد المنشأ',
                         hasHint: true,
@@ -286,6 +284,7 @@ class _AddASparePartScreenState extends State<AddASparePartScreen> {
 
                   await readyPlanProvider.addReadyPlan(
                     PlanDuration: readyPlanProvider.PlanDurationController!,
+                    PlanName: readyPlanProvider.PlanNameController.text,
                     NumberOfFixedVisits: int.parse(
                       readyPlanProvider.NumberOfFixedVisitsController.text,
                     ),

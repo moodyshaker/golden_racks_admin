@@ -199,7 +199,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
               fontSize: widget.hintFont ?? 14.sp,
               fontWeight: widget.hintWeight ?? FontWeight.w800,
               color: widget.hintColor ?? Color(0xff7c7c7c),
-              fontFamily: 'Cairo',
+              fontFamily: 'Lato',
             ),
             suffixIcon: widget.isPassword
                 ? widget.withPasswordIcon

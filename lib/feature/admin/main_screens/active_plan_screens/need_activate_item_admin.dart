@@ -86,12 +86,14 @@ class _NeedActivateItemAdminState extends State<NeedActivateItemAdmin> {
               SizedBox(
                 width: 13.w,
               ),
-              MainText(
-                text:
-                    '${arabicPlanTypes[englishPlanTypes.indexOf(widget.unActivePlan.planeName!)]}  ${widget.unActivePlan.planePrice}',
-                font: 15.sp,
-                color: Colors.black,
-                weight: FontWeight.w500,
+              Flexible(
+                child: MainText(
+                  text:
+                      '${widget.unActivePlan.planeName}  ${widget.unActivePlan.planePrice}',
+                  font: 15.sp,
+                  color: Colors.black,
+                  weight: FontWeight.w500,
+                ),
               ),
             ],
           ),
