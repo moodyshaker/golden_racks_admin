@@ -14,7 +14,7 @@ class CustomAudio extends StatefulWidget {
 class _CustomAudioState extends State<CustomAudio> {
   bool isPlaying = false;
   bool isRecording = false;
-  late Record audioRecord;
+  late AudioRecorder audioRecord;
   late AudioPlayer audioPlayer;
 
   //recorder
@@ -31,7 +31,7 @@ class _CustomAudioState extends State<CustomAudio> {
   @override
   void initState() {
     super.initState();
-    audioRecord = Record();
+    audioRecord = AudioRecorder();
     audioPlayer = AudioPlayer();
   }
 
@@ -148,9 +148,8 @@ class _CustomAudioState extends State<CustomAudio> {
       if (hasPermission) {
         audioPlayer.stop();
         await audioRecord.start(
-          encoder: AudioEncoder.aacLc,
-          bitRate: 128000,
-          samplingRate: 44100,
+          RecordConfig(),
+          path: 'file',
         );
         bool recording = await audioRecord.isRecording();
         setState(() {
