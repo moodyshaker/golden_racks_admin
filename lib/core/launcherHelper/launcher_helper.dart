@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -8,7 +10,7 @@ class LauncherHelper {
       await launch(url);
     else
       null;
-      // showDefaultErrorMessage();
+    // showDefaultErrorMessage();
   }
 
   static Future<void> launchPhone(String phone) async {
