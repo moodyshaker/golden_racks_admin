@@ -11,7 +11,7 @@ import 'package:golden_racks_admin/core/models/profile_model.dart';
 import 'package:golden_racks_admin/core/networkStatus/network_status.dart';
 import 'package:golden_racks_admin/core/router/router.dart';
 import 'package:golden_racks_admin/feature/admin/other_screens/units/admin_home_screen.dart';
-import 'package:golden_racks_admin/feature/technician/main_screens/technician_home.dart';
+import 'package:golden_racks_admin/feature/technician/main_screens/units/technician_main.dart';
 import 'package:golden_racks_admin/feature/widgets/loading_dialog.dart';
 import 'package:http/http.dart';
 import 'package:http/http.dart' as http;
@@ -188,7 +188,7 @@ class ProfileProvider extends ChangeNotifier {
                   }
                 else
                   {
-                    MagicRouter.navigateAndPopAll(TechnicianHome()),
+                    MagicRouter.navigateAndPopAll(TechnicianMain()),
                   }
               });
         } else {
@@ -275,13 +275,29 @@ class ProfileProvider extends ChangeNotifier {
         oldPasswordController.clear();
         newPasswordController.clear();
         confirmNewPasswordController.clear();
+        bool navigated = false;
         showDialog(
           context: navigatorKey.currentContext!,
           barrierDismissible: false,
           builder: (ctx) => InfoDialog(
             content: "تم تغيير كلمة المرور بنجاح",
           ),
-        ).then((value) => MagicRouter.pop());
+        ).then((value) => {
+              navigated = true,
+              MagicRouter.pop(),
+            });
+
+        Future.delayed(
+          Duration(seconds: 3),
+          () async {
+            if (!navigated) {
+              if (Navigator.canPop(navigatorKey.currentContext!)) {
+                Navigator.pop(navigatorKey.currentContext!);
+              }
+              MagicRouter.pop();
+            }
+          },
+        );
       } else {
         MagicRouter.pop();
         print(response.body);

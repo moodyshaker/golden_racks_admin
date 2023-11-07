@@ -85,6 +85,7 @@ class AssignToSubEmergencyProvider extends ChangeNotifier {
       if (response.statusCode >= 200 && response.statusCode < 300) {
         log(response.body);
         MagicRouter.pop();
+        bool navigated = false;
         showDialog(
           context: navigatorKey.currentContext!,
           barrierDismissible: false,
@@ -93,6 +94,7 @@ class AssignToSubEmergencyProvider extends ChangeNotifier {
           ),
         ).then(
           (value) async {
+            navigated = true;
             showDialog(
               context: navigatorKey.currentContext!,
               barrierDismissible: false,
@@ -101,6 +103,19 @@ class AssignToSubEmergencyProvider extends ChangeNotifier {
             await getEmergencySubPlans();
             MagicRouter.pop();
             MagicRouter.pop();
+          },
+        );
+
+        Future.delayed(
+          Duration(seconds: 3),
+          () async {
+            if (!navigated) {
+              if (Navigator.canPop(navigatorKey.currentContext!)) {
+                Navigator.pop(navigatorKey.currentContext!);
+              }
+              await getEmergencySubPlans();
+              MagicRouter.pop();
+            }
           },
         );
       } else {

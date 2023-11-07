@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:golden_racks_admin/core/appStorage/shared_preference.dart';
 import 'package:golden_racks_admin/core/notifications/firebase.dart';
 import 'package:golden_racks_admin/feature/admin/other_screens/units/admin_home_screen.dart';
-import 'package:golden_racks_admin/feature/technician/main_screens/technician_home.dart';
+import 'package:golden_racks_admin/feature/technician/main_screens/units/technician_main.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import '../../../constants.dart';
 import '../../../core/router/router.dart';
@@ -50,7 +50,7 @@ class _SplashState extends State<Splash> {
                   }
                 else if (Preferences.instance.getUserStatus == 'tech')
                   {
-                    MagicRouter.navigateAndPopAll(TechnicianHome()),
+                    MagicRouter.navigateAndPopAll(TechnicianMain()),
                     isAdmin = false,
                   }
                 else
@@ -80,16 +80,17 @@ class _SplashState extends State<Splash> {
         ),
       ),
       child: CustomScaffold(
-          backgroundColor: Colors.transparent,
-          isHome: false,
-          hasAppbar: false,
-          hasNavBar: false,
-          body: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image.asset(getAsset('logo')),
-            ],
-          )),
+        backgroundColor: Colors.transparent,
+        isHome: false,
+        hasAppbar: false,
+        hasNavBar: false,
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(getAsset('logo')),
+          ],
+        ),
+      ),
     );
   }
 }

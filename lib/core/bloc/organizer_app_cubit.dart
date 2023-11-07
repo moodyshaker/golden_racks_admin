@@ -23,7 +23,7 @@ class OrganizerAppCubit extends ChangeNotifier {
 
   static OrganizerAppCubit listenFalse(context) =>
       Provider.of<OrganizerAppCubit>(context, listen: false);
-  int _i = 2;
+  int _i = 1;
   Widget _w = AdminHome();
   String _title = 'main';
   TextEditingController loginEmailController = TextEditingController();
@@ -130,14 +130,10 @@ class OrganizerAppCubit extends ChangeNotifier {
       case 0:
         break;
       case 1:
-        break;
-      case 2:
         _w = AdminHome();
         break;
-      case 3:
+      case 2:
         _w = AdminTicketsScreen();
-        break;
-      case 4:
         break;
     }
   }

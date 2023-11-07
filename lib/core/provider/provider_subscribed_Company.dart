@@ -118,13 +118,30 @@ class SubscribedCompanyProvider extends ChangeNotifier {
       if (response.statusCode >= 200 && response.statusCode < 300) {
         MagicRouter.pop();
         notificationController.clear();
+        bool navigated = false;
         showDialog(
           context: navigatorKey.currentContext!,
           barrierDismissible: false,
           builder: (ctx) => InfoDialog(
             content: 'تم ارسال الاشعار بنجاح',
           ),
-        ).then((value) => MagicRouter.pop());
+        ).then(
+          (value) => {
+            navigated = true,
+            MagicRouter.pop(),
+          },
+        );
+        Future.delayed(
+          Duration(seconds: 3),
+          () async {
+            if (!navigated) {
+              if (Navigator.canPop(navigatorKey.currentContext!)) {
+                Navigator.pop(navigatorKey.currentContext!);
+              }
+              MagicRouter.pop();
+            }
+          },
+        );
       } else {
         MagicRouter.pop();
         showDialog(

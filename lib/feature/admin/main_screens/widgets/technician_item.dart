@@ -1,21 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:golden_racks_admin/core/models/technical_model.dart';
+import 'package:golden_racks_admin/core/router/router.dart';
+import 'package:golden_racks_admin/feature/screens/technical_profile_screen.dart';
 import '../../../../constants.dart';
 import '../../../widgets/main_text.dart';
 
-class TechnicianItem extends StatefulWidget {
+class TechnicianItem extends StatelessWidget {
   final Technical tech;
 
   const TechnicianItem({
     required this.tech,
   });
 
-  @override
-  State<TechnicianItem> createState() => _TechnicianItemState();
-}
-
-class _TechnicianItemState extends State<TechnicianItem> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -30,7 +27,7 @@ class _TechnicianItemState extends State<TechnicianItem> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           MainText(
-            text: '${widget.tech.fullName}',
+            text: '${tech.fullName}',
             font: 15.sp,
             color: Colors.black,
             weight: FontWeight.w500,
@@ -44,7 +41,13 @@ class _TechnicianItemState extends State<TechnicianItem> {
                 getAsset('eyes_icon'),
               ),
             ),
-            onTap: () {},
+            onTap: () {
+              MagicRouter.navigateTo(
+                TechProfileScreen(
+                  techId: tech.userId!,
+                ),
+              );
+            },
           ),
         ],
       ),

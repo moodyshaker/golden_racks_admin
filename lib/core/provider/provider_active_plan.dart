@@ -146,14 +146,28 @@ class ActivePlanProvider extends ChangeNotifier {
 
       if (response.statusCode >= 200 && response.statusCode < 300) {
         MagicRouter.pop();
+        bool navigated = false;
         showDialog(
           context: navigatorKey.currentContext!,
           barrierDismissible: false,
           builder: (ctx) => InfoDialog(
             content: 'تم رفض الخطة بنجاح',
           ),
-        ).then(
-          (value) => MagicRouter.navigateAndPop(ActivatePlanAdminScreen()),
+        ).then((value) {
+          navigated = true;
+          MagicRouter.navigateAndPopAll(ActivatePlanAdminScreen());
+        });
+
+        Future.delayed(
+          Duration(seconds: 3),
+          () {
+            if (!navigated) {
+              if (Navigator.canPop(navigatorKey.currentContext!)) {
+                Navigator.pop(navigatorKey.currentContext!);
+              }
+              MagicRouter.navigateAndPopAll(ActivatePlanAdminScreen());
+            }
+          },
         );
       } else {
         MagicRouter.pop();

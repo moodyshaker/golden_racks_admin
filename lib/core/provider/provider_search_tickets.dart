@@ -130,16 +130,32 @@ class SearchTicketProvider extends ChangeNotifier {
 
       if (response.statusCode >= 200 && response.statusCode < 300) {
         MagicRouter.pop();
+        bool navigated = false;
         showDialog(
           context: navigatorKey.currentContext!,
           barrierDismissible: false,
           builder: (ctx) => InfoDialog(
             content: 'تم حفظ التقرير بنجاح',
           ),
-        ).then((value) => {
-              addTechnicalReportController.clear(),
-              MagicRouter.pop(),
-            });
+        ).then(
+          (value) => {
+            navigated = true,
+            addTechnicalReportController.clear(),
+            MagicRouter.pop(),
+          },
+        );
+        Future.delayed(
+          Duration(seconds: 3),
+          () async {
+            if (!navigated) {
+              if (Navigator.canPop(navigatorKey.currentContext!)) {
+                Navigator.pop(navigatorKey.currentContext!);
+              }
+              addTechnicalReportController.clear();
+              MagicRouter.pop();
+            }
+          },
+        );
       } else {
         MagicRouter.pop();
         showDialog(
@@ -196,14 +212,33 @@ class SearchTicketProvider extends ChangeNotifier {
 
       if (response.statusCode >= 200 && response.statusCode < 300) {
         MagicRouter.pop();
+        bool navigated = false;
         showDialog(
           context: navigatorKey.currentContext!,
           barrierDismissible: false,
           builder: (ctx) => InfoDialog(
             content: 'تم ارسال التنبيه بنجاح',
           ),
-        ).then((value) => MagicRouter.pop());
-        sendAlertToCompanyController.clear();
+        ).then(
+          (value) => {
+            navigated = true,
+            MagicRouter.pop(),
+            sendAlertToCompanyController.clear(),
+          },
+        );
+        Future.delayed(
+          Duration(seconds: 3),
+          () async {
+            if (!navigated) {
+              if (Navigator.canPop(navigatorKey.currentContext!)) {
+                Navigator.pop(navigatorKey.currentContext!);
+              }
+
+              MagicRouter.pop();
+              sendAlertToCompanyController.clear();
+            }
+          },
+        );
       } else {
         MagicRouter.pop();
         showDialog(
@@ -258,13 +293,31 @@ class SearchTicketProvider extends ChangeNotifier {
 
       if (response.statusCode >= 200 && response.statusCode < 300) {
         MagicRouter.pop();
+        bool navigated = false;
         showDialog(
           context: navigatorKey.currentContext!,
           barrierDismissible: false,
           builder: (ctx) => InfoDialog(
             content: 'تم تسجيل الحضور بنجاح',
           ),
-        ).then((value) => MagicRouter.pop());
+        ).then(
+          (value) => {
+            navigated = true,
+            MagicRouter.pop(),
+          },
+        );
+        Future.delayed(
+          Duration(seconds: 3),
+          () async {
+            if (!navigated) {
+              if (Navigator.canPop(navigatorKey.currentContext!)) {
+                Navigator.pop(navigatorKey.currentContext!);
+              }
+
+              MagicRouter.pop();
+            }
+          },
+        );
       } else {
         MagicRouter.pop();
         showDialog(
@@ -317,13 +370,30 @@ class SearchTicketProvider extends ChangeNotifier {
 
       if (response.statusCode >= 200 && response.statusCode < 300) {
         MagicRouter.pop();
+        bool navigated = false;
         showDialog(
           context: navigatorKey.currentContext!,
           barrierDismissible: false,
           builder: (ctx) => InfoDialog(
             content: 'تم تسجيل الانصراف بنجاح',
           ),
-        ).then((value) => MagicRouter.navigateAndPopAll(SearchTicketsScreen()));
+        ).then(
+          (value) => {
+            navigated = true,
+            MagicRouter.navigateAndPopAll(SearchTicketsScreen()),
+          },
+        );
+        Future.delayed(
+          Duration(seconds: 3),
+          () async {
+            if (!navigated) {
+              if (Navigator.canPop(navigatorKey.currentContext!)) {
+                Navigator.pop(navigatorKey.currentContext!);
+              }
+              MagicRouter.navigateAndPopAll(SearchTicketsScreen());
+            }
+          },
+        );
       } else {
         MagicRouter.pop();
         showDialog(
@@ -461,19 +531,38 @@ class SearchTicketProvider extends ChangeNotifier {
       if (response.statusCode >= 200 && response.statusCode < 300) {
         MagicRouter.pop();
 
+        bool navigated = false;
         showDialog(
           context: navigatorKey.currentContext!,
           barrierDismissible: false,
           builder: (ctx) => InfoDialog(
             content: 'تم حفظ الفاتورة بنجاح',
           ),
-        ).then((value) => {
-              tableList.clear(),
-              invoiceNotesController.clear(),
-              totalPrice = 0,
-              totalQuantity = 0,
-              MagicRouter.pop(),
-            });
+        ).then(
+          (value) => {
+            navigated = true,
+            tableList.clear(),
+            invoiceNotesController.clear(),
+            totalPrice = 0,
+            totalQuantity = 0,
+            MagicRouter.pop(),
+          },
+        );
+        Future.delayed(
+          Duration(seconds: 3),
+          () async {
+            if (!navigated) {
+              if (Navigator.canPop(navigatorKey.currentContext!)) {
+                Navigator.pop(navigatorKey.currentContext!);
+              }
+              tableList.clear();
+              invoiceNotesController.clear();
+              totalPrice = 0;
+              totalQuantity = 0;
+              MagicRouter.pop();
+            }
+          },
+        );
       } else {
         print('error add ticket invoice>> ${response.body}');
         MagicRouter.pop();

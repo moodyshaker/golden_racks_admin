@@ -21,6 +21,16 @@ import '../../core/models/nav_item.dart';
 import '../../core/router/router.dart';
 import 'action_dialog.dart';
 import 'main_text.dart';
+import 'package:golden_racks_admin/feature/admin/main_screens/active_plan_screens/activate_plane_admin_screen.dart';
+import 'package:golden_racks_admin/feature/admin/main_screens/subscribe_emergency_admin_screens/subscribers_emergency_requests_screen.dart';
+import 'package:golden_racks_admin/feature/admin/main_screens/unsubscribe_normal_admin_screens/unsubscribers_normal_requests_screen.dart';
+import 'package:golden_racks_admin/feature/admin/other_screens/add_company_with_plan_screen.dart';
+import 'package:golden_racks_admin/feature/admin/main_screens/subscribed_companies_admin/subscribed_company_data_screen.dart';
+import 'package:golden_racks_admin/feature/admin/other_screens/technician_view_screen.dart';
+import 'package:golden_racks_admin/feature/admin/main_screens/subscribe_ready_admin_screens/subscribers_ready_requests_screen.dart';
+import 'package:golden_racks_admin/feature/admin/main_screens/unsubscribe_emergency_admin_screens/unsubscribers_emergency_requests_screen.dart';
+import 'package:golden_racks_admin/feature/admin/other_screens/add_single_spare_part_screen.dart';
+import 'package:golden_racks_admin/feature/admin/other_screens/create_plan_screen.dart';
 
 class OrganizerCustomScaffold extends StatefulWidget {
   final String? title1;
@@ -74,6 +84,58 @@ class _OrganizerCustomScaffoldState extends State<OrganizerCustomScaffold> {
 
   @override
   Widget build(BuildContext context) {
+    List<DrawerItemModel> list = [
+      DrawerItemModel(
+        title: 'انشاء حسابات للشركات وربطها بخطة',
+        route: AddCompanyWithPlanScreen(),
+      ),
+      DrawerItemModel(
+        count: '${mainStatistics.numberOfWaitingActivation}',
+        title: 'حسابات في انتظار تفعيل الخطط لها',
+        route: ActivatePlanAdminScreen(),
+      ),
+      DrawerItemModel(
+        title: 'تحديد فني لطلبات الطوارئ للمشتركين',
+        count: '${mainStatistics.numberOfSubscriberEmergency}',
+        route: SubscribersEmergencyRequestsAdminScreen(),
+      ),
+      DrawerItemModel(
+        title: 'تحديد فني للصيانة الدورية للمشتركين',
+        count: '${mainStatistics.numberOfSubscriberNormalComeFromSystem}',
+        route: SubscribersReadyRequestsAdminScreen(),
+      ),
+      DrawerItemModel(
+        title: 'تحديد فني لطلبات الطوارئ لغير المشتركين',
+        count: '${mainStatistics.numberOfUnSubscriberEmergency}',
+        route: UnSubscribersEmergencyRequestsAdminScreen(),
+      ),
+      DrawerItemModel(
+        title: 'تحديد فني لطلبات الدورية لغير المشتركين',
+        count: '${mainStatistics.numberOfUnSubscriberNormal}',
+        route: UnSubscribersNormalRequestsAdminScreen(),
+      ),
+      DrawerItemModel(
+        title: 'انشاء حسابات الدخول للفنين',
+        route: TechnicianViewScreen(),
+      ),
+      DrawerItemModel(
+        title: 'بيانات الشركات المشتركة في خطط',
+        route: SubscribedCompanyDataScreen(),
+      ),
+      DrawerItemModel(
+        title: 'اضافة قطع الغيار',
+        route: AddSingleSparePartScreen(),
+      ),
+      DrawerItemModel(
+        title: 'انشاء خطط الصيانة',
+        route: CreatePlanScreen(),
+        // route: ShowPlansScreen(),
+      ),
+      DrawerItemModel(
+        title: 'التقارير',
+      ),
+    ];
+
     final authProvider = AuthProvider.get(context);
     final cubit = OrganizerAppCubit.get(context);
     final demo = DemoLocalization.of(context);
@@ -447,81 +509,86 @@ class _OrganizerCustomScaffoldState extends State<OrganizerCustomScaffold> {
                   decoration: BoxDecoration(
                     color: Colors.brown,
                   ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: List.generate(
-                      navBar.length,
-                      (i) => GestureDetector(
-                        onTap: () {
-                          cubit.changeCurrent(i);
+                  child: Container(
+                    margin: EdgeInsets.symmetric(horizontal: 12.w),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: List.generate(
+                        navBar.length,
+                        (i) => GestureDetector(
+                          onTap: () async {
+                            cubit.changeCurrent(i);
 
-                          if (i == 2) {
-                            MagicRouter.navigateAndPopAll(AdminHome());
-                          } else if (i == 0) {
-                            _key.currentState!.openDrawer();
-                          } else if (i == 3) {
-                            MagicRouter.navigateAndPopAll(AdminTicketsScreen());
-                          }
-                        },
-                        child: i == 2
-                            ? Padding(
-                                padding: EdgeInsets.only(bottom: 6.h),
-                                child: Container(
-                                  height: cubit.i == i ? 60.h : 55.h,
-                                  width: cubit.i == i ? 60.w : 55.w,
-                                  padding: EdgeInsets.symmetric(
-                                    vertical: 6.h,
-                                    horizontal: 6.w,
-                                  ),
-                                  margin: EdgeInsets.symmetric(
-                                    vertical: 6.h,
-                                    horizontal: 6.w,
-                                  ),
-                                  decoration: BoxDecoration(
-                                    color: kAccentColor,
-                                    shape: BoxShape.circle,
-                                  ),
-                                  child: Center(
-                                    child: Padding(
-                                      padding: EdgeInsets.only(bottom: 4.h),
-                                      // child: Image.asset(
-                                      //   getAsset('${navBar[i].icon}'),
-                                      //   height: 24.h,
-                                      //   width: 24.w,
-                                      //   color: kBlackColor,
-                                      // ),
-                                      child: Icon(
-                                        Icons.home,
-                                        color: kSecondaryColor,
-                                        size: 32,
+                            if (i == 1) {
+                              MagicRouter.navigateAndPopAll(AdminHome());
+                            } else if (i == 0) {
+                              await authProvider.getStatistics();
+                              _key.currentState!.openDrawer();
+                            } else if (i == 2) {
+                              MagicRouter.navigateAndPopAll(
+                                  AdminTicketsScreen());
+                            }
+                          },
+                          child: i == 1
+                              ? Padding(
+                                  padding: EdgeInsets.only(bottom: 6.h),
+                                  child: Container(
+                                    height: cubit.i == i ? 60.h : 45.h,
+                                    width: cubit.i == i ? 60.w : 45.w,
+                                    padding: EdgeInsets.symmetric(
+                                      vertical: 6.h,
+                                      horizontal: 6.w,
+                                    ),
+                                    margin: EdgeInsets.symmetric(
+                                      vertical: 6.h,
+                                      horizontal: 6.w,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color: kAccentColor,
+                                      shape: BoxShape.circle,
+                                    ),
+                                    child: Center(
+                                      child: Padding(
+                                        padding: EdgeInsets.only(bottom: 4.h),
+                                        // child: Image.asset(
+                                        //   getAsset('${navBar[i].icon}'),
+                                        //   height: 32.h,
+                                        //   width: 32.w,
+                                        //   color: kSecondaryColor,
+                                        // ),
+                                        child: Icon(
+                                          Icons.home,
+                                          color: kSecondaryColor,
+                                          size: cubit.i == i ? 32 : 24,
+                                        ),
                                       ),
                                     ),
                                   ),
+                                )
+                              : Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Image.asset(
+                                      getAsset('${navBar[i].icon}'),
+                                      height: cubit.i == i ? 30.h : 24.h,
+                                      width: cubit.i == i ? 30.w : 24.w,
+                                      color: cubit.i == i
+                                          ? kAccentColor
+                                          : kInactiveColor,
+                                    ),
+                                    SizedBox(height: 5.h),
+                                    MainText(
+                                      text: navBar[i].title,
+                                      font: cubit.i == i ? 14.sp : 12.sp,
+                                      color: kAccentColor,
+                                      weight: cubit.i == i
+                                          ? FontWeight.bold
+                                          : FontWeight.w500,
+                                    ),
+                                  ],
                                 ),
-                              )
-                            : Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Image.asset(
-                                    getAsset('${navBar[i].icon}'),
-                                    height: cubit.i == i ? 30.h : 24.h,
-                                    width: cubit.i == i ? 30.w : 24.w,
-                                    color: cubit.i == i
-                                        ? kAccentColor
-                                        : kInactiveColor,
-                                  ),
-                                  SizedBox(height: 5.h),
-                                  MainText(
-                                    text: navBar[i].title,
-                                    font: cubit.i == i ? 14.sp : 12.sp,
-                                    color: kAccentColor,
-                                    weight: cubit.i == i
-                                        ? FontWeight.bold
-                                        : FontWeight.w500,
-                                  ),
-                                ],
-                              ),
+                        ),
                       ),
                     ),
                   ),

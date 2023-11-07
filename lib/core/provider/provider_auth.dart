@@ -6,10 +6,10 @@ import 'package:golden_racks_admin/constants.dart';
 import 'package:golden_racks_admin/core/models/admin_statistics_model.dart';
 import 'package:golden_racks_admin/core/networkStatus/network_status.dart';
 import 'package:golden_racks_admin/feature/admin/other_screens/units/admin_home_screen.dart';
+import 'package:golden_racks_admin/feature/technician/main_screens/units/technician_main.dart';
 import 'package:http/http.dart';
 import 'package:provider/provider.dart';
 import '../../feature/admin/other_screens/add_plan_screen.dart';
-import '../../feature/technician/main_screens/technician_home.dart';
 import '../../feature/widgets/loading_dialog.dart';
 import '../appStorage/shared_preference.dart';
 import '../dialogs/error_dialog.dart';
@@ -198,7 +198,7 @@ class AuthProvider extends ChangeNotifier {
               }
             : {
                 navigated = true,
-                MagicRouter.navigateAndPopAll(TechnicianHome()),
+                MagicRouter.navigateAndPopAll(TechnicianMain()),
                 isAdmin = false,
                 Preferences.instance.setUserStatus('tech'),
               });
@@ -212,7 +212,7 @@ class AuthProvider extends ChangeNotifier {
             if (isAdmin!) {
               MagicRouter.navigateAndPopAll(AdminHome());
             } else {
-              MagicRouter.navigateAndPopAll(TechnicianHome());
+              MagicRouter.navigateAndPopAll(TechnicianMain());
             }
           }
         });

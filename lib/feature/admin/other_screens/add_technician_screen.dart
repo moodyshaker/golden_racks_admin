@@ -180,7 +180,7 @@ class _AddTechnicianScreenState extends State<AddTechnicianScreen> {
                           hintFont: 15.sp,
                           hintColor: gray_40,
                           hintWeight: FontWeight.w400,
-                          type: TextInputType.text,
+                          type: TextInputType.number,
                           valid: (String? v) {
                             final n = num.tryParse(v!);
                             if (v.isEmpty || n == null) {

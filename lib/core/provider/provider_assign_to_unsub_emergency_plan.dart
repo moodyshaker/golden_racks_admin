@@ -69,6 +69,7 @@ class AssignToUnsubEmergencyProvider extends ChangeNotifier {
 
       if (response.statusCode >= 200 && response.statusCode < 300) {
         MagicRouter.pop();
+        bool navigated = false;
         showDialog(
           context: navigatorKey.currentContext!,
           barrierDismissible: false,
@@ -76,10 +77,25 @@ class AssignToUnsubEmergencyProvider extends ChangeNotifier {
             content: 'تم رفض الخطة بنجاح',
           ),
         ).then((value) {
+          navigated = true;
           MagicRouter.navigateAndPop(
             UnSubscribersEmergencyRequestsAdminScreen(),
           );
         });
+
+        Future.delayed(
+          Duration(seconds: 3),
+          () {
+            if (!navigated) {
+              if (Navigator.canPop(navigatorKey.currentContext!)) {
+                Navigator.pop(navigatorKey.currentContext!);
+              }
+              MagicRouter.navigateAndPop(
+                UnSubscribersEmergencyRequestsAdminScreen(),
+              );
+            }
+          },
+        );
       } else {
         MagicRouter.pop();
         showDialog(
@@ -129,6 +145,7 @@ class AssignToUnsubEmergencyProvider extends ChangeNotifier {
       if (response.statusCode >= 200 && response.statusCode < 300) {
         log(response.body);
         MagicRouter.pop();
+        bool navigated = false;
         showDialog(
           context: navigatorKey.currentContext!,
           barrierDismissible: false,
@@ -137,6 +154,7 @@ class AssignToUnsubEmergencyProvider extends ChangeNotifier {
           ),
         ).then(
           (value) async {
+            navigated = true;
             showDialog(
               context: navigatorKey.currentContext!,
               barrierDismissible: false,
@@ -144,9 +162,20 @@ class AssignToUnsubEmergencyProvider extends ChangeNotifier {
             );
             await getEmergencyUnsubPlans();
             MagicRouter.pop();
-            // OrganizerAppCubit.listenFalse(navigatorKey.currentContext!)
-            //     .changeCurrent(2);
             MagicRouter.pop();
+          },
+        );
+
+        Future.delayed(
+          Duration(seconds: 3),
+          () async {
+            if (!navigated) {
+              if (Navigator.canPop(navigatorKey.currentContext!)) {
+                Navigator.pop(navigatorKey.currentContext!);
+              }
+              await getEmergencyUnsubPlans();
+              MagicRouter.pop();
+            }
           },
         );
       } else {

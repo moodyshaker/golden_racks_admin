@@ -69,16 +69,32 @@ class AssignToUnsubNormalProvider extends ChangeNotifier {
 
       if (response.statusCode >= 200 && response.statusCode < 300) {
         MagicRouter.pop();
+        bool navigated = false;
         showDialog(
           context: navigatorKey.currentContext!,
           barrierDismissible: false,
           builder: (ctx) => InfoDialog(
             content: 'تم رفض الخطة بنجاح',
           ),
-        ).then(
-          (value) => MagicRouter.navigateAndPop(
-            UnSubscribersNormalRequestsAdminScreen(),
-          ),
+        ).then((value) => {
+              navigated = true,
+              MagicRouter.navigateAndPop(
+                UnSubscribersNormalRequestsAdminScreen(),
+              ),
+            });
+
+        Future.delayed(
+          Duration(seconds: 3),
+          () {
+            if (!navigated) {
+              if (Navigator.canPop(navigatorKey.currentContext!)) {
+                Navigator.pop(navigatorKey.currentContext!);
+              }
+              MagicRouter.navigateAndPop(
+                UnSubscribersNormalRequestsAdminScreen(),
+              );
+            }
+          },
         );
       } else {
         MagicRouter.pop();
@@ -129,6 +145,7 @@ class AssignToUnsubNormalProvider extends ChangeNotifier {
       if (response.statusCode >= 200 && response.statusCode < 300) {
         log(response.body);
         MagicRouter.pop();
+        bool navigated = false;
         showDialog(
           context: navigatorKey.currentContext!,
           barrierDismissible: false,
@@ -137,6 +154,7 @@ class AssignToUnsubNormalProvider extends ChangeNotifier {
           ),
         ).then(
           (value) async {
+            navigated = true;
             showDialog(
               context: navigatorKey.currentContext!,
               barrierDismissible: false,
@@ -145,6 +163,18 @@ class AssignToUnsubNormalProvider extends ChangeNotifier {
             await getNormalUnsubPlans();
             MagicRouter.pop();
             MagicRouter.pop();
+          },
+        );
+        Future.delayed(
+          Duration(seconds: 3),
+          () async {
+            if (!navigated) {
+              if (Navigator.canPop(navigatorKey.currentContext!)) {
+                Navigator.pop(navigatorKey.currentContext!);
+              }
+              await getNormalUnsubPlans();
+              MagicRouter.pop();
+            }
           },
         );
       } else {

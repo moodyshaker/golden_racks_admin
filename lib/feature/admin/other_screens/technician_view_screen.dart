@@ -153,12 +153,13 @@ class _TechnicianViewScreenState extends State<TechnicianViewScreen> {
                             height: 6.h,
                           ),
                           Container(
-                            height: 200.h,
+                            height: 250.h,
                             child: addTechProvider.allTechnicals.isEmpty
                                 ? MainText(
                                     text: 'لا يوجد فني بهذا الاسم',
                                   )
                                 : ListView.builder(
+                                    shrinkWrap: true,
                                     padding:
                                         EdgeInsets.symmetric(vertical: 10.h),
                                     itemBuilder: (BuildContext context, int i) {
@@ -170,20 +171,6 @@ class _TechnicianViewScreenState extends State<TechnicianViewScreen> {
                                         addTechProvider.allTechnicals.length,
                                   ),
                           ),
-                          SizedBox(
-                            height: 27.h,
-                          ),
-                          CustomButton(
-                            title: 'عرض تقرير الزيارات اليومي',
-                            color: kSecondaryColor,
-                            height: 50.h,
-                            font: 16.sp,
-                            family: 'Lato_bold',
-                            textColor: Colors.white,
-                            withBorder: false,
-                            onPressed: () async {},
-                          ),
-                          SizedBox(height: 16.h)
                         ],
                       ),
                     ),

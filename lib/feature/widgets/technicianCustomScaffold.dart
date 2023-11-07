@@ -8,7 +8,7 @@ import 'package:golden_racks_admin/feature/admin/auth_screens/organizer_login.da
 import 'package:golden_racks_admin/feature/screens/profile_screen.dart';
 import 'package:golden_racks_admin/feature/technician/main_screens/search_tickets_screen.dart';
 import 'package:golden_racks_admin/feature/technician/main_screens/technical_notification_screen.dart';
-import 'package:golden_racks_admin/feature/technician/main_screens/technician_home.dart';
+import 'package:golden_racks_admin/feature/technician/main_screens/units/technician_main.dart';
 import '../../constants.dart';
 import '../../core/bloc/language_cubit.dart';
 import '../../core/localization/demo_localization.dart';
@@ -382,7 +382,7 @@ class _TechnicianCustomScaffoldState extends State<TechnicianCustomScaffold> {
 
                           if (i == 0) {
                             print('home sweet home');
-                            MagicRouter.navigateAndPopAll(TechnicianHome());
+                            MagicRouter.navigateAndPopAll(TechnicianMain());
                           } else if (i == 1) {
                             print('tickets 50 cents');
                             MagicRouter.navigateAndPopAll(

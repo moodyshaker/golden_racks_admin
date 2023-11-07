@@ -85,6 +85,7 @@ class AssignToSubReadyProvider extends ChangeNotifier {
 
       if (response.statusCode >= 200 && response.statusCode < 300) {
         MagicRouter.pop();
+        bool navigated = false;
         showDialog(
           context: navigatorKey.currentContext!,
           barrierDismissible: false,
@@ -93,6 +94,7 @@ class AssignToSubReadyProvider extends ChangeNotifier {
           ),
         ).then(
           (value) async {
+            navigated = true;
             showDialog(
               context: navigatorKey.currentContext!,
               barrierDismissible: false,
@@ -103,7 +105,18 @@ class AssignToSubReadyProvider extends ChangeNotifier {
             MagicRouter.pop();
           },
         );
-        ;
+        Future.delayed(
+          Duration(seconds: 3),
+          () async {
+            if (!navigated) {
+              if (Navigator.canPop(navigatorKey.currentContext!)) {
+                Navigator.pop(navigatorKey.currentContext!);
+              }
+              await getReadySubPlans();
+              MagicRouter.pop();
+            }
+          },
+        );
       } else {
         log('error assign ready sub> ${response.body}');
         MagicRouter.pop();

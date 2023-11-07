@@ -152,13 +152,30 @@ class ReadyPlanProvider extends ChangeNotifier {
       if (response.statusCode >= 200 && response.statusCode < 300) {
         log(response.body);
         MagicRouter.pop();
+        bool navigated = false;
         showDialog(
           context: navigatorKey.currentContext!,
           barrierDismissible: false,
           builder: (ctx) => InfoDialog(
             content: 'تم اضافة الخطة بنجاح',
           ),
-        ).then((value) => MagicRouter.navigateTo(AdminHome()));
+        ).then(
+          (value) => {
+            navigated = true,
+            MagicRouter.navigateTo(AdminHome()),
+          },
+        );
+        Future.delayed(
+          Duration(seconds: 3),
+          () async {
+            if (!navigated) {
+              if (Navigator.canPop(navigatorKey.currentContext!)) {
+                Navigator.pop(navigatorKey.currentContext!);
+              }
+              MagicRouter.navigateTo(AdminHome());
+            }
+          },
+        );
       } else {
         log('error >> ${response.body}');
         MagicRouter.pop();
@@ -287,13 +304,30 @@ class ReadyPlanProvider extends ChangeNotifier {
       if (response.statusCode >= 200 && response.statusCode < 300) {
         log(response.body);
         MagicRouter.pop();
+        bool navigated = false;
         showDialog(
           context: navigatorKey.currentContext!,
           barrierDismissible: false,
           builder: (ctx) => InfoDialog(
             content: 'تم اضافة قطعة الغيار بنجاح',
           ),
-        ).then((value) => MagicRouter.navigateTo(AdminHome()));
+        ).then(
+          (value) => {
+            navigated = true,
+            MagicRouter.navigateTo(AdminHome()),
+          },
+        );
+        Future.delayed(
+          Duration(seconds: 3),
+          () async {
+            if (!navigated) {
+              if (Navigator.canPop(navigatorKey.currentContext!)) {
+                Navigator.pop(navigatorKey.currentContext!);
+              }
+              MagicRouter.navigateTo(AdminHome());
+            }
+          },
+        );
       } else {
         log('error add single spare part >> ${response.body}');
         MagicRouter.pop();
@@ -380,13 +414,30 @@ class ReadyPlanProvider extends ChangeNotifier {
 
         log(response.body);
         MagicRouter.pop();
+        bool navigated = false;
         showDialog(
           context: navigatorKey.currentContext!,
           barrierDismissible: false,
           builder: (ctx) => InfoDialog(
             content: 'تم الاشتراك في الخطة',
           ),
-        ).then((value) => MagicRouter.navigateAndPopAll(AdminHome()));
+        ).then(
+          (value) => {
+            navigated = true,
+            MagicRouter.navigateAndPopAll(AdminHome()),
+          },
+        );
+        Future.delayed(
+          Duration(seconds: 3),
+          () async {
+            if (!navigated) {
+              if (Navigator.canPop(navigatorKey.currentContext!)) {
+                Navigator.pop(navigatorKey.currentContext!);
+              }
+              MagicRouter.navigateAndPopAll(AdminHome());
+            }
+          },
+        );
       } else {
         print('erro >> ${response.body}');
         MagicRouter.pop();

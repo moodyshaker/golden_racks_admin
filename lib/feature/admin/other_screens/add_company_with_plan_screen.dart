@@ -293,7 +293,7 @@ class _AddCompanyWithPlanScreenState extends State<AddCompanyWithPlanScreen> {
                                     hintFont: 15.sp,
                                     hintColor: gray_60,
                                     hintWeight: FontWeight.w400,
-                                    type: TextInputType.text,
+                                    type: TextInputType.number,
                                     valid: (v) {
                                       final n = num.tryParse(v!);
                                       if (v.isEmpty || n == null) {

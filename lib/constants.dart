@@ -1,21 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:golden_racks_admin/core/models/admin_statistics_model.dart';
-import 'package:golden_racks_admin/feature/admin/main_screens/subscribe_ready_admin_screens/subscribers_ready_requests_screen.dart';
-import 'package:golden_racks_admin/feature/admin/main_screens/unsubscribe_emergency_admin_screens/unsubscribers_emergency_requests_screen.dart';
-import 'package:golden_racks_admin/feature/admin/other_screens/add_single_spare_part_screen.dart';
-import 'package:golden_racks_admin/feature/admin/other_screens/create_plan_screen.dart';
 import 'package:intl/intl.dart';
 
 import 'core/localization/demo_localization.dart';
 import 'core/models/more_model.dart';
 import 'core/models/nav_item.dart';
 import 'core/router/router.dart';
-import 'feature/admin/main_screens/active_plan_screens/activate_plane_admin_screen.dart';
-import 'feature/admin/main_screens/subscribe_emergency_admin_screens/subscribers_emergency_requests_screen.dart';
-import 'feature/admin/main_screens/unsubscribe_normal_admin_screens/unsubscribers_normal_requests_screen.dart';
-import 'feature/admin/other_screens/add_company_with_plan_screen.dart';
-import 'feature/admin/main_screens/subscribed_companies_admin/subscribed_company_data_screen.dart';
-import 'feature/admin/other_screens/technician_view_screen.dart';
 
 String getAsset(String imageName) => 'assets/images/$imageName.png';
 
@@ -163,10 +153,10 @@ List<NavItem> navItems = [
 
 List<NavItem> organizerNavItems = [
   NavItem(icon: 'menu_icon', title: 'القائمة'),
-  NavItem(icon: 'icon', title: 'الإحصائيات'),
-  NavItem(icon: 'add_new_icon', title: ''),
+  // NavItem(icon: 'icon', title: 'الإحصائيات'),
+  NavItem(icon: 'home_icon', title: ''),
   NavItem(icon: 'ticket_icon', title: 'التذاكر'),
-  NavItem(icon: 'control_icon', title: 'اللوحة'),
+  // NavItem(icon: 'control_icon', title: 'اللوحة'),
 ];
 
 List<NavItem> technicianNavItems = [
@@ -182,58 +172,6 @@ class DrawerItemModel {
 
   DrawerItemModel({required this.title, this.count, this.route});
 }
-
-List<DrawerItemModel> list = [
-  DrawerItemModel(
-    count: '${mainStatistics.numberOfWaitingActivation}',
-    title: 'حسابات في انتظار تفعيل الخطط لها',
-    route: ActivatePlanAdminScreen(),
-  ),
-  DrawerItemModel(
-    title: 'انشاء حسابات للشركات وربطها بخطة',
-    route: AddCompanyWithPlanScreen(),
-  ),
-  DrawerItemModel(
-    title: 'تحديد فني لطلبات الطوارئ لغير المشتركين',
-    count: '${mainStatistics.numberOfUnSubscriberEmergency}',
-    route: UnSubscribersEmergencyRequestsAdminScreen(),
-  ),
-  DrawerItemModel(
-    title: 'تحديد فني لطلبات الدورية لغير المشتركين',
-    count: '${mainStatistics.numberOfUnSubscriberNormal}',
-    route: UnSubscribersNormalRequestsAdminScreen(),
-  ),
-  DrawerItemModel(
-    title: 'تحديد فني لطلبات الطوارئ للمشتركين',
-    count: '${mainStatistics.numberOfSubscriberEmergency}',
-    route: SubscribersEmergencyRequestsAdminScreen(),
-  ),
-  DrawerItemModel(
-    title: 'تحديد فني للصيانة الدورية للمشتركين',
-    count: '${mainStatistics.numberOfSubscriberNormalComeFromSystem}',
-    route: SubscribersReadyRequestsAdminScreen(),
-  ),
-  DrawerItemModel(
-    title: 'انشاء حسابات الدخول للفنين',
-    route: TechnicianViewScreen(),
-  ),
-  DrawerItemModel(
-    title: 'بيانات الشركات المشتركة في خطط',
-    route: SubscribedCompanyDataScreen(),
-  ),
-  DrawerItemModel(
-    title: 'اضافة قطع الغيار',
-    route: AddSingleSparePartScreen(),
-  ),
-  DrawerItemModel(
-    title: 'انشاء خطط الصيانة',
-    route: CreatePlanScreen(),
-    // route: ShowPlansScreen(),
-  ),
-  DrawerItemModel(
-    title: 'التقارير',
-  ),
-];
 
 List<MoreModel> moreList(DemoLocalization demo) => [
       MoreModel(

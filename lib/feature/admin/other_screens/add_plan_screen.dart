@@ -94,7 +94,7 @@ class _AddPlanScreenState extends State<AddPlanScreen> {
                           hintWeight: FontWeight.normal,
                           headerTextColor: Colors.black,
                           headerWeight: FontWeight.w400,
-                          type: TextInputType.number,
+                          type: TextInputType.text,
                           valid: (String? v) {
                             if (v!.isEmpty) {
                               return 'من فضلك ادخل اسم الخطة';

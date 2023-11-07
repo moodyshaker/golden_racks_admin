@@ -143,14 +143,29 @@ class AddTechnationProvider extends ChangeNotifier {
         print('Login Success');
         log(response.body);
         MagicRouter.pop();
+        bool navigated = false;
         showDialog(
           context: navigatorKey.currentContext!,
           barrierDismissible: false,
           builder: (ctx) => InfoDialog(
             content: 'تم تسجيل حساب جديد بنجاح',
           ),
-        ).then(
-            (value) => MagicRouter.navigateAndPopAll(TechnicianViewScreen()));
+        ).then((value) {
+          navigated = true;
+          MagicRouter.navigateAndPopAll(TechnicianViewScreen());
+        });
+
+        Future.delayed(
+          Duration(seconds: 3),
+          () {
+            if (!navigated) {
+              if (Navigator.canPop(navigatorKey.currentContext!)) {
+                Navigator.pop(navigatorKey.currentContext!);
+              }
+              MagicRouter.navigateAndPopAll(TechnicianViewScreen());
+            }
+          },
+        );
       } else {
         MagicRouter.pop();
         print('error create tech > ${response.body}');
