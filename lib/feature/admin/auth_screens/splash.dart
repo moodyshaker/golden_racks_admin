@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:golden_racks_admin/core/appStorage/shared_preference.dart';
 import 'package:golden_racks_admin/core/notifications/firebase.dart';
+import 'package:golden_racks_admin/core/provider/provider_auth.dart';
 import 'package:golden_racks_admin/feature/admin/other_screens/units/admin_home_screen.dart';
 import 'package:golden_racks_admin/feature/technician/main_screens/units/technician_main.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
@@ -43,6 +46,11 @@ class _SplashState extends State<Splash> {
               }
             else
               {
+                await AuthProvider.listenFalse(context).setDeviceUserToken(
+                  userid: Preferences.instance.getUserId,
+                  mobielType: Platform.isAndroid ? 'android' : 'ios',
+                  deviceusertoken: Preferences.instance.getFcmToken,
+                ),
                 if (Preferences.instance.getUserStatus == 'admin')
                   {
                     MagicRouter.navigateAndPopAll(AdminHome()),
