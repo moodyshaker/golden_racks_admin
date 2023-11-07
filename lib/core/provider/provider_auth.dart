@@ -272,12 +272,12 @@ class AuthProvider extends ChangeNotifier {
       );
 
       if (response.statusCode >= 200 && response.statusCode < 300) {
-        log('device token set successfully');
+        print('device token set successfully');
       } else {
-        log('error device token $response.body');
+        print('error device token $response.body');
       }
     } catch (e) {
-      log('catch device token');
+      print('catch device token');
     }
   }
 
