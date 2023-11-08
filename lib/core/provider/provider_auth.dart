@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:golden_racks_admin/constants.dart';
 import 'package:golden_racks_admin/core/models/admin_statistics_model.dart';
 import 'package:golden_racks_admin/core/networkStatus/network_status.dart';
+import 'package:golden_racks_admin/core/notifications/firebase.dart';
 import 'package:golden_racks_admin/feature/admin/other_screens/units/admin_home_screen.dart';
 import 'package:golden_racks_admin/feature/technician/main_screens/units/technician_main.dart';
 import 'package:http/http.dart';
@@ -174,6 +175,8 @@ class AuthProvider extends ChangeNotifier {
         _preferences.setUserFullName(r['name'] ?? '');
         _preferences.setUserImage(r['image'] ?? '');
         _preferences.setUserName(UserName);
+
+        await FirebaseNotifications.getFCM();
 
         await setDeviceUserToken(
           userid: r['userId'],
