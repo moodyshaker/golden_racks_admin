@@ -213,7 +213,7 @@ class _AgendaTicketViewState extends State<AgendaTicketView> {
                         var path =
                             '$base_url_image${widget.agendaTicket.sound}';
 
-                        if (path.isEmpty) {
+                        if (widget.agendaTicket.sound!.isEmpty) {
                           showDialog(
                             context: context,
                             builder: (_) => ActionDialog(
